@@ -1,0 +1,56 @@
+/* Theme tokens — single source of truth for all colors, gradients, fonts.
+   Edit src/theme.css to change the look of the entire site. */
+@import "./theme.css";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  font-family: var(--theme-font-family-base, "Poppins", sans-serif);
+  background-color: var(--theme-color-bg-base);
+  color: var(--theme-color-text-base);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Hot Providers — Slick: arrows + slide alignment */
+.hot-providers-slider .slick-prev,
+.hot-providers-slider .slick-next {
+  width: 32px;
+  height: 32px;
+  z-index: 2;
+}
+.hot-providers-slider .slick-prev {
+  left: 0;
+}
+.hot-providers-slider .slick-next {
+  right: 0;
+}
+.hot-providers-slider .slick-prev:before,
+.hot-providers-slider .slick-next:before {
+  color: #64748b;
+  font-size: 22px;
+  opacity: 1;
+}
+.hot-providers-slider .slick-prev:hover:before,
+.hot-providers-slider .slick-next:hover:before {
+  color: var(--primary, #b91c1c);
+}
+.hot-providers-slider .slick-slide > div {
+  height: 100%;
+}
