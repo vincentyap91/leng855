@@ -12,13 +12,14 @@ const chips = [
 ];
 export function CategoryChips() {
     const [activeLabel, setActiveLabel] = useState("Slots");
-    return (_jsx("div", { role: "tablist", "aria-label": "Game categories", className: "inline-flex max-w-full items-center overflow-x-auto rounded-full py-1.5 pl-1.5 pr-2", style: {
+    return (_jsx("div", { role: "tablist", "aria-label": "Game categories", className: "t3-game-category-list inline-flex max-w-full items-center overflow-x-auto rounded-full py-1.5 pl-1.5 pr-2", style: {
             backgroundColor: "var(--game-category-tab-bg)",
             boxShadow: "var(--game-category-pill-shadow)",
         }, children: chips.map((c) => {
             const isActive = activeLabel === c.label;
             return (_jsxs("button", { type: "button", role: "tab", "aria-selected": isActive, onClick: () => setActiveLabel(c.label), className: [
-                    "flex shrink-0 items-center gap-2 rounded-full px-4 py-2 text-[12.5px] font-bold leading-none whitespace-nowrap transition-[background-color,color]",
+                    "t3-game-category-item flex shrink-0 items-center gap-2 rounded-full px-4 py-2 text-[12.5px] font-bold leading-none whitespace-nowrap transition-[background-color,color]",
+                    isActive ? "active" : "",
                     isActive
                         ? "text-[var(--game-category-tab-active-color)]"
                         : "text-[var(--game-category-tab-color)] hover:bg-[var(--game-category-tab-hover)]",
@@ -28,6 +29,6 @@ export function CategoryChips() {
                             filter: isActive
                                 ? "var(--sidebar-icon-filter-active)"
                                 : "var(--sidebar-icon-filter)",
-                        } }), _jsx("span", { children: c.label })] }, c.label));
+                        } }), _jsx("h6", { className: "m-0 text-inherit font-inherit", children: c.label })] }, c.label));
         }) }));
 }

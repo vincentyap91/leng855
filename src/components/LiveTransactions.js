@@ -11,22 +11,16 @@ const withdrawals = [
     { account: "***un", amount: "100.00" },
     { account: "***un", amount: "300.00" },
 ];
-function Avatar() {
-    return (_jsx("span", { className: "inline-block w-5 h-5 rounded-full mr-2 align-middle", style: {
-            backgroundColor: "var(--surface-3)",
-            border: "1px solid var(--border)",
-        } }));
-}
-function Column({ title, rows }) {
-    return (_jsxs("div", { className: "flex-1 flex flex-col overflow-hidden", children: [_jsx("div", { className: "h-[34px] bg-gold-header flex items-center justify-center", children: _jsx("span", { className: "text-sm font-bold text-[var(--on-gold)]", children: title }) }), rows.map((r, i) => (_jsxs("div", { className: [
-                    "h-[34px] flex items-center px-[14px] text-[13px] text-[var(--text)]",
-                    i % 2 === 0 ? "bg-bg-rowAlt" : "bg-bg-row",
-                ].join(" "), children: [_jsx(Avatar, {}), _jsx("span", { children: r.account }), _jsx("span", { className: "ml-auto tabular-nums", children: r.amount })] }, i)))] }));
-}
 export function LiveTransactions() {
-    return (_jsxs("section", { children: [_jsx("h2", { className: "italic font-bold text-[17.5px] text-brand-red tracking-wide", children: "LIVE TRANSACTIONS" }), _jsxs("div", { className: "mt-2 rounded-lg overflow-hidden flex", style: {
+    return (_jsxs("section", { className: "mobile-home-latest-transactions-box", children: [_jsx("h2", { className: "italic font-bold text-[17.5px] text-brand-red tracking-wide", children: "LIVE TRANSACTIONS" }), _jsx("div", { className: "body mt-2 rounded-lg overflow-hidden", style: {
                     backgroundColor: "var(--surface)",
-                    border: "1px solid #D4AF37",
+                    border: "1px solid var(--gold)",
                     boxShadow: "var(--card-shadow)",
-                }, children: [_jsx(Column, { title: "Deposit", rows: deposits }), _jsx(Column, { title: "Withdrawal", rows: withdrawals })] })] }));
+                }, children: _jsxs("table", { className: "t3-custom-table w-full border-collapse text-[13px]", children: [_jsx("thead", { children: _jsxs("tr", { children: [_jsx("th", { className: "h-[34px] px-3 text-center font-bold", children: "Deposit" }), _jsx("th", { className: "h-[34px] px-3 text-center font-bold", children: "Withdrawal" })] }) }), _jsx("tbody", { children: deposits.map((d, i) => (_jsxs("tr", { children: [_jsx("td", { className: "h-[34px] px-3", children: _jsxs("div", { className: "flex items-center", children: [_jsx("span", { className: "mr-2 inline-block h-5 w-5 rounded-full", style: {
+                                                        backgroundColor: "var(--surface-3)",
+                                                        border: "1px solid var(--border)",
+                                                    } }), _jsx("span", { children: d.account }), _jsx("span", { className: "ml-auto tabular-nums", children: d.amount })] }) }), _jsx("td", { className: "h-[34px] px-3", children: _jsxs("div", { className: "flex items-center", children: [_jsx("span", { className: "mr-2 inline-block h-5 w-5 rounded-full", style: {
+                                                        backgroundColor: "var(--surface-3)",
+                                                        border: "1px solid var(--border)",
+                                                    } }), _jsx("span", { children: withdrawals[i]?.account }), _jsx("span", { className: "ml-auto tabular-nums", children: withdrawals[i]?.amount })] }) })] }, `${d.account}-${i}`))) })] }) })] }));
 }

@@ -62,8 +62,9 @@ export function RecentBigWins() {
     <section
       className="rounded-xl border p-4"
       style={{
-        backgroundColor: "#F5F5F5",
-        borderColor: "#D4AF37",
+        backgroundColor: "var(--surface-3)",
+        borderColor: "var(--gold)",
+        boxShadow: "var(--card-shadow)",
       }}
     >
       <h2 className="mb-3 flex items-center gap-2">
@@ -73,8 +74,8 @@ export function RecentBigWins() {
           className="h-6 w-6 shrink-0 object-contain [filter:sepia(0.5)_saturate(1.4)_brightness(0.95)]"
         />
         <span className="text-[15px] font-bold uppercase leading-none tracking-wide">
-          <span className="text-slate-700">RECENT</span>{" "}
-          <span className="text-red-600">BIG WINS</span>
+          <span style={{ color: "var(--text)" }}>RECENT</span>{" "}
+          <span style={{ color: "var(--primary)" }}>BIG WINS</span>
         </span>
       </h2>
 
@@ -84,8 +85,8 @@ export function RecentBigWins() {
             key={i}
             className="flex items-center gap-3 overflow-hidden rounded-lg bg-white p-2.5"
             style={{
-              border: "1px solid #D4AF37",
-              boxShadow: "0 1px 4px rgba(0, 0, 0, 0.08)",
+              border: "1px solid var(--gold)",
+              boxShadow: "var(--card-shadow)",
             }}
           >
             <img
@@ -94,15 +95,20 @@ export function RecentBigWins() {
               className="h-[60px] w-[60px] shrink-0 rounded object-cover"
             />
             <div className="min-w-0 text-[13px] leading-snug">
-              <p className="text-slate-800">
+              <p style={{ color: "var(--text)" }}>
                 Provider:{" "}
-                <span className="font-bold text-slate-800">{w.provider}</span>
+                <span className="font-bold" style={{ color: "var(--text)" }}>
+                  {w.provider}
+                </span>
               </p>
-              <p className="text-slate-500">
+              <p style={{ color: "var(--muted)" }}>
                 {w.user} in{" "}
-                <span className="font-semibold text-sky-800">{w.game}</span> won
+                <span className="font-semibold" style={{ color: "var(--primary-dark)" }}>
+                  {w.game}
+                </span>{" "}
+                won
               </p>
-              <p className="text-sm font-bold text-red-600">
+              <p className="text-sm font-bold" style={{ color: "var(--primary)" }}>
                 {formatWinAmount(w.amount)}
               </p>
             </div>

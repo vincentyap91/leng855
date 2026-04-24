@@ -14,7 +14,7 @@ import { FloatingOverlays } from "./components/FloatingOverlays";
 export default function App() {
   return (
     <div
-      className="flex min-h-screen flex-col bg-bg-page text-[var(--text)]"
+      className="t3-default-lobby flex min-h-screen flex-col bg-bg-page text-[var(--text)]"
       style={{ background: "var(--page-bg-gradient)" }}
     >
       <Header />
@@ -29,7 +29,7 @@ export default function App() {
 
               <AnnouncementBar />
 
-              <div className="flex justify-end">
+              <div className="provider-category-container flex justify-end">
                 <CategoryChips />
               </div>
 

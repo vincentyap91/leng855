@@ -14,57 +14,60 @@ const withdrawals: Row[] = [
   { account: "***un", amount: "300.00" },
 ];
 
-function Avatar() {
-  return (
-    <span
-      className="inline-block w-5 h-5 rounded-full mr-2 align-middle"
-      style={{
-        backgroundColor: "var(--surface-3)",
-        border: "1px solid var(--border)",
-      }}
-    />
-  );
-}
-
-function Column({ title, rows }: { title: string; rows: Row[] }) {
-  return (
-    <div className="flex-1 flex flex-col overflow-hidden">
-      <div className="h-[34px] bg-gold-header flex items-center justify-center">
-        <span className="text-sm font-bold text-[var(--on-gold)]">{title}</span>
-      </div>
-      {rows.map((r, i) => (
-        <div
-          key={i}
-          className={[
-            "h-[34px] flex items-center px-[14px] text-[13px] text-[var(--text)]",
-            i % 2 === 0 ? "bg-bg-rowAlt" : "bg-bg-row",
-          ].join(" ")}
-        >
-          <Avatar />
-          <span>{r.account}</span>
-          <span className="ml-auto tabular-nums">{r.amount}</span>
-        </div>
-      ))}
-    </div>
-  );
-}
-
 export function LiveTransactions() {
   return (
-    <section>
+    <section className="mobile-home-latest-transactions-box">
       <h2 className="italic font-bold text-[17.5px] text-brand-red tracking-wide">
         LIVE TRANSACTIONS
       </h2>
       <div
-        className="mt-2 rounded-lg overflow-hidden flex"
+        className="body mt-2 rounded-lg overflow-hidden"
         style={{
           backgroundColor: "var(--surface)",
-          border: "1px solid #D4AF37",
+          border: "1px solid var(--gold)",
           boxShadow: "var(--card-shadow)",
         }}
       >
-        <Column title="Deposit" rows={deposits} />
-        <Column title="Withdrawal" rows={withdrawals} />
+        <table className="t3-custom-table w-full border-collapse text-[13px]">
+          <thead>
+            <tr>
+              <th className="h-[34px] px-3 text-center font-bold">Deposit</th>
+              <th className="h-[34px] px-3 text-center font-bold">Withdrawal</th>
+            </tr>
+          </thead>
+          <tbody>
+            {deposits.map((d, i) => (
+              <tr key={`${d.account}-${i}`}>
+                <td className="h-[34px] px-3">
+                  <div className="flex items-center">
+                    <span
+                      className="mr-2 inline-block h-5 w-5 rounded-full"
+                      style={{
+                        backgroundColor: "var(--surface-3)",
+                        border: "1px solid var(--border)",
+                      }}
+                    />
+                    <span>{d.account}</span>
+                    <span className="ml-auto tabular-nums">{d.amount}</span>
+                  </div>
+                </td>
+                <td className="h-[34px] px-3">
+                  <div className="flex items-center">
+                    <span
+                      className="mr-2 inline-block h-5 w-5 rounded-full"
+                      style={{
+                        backgroundColor: "var(--surface-3)",
+                        border: "1px solid var(--border)",
+                      }}
+                    />
+                    <span>{withdrawals[i]?.account}</span>
+                    <span className="ml-auto tabular-nums">{withdrawals[i]?.amount}</span>
+                  </div>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       </div>
     </section>
   );

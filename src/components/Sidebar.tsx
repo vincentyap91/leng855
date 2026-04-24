@@ -39,7 +39,7 @@ function SideLink({ label, icon, badge, active }: Item) {
     <button
       type="button"
       className={[
-        "side-nav-item group relative w-full h-[44px] rounded-lg transition-[color,background-color,box-shadow] duration-200 ease-out flex items-center px-[12px] gap-[10px]",
+        "t3-sidemenu-item side-nav-item group relative w-full h-[44px] rounded-lg transition-[color,background-color,box-shadow] duration-200 ease-out flex items-center px-[12px] gap-[10px]",
         active ? "side-nav-item--active bg-[var(--nav-side-active)]" : "bg-bg-item hover:bg-[var(--nav-side-item-hover)]",
       ].join(" ")}
       style={{
@@ -51,16 +51,16 @@ function SideLink({ label, icon, badge, active }: Item) {
         alt=""
         className="side-nav-icon w-[24px] h-[24px] object-contain shrink-0 transition"
       />
-      <span
+      <h6
         className={[
-          "text-[13px] font-semibold leading-none flex-1 text-left",
+          "m-0 text-[13px] font-semibold leading-none flex-1 text-left",
           active
             ? "text-[var(--nav-side-text-active)]"
             : "text-[var(--nav-side-color)] group-hover:text-[var(--nav-side-text-hover)]",
         ].join(" ")}
       >
         {label}
-      </span>
+      </h6>
       {badge !== undefined && (
         <span
           className={[
@@ -82,16 +82,16 @@ function RecentGameLink() {
   return (
     <button
       type="button"
-      className="group w-full h-[44px] rounded-lg flex items-center px-[12px] gap-[10px] text-left transition-colors bg-bg-item hover:bg-[var(--nav-side-item-hover)]"
+      className="t3-sidemenu-item group w-full h-[44px] rounded-lg flex items-center px-[12px] gap-[10px] text-left transition-colors bg-bg-item hover:bg-[var(--nav-side-item-hover)]"
     >
       <img
         src={assets.iconRecent}
         alt=""
         className="w-[24px] h-[24px] object-contain shrink-0 [filter:var(--sidebar-icon-filter)] group-hover:[filter:var(--sidebar-icon-filter-active)]"
       />
-      <span className="text-[13px] font-semibold leading-none text-[var(--nav-side-color)] group-hover:text-[var(--nav-side-text-hover)]">
+      <h6 className="m-0 text-[13px] font-semibold leading-none text-[var(--nav-side-color)] group-hover:text-[var(--nav-side-text-hover)]">
         Recent Game
-      </span>
+      </h6>
     </button>
   );
 }
@@ -101,12 +101,12 @@ function LiveChatLink() {
   return (
     <button
       type="button"
-      className="group w-full h-[44px] rounded-lg flex items-center px-[12px] gap-[10px] text-left transition-colors bg-bg-item hover:bg-[var(--nav-side-item-hover)]"
+      className="t3-sidemenu-item group w-full h-[44px] rounded-lg flex items-center px-[12px] gap-[10px] text-left transition-colors bg-bg-item hover:bg-[var(--nav-side-item-hover)]"
     >
       <LiveChatIcon />
-      <span className="text-[13px] font-semibold leading-none flex-1 text-left text-[var(--nav-side-color)] group-hover:text-[var(--nav-side-text-hover)]">
+      <h6 className="m-0 text-[13px] font-semibold leading-none flex-1 text-left text-[var(--nav-side-color)] group-hover:text-[var(--nav-side-text-hover)]">
         Live Chat
-      </span>
+      </h6>
       <span className="min-w-[18px] h-[18px] px-[5px] rounded-full bg-[var(--primary)] text-white text-[11px] font-bold flex items-center justify-center">
         1
       </span>
@@ -191,7 +191,7 @@ function PromoStrip({
 export function Sidebar() {
   return (
     <aside
-      className="w-[220px] shrink-0 bg-bg-sidebar relative pb-4 border-r"
+      className="t3-side-menu t3-sidemenu-box sticky top-[60px] h-[calc(100vh-60px)] w-[220px] shrink-0 overflow-y-auto bg-bg-sidebar relative pb-4 border-r"
       style={{
         borderRightColor: "var(--sidebar-container-border)",
       }}

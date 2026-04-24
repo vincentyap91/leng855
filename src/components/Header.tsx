@@ -3,7 +3,7 @@ import { assets } from "../data/assets";
 export function Header() {
   return (
     <header
-      className="flex h-[60px] min-w-0 items-center gap-3 border-b border-t px-4 sm:px-5 md:gap-4"
+      className="t3-header flex h-[60px] min-w-0 items-center gap-3 border-b border-t px-4 sm:px-5 md:gap-4"
       style={{
         borderTopColor: "var(--header-bar-top-line)",
         borderBottomColor: "var(--header-bar-bottom-line)",
@@ -15,7 +15,15 @@ export function Header() {
         aria-label="Menu"
         className="grid h-[30px] w-[30px] shrink-0 place-items-center opacity-90 hover:opacity-100"
       >
-        <img src={assets.menuIcon} alt="" className="h-[24px] w-[24px]" />
+        <img
+          src={assets.menuIcon}
+          alt=""
+          className="h-[24px] w-[24px]"
+          style={{
+            filter:
+              "brightness(0) saturate(100%) invert(74%) sepia(63%) saturate(438%) hue-rotate(6deg) brightness(95%) contrast(90%)",
+          }}
+        />
       </button>
 
       <a
@@ -30,7 +38,7 @@ export function Header() {
         />
       </a>
 
-      <div className="ml-auto flex shrink-0 items-center gap-4 sm:gap-5">
+      <div className="second ml-auto flex shrink-0 items-center gap-4 sm:gap-5">
         <a
           href="#login"
           className="hidden text-sm font-bold hover:opacity-80 sm:inline"
@@ -41,7 +49,7 @@ export function Header() {
 
         <button
           type="button"
-          className="h-[40px] min-w-[96px] rounded-lg px-4 text-sm font-bold transition hover:brightness-110"
+          className="t3-header-register h-[40px] min-w-[96px] rounded-lg px-4 text-sm font-bold transition hover:brightness-110"
           style={{
             background: "var(--nav-header-register-bg)",
             color: "var(--nav-header-register-color)",

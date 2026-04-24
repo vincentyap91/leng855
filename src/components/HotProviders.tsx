@@ -30,10 +30,10 @@ const sliderSettings: Settings = {
 
 export function HotProviders() {
   return (
-    <section className="rounded-xl bg-white p-4">
+    <section className="rounded-xl bg-white p-4" style={{ boxShadow: "var(--card-shadow)" }}>
       <h2 className="mb-4 text-[15px] font-bold uppercase tracking-wide">
-        <span className="text-red-600">HOT</span>{" "}
-        <span className="text-slate-800">PROVIDERS</span>
+        <span style={{ color: "var(--primary)" }}>HOT</span>{" "}
+        <span style={{ color: "var(--text)" }}>PROVIDERS</span>
       </h2>
 
       <div className="hot-providers-slider -mx-1 px-1 sm:mx-0 sm:px-6">

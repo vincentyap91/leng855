@@ -15,8 +15,8 @@
     --gold-bright: #E9C96A;    /* soft gold gleam */
     --bg: #FFFFFF;             /* pure white page base (CAM88 clean feel) */
     --surface: #FFFFFF;        /* cards / sections */
-    --text: #1F2937;           /* high-contrast dark gray */
-    --muted: #6B7280;          /* secondary text (slate) */
+    --text: #3A1515;           /* high-contrast dark red-brown */
+    --muted: #8A6B2A;          /* secondary text (muted gold-brown) */
     /* Foreground colors when painted over brand fills */
     --on-primary: #FFFFFF;     /* text on red/CTA */
     --on-gold: #2A1A00;        /* text on gold */
@@ -216,7 +216,7 @@
     /* Announcement — light cream bar, dark brown/red copy (no heavy shadows) */
     --announcement-bg: #FDF0C5;
     --announcement-color: var(--primary-dark);
-    --announcement-muted: #B45309;
+    --announcement-muted: color-mix(in srgb, var(--gold) 74%, var(--primary-dark) 26%);
     --announcement-icon-color: var(--primary-dark);
     --announcement-shadow: none;
 
@@ -357,14 +357,21 @@
     --game-table-border: var(--border);
 
     --game-win-amount: var(--gold);
+    --game-lose-amount: var(--primary);
 
 
     /* Setting Page Wallet Info */
+    --setting-wallet-bg: var(--surface);
+    --setting-wallet-item: var(--surface-2);
     --setting-wallet-frame: var(--primary);
     --setting-wallet-end-promo: var(--gold);
     --setting-wallet-end-promo-color: var(--on-gold);
     --setting-progress-bg: var(--surface-3);
     --setting-progress-bar: var(--cta-gradient);
+    --setting-primary-btn: var(--cta-gradient);
+    --setting-primary-btn-color: var(--on-primary);
+    --setting-secondary-btn: var(--surface-2);
+    --setting-secondary-btn-color: var(--text);
 
 
     /* Modal */
@@ -402,6 +409,7 @@
 
     /* Deposit NumberPad*/
     --numberpad-bg: var(--surface);
+    --numberpad-color: inherit;
 
     --numberpad-button: var(--surface-2);
     --numberpad-button-color: var(--text);
@@ -625,6 +633,7 @@
     --theme-color-bg-btn-gold: var(--gold);
 
     --theme-color-bg-input-primary: var(--text);
+    --theme-color-bg-input-default: var(--theme-color-bg-input-primary);
     --theme-color-bg-input-special: var(--surface-3);
 
     --theme-min-width-html: 500px;
@@ -875,12 +884,21 @@ button.side-nav-item:not(.side-nav-item--active):hover .side-nav-icon {
  color: var(--muted) !important;
 }
 
+/* Preserve live-site sidebar state colors when using t3-sidemenu-item + h6 */
+.t3-sidemenu-box .t3-sidemenu-item.side-nav-item--active h6 {
+ color: var(--nav-side-text-active) !important;
+}
+
+.t3-sidemenu-box .t3-sidemenu-item:hover h6 {
+ color: var(--nav-side-text-hover) !important;
+}
+
 .t3-header > .second .t3-header-register {
     color: var(--nav-header-register-color) !important;
 }
 
 .t3-side-menu {
-    background-color: var(--surface) !important;
+    background-color: var(--sidebar-bg) !important;
 }
 
 .mobile-latest-deposit-withdraw-box > div:first-child > .mobile-home-latest-transactions-box {
@@ -888,7 +906,7 @@ button.side-nav-item:not(.side-nav-item--active):hover .side-nav-icon {
 }
 
 /*.t3-game-category-list .t3-game-category-item:hover {
-    background: #462e2c !important;
+    background: var(--primary-dark) !important;
 }*/
 
 .footer-container {
@@ -1087,7 +1105,7 @@ display: none;
 margin: 0;
 }
 .modal-backdrop {
-background-color: rgba(50,50,50,1);
+background-color: color-mix(in srgb, var(--primary-dark) 72%, var(--crimson-deep));
 }
 @media (max-width: 500px) {
 #t3-login-register-modal.home-announcement-modal.modal-dialog-centered {

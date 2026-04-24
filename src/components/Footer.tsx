@@ -9,7 +9,7 @@ const socials = [
 export function Footer() {
   return (
     <footer
-      className="text-[var(--nav-footer-color)]"
+      className="t3-footer footer-container text-[var(--nav-footer-color)]"
       style={{
         background: "var(--nav-footer-gradient)",
         borderBottom: "var(--nav-footer-border)",
