@@ -19,8 +19,5 @@ const tiles = [
     { label: "Relax Gaming", src: assets.tiles.relaxgaming },
 ];
 export function GamesGrid() {
-    return (_jsx("section", { children: _jsx("div", { className: "grid grid-cols-6 gap-x-[14px] gap-y-[8px]", children: tiles.map((t) => (_jsxs("div", { className: "flex flex-col items-center select-none", children: [_jsx("div", { className: "w-full max-w-[180px] rounded-xl bg-white p-1", style: {
-                            border: "1px solid #D4AF37",
-                            boxShadow: "0 4px 12px rgba(0, 0, 0, 0.08)",
-                        }, children: _jsx("img", { src: t.src, alt: t.label, className: "w-full aspect-square object-contain transition-transform hover:scale-[1.03] cursor-pointer" }) }), _jsx("p", { className: "mt-1 text-[13px] font-semibold text-[var(--text)] text-center", children: t.label })] }, t.label))) }) }));
+    return (_jsx("section", { children: _jsx("div", { className: "grid grid-cols-6 gap-x-[14px] gap-y-[8px]", children: tiles.map((t) => (_jsxs("div", { className: "flex flex-col items-center select-none", children: [_jsx("div", { className: "w-full max-w-[180px] rounded-xl bg-white p-1", children: _jsx("img", { src: t.src, alt: t.label, className: "w-full aspect-square object-contain transition-transform hover:scale-[1.03] cursor-pointer" }) }), _jsx("p", { className: "mt-1 text-[13px] font-semibold text-[var(--text)] text-center", children: t.label })] }, t.label))) }) }));
 }

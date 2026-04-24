@@ -32,13 +32,7 @@ export function GamesGrid() {
       <div className="grid grid-cols-6 gap-x-[14px] gap-y-[8px]">
         {tiles.map((t) => (
           <div key={t.label} className="flex flex-col items-center select-none">
-            <div
-              className="w-full max-w-[180px] rounded-xl bg-white p-1"
-              style={{
-                border: "1px solid #D4AF37",
-                boxShadow: "0 4px 12px rgba(0, 0, 0, 0.08)",
-              }}
-            >
+            <div className="w-full max-w-[180px] rounded-xl bg-white p-1">
               <img
                 src={t.src}
                 alt={t.label}
