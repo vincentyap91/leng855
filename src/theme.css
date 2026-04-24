@@ -917,7 +917,8 @@ button.side-nav-item:not(.side-nav-item--active):hover .side-nav-icon {
 }*/
 
 .footer-container {
-    background: var(--bg) !important;
+    /* Match header bar — same red gradient as --header-gradient / --header-bar-gradient */
+    background: var(--nav-footer-gradient) !important;
 }
 
 .t3-footer {

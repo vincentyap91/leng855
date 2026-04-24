@@ -30,7 +30,7 @@ const sliderSettings: Settings = {
 
 export function HotProviders() {
   return (
-    <section className="rounded-xl bg-white p-4" style={{ boxShadow: "var(--card-shadow)" }}>
+    <section className="rounded-xl bg-white p-4">
       <h2 className="mb-4 text-[15px] font-bold uppercase tracking-wide">
         <span style={{ color: "var(--primary)" }}>HOT</span>{" "}
         <span style={{ color: "var(--text)" }}>PROVIDERS</span>
