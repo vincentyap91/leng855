@@ -1,6 +1,6 @@
 /**
  * Static image paths — files live in `public/assets/` (served at `/assets/*`).
- * Sourced from kh168.live (see `scripts/fetch-assets.ps1`).
+ * Asset paths for Leng855 (see `scripts/fetch-assets.ps1` for CDN fetch).
  * To replace an image, drop a new file in `public/assets/` and update the path here.
  */
 
@@ -8,7 +8,7 @@ const base = "/assets";
 
 export const assets = {
   // Header + flags
-  kh168Logo: `${base}/Leng855_logo.png`,
+  leng855Logo: `${base}/Leng855_logo.png`,
   ukFlag: `${base}/flag-uk.svg`,
   cambodiaFlag: `${base}/flag-cambodia.svg`,
   chinaFlag: `${base}/flag-china.svg`,

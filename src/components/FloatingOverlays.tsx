@@ -16,7 +16,7 @@ function readDownloadBannerDismissed(): boolean {
 
 /**
  * Fixed-position overlays that appear on top of the landing page content
- * (matches kh168.live): a download banner at bottom-left and a live-chat
+ * (matches leng855.live): a download banner at bottom-left and a live-chat
  * agent bubble at bottom-right.
  */
 export function FloatingOverlays() {
@@ -36,18 +36,18 @@ export function FloatingOverlays() {
   return (
     <>
       {/* Bottom-left "Super Apps / Download" banner. The image itself contains
-          the KH168 mark, tagline, and DOWNLOAD button. */}
+          the Leng855 mark, tagline, and DOWNLOAD button. */}
       {!downloadBannerDismissed && (
         <div className="fixed left-[220px] bottom-0 z-40 pointer-events-none">
           <div className="pointer-events-auto relative inline-block">
             <button
               type="button"
               className="relative block"
-              aria-label="Download KH168 app"
+              aria-label="Download Leng855 app"
             >
               <img
                 src={assets.floatingDownload}
-                alt="KH168 Super Apps — Download"
+                alt="Leng855 Super Apps — Download"
                 className="h-[74px] w-auto select-none"
               />
             </button>

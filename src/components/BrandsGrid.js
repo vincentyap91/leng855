@@ -1,7 +1,7 @@
 import { jsx as _jsx } from "react/jsx-runtime";
 import { assets } from "../data/assets";
 /**
- * Bottom brand/provider logo strip from kh168.live/en.
+ * Bottom brand/provider logo strip from leng855.live/en.
  * Uses real color logos downloaded into /public/assets.
  */
 const brands = [

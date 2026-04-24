@@ -1,7 +1,7 @@
 import { assets } from "../data/assets";
 
 /**
- * Provider game tiles under the category tabs, 6 columns like kh168.live/en.
+ * Provider game tiles under the category tabs, 6 columns like leng855.live/en.
  * The tile images already contain the red pedestal and provider logo,
  * so the card itself is transparent.
  */

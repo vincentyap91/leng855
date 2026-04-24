@@ -24,7 +24,7 @@ export function Header() {
         aria-label="Leng855 home"
       >
         <img
-          src={assets.kh168Logo}
+          src={assets.leng855Logo}
           alt="Leng855"
           className="h-[50px] max-h-[50px] w-[min(320px,42vw)] max-w-[320px] object-contain object-left"
         />

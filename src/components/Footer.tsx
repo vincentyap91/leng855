@@ -47,7 +47,7 @@ export function Footer() {
       </div>
 
       <div className="text-center pb-6 text-xs text-[var(--nav-footer-copyright-color)] font-light">
-        ©2026 KH168.LIVE. All rights reserved. | 18+ | v1.10.334
+        ©2026 Leng855. All rights reserved. | 18+ | v1.10.334
       </div>
     </footer>
   );

@@ -1,6 +1,6 @@
 import { assets } from "../data/assets";
 
-// Left → right order matches the live kh168.live/en landing page.
+// Left → right order matches the live leng855.live/en landing page.
 const banners = [
   { alt: "Enjoy Our Exclusive Bonus", src: assets.bannerExclusive },
   { alt: "50% Welcome Bonus", src: assets.banner50Welcome },

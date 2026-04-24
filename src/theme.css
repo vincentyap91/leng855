@@ -10,6 +10,7 @@
     --primary: #B91C1C;        /* primary red */
     --primary-dark: #991B1B;   /* deep red */
     --primary-bright: #D81E2F; /* crimson highlight */
+    --crimson-deep: #8A0F1E;   /* header / vibrant anchor (not muddy black-red) */
     --gold: #D4AF37;           /* premium gold */
     --gold-bright: #E9C96A;    /* soft gold gleam */
     --bg: #FFFFFF;             /* pure white page base (CAM88 clean feel) */
@@ -26,6 +27,10 @@
     --border: rgba(0, 0, 0, 0.06);
     --border-strong: rgba(0, 0, 0, 0.12);
     --shadow-soft: rgba(0, 0, 0, 0.06);
+    /* Light theme: elevation from ink color, not flat black */
+    --shadow-elevated-color: color-mix(in srgb, var(--text) 12%, transparent);
+    --shadow-elevated: 0 4px 12px 0 var(--shadow-elevated-color);
+    --shadow-promo-text: 0 1px 2px color-mix(in srgb, var(--primary-dark) 42%, transparent);
     --active-tint: rgba(179, 13, 30, 0.10);
     --gold-tint: rgba(199, 154, 44, 0.14);
     --page-bg-glow: #FFFFFF;
@@ -33,10 +38,10 @@
     --glass-blur: blur(6px);
     --nav-surface-border: rgba(0, 0, 0, 0.06);
     --header-logo-backdrop: transparent;
-    --card-border: rgba(212, 175, 55, 0.55);
+    --card-border: color-mix(in srgb, var(--gold) 55%, transparent);
     /* ---- Soft elevation for white cards (CAM88 clean look) ---- */
-    --card-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
-    --card-shadow-hover: 0 6px 18px rgba(0, 0, 0, 0.10);
+    --card-shadow: 0 2px 8px color-mix(in srgb, var(--text) 7%, transparent);
+    --card-shadow-hover: 0 6px 18px color-mix(in srgb, var(--text) 11%, transparent);
     /* Sidebar nav rows — dark-red active cell + soft glow */
     --nav-side-highlight-ring: var(--primary);
     --nav-side-item-glow: rgba(138, 15, 30, 0.18);
@@ -49,8 +54,8 @@
     --container-gold-border: 1px solid transparent;
     --container-gold-glow: var(--card-shadow);
     --panel-item-bg: #FFFFFF;
-    --panel-item-border: rgba(212, 175, 55, 0.45);
-    --panel-item-shadow: 0 4px 10px rgba(15, 23, 42, 0.08);
+    --panel-item-border: color-mix(in srgb, var(--gold) 48%, transparent);
+    --panel-item-shadow: var(--shadow-elevated);
 
     /* ---- Reusable gradients ----
        5-stop metallic shine: dark → body → bright peak → body → dark */
@@ -62,17 +67,18 @@
         var(--primary) 62%,
         var(--primary-dark) 100%
     );
-    /* Header — deep crimson (left) → bright red (right), matches reference bar */
+    /* Header — deep crimson anchor (no near-black) → bright red, light R/W/G theme */
     --header-gradient: linear-gradient(
         90deg,
-        #37010f 0%,
-        #6E0D19 40%,
-        #991B1B 55%,
-        #B91C1C 100%
+        var(--crimson-deep) 0%,
+        #7A1120 24%,
+        var(--primary-dark) 48%,
+        var(--primary) 78%,
+        var(--primary-bright) 100%
     );
     --header-bar-gradient: var(--header-gradient);
-    --header-bar-top-line: rgba(35, 0, 6, 0.55);
-    --header-bar-bottom-line: rgba(60, 6, 12, 0.75);
+    --header-bar-top-line: color-mix(in srgb, var(--gold) 38%, transparent);
+    --header-bar-bottom-line: color-mix(in srgb, var(--gold-bright) 28%, transparent);
     /* Language chip — same fill as Register *text* (on-gold), no border */
     --header-lang-bg: var(--on-gold);
     --header-lang-border: none;
@@ -135,7 +141,7 @@
     --nav-login-btn: unset;
     --nav-login-btn-hover: unset;
 
-    --nav-login-color: #D4AF37;
+    --nav-login-color: var(--gold);
 
 
     /* Balance/username/language */
@@ -158,10 +164,10 @@
        dark-red active row; light-gray default rows; red text/icons.
        ============================================================ */
     --sidebar-bg:              #EBEBEB;
-    --sidebar-text:            #991B1B;
+    --sidebar-text:            var(--primary-dark);
     --sidebar-item-bg:         #DBDAD8;
     --sidebar-item-hover:      var(--sidebar-item-active);
-    --sidebar-item-active:     #8A0F1E;
+    --sidebar-item-active:     var(--crimson-deep);
     --sidebar-item-active-ring: transparent;
     --sidebar-container-border: #D7DBE2;
     --sidebar-item-radius:     8px;
@@ -173,9 +179,9 @@
     --sidebar-text-active: var(--on-primary);
     --sidebar-text-hover:  var(--on-primary);
 
-    --sidebar-daily-bg:    linear-gradient(180deg, #430000 0%, #771405 100%);
-    --sidebar-spin-bg:     linear-gradient(180deg, #432800 0%, #774505 100%);
-    --sidebar-download-bg: linear-gradient(180deg, #001F3F 0%, #003366 100%);
+    --sidebar-daily-bg:    linear-gradient(180deg, var(--primary-dark) 0%, var(--primary) 100%);
+    --sidebar-spin-bg:     linear-gradient(180deg, color-mix(in srgb, var(--gold) 28%, #5c3a0a) 0%, var(--primary-dark) 100%);
+    --sidebar-download-bg: linear-gradient(180deg, #1e4976 0%, #2b6cb0 100%);
 
     /* Consumers of the sidebar palette */
     --nav-side-bg:       var(--sidebar-bg);
@@ -190,7 +196,7 @@
     --nav-side-promo-daily-bg:    var(--sidebar-daily-bg);
     --nav-side-promo-spin-bg:     var(--sidebar-spin-bg);
     --nav-side-promo-download-bg: var(--sidebar-download-bg);
-    --nav-side-promo-text-shadow: 0 1px 2px rgba(0, 0, 0, 0.55);
+    --nav-side-promo-text-shadow: var(--shadow-promo-text);
     --nav-side-promo-icon-size:   34px;
 
     /* Sidebar nav row states */
@@ -202,28 +208,26 @@
     --nav-side-chat-btn-gradient: var(--primary);
     --nav-side-chat-btn-gradient2: var(--primary-dark);
 
-/* Hotfix */
-/* mobile menu */
---theme-color-nav-menu-active: var(--primary-dark);
-/* game page */
---theme-color-text-tab-active: var(--primary);
---theme-color-bet-table-row: var(--surface-2);
+    /* BO / legacy bridge (was “Hotfix”) — keep in :root for single source */
+    --theme-color-nav-menu-active: var(--primary-dark);
+    --theme-color-text-tab-active: var(--primary);
+    --theme-color-bet-table-row: var(--surface-2);
 
     /* Announcement — light cream bar, dark brown/red copy (no heavy shadows) */
     --announcement-bg: #FDF0C5;
-    --announcement-color: #991B1B;
+    --announcement-color: var(--primary-dark);
     --announcement-muted: #B45309;
-    --announcement-icon-color: #991B1B;
+    --announcement-icon-color: var(--primary-dark);
     --announcement-shadow: none;
 
     /* Game List Page */
     /* Game category strip — cream pill bar, dark red labels, solid red active chip */
-    --game-category-tab-color: #991b1b;
+    --game-category-tab-color: var(--primary-dark);
     --game-category-tab-bg: #fff9e6;
     --game-category-tab-hover: #f0e4c8;
-    --game-category-tab-active: #991b1b;
-    --game-category-tab-active-color: #ffffff;
-    --game-category-pill-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+    --game-category-tab-active: var(--primary-dark);
+    --game-category-tab-active-color: var(--on-primary);
+    --game-category-pill-shadow: 0 2px 12px color-mix(in srgb, var(--text) 9%, transparent);
 
     --game-title-color: inherit;
     --game-title-highlight-color: var(--primary);
@@ -295,7 +299,7 @@
     --membership-tab-bg: var(--surface-2);
     --membership-tab-border: 1px solid var(--border);
     --membership-tab-active: var(--primary-dark);
-    --membership-tab-active-color: var(--text);
+    --membership-tab-active-color: var(--on-primary);
     --membership-tab-active-border: var(--gold);
     --membership-tab-active-box-shadow: 0 0 20px 0 var(--active-tint) inset;
 
@@ -305,12 +309,12 @@
     --membership-tap-button-box-shadow: none;
 
     --membership-tab-button-active: var(--gold);
-    --membership-tab-button-active-color: var(--bg);
+    --membership-tab-button-active-color: var(--on-gold);
     --membership-tab-bitton-active-box-shadow: 0 0 10px 0 var(--gold-tint);
 
     /* Accordion Container */
     --accordion-header-bg: var(--primary-dark);
-    --accordion-header-color: var(--text);
+    --accordion-header-color: var(--on-primary);
     --accordion-header-bg-active: var(--primary-dark);
 
     --accordion-body-bg: var(--surface-2);
@@ -324,10 +328,10 @@
     --promotion-date: var(--surface-3);
     --promotion-highlight: var(--gold);
     --promotion-button: var(--cta-gradient);
-    --promotion-button-color: var(--text);
+    --promotion-button-color: var(--on-primary);
 
     --promotion-status-active: var(--gold);
-    --promotion-status-active-color: var(--bg);
+    --promotion-status-active-color: var(--on-gold);
     --promotion-status-end: var(--primary);
     --promotion-status-end-color: var(--text);
 
@@ -338,17 +342,17 @@
     --date-button-bg: var(--surface);
     --date-button-color: inherit;
     --date-button-active: var(--primary-dark);
-    --date-button-active-color: var(--text);
+    --date-button-active-color: var(--on-primary);
 
 
     /* Game Page */
     --game-tab: var(--surface-2);
     --game-tab-color: inherit;
     --game-tab-active: var(--primary-dark);
-    --game-tab-active-color: var(--text);
+    --game-tab-active-color: var(--on-primary);
 
     --game-table-header: var(--primary-dark);
-    --game-table-header-color: var(--text);
+    --game-table-header-color: var(--on-primary);
     --game-table-body: var(--surface-2);
     --game-table-border: var(--border);
 
@@ -358,7 +362,7 @@
     /* Setting Page Wallet Info */
     --setting-wallet-frame: var(--primary);
     --setting-wallet-end-promo: var(--gold);
-    --setting-wallet-end-promo-color: var(--bg);
+    --setting-wallet-end-promo-color: var(--on-gold);
     --setting-progress-bg: var(--surface-3);
     --setting-progress-bar: var(--cta-gradient);
 
@@ -375,7 +379,7 @@
     --modal-tab: transparent;
     --modal-tab-color: var(--muted);
     --modal-tab-active: var(--primary-dark);
-    --modal-tab-active-color: var(--text);
+    --modal-tab-active-color: var(--on-primary);
 
     --modal-container: var(--surface);
     --modal-container-title: var(--muted);
@@ -391,7 +395,7 @@
 
     /* Deposit Withdrawal Tab */
     --deposit-tab-button-active: var(--primary-dark);
-    --deposit-tab-button-active-color: var(--text);
+    --deposit-tab-button-active-color: var(--on-primary);
     --deposit-tab-button: var(--surface-2);
     --deposit-tab-button-color: inherit;
 
@@ -403,7 +407,7 @@
     --numberpad-button-color: var(--text);
 
     --numberpad-button-active: var(--primary-dark);
-    --numberpad-button-active-color: var(--text);
+    --numberpad-button-active-color: var(--on-primary);
 
     --numberpad-button-disabled: var(--surface-3);
     --numberpad-button-disabled-color: var(--muted);
@@ -422,13 +426,13 @@
     --warning-info-link: var(--primary);
 
 
-    /* Footer — matching deep red gradient with readable light text */
-    --nav-footer-bg: #B91C1C;
+    /* Footer — matching header gradient with gold-tinted copy on red */
+    --nav-footer-bg: var(--primary);
     --nav-footer-gradient: var(--header-gradient);
-    --nav-footer-bottom-accent: #7A0A17;
-    --nav-footer-color: #F8E7B6;
-    --nav-footer-copyright-color: #FDECC1;
-    --nav-footer-control-border: rgba(212, 175, 55, 0.55);
+    --nav-footer-bottom-accent: var(--primary-dark);
+    --nav-footer-color: color-mix(in srgb, var(--gold-bright) 72%, #FFFFFF);
+    --nav-footer-copyright-color: color-mix(in srgb, var(--gold-bright) 58%, #FFFDF5);
+    --nav-footer-control-border: color-mix(in srgb, var(--gold) 55%, transparent);
     --nav-footer-active: var(--primary-dark);
     --nav-footer-active-color: var(--text);
     --nav-footer-border: 3px solid var(--nav-footer-bottom-accent);
@@ -603,12 +607,12 @@
     --theme-color-text-special: var(--gold);
     --theme-color-text-table-header: var(--text);
 
-    --theme-color-bg-side-menu-active: var(--primary-dark);
+    --theme-color-bg-side-menu-active: var(--sidebar-item-active);
     --theme-color-bg-nav: var(--nav-header-bg);
     --theme-color-bg-table-header: var(--primary-dark);
     --theme-color-bg-table-row: var(--surface-2);
 
-    --theme-color-bg-btn-primary: var(--primary-dark);
+    --theme-color-bg-btn-primary: var(--cta-gradient);
     --theme-color-bg-btn-secondary: var(--surface-2);
     --theme-color-bg-btn-submit: var(--cta-gradient);
     --theme-color-bg-btn-alert: var(--cta-gradient);
@@ -650,7 +654,7 @@ button.side-nav-item:not(.side-nav-item--active):hover .side-nav-icon {
   }
 
 .t3-game-category-list .t3-game-category-item.active h6 {
-    color: var(--theme-color-text-base) !important;
+    color: var(--on-primary) !important;
 }
 
 .t3-custom-gray-btn {
@@ -671,14 +675,16 @@ button.side-nav-item:not(.side-nav-item--active):hover .side-nav-icon {
 
 .t3-accordion-item.active > .head {
   background: var(--primary-dark) !important;
+  color: var(--on-primary) !important;
 }
 
 .t3-mobile-side-menu-content .t3-sidemenu-item {
     background-image: linear-gradient(90deg, var(--surface-2) 0%, var(--primary-dark) 100%) !important;
 }
 .add-remove-week-filter li.active {
-  background: var(--primary-dark) !important;
+  background: var(--cta-gradient) !important;
   border: 1px solid var(--primary-dark) !important;
+  color: var(--on-primary) !important;
 }
 
 #deposit-id .all-flex-box-gray {
@@ -701,7 +707,8 @@ button.side-nav-item:not(.side-nav-item--active):hover .side-nav-icon {
 }
 
 .btn-custom-small {
-  background: var(--primary-dark) !important;
+  background: var(--cta-gradient) !important;
+  color: var(--on-primary) !important;
 }
 
 .add-remove-week-filter li{
@@ -752,7 +759,7 @@ button.side-nav-item:not(.side-nav-item--active):hover .side-nav-icon {
 }
 
 .t3-two-custom-tabs > .active {
-    color: var(--theme-color-text-base) !important;
+    color: var(--primary-dark) !important;
 }
 
 .yellow-note-title {
@@ -770,6 +777,7 @@ button.side-nav-item:not(.side-nav-item--active):hover .side-nav-icon {
 .provider-category-container>div.active {
     background: var(--primary-dark) !important;
     border: 1px solid var(--gold) !important;
+    color: var(--on-primary) !important;
 }
 
 .t3-cms-header {
@@ -791,15 +799,12 @@ button.side-nav-item:not(.side-nav-item--active):hover .side-nav-icon {
 }
 
 .mobile-home-balance-box > .body .second button {
-    color: var(--theme-color-text-base) !important;
-}
-
-.mobile-home-balance-box > .body .second button {
     background: var(--cta-gradient) !important;
+    color: var(--on-primary) !important;
 }
 
 .t3-header-balance-deposit-box .t3-header-deposit {
-    color: var(--theme-color-text-base) !important;
+    color: var(--on-primary) !important;
 }
 
 .home-login-register-box > div:first-child {
@@ -811,7 +816,7 @@ button.side-nav-item:not(.side-nav-item--active):hover .side-nav-icon {
 
 .home-login-register-box > div:last-child {
     background: var(--cta-gradient) !important;
-    color: var(--theme-color-text-base) !important;
+    color: var(--on-primary) !important;
 }
 
 .tac-countdown {
@@ -823,8 +828,8 @@ button.side-nav-item:not(.side-nav-item--active):hover .side-nav-icon {
 }
 
 .t3-downline-table-tab > button.active, .t3-downline-status-table-tab > button.active {
-    background: var(--primary-dark) !important;
-    color: var(--theme-color-text-base) !important;
+    background: var(--cta-gradient) !important;
+    color: var(--on-primary) !important;
 }
 
 .t3-downline-table-tab > button, .t3-downline-status-table-tab > button {
@@ -839,7 +844,8 @@ button.side-nav-item:not(.side-nav-item--active):hover .side-nav-icon {
 }
 
 .t3-custom-table thead > tr > th {
-    background-color: var(--surface-2) !important;
+    background-color: var(--dashboard-table-th) !important;
+    color: var(--dashboard-table-th-color) !important;
     border-bottom: unset !important;
 }
 
@@ -853,7 +859,8 @@ button.side-nav-item:not(.side-nav-item--active):hover .side-nav-icon {
 }
 
 .pagination-bar .page-btn.active {
-    background-color: var(--primary-dark) !important;
+    background: var(--cta-gradient) !important;
+    color: var(--on-primary) !important;
 }
 
 .pagination-bar .page-btn {
@@ -869,7 +876,7 @@ button.side-nav-item:not(.side-nav-item--active):hover .side-nav-icon {
 }
 
 .t3-header > .second .t3-header-register {
-    color: var(--theme-color-text-base) !important;
+    color: var(--nav-header-register-color) !important;
 }
 
 .t3-side-menu {
@@ -909,6 +916,7 @@ button.side-nav-item:not(.side-nav-item--active):hover .side-nav-icon {
 
 .t3-accordion-item > .head {
     background: var(--primary-dark) !important;
+    color: var(--on-primary) !important;
 }
 
 .custom-gray-box {
@@ -926,7 +934,8 @@ button.side-nav-item:not(.side-nav-item--active):hover .side-nav-icon {
 }
 
 .btn.btn-lg.btn-primary {
-    color: var(--theme-color-text-base) !important;
+    background: var(--cta-gradient) !important;
+    color: var(--on-primary) !important;
 }
 
 .t3-header-balance-deposit-box .t3-header-deposit .vicon {
@@ -963,8 +972,8 @@ button.side-nav-item:not(.side-nav-item--active):hover .side-nav-icon {
 }
 
 .t3-settings-menu-list .t3-settings-menu-list-item:hover {
-    background: var(--primary-dark) !important;
-    color: var(--theme-color-text-base) !important;
+    background: var(--cta-gradient) !important;
+    color: var(--on-primary) !important;
 }
 
 .t3-statistics-dropdown-box > .first {
@@ -988,7 +997,7 @@ button.side-nav-item:not(.side-nav-item--active):hover .side-nav-icon {
 }
 
 .t3-settings-menu-list-item:hover svg {
-    color: var(--theme-color-text-base) !important;
+    color: var(--on-primary) !important;
 }
 
 .t3-downline-modal-body {

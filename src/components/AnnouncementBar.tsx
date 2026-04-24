@@ -33,7 +33,7 @@ function AnnouncementSegment() {
       <span className="mx-6 text-[var(--announcement-muted)]">•</span>
       <span className="mr-2">🌐</span>
       <span className="font-semibold">
-        Backup Website: kh168-01.com, kh168-02.com, kh168-03.com
+        Backup Website: leng855-01.com, leng855-02.com, leng855-03.com
       </span>
     </span>
   );

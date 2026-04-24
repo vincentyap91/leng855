@@ -1,4 +1,4 @@
-# One-shot downloader for kh168.live landing page assets.
+# One-shot downloader for Leng855 assets (remote CDN paths still contain legacy filenames).
 # Re-run safely: files that already exist are skipped.
 
 $ErrorActionPreference = 'Continue'
@@ -7,7 +7,7 @@ New-Item -ItemType Directory -Force -Path $base | Out-Null
 
 $map = @(
     # Header + flags
-    @{ url = 'https://pksoftcdn.azureedge.net/media/kh168_logo-202507070808100538.svg'; name = 'kh168-logo.svg' },
+    @{ url = 'https://pksoftcdn.azureedge.net/media/kh168_logo-202507070808100538.svg'; name = 'leng855-logo.svg' },
     @{ url = 'https://pksoftcdn.azureedge.net/media/flag-uk-202507011318574705.svg'; name = 'flag-uk.svg' },
     @{ url = 'https://pksoftcdn.azureedge.net/media/cambodia_flag_rounded_resize-202507011318342325.svg'; name = 'flag-cambodia.svg' },
     @{ url = 'https://pksoftcdn.azureedge.net/media/flag-china-202410031642228471-202506261355454045-202507091826596271.svg'; name = 'flag-china.svg' },
