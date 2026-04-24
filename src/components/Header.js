@@ -1,7 +1,7 @@
 import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
 import { assets } from "../data/assets";
 export function Header() {
-    return (_jsxs("header", { className: "t3-header flex h-[60px] min-w-0 items-center gap-3 border-b border-t px-4 sm:px-5 md:gap-4", style: {
+    return (_jsxs("header", { className: "t3-header sticky top-0 z-50 flex h-[60px] min-w-0 shrink-0 items-center gap-3 border-b border-t px-4 sm:px-5 md:gap-4", style: {
             borderTopColor: "var(--header-bar-top-line)",
             borderBottomColor: "var(--header-bar-bottom-line)",
             background: "var(--header-bar-gradient)",

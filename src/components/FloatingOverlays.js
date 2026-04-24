@@ -27,7 +27,7 @@ export function FloatingOverlays() {
         }
         setDownloadBannerDismissed(true);
     };
-    return (_jsxs(_Fragment, { children: [!downloadBannerDismissed && (_jsx("div", { className: "fixed left-[220px] bottom-0 z-40 pointer-events-none", children: _jsxs("div", { className: "pointer-events-auto relative inline-block", children: [_jsx("button", { type: "button", className: "relative block", "aria-label": "Download Leng855 app", children: _jsx("img", { src: assets.floatingDownload, alt: "Leng855 Super Apps \u2014 Download", className: "h-[74px] w-auto select-none" }) }), _jsx("button", { type: "button", onClick: dismissDownloadBanner, "aria-label": "Dismiss download banner", className: "absolute -top-2 -right-2 z-10 w-5 h-5 rounded-full border text-[11px] leading-none grid place-items-center transition-colors", style: {
+    return (_jsxs(_Fragment, { children: [!downloadBannerDismissed && (_jsx("div", { className: "fixed left-0 bottom-0 z-40 pointer-events-none", children: _jsxs("div", { className: "pointer-events-auto relative inline-block", children: [_jsx("button", { type: "button", className: "relative block", "aria-label": "Download Leng855 app", children: _jsx("img", { src: assets.floatingDownload, alt: "Leng855 Super Apps \u2014 Download", className: "h-[74px] w-auto select-none" }) }), _jsx("button", { type: "button", onClick: dismissDownloadBanner, "aria-label": "Dismiss download banner", className: "absolute -top-2 -right-2 z-10 w-5 h-5 rounded-full border text-[11px] leading-none grid place-items-center transition-colors", style: {
                                 backgroundColor: "#FFFFFF",
                                 borderColor: "#D4AF37",
                                 color: "#991B1B",

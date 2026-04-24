@@ -899,6 +899,13 @@ button.side-nav-item:not(.side-nav-item--active):hover .side-nav-icon {
 
 .t3-side-menu {
     background-color: var(--sidebar-bg) !important;
+    -ms-overflow-style: none; /* IE / legacy Edge */
+    scrollbar-width: none; /* Firefox */
+}
+.t3-side-menu::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Edge */
+    width: 0;
+    height: 0;
 }
 
 .mobile-latest-deposit-withdraw-box > div:first-child > .mobile-home-latest-transactions-box {

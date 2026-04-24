@@ -38,7 +38,7 @@ export function FloatingOverlays() {
       {/* Bottom-left "Super Apps / Download" banner. The image itself contains
           the Leng855 mark, tagline, and DOWNLOAD button. */}
       {!downloadBannerDismissed && (
-        <div className="fixed left-[220px] bottom-0 z-40 pointer-events-none">
+        <div className="fixed left-0 bottom-0 z-40 pointer-events-none">
           <div className="pointer-events-auto relative inline-block">
             <button
               type="button"
