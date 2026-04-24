@@ -179,9 +179,9 @@
     --sidebar-text-active: var(--on-primary);
     --sidebar-text-hover:  var(--on-primary);
 
-    --sidebar-daily-bg:    linear-gradient(180deg, var(--primary-dark) 0%, var(--primary) 100%);
-    --sidebar-spin-bg:     linear-gradient(180deg, color-mix(in srgb, var(--gold) 28%, #5c3a0a) 0%, var(--primary-dark) 100%);
-    --sidebar-download-bg: linear-gradient(180deg, #1e4976 0%, #2b6cb0 100%);
+    --sidebar-daily-bg:    linear-gradient(180deg, #430000 0%, #771405 100%);
+    --sidebar-spin-bg:     linear-gradient(180deg, #432800 0%, #774505 100%);
+    --sidebar-download-bg: linear-gradient(180deg, #001F3F 0%, #003366 100%);
 
     /* Consumers of the sidebar palette */
     --nav-side-bg:       var(--sidebar-bg);
