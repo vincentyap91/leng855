@@ -1,6 +1,11 @@
 import { assets } from "../data/assets";
 
-export function Header() {
+type HeaderProps = {
+  onLoginClick: () => void;
+  onRegisterClick: () => void;
+};
+
+export function Header({ onLoginClick, onRegisterClick }: HeaderProps) {
   return (
     <header
       className="t3-header sticky top-0 z-50 flex h-[60px] min-w-0 shrink-0 items-center gap-3 border-b border-t px-4 sm:px-5 md:gap-4"
@@ -39,16 +44,18 @@ export function Header() {
       </a>
 
       <div className="second ml-auto flex shrink-0 items-center gap-4 sm:gap-5">
-        <a
-          href="#login"
+        <button
+          type="button"
+          onClick={onLoginClick}
           className="hidden text-sm font-bold hover:opacity-80 sm:inline"
           style={{ color: "var(--nav-login-color)" }}
         >
           Log in
-        </a>
+        </button>
 
         <button
           type="button"
+          onClick={onRegisterClick}
           className="t3-header-register h-[40px] min-w-[96px] rounded-lg px-4 text-sm font-bold transition hover:brightness-110"
           style={{
             background: "var(--nav-header-register-bg)",

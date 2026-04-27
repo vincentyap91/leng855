@@ -1,14 +1,15 @@
 import { assets } from "../data/assets";
 
+export type AppView = "home" | "all-games";
+
 type Item = {
   label: string;
   icon: string;
   badge?: number;
-  active?: boolean;
 };
 
 const mainItems: Item[] = [
-  { label: "Hot Games", icon: assets.iconHotGames, active: true },
+  { label: "Hot Games", icon: assets.iconHotGames },
   { label: "Home", icon: assets.iconHome },
   { label: "All", icon: assets.iconAll },
   { label: "Live Casino", icon: assets.iconCasino },
@@ -34,10 +35,13 @@ function LiveChatIcon() {
   );
 }
 
-function SideLink({ label, icon, badge, active }: Item) {
+type SideLinkProps = Item & { active: boolean; onSelect?: () => void };
+
+function SideLink({ label, icon, badge, active, onSelect }: SideLinkProps) {
   return (
     <button
       type="button"
+      onClick={onSelect}
       className={[
         "t3-sidemenu-item side-nav-item group relative w-full h-[44px] rounded-lg transition-[color,background-color,box-shadow] duration-200 ease-out flex items-center px-[12px] gap-[10px]",
         active ? "side-nav-item--active bg-[var(--nav-side-active)]" : "bg-bg-item hover:bg-[var(--nav-side-item-hover)]",
@@ -188,7 +192,24 @@ function PromoStrip({
   );
 }
 
-export function Sidebar() {
+type SidebarProps = {
+  view: AppView;
+  onNavigate: (next: AppView) => void;
+};
+
+function navTargetForLabel(label: string): AppView | null {
+  if (label === "All") return "all-games";
+  if (label === "Home" || label === "Hot Games") return "home";
+  return null;
+}
+
+function isItemActive(view: AppView, label: string): boolean {
+  if (view === "all-games" && label === "All") return true;
+  if (view === "home" && label === "Hot Games") return true;
+  return false;
+}
+
+export function Sidebar({ view, onNavigate }: SidebarProps) {
   return (
     <aside
       className="t3-side-menu t3-sidemenu-box sticky top-[60px] h-[calc(100vh-60px)] w-[220px] shrink-0 overflow-y-auto bg-bg-sidebar relative pb-4 border-r"
@@ -217,9 +238,17 @@ export function Sidebar() {
         className="flex flex-col gap-[6px] pt-[10px] px-[8px]"
         aria-label="Main"
       >
-        {mainItems.map((item) => (
-          <SideLink key={item.label} {...item} />
-        ))}
+        {mainItems.map((item) => {
+          const target = navTargetForLabel(item.label);
+          return (
+            <SideLink
+              key={item.label}
+              {...item}
+              active={isItemActive(view, item.label)}
+              onSelect={target != null ? () => onNavigate(target) : undefined}
+            />
+          );
+        })}
 
         <RecentGameLink />
         <div

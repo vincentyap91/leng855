@@ -7,9 +7,9 @@
     "node": ">=14.18.0"
   },
   "scripts": {
-    "dev": "node scripts/ensure-node.mjs && vite",
-    "build": "node scripts/ensure-node.mjs && tsc -b && vite build",
-    "preview": "node scripts/ensure-node.mjs && vite preview"
+    "dev": "node scripts/run-vite.mjs dev",
+    "build": "node scripts/run-vite.mjs build",
+    "preview": "node scripts/run-vite.mjs preview"
   },
   "dependencies": {
     "react": "^18.3.1",
