@@ -900,7 +900,7 @@ button.side-nav-item:not(.side-nav-item--active):hover .side-nav-icon {
 }
 
 .t3-custom-modal .modal-header {
-    background: var(--surface-2) !important;
+    background-color: var(--sidebar-bg) !important;
 }
 
 .modal.show {
@@ -956,7 +956,7 @@ button.side-nav-item:not(.side-nav-item--active):hover .side-nav-icon {
     align-items: center;
     justify-content: space-between;
     gap: 12px;
-    background: var(--theme-color-bg-modal-header);
+    background-color: var(--sidebar-bg);
     border-bottom: 1px solid var(--border);
 }
 

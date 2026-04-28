@@ -2,6 +2,8 @@ import { useCallback, useEffect, useState } from "react";
 import { Header } from "./components/Header";
 import { Sidebar, type AppView } from "./components/Sidebar";
 import { AllGamesPage } from "./components/AllGamesPage";
+import { PromotionPage } from "./components/PromotionPage";
+import { PromotionDetailPage } from "./components/PromotionDetailPage";
 import { AnnouncementBar } from "./components/AnnouncementBar";
 import { PromoBanners } from "./components/PromoBanners";
 import { CategoryChips } from "./components/CategoryChips";
@@ -14,30 +16,50 @@ import { Footer } from "./components/Footer";
 import { FloatingOverlays } from "./components/FloatingOverlays";
 import { AuthModal, type AuthMode } from "./components/AuthModal";
 
-function readViewFromHash(): AppView {
-  const h = window.location.hash.replace(/^#/, "").toLowerCase();
-  if (h === "games" || h === "all-games" || h === "/games" || h === "/all-games") {
-    return "all-games";
+type RouteState = { view: AppView; promoSlug: string | null };
+
+function parseRoute(): RouteState {
+  const raw = window.location.hash.replace(/^#\/?/, "").toLowerCase();
+  const h = raw.split("?")[0] ?? "";
+  if (h === "hot-games" || h === "/hot-games") {
+    return { view: "hot-games", promoSlug: null };
   }
-  return "home";
+  if (h === "games" || h === "all-games" || h === "/games" || h === "/all-games") {
+    return { view: "all-games", promoSlug: null };
+  }
+  if (h === "promotion" || h === "/promotion") {
+    return { view: "promotion", promoSlug: null };
+  }
+  if (h.startsWith("promotion/")) {
+    const slug = h.slice("promotion/".length).replace(/\/$/, "");
+    if (slug) {
+      return { view: "promotion-detail", promoSlug: decodeURIComponent(slug) };
+    }
+  }
+  return { view: "home", promoSlug: null };
 }
 
 export default function App() {
-  const [view, setView] = useState<AppView>(() => readViewFromHash());
+  const [route, setRoute] = useState<RouteState>(() => parseRoute());
+  const { view, promoSlug } = route;
   const [authMode, setAuthMode] = useState<AuthMode>("login");
   const [isAuthOpen, setIsAuthOpen] = useState(false);
 
   useEffect(() => {
-    const onHash = () => setView(readViewFromHash());
+    const onHash = () => setRoute(parseRoute());
     window.addEventListener("hashchange", onHash);
     onHash();
     return () => window.removeEventListener("hashchange", onHash);
   }, []);
 
   const goView = useCallback((next: AppView) => {
-    setView(next);
-    if (next === "all-games") {
+    setRoute({ view: next, promoSlug: null });
+    if (next === "hot-games") {
+      window.location.hash = "#/hot-games";
+    } else if (next === "all-games") {
       window.location.hash = "#/games";
+    } else if (next === "promotion") {
+      window.location.hash = "#/promotion";
     } else {
       const { pathname, search } = window.location;
       window.history.replaceState(null, "", `${pathname}${search}`);
@@ -65,8 +87,17 @@ export default function App() {
         <div className="flex min-w-0 flex-1 flex-col">
           <main className="min-w-0 flex-1" style={{ background: "transparent" }}>
             <div className="mx-auto max-w-[1280px] space-y-6 px-6 py-5">
-              {view === "all-games" ? (
+              {view === "hot-games" ? (
+                <AllGamesPage
+                  bannerSrc="https://pksoftcdn.azureedge.net/media/kh168_gamecategory_hotgames-202507070909452469.jpg"
+                  bannerAlt="Leng855 hot games"
+                />
+              ) : view === "all-games" ? (
                 <AllGamesPage />
+              ) : view === "promotion" ? (
+                <PromotionPage />
+              ) : view === "promotion-detail" && promoSlug ? (
+                <PromotionDetailPage slug={promoSlug} />
               ) : (
                 <>
                   <PromoBanners />

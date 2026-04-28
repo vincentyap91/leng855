@@ -1,6 +1,6 @@
 import { assets } from "../data/assets";
 
-export type AppView = "home" | "all-games";
+export type AppView = "home" | "hot-games" | "all-games" | "promotion" | "promotion-detail";
 
 type Item = {
   label: string;
@@ -9,8 +9,8 @@ type Item = {
 };
 
 const mainItems: Item[] = [
-  { label: "Hot Games", icon: assets.iconHotGames },
   { label: "Home", icon: assets.iconHome },
+  { label: "Hot Games", icon: assets.iconHotGames },
   { label: "All", icon: assets.iconAll },
   { label: "Live Casino", icon: assets.iconCasino },
   { label: "Slots", icon: assets.iconSlots },
@@ -198,14 +198,18 @@ type SidebarProps = {
 };
 
 function navTargetForLabel(label: string): AppView | null {
+  if (label === "Hot Games") return "hot-games";
   if (label === "All") return "all-games";
-  if (label === "Home" || label === "Hot Games") return "home";
+  if (label === "Promotion") return "promotion";
+  if (label === "Home") return "home";
   return null;
 }
 
 function isItemActive(view: AppView, label: string): boolean {
+  if (view === "hot-games" && label === "Hot Games") return true;
   if (view === "all-games" && label === "All") return true;
-  if (view === "home" && label === "Hot Games") return true;
+  if ((view === "promotion" || view === "promotion-detail") && label === "Promotion") return true;
+  if (view === "home" && label === "Home") return true;
   return false;
 }
 
