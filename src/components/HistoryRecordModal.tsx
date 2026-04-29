@@ -190,14 +190,15 @@ export function HistoryRecordModal({ isOpen, onClose }: HistoryRecordModalProps)
                         key={f}
                         type="button"
                         onClick={() => setActiveQuickFilter(f)}
-                        className="rounded-md px-3 py-1"
+                        className="rounded-md"
                         style={{
-                          background: active ? "color-mix(in srgb, var(--theme-color-nav-menu-active) 18%, white)" : "var(--surface-3)",
-                          color: active ? "var(--primary-dark)" : "var(--muted)",
-                          border: `1px solid ${active ? "color-mix(in srgb, var(--theme-color-nav-menu-active) 20%, transparent)" : "var(--border)"}`,
+                          background: active ? "var(--theme-color-nav-menu-active)" : "var(--surface-3)",
+                          color: active ? "var(--on-primary)" : "var(--primary-dark)",
+                          border: `1px solid ${active ? "var(--theme-color-nav-menu-active)" : "var(--border)"}`,
                           fontFamily: "var(--base-font-family)",
                           fontSize: 12,
                           fontWeight: 700,
+                          padding: "10px 12px",
                         }}
                       >
                         {f}
@@ -210,23 +211,25 @@ export function HistoryRecordModal({ isOpen, onClose }: HistoryRecordModalProps)
                 <div className="mt-4 grid grid-cols-2 overflow-hidden rounded-md border" style={{ borderColor: "var(--border)" }}>
                   <button
                     type="button"
-                    className="py-2 text-sm font-bold"
+                    className="text-sm font-bold"
                     onClick={() => setTab("deposits")}
                     style={{
                       background: tab === "deposits" ? "var(--theme-color-nav-menu-active)" : "var(--surface-3)",
-                      color: tab === "deposits" ? "var(--on-primary)" : "var(--text)",
+                      color: tab === "deposits" ? "var(--on-primary)" : "var(--primary-dark)",
                       borderRight: "1px solid var(--border)",
+                      padding: "10px 12px",
                     }}
                   >
                     Deposits
                   </button>
                   <button
                     type="button"
-                    className="py-2 text-sm font-bold"
+                    className="text-sm font-bold"
                     onClick={() => setTab("withdrawals")}
                     style={{
                       background: tab === "withdrawals" ? "var(--theme-color-nav-menu-active)" : "var(--surface-3)",
-                      color: tab === "withdrawals" ? "var(--on-primary)" : "var(--text)",
+                      color: tab === "withdrawals" ? "var(--on-primary)" : "var(--primary-dark)",
+                      padding: "10px 12px",
                     }}
                   >
                     Withdrawals

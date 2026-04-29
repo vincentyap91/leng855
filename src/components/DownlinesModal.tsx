@@ -46,10 +46,7 @@ export function DownlinesModal({ isOpen, onClose }: DownlinesModalProps) {
   const activeTabColor = "var(--on-primary)";
 
   const inactiveTabBg = "var(--surface-3)";
-  const inactiveTabColor = "var(--text)";
-
-  const quickActiveBg = "color-mix(in srgb, var(--theme-color-nav-menu-active) 18%, var(--surface-2))";
-  const quickActiveColor = "var(--text)";
+  const inactiveTabColor = "var(--primary-dark)";
 
   const cardLabelColor = "var(--text)";
   const cardValueColor = "var(--gold)";
@@ -58,8 +55,7 @@ export function DownlinesModal({ isOpen, onClose }: DownlinesModalProps) {
     fontFamily: "var(--base-font-family)",
     fontWeight: 800,
     fontSize: 13,
-    paddingTop: 10,
-    paddingBottom: 10,
+    padding: "10px 12px",
   };
 
   const cardBase: CSSProperties = {
@@ -179,14 +175,15 @@ export function DownlinesModal({ isOpen, onClose }: DownlinesModalProps) {
                       key={f}
                       type="button"
                       onClick={() => setActiveQuickFilter(f)}
-                      className="rounded-md px-3 py-1"
+                      className="rounded-md"
                       style={{
-                        border: `1px solid ${active ? "var(--border-strong)" : "var(--border)"}`,
-                        background: active ? quickActiveBg : "var(--surface-3)",
-                        color: active ? quickActiveColor : "var(--muted)",
+                        border: `1px solid ${active ? "var(--theme-color-nav-menu-active)" : "var(--border)"}`,
+                        background: active ? "var(--theme-color-nav-menu-active)" : "var(--surface-3)",
+                        color: active ? "var(--on-primary)" : "var(--primary-dark)",
                         fontFamily: "var(--base-font-family)",
                         fontSize: 12,
-                        fontWeight: 800,
+                        fontWeight: 700,
+                        padding: "10px 12px",
                       }}
                     >
                       {f}
