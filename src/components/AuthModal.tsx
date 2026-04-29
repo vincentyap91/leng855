@@ -75,7 +75,7 @@ export function AuthModal({
     : "e.g: johndoe or 61123456789";
   const passwordLabel = isLogin ? "Enter Password" : "Enter Your Password";
   const passwordPlaceholder = isLogin ? "Enter Password" : "";
-  const submitLabel = isLogin ? "Log In" : "Confirm & Register";
+  const submitLabel = isLogin ? "Log In" : "Register";
   const secondaryLabel = isLogin ? "Forgot Password" : "Back to Login";
   const promptPrefix = isLogin
     ? "Do not have an account yet?"
@@ -218,8 +218,8 @@ export function AuthModal({
                         </p>
                       ) : null}
                       <div className="t3-lr-button-box mt-4">
-                        <div>
-                          <button className="t3-custom-light-btn" type="submit">
+                        <div style={!isLogin ? { flex: "0 0 auto" } : undefined}>
+                          <button className={isLogin ? "t3-custom-light-btn" : "t3-profile-action-btn"} type="submit">
                             {submitLabel}
                           </button>
                         </div>
