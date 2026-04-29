@@ -98,8 +98,10 @@ export function Header({
   const loggedIn = session != null;
   const [langOpen, setLangOpen] = useState(false);
   const [balanceOpen, setBalanceOpen] = useState(false);
+  const [rolloverOpen, setRolloverOpen] = useState(false);
   const langRef = useRef<HTMLDivElement | null>(null);
   const balanceWrapRef = useRef<HTMLDivElement | null>(null);
+  const rolloverRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     if (!langOpen) return;
@@ -118,6 +120,15 @@ export function Header({
     document.addEventListener("mousedown", onDoc);
     return () => document.removeEventListener("mousedown", onDoc);
   }, [balanceOpen]);
+
+  useEffect(() => {
+    if (!rolloverOpen) return;
+    const onDoc = (e: MouseEvent) => {
+      if (rolloverRef.current && !rolloverRef.current.contains(e.target as Node)) setRolloverOpen(false);
+    };
+    document.addEventListener("mousedown", onDoc);
+    return () => document.removeEventListener("mousedown", onDoc);
+  }, [rolloverOpen]);
 
   return (
     <header
@@ -242,17 +253,59 @@ export function Header({
             </a>
           </div>
 
-          <button
-            type="button"
-            className="t3-rollover-btn"
-            aria-label="Activity"
-            style={{
-              background: "var(--header-auth-target-bg)",
-              color: "var(--header-auth-target-color)",
-            }}
-          >
-            <IconTargetEmbedded />
-          </button>
+          <div ref={rolloverRef} className="relative">
+            <button
+              type="button"
+              className="t3-rollover-btn"
+              aria-label="Activity"
+              aria-haspopup="dialog"
+              aria-expanded={rolloverOpen}
+              onClick={() => setRolloverOpen((v) => !v)}
+              style={{
+                background: "var(--header-auth-target-bg)",
+                color: "var(--header-auth-target-color)",
+              }}
+            >
+              <IconTargetEmbedded />
+            </button>
+            {rolloverOpen ? (
+              <div
+                role="dialog"
+                aria-label="Rollover information"
+                className="absolute right-0 top-[calc(100%+8px)] z-[120] w-[290px] rounded-xl border p-3"
+                style={{
+                  background: "var(--rollover-modal-popup-header)",
+                  borderColor: "var(--header-auth-panel-border)",
+                  boxShadow: "var(--card-shadow)",
+                }}
+              >
+                <div
+                  className="flex items-center justify-between rounded-lg px-3 py-2"
+                  style={{ background: "var(--surface-3)" }}
+                >
+                  <div>
+                    <div className="text-sm font-bold" style={{ color: "var(--primary-dark)", lineHeight: 1.2 }}>
+                      Deposit Now
+                    </div>
+                    <div className="text-[12px] font-medium" style={{ color: "var(--muted)" }}>
+                      Deposit to View Your Rollover
+                    </div>
+                  </div>
+                  <span aria-hidden style={{ color: "var(--primary-dark)" }}>
+                    <IconTargetEmbedded />
+                  </span>
+                </div>
+                <a
+                  href="#/deposit"
+                  className="mt-3 block rounded-lg px-4 py-2 text-center text-sm font-bold no-underline"
+                  style={{ background: "var(--cta-gradient)", color: "var(--on-primary)" }}
+                  onClick={() => setRolloverOpen(false)}
+                >
+                  Deposit Now
+                </a>
+              </div>
+            ) : null}
+          </div>
 
           <a href="#/profile" className="t3-header-profile-box no-underline">
             <div className="second">
