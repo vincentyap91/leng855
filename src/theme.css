@@ -105,8 +105,8 @@
 
     --base-main-button: var(--cta-gradient);
     --base-main-button-color: var(--on-primary);
-    --base-main-button-second: var(--surface);
-    --base-main-button-second-color: var(--text);
+    --base-main-button-second: var(--non-active-bg);
+    --base-main-button-second-color: var(--on-primary);
     --base-main-button-third: var(--cta-gradient);
     --base-main-button-third-color: var(--on-primary);
     --base-main-button-four: var(--gold-gradient);
@@ -122,7 +122,8 @@
     --base-input-border: var(--border);
     --base-input-placeholder: var(--muted);
 
-    --base-social-button: var(--surface-2);
+    --base-social-button: var(--non-active-bg);
+    --non-active-bg: #3E2621;
 
     /* referral/vip container */
     --base-container-bg: var(--surface);
@@ -245,7 +246,7 @@
 
     /* Game List Page */
     /* Game category strip — cream pill bar, dark red labels, solid red active chip */
-    --game-category-tab-color: var(--primary-dark);
+    --game-category-tab-color: var(--on-primary);
     --game-category-tab-bg: #fff9e6;
     --game-category-tab-hover: #f0e4c8;
     --game-category-tab-active: var(--primary-dark);
@@ -306,7 +307,7 @@
 
     /* Game List Tab */
     --game-list-tab-bg: var(--surface);
-    --game-list-tab-btn: var(--surface-2);
+    --game-list-tab-btn: var(--non-active-bg);
     --game-list-tab-btn-active: var(--primary-dark);
     --game-list-tab-btn-active-border: 1px solid var(--gold);
     --game-list-tab-scroll: var(--primary-dark);
@@ -331,8 +332,8 @@
     --membership-tab-active-box-shadow: 0 0 20px 0 var(--active-tint) inset;
 
 
-    --membership-tab-button: var(--surface-3);
-    --membership-tab-button-color: var(--muted);
+    --membership-tab-button: var(--non-active-bg);
+    --membership-tab-button-color: var(--on-primary);
     --membership-tap-button-box-shadow: none;
 
     --membership-tab-button-active: var(--gold);
@@ -366,15 +367,15 @@
     --promotion-time-color: var(--primary);
 
     /* Date Picker */
-    --date-button-bg: var(--surface);
-    --date-button-color: inherit;
+    --date-button-bg: var(--non-active-bg);
+    --date-button-color: var(--on-primary);
     --date-button-active: var(--primary-dark);
     --date-button-active-color: var(--on-primary);
 
 
     /* Game Page */
-    --game-tab: var(--surface-2);
-    --game-tab-color: inherit;
+    --game-tab: var(--non-active-bg);
+    --game-tab-color: var(--on-primary);
     --game-tab-active: var(--primary-dark);
     --game-tab-active-color: var(--on-primary);
 
@@ -443,16 +444,16 @@
     /* Deposit Withdrawal Tab */
     --deposit-tab-button-active: var(--primary-dark);
     --deposit-tab-button-active-color: var(--on-primary);
-    --deposit-tab-button: var(--surface-2);
-    --deposit-tab-button-color: inherit;
+    --deposit-tab-button: var(--non-active-bg);
+    --deposit-tab-button-color: var(--on-primary);
 
 
     /* Deposit NumberPad*/
     --numberpad-bg: var(--surface);
     --numberpad-color: inherit;
 
-    --numberpad-button: var(--surface-2);
-    --numberpad-button-color: var(--text);
+    --numberpad-button: var(--non-active-bg);
+    --numberpad-button-color: var(--on-primary);
 
     --numberpad-button-active: var(--primary-dark);
     --numberpad-button-active-color: var(--on-primary);
@@ -565,8 +566,8 @@
     --referral-login-left-before: var(--primary-dark);
     --referral-login-right-before: var(--gold);
     --referral-login-color: inherit;
-    --referral-tab: var(--surface-2);
-    --referral-tab-color: var(--text);
+    --referral-tab: var(--non-active-bg);
+    --referral-tab-color: var(--on-primary);
     --referral-tab-btn-active: var(--primary-dark);
     --referral-tab-btn-active-color: var(--text);
 
@@ -661,7 +662,7 @@
     --theme-color-bg-table-row: var(--surface-2);
 
     --theme-color-bg-btn-primary: var(--cta-gradient);
-    --theme-color-bg-btn-secondary: var(--surface-2);
+    --theme-color-bg-btn-secondary: var(--non-active-bg);
     --theme-color-bg-btn-submit: var(--cta-gradient);
     --theme-color-bg-btn-alert: var(--cta-gradient);
     --theme-color-bg-btn-special: var(--gold);
@@ -818,8 +819,8 @@ button.side-nav-item:not(.side-nav-item--active):hover .side-nav-icon {
     min-height: 44px;
     border-radius: 10px;
     border: 1px solid var(--border);
-    background: var(--surface-2) !important;
-    color: var(--text) !important;
+    background: var(--non-active-bg) !important;
+    color: var(--on-primary) !important;
     font-family: var(--base-font-family);
     font-size: 16px;
     font-weight: 700;
@@ -1386,7 +1387,7 @@ button.side-nav-item:not(.side-nav-item--active):hover .side-nav-icon {
 }
 
 .pagination-bar .pagination-number-bar {
-    background: var(--surface-2) !important;
+    background: var(--non-active-bg) !important;
 }
 
 .pagination-bar .page-btn.active {
@@ -1399,7 +1400,8 @@ button.side-nav-item:not(.side-nav-item--active):hover .side-nav-icon {
 }
 
 .pagination-bar .arrow-btn {
-    background-color: var(--surface-2) !important;
+    background-color: var(--non-active-bg) !important;
+    color: var(--on-primary) !important;
 }
 
 .t3-sidemenu-box .t3-sidemenu-item h6 {
@@ -1887,8 +1889,8 @@ button.side-nav-item:not(.side-nav-item--active):hover .side-nav-icon {
 }
 
 .deposit-page .deposit-cash-tab--inactive {
-    background: var(--surface-2) !important;
-    color: var(--text) !important;
+    background: var(--non-active-bg) !important;
+    color: var(--on-primary) !important;
     border: 1px solid var(--border) !important;
     box-shadow: 0 1px 2px var(--shadow-soft);
 }
@@ -1935,7 +1937,7 @@ button.side-nav-item:not(.side-nav-item--active):hover .side-nav-icon {
 }
 
 .t3-two-custom-tabs > div {
-    background: var(--surface-2) !important;
+    background: var(--non-active-bg) !important;
 }
 
 .t3-reload-bank-list-box .border-top {
