@@ -29,6 +29,33 @@ function ChevronDown({ open }: { open: boolean }) {
   );
 }
 
+function InfoTooltip({
+  text,
+  label,
+}: {
+  text: string;
+  label: string;
+}) {
+  return (
+    <span className="group relative inline-flex items-center">
+      <button
+        type="button"
+        aria-label={label}
+        className="ml-1 inline-flex h-5 w-5 items-center justify-center"
+      >
+        <img src={imgInfoIcon} alt="" className="h-5 w-5 object-contain" aria-hidden />
+      </button>
+      <span
+        role="tooltip"
+        className="pointer-events-none absolute bottom-[calc(100%+10px)] left-1/2 z-20 w-[230px] -translate-x-1/2 rounded-lg px-4 py-2.5 text-center text-[13px] font-semibold leading-6 opacity-0 shadow-lg transition-opacity duration-150 group-hover:opacity-100 group-focus-within:opacity-100"
+        style={{ background: "#1f2228", color: "#ffffff", fontFamily: "Poppins, sans-serif" }}
+      >
+        {text}
+      </span>
+    </span>
+  );
+}
+
 // Figma icon assets for this frame (exact exports)
 const imgCopy = "https://www.figma.com/api/mcp/asset/c5bd09be-d127-4471-b95e-f69e17e30bd2";
 const imgShareOnFacebook = "https://www.figma.com/api/mcp/asset/63899948-cdda-4794-8c43-59cce5e6c107";
@@ -37,6 +64,8 @@ const imgShareOnWhatsApp = "https://www.figma.com/api/mcp/asset/14e9dd20-5f8f-45
 const imgStep01 = "https://www.figma.com/api/mcp/asset/fd857e24-eeae-43ca-ab74-5d6296511368";
 const imgStep02 = "https://www.figma.com/api/mcp/asset/70faaa8f-2aa6-432c-83f9-6fecfd8c2265";
 const imgStep03 = "https://www.figma.com/api/mcp/asset/f93ecb38-bf5a-4bd8-8ecf-fe616c69180b";
+const imgInfoIcon =
+  "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUBAMAAAB/pwA+AAAAMFBMVEUAAAB9fX19fX19fX18fHx8fHx+fn59fX16enp8fHx9fX16enp4eHh3d3d9fX19fX1tXtBLAAAAD3RSTlMA36+fgF/vYGDPj1AQIL+0MRL2AAAAkUlEQVQI12NgYOBpkv+pzgAG2/4DgTiIxfUfDByATH8I8xcDAzuQkr0GJDYwMAJJBSYgkcNQDyS/gBR9ZdD/DwWfGOYDBRn4gMyPDCCigBkkzAAiDCBMeRjzJ4M+mAnW1g9mgg07BtQWwAFUJsDADeSDHRLAwLAeYsMXoMtYIMwFIAc3gljZEG80zf+oeoCBAQD6u4RdPf8nFgAAAABJRU5ErkJggg==";
 
 type CategoryPanel = { id: string; title: string; desc: string };
 
@@ -83,7 +112,7 @@ export function ReferralPage() {
 
   return (
     <section className="t3-referral-content" style={{ background: "var(--bg)" }}>
-      <div className="mx-auto w-full max-w-[1120px] px-4 py-5">
+      <div className="mx-auto w-full max-w-[1430px] px-4 py-5">
         {/* Breadcrumbs */}
         <div className="flex items-center gap-2 text-xs font-semibold">
           <a href="#/" style={{ color: "var(--muted)", textDecoration: "none" }} aria-label="Home">
@@ -223,16 +252,24 @@ export function ReferralPage() {
                 >
                   <div className="space-y-4">
                     <div className="rounded-lg border p-4" style={{ background: "var(--surface-3)", borderColor: "var(--panel-item-border)" }}>
-                      <div className="text-[13px] font-semibold" style={{ color: "var(--muted)" }}>
+                      <div className="flex items-center text-[13px] font-semibold" style={{ color: "var(--muted)" }}>
                         Total Referral Commission Bonus
+                        <InfoTooltip
+                          label="Total referral commission bonus info"
+                          text="Your total commissions earned. Commissions are calculated from the total bets placed by your referrals."
+                        />
                       </div>
                       <div className="mt-2 text-[18px] font-extrabold" style={{ color: "var(--gold)" }}>
                         $0.000
                       </div>
                     </div>
                     <div className="rounded-lg border p-4" style={{ background: "var(--surface-3)", borderColor: "var(--panel-item-border)" }}>
-                      <div className="text-[13px] font-semibold" style={{ color: "var(--muted)" }}>
+                      <div className="flex items-center text-[13px] font-semibold" style={{ color: "var(--muted)" }}>
                         Total Referral Deposit Bonus
+                        <InfoTooltip
+                          label="Total referral deposit bonus info"
+                          text="Your total referral deposit bonus earned. Bonus is calculated from the total deposit by your referrals."
+                        />
                       </div>
                       <div className="mt-2 text-[18px] font-extrabold" style={{ color: "var(--gold)" }}>
                         $0.000
@@ -273,26 +310,25 @@ export function ReferralPage() {
                 ].map(({ label, text, src }) => (
                   <div
                     key={label}
-                    className="rounded-xl border p-5 text-center"
+                    className="relative rounded-xl border px-5 pb-5 pt-8 text-center"
                     style={{ borderColor: "var(--panel-item-border)", background: "var(--surface)" }}
                   >
                     <div
-                      className="mx-auto w-fit rounded-md px-4 py-1 text-[13px] font-extrabold"
-                      style={{ background: "var(--cta-gradient)", color: "var(--on-primary)" }}
+                      className="absolute left-0 top-0 w-fit rounded-md px-4 py-1 text-[12px] font-extrabold"
+                      style={{
+                        background: "var(--cta-gradient)",
+                        color: "var(--on-primary)",
+                        boxShadow: "0 3px 8px color-mix(in srgb, var(--primary-dark) 36%, transparent)",
+                      }}
                     >
                       {label}
                     </div>
 
-                    <div className="mt-4 flex items-center justify-center">
-                      <div
-                        className="grid h-[64px] w-[64px] place-items-center rounded-full"
-                        style={{ background: "var(--gold)" }}
-                      >
-                        <img src={src} alt="" className="h-7 w-7 object-contain" aria-hidden />
-                      </div>
+                    <div className="mt-5 flex items-center justify-center">
+                      <img src={src} alt="" className="h-16 w-16 object-contain" aria-hidden />
                     </div>
 
-                    <div className="mt-4 text-[13px] font-semibold" style={{ color: "var(--text)" }}>
+                    <div className="mt-4 text-[15px] font-bold" style={{ color: "var(--text)", lineHeight: 1.35 }}>
                       {text}
                     </div>
                   </div>

@@ -1,5 +1,8 @@
 import { useState } from "react";
 
+import { ChangeLanguageModal } from "./ChangeLanguageModal";
+import { ChangePasswordModal } from "./ChangePasswordModal";
+import { DownlinesModal } from "./DownlinesModal";
 import { HistoryRecordModal } from "./HistoryRecordModal";
 import { MyProfileModal } from "./MyProfileModal";
 
@@ -63,6 +66,9 @@ export function ProfilePage() {
   const [isMyProfileOpen, setIsMyProfileOpen] = useState(false);
   const [draftFullName, setDraftFullName] = useState("");
   const [isHistoryRecordOpen, setIsHistoryRecordOpen] = useState(false);
+  const [isDownlinesOpen, setIsDownlinesOpen] = useState(false);
+  const [isChangeLanguageOpen, setIsChangeLanguageOpen] = useState(false);
+  const [isChangePasswordOpen, setIsChangePasswordOpen] = useState(false);
 
   return (
     <section className="mx-auto w-full max-w-[760px] px-4 py-6">
@@ -95,6 +101,9 @@ export function ProfilePage() {
           </div>
           <button
             type="button"
+            onClick={() => {
+              window.location.hash = "#/deposit";
+            }}
             className="rounded-lg px-5 py-2 text-sm font-bold"
             style={{ background: "var(--cta-gradient)", color: "var(--on-primary)" }}
           >
@@ -119,6 +128,33 @@ export function ProfilePage() {
                 setIsHistoryRecordOpen(true);
                 setIsMyProfileOpen(false);
               }
+              if (label === "Downlines") {
+                setIsDownlinesOpen(true);
+                setIsMyProfileOpen(false);
+                setIsHistoryRecordOpen(false);
+                setIsChangeLanguageOpen(false);
+                setIsChangePasswordOpen(false);
+              }
+              if (label === "Deposit") {
+                window.location.hash = "#/deposit";
+              }
+              if (label === "Withdrawal") {
+                window.location.hash = "#/deposit?tab=withdrawal";
+              }
+              if (label === "Change Language") {
+                setIsChangeLanguageOpen(true);
+                setIsMyProfileOpen(false);
+                setIsHistoryRecordOpen(false);
+                setIsDownlinesOpen(false);
+                setIsChangePasswordOpen(false);
+              }
+              if (label === "Change Password") {
+                setIsChangePasswordOpen(true);
+                setIsMyProfileOpen(false);
+                setIsHistoryRecordOpen(false);
+                setIsDownlinesOpen(false);
+                setIsChangeLanguageOpen(false);
+              }
             }}
           >
             <div className="flex min-w-0 items-center gap-3">
@@ -140,8 +176,7 @@ export function ProfilePage() {
       <div className="mt-5 flex justify-center">
         <button
           type="button"
-          className="rounded-lg px-5 py-2.5 text-sm font-bold"
-          style={{ background: "var(--cta-gradient)", color: "var(--on-primary)" }}
+          className="t3-profile-action-btn"
         >
           Logout
         </button>
@@ -160,6 +195,9 @@ export function ProfilePage() {
       />
 
       <HistoryRecordModal isOpen={isHistoryRecordOpen} onClose={() => setIsHistoryRecordOpen(false)} />
+      <DownlinesModal isOpen={isDownlinesOpen} onClose={() => setIsDownlinesOpen(false)} />
+      <ChangeLanguageModal isOpen={isChangeLanguageOpen} onClose={() => setIsChangeLanguageOpen(false)} />
+      <ChangePasswordModal isOpen={isChangePasswordOpen} onClose={() => setIsChangePasswordOpen(false)} />
     </section>
   );
 }

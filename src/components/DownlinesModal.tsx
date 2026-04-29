@@ -79,8 +79,7 @@ export function DownlinesModal({ isOpen, onClose }: DownlinesModalProps) {
         role="document"
         style={{
           ...getCenteredModalDialogStyle({
-            width: "min(880px, calc(100vw - 32px))",
-            minWidth: 700,
+            width: "100%",
           }),
         }}
       >

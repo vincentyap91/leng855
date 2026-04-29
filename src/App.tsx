@@ -7,6 +7,8 @@ import { PromotionDetailPage } from "./components/PromotionDetailPage";
 import { ReferralPage } from "./components/ReferralPage";
 import { DepositPage } from "./components/DepositPage";
 import { ProfilePage } from "./components/ProfilePage";
+import { RebatePage } from "./components/RebatePage";
+import { RecentGamePage } from "./components/RecentGamePage";
 import { AnnouncementBar } from "./components/AnnouncementBar";
 import { PromoBanners } from "./components/PromoBanners";
 import { CategoryChips } from "./components/CategoryChips";
@@ -41,6 +43,12 @@ function parseRoute(): RouteState {
   }
   if (h === "profile" || h === "/profile") {
     return { view: "profile", promoSlug: null };
+  }
+  if (h === "rebate" || h === "/rebate") {
+    return { view: "rebate", promoSlug: null };
+  }
+  if (h === "recent-game" || h === "/recent-game") {
+    return { view: "recent-game", promoSlug: null };
   }
   if (h.startsWith("promotion/")) {
     const slug = h.slice("promotion/".length).replace(/\/$/, "");
@@ -95,6 +103,10 @@ export default function App() {
       window.location.hash = "#/deposit";
     } else if (next === "profile") {
       window.location.hash = "#/profile";
+    } else if (next === "rebate") {
+      window.location.hash = "#/rebate";
+    } else if (next === "recent-game") {
+      window.location.hash = "#/recent-game";
     } else {
       const { pathname, search } = window.location;
       window.history.replaceState(null, "", `${pathname}${search}`);
@@ -135,7 +147,7 @@ export default function App() {
 
         <div className="flex min-w-0 flex-1 flex-col">
           <main className="min-w-0 flex-1" style={{ background: "transparent" }}>
-            <div className="mx-auto max-w-[1280px] space-y-6 px-6 py-5">
+            <div className="mx-auto w-full max-w-[1430px] space-y-6 px-6 py-5">
               {view === "hot-games" ? (
                 <AllGamesPage
                   bannerSrc="https://pksoftcdn.azureedge.net/media/kh168_gamecategory_hotgames-202507070909452469.jpg"
@@ -151,6 +163,10 @@ export default function App() {
                 <DepositPage />
               ) : view === "profile" ? (
                 <ProfilePage />
+              ) : view === "rebate" ? (
+                <RebatePage />
+              ) : view === "recent-game" ? (
+                <RecentGamePage />
               ) : view === "promotion-detail" && promoSlug ? (
                 <PromotionDetailPage slug={promoSlug} />
               ) : (

@@ -65,21 +65,6 @@ export function MyProfileModal({
 }: MyProfileModalProps) {
   const [fullName, setFullName] = useState(initialFullName ?? "");
 
-  const fieldBoxStyle = {
-    background: "var(--surface-3)",
-    border: "1px solid var(--border)",
-    borderRadius: 10,
-    paddingLeft: 14,
-    paddingRight: 14,
-    minHeight: 40,
-    display: "flex",
-    alignItems: "center",
-    boxSizing: "border-box" as const,
-    color: "var(--text)",
-    fontSize: 12,
-    fontWeight: 600,
-  };
-
   useEffect(() => {
     if (!isOpen) return;
     setFullName(initialFullName ?? "");
@@ -107,8 +92,7 @@ export function MyProfileModal({
         role="document"
         style={{
           ...getCenteredModalDialogStyle({
-            minWidth: 700,
-            width: 700,
+            width: "100%",
           }),
         }}
       >
@@ -159,96 +143,121 @@ export function MyProfileModal({
             </button>
           </div>
 
-          <div className="modal-body" style={{ flex: "1 1 auto", overflowY: "auto", background: "var(--modal-body)" }}>
+          <div className="modal-body text-sm" style={{ flex: "1 1 auto", overflowY: "auto", background: "var(--modal-body)" }}>
             <div className="p-6" style={{ background: "var(--bg)" }}>
-              <div className="mt-2">
-                <div
-                  className="font-bold"
-                  style={{
-                    color: "var(--text)",
-                    fontFamily: "var(--base-font-family)",
-                    fontSize: 13,
-                    lineHeight: 1.2,
-                  }}
-                >
-                  General
-                </div>
+              <div className="mt-1">
+                <div style={{ color: "var(--primary)", fontWeight: 700, lineHeight: 1.2 }}>General</div>
 
-                <div
-                  className="mt-4 grid gap-y-3"
-                  style={{
-                    gridTemplateColumns: "128px 1fr",
-                    columnGap: 16,
-                    rowGap: 10,
-                    alignItems: "center",
-                  }}
-                >
-                  <div style={{ color: "var(--text)", fontSize: 12, fontWeight: 600 }}>Username</div>
-                  <div style={fieldBoxStyle}>{username}</div>
+                <div className="mt-5 space-y-3">
+                  <div
+                    style={{
+                      background: "var(--surface-3)",
+                      borderRadius: 10,
+                      minHeight: 44,
+                      display: "flex",
+                      alignItems: "center",
+                      padding: "0 16px",
+                      gap: 20,
+                    }}
+                  >
+                    <span style={{ color: "var(--primary)", fontWeight: 600, minWidth: 112 }}>Username</span>
+                    <span style={{ color: "var(--primary)", fontWeight: 600 }}>{username}</span>
+                  </div>
 
-                  <div style={{ color: "var(--text)", fontSize: 12, fontWeight: 600 }}>Full Name</div>
-                  <div>
+                  <div
+                    style={{
+                      background: "var(--surface-3)",
+                      borderRadius: 10,
+                      minHeight: 44,
+                      display: "flex",
+                      alignItems: "center",
+                      padding: "4px 8px 4px 16px",
+                      gap: 14,
+                    }}
+                  >
+                    <span style={{ color: "var(--primary)", fontWeight: 600, minWidth: 112 }}>Full Name</span>
                     <input
                       value={fullName}
                       onChange={(e) => setFullName(e.target.value)}
                       placeholder="Please enter your full name"
-                      className="t3-custom-input-text text-[12px] min-h-[34px] h-[34px]"
+                      className="w-full rounded-lg border-0 px-5 py-2.5 outline-none"
                       style={{
-                        paddingLeft: 12,
-                        paddingRight: 12,
-                        background: "var(--surface-3)",
-                        border: "1px solid var(--border)",
+                        background: "var(--surface)",
                         color: "var(--text)",
+                        fontWeight: 500,
                       }}
                     />
                   </div>
 
-                  <div style={{ color: "var(--text)", fontSize: 12, fontWeight: 600 }}>Birth Date</div>
-                  <div style={fieldBoxStyle}>{birthDate}</div>
-
-                  <div style={{ gridColumn: "1 / -1" }}>
-                    <div className="mt-1 flex items-start gap-2" style={{ color: "var(--primary)" }}>
-                      <InfoIcon />
-                      <p style={{ margin: 0, fontSize: 12, fontWeight: 600 }}>
-                        Please enter your date of birth...
-                      </p>
+                  <div
+                    style={{
+                      background: "var(--surface-3)",
+                      borderRadius: 10,
+                      minHeight: 44,
+                      display: "flex",
+                      alignItems: "center",
+                      padding: "4px 8px 4px 16px",
+                      gap: 14,
+                    }}
+                  >
+                    <span style={{ color: "var(--primary)", fontWeight: 600, minWidth: 112 }}>Birth Date</span>
+                    <div
+                      style={{
+                        background: "var(--surface)",
+                        borderRadius: 8,
+                        width: "100%",
+                        padding: "8px 20px",
+                        color: "color-mix(in srgb, var(--text) 80%, transparent)",
+                        fontWeight: 600,
+                        lineHeight: 1.2,
+                      }}
+                    >
+                      {birthDate}
                     </div>
                   </div>
-                </div>
-              </div>
 
-              <div className="mt-6">
-                <div
-                  className="font-bold"
-                  style={{
-                    color: "var(--text)",
-                    fontFamily: "var(--base-font-family)",
-                    fontSize: 13,
-                    lineHeight: 1.2,
-                  }}
-                >
-                  Contact Details
-                </div>
-
-                <div className="mt-4">
-                  <div style={fieldBoxStyle}>
-                    <span style={{ color: "var(--text)", display: "flex", alignItems: "center" }} aria-hidden>
-                      <PhoneIcon />
-                    </span>
-                    <span style={{ marginLeft: 10 }}>{phone}</span>
+                  <div className="flex items-center gap-2.5" style={{ color: "#FF3B30" }}>
+                    <InfoIcon />
+                    <p style={{ margin: 0, fontWeight: 600 }}>
+                      Please enter your date of birth to receive additional bonus
+                    </p>
                   </div>
                 </div>
               </div>
 
-              <div className="mt-8 flex justify-center">
+              <div className="mt-7">
+                <div style={{ color: "var(--primary)", fontWeight: 700, lineHeight: 1.2 }}>Contact Details</div>
+
+                <div className="mt-4">
+                  <div
+                    style={{
+                      background: "var(--surface-3)",
+                      borderRadius: 10,
+                      minHeight: 44,
+                      display: "flex",
+                      alignItems: "center",
+                      padding: "0 16px",
+                      gap: 14,
+                      color: "var(--primary)",
+                    }}
+                  >
+                    <span aria-hidden style={{ display: "flex", alignItems: "center" }}>
+                      <PhoneIcon />
+                    </span>
+                    <span style={{ fontWeight: 600 }}>{phone}</span>
+                  </div>
+                </div>
+              </div>
+
+              <div className="mt-10 flex justify-center">
                 <button
                   type="button"
                   onClick={() => {
                     onSave?.({ fullName });
                     onClose();
                   }}
-                  className="rounded-lg px-8 py-2.5 text-sm font-bold"
-                  style={{ background: "var(--cta-gradient)", color: "var(--on-primary)" }}
+                  className="t3-profile-action-btn"
+                  style={{ minWidth: 154, boxShadow: "var(--card-shadow)" }}
                 >
                   Save Changes
                 </button>

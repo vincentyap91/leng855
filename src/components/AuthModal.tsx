@@ -241,7 +241,7 @@ export function AuthModal({
                       </div>
                       <div className="t3-lr-modal-footer mt-3">
                         <div className="t3-lr-button-box">
-                          <span>{promptPrefix}</span>{" "}
+                          <span className={!isLogin ? "text-[14px]" : undefined}>{promptPrefix}</span>{" "}
                           <button
                             className="header-login-btn"
                             type="button"

@@ -79,8 +79,7 @@ export function HistoryRecordModal({ isOpen, onClose }: HistoryRecordModalProps)
         role="document"
         style={{
           ...getCenteredModalDialogStyle({
-            width: 700,
-            minWidth: 700,
+            width: "100%",
             height: 600,
           }),
         }}

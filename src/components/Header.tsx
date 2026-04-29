@@ -93,7 +93,6 @@ export function Header({
   gameWalletDisplay = "0.00",
   onLoginClick,
   onRegisterClick,
-  onLogout,
   onBalanceRefresh,
 }: HeaderProps) {
   const loggedIn = session != null;
@@ -266,31 +265,6 @@ export function Header({
               <ProfileExpandIcon />
             </div>
           </a>
-
-          <button
-            type="button"
-            onClick={onLogout}
-            className="header-auth-logout hidden text-[12px] font-semibold underline-offset-2 hover:underline md:inline"
-            style={{ color: "var(--header-auth-logout-color)" }}
-          >
-            Log out
-          </button>
-
-          <button
-            type="button"
-            onClick={onLogout}
-            className="header-auth-mobile-logout grid h-10 w-10 shrink-0 place-items-center rounded-lg border md:hidden"
-            style={{
-              borderColor: "var(--header-auth-chip-border)",
-              background: "var(--header-auth-chip-bg)",
-              color: "var(--header-auth-logout-color)",
-            }}
-            aria-label="Log out"
-          >
-            <svg className="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
-              <path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4M16 17l5-5-5-5M21 12H9" strokeLinecap="round" strokeLinejoin="round" />
-            </svg>
-          </button>
 
           <div ref={langRef} className="drop-down-language header-language-container dropdown relative">
             <button

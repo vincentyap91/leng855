@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 type CashTab = "deposit" | "withdrawal";
 
@@ -78,6 +78,20 @@ const BANKS: { name: string; limit: string; logoUrl: string }[] = [
 export function DepositPage() {
   const [cashTab, setCashTab] = useState<CashTab>("deposit");
   const [bankOpen, setBankOpen] = useState(true);
+  
+  useEffect(() => {
+    const applyTabFromHash = () => {
+      const raw = window.location.hash.replace(/^#\/?/, "");
+      const query = raw.split("?")[1] ?? "";
+      const params = new URLSearchParams(query);
+      const tab = params.get("tab");
+      setCashTab(tab === "withdrawal" ? "withdrawal" : "deposit");
+    };
+
+    applyTabFromHash();
+    window.addEventListener("hashchange", applyTabFromHash);
+    return () => window.removeEventListener("hashchange", applyTabFromHash);
+  }, []);
 
   return (
     <section className="deposit-page mx-auto w-full max-w-4xl px-4 py-6" style={{ background: "var(--bg)" }}>

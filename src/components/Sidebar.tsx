@@ -1,6 +1,6 @@
 import { assets } from "../data/assets";
 
-export type AppView = "home" | "hot-games" | "all-games" | "promotion" | "promotion-detail" | "referral" | "deposit" | "profile";
+export type AppView = "home" | "hot-games" | "all-games" | "promotion" | "promotion-detail" | "referral" | "deposit" | "profile" | "rebate" | "recent-game";
 
 type Item = {
   label: string;
@@ -82,18 +82,31 @@ function SideLink({ label, icon, badge, active, onSelect }: SideLinkProps) {
 }
 
 /** Plain row: icon + white label, no filled cell (screenshot: Recent Game) */
-function RecentGameLink() {
+function RecentGameLink({ active, onSelect }: { active: boolean; onSelect?: () => void }) {
   return (
     <button
       type="button"
-      className="t3-sidemenu-item group w-full h-[44px] rounded-lg flex items-center px-[12px] gap-[10px] text-left transition-colors bg-bg-item hover:bg-[var(--nav-side-item-hover)]"
+      onClick={onSelect}
+      className={[
+        "t3-sidemenu-item group w-full h-[44px] rounded-lg flex items-center px-[12px] gap-[10px] text-left transition-colors",
+        active ? "side-nav-item--active bg-[var(--nav-side-active)]" : "bg-bg-item hover:bg-[var(--nav-side-item-hover)]",
+      ].join(" ")}
+      style={{ boxShadow: active ? "var(--nav-side-item-active-shadow)" : undefined }}
     >
       <img
         src={assets.iconRecent}
         alt=""
-        className="w-[24px] h-[24px] object-contain shrink-0 [filter:var(--sidebar-icon-filter)] group-hover:[filter:var(--sidebar-icon-filter-active)]"
+        className={[
+          "w-[24px] h-[24px] object-contain shrink-0",
+          active ? "[filter:var(--sidebar-icon-filter-active)]" : "[filter:var(--sidebar-icon-filter)] group-hover:[filter:var(--sidebar-icon-filter-active)]",
+        ].join(" ")}
       />
-      <h6 className="m-0 text-[13px] font-semibold leading-none text-[var(--nav-side-color)] group-hover:text-[var(--nav-side-text-hover)]">
+      <h6
+        className={[
+          "m-0 text-[13px] font-semibold leading-none",
+          active ? "text-[var(--nav-side-text-active)]" : "text-[var(--nav-side-color)] group-hover:text-[var(--nav-side-text-hover)]",
+        ].join(" ")}
+      >
         Recent Game
       </h6>
     </button>
@@ -203,6 +216,8 @@ function navTargetForLabel(label: string): AppView | null {
   if (label === "Promotion") return "promotion";
   if (label === "Referral") return "referral";
   if (label === "Home") return "home";
+  if (label === "Rebate") return "rebate";
+  if (label === "Recent Game") return "recent-game";
   return null;
 }
 
@@ -211,6 +226,8 @@ function isItemActive(view: AppView, label: string): boolean {
   if (view === "all-games" && label === "All") return true;
   if ((view === "promotion" || view === "promotion-detail") && label === "Promotion") return true;
   if (view === "referral" && label === "Referral") return true;
+  if (view === "rebate" && label === "Rebate") return true;
+  if (view === "recent-game" && label === "Recent Game") return true;
   if (view === "home" && label === "Home") return true;
   return false;
 }
@@ -252,7 +269,7 @@ export function Sidebar({ view, onNavigate }: SidebarProps) {
           );
         })}
 
-        <RecentGameLink />
+        <RecentGameLink active={view === "recent-game"} onSelect={() => onNavigate("recent-game")} />
         <div
           className="mt-2 border-t border-b py-2.5 -mx-[8px] px-[8px]"
           style={{ borderColor: "var(--nav-side-chat-section-border)" }}

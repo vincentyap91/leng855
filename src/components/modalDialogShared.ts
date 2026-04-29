@@ -2,7 +2,6 @@ import type { CSSProperties } from "react";
 
 export function getCenteredModalDialogStyle(opts: {
   width: number | string;
-  minWidth?: number;
   height?: number;
 }) {
   return {
@@ -12,8 +11,7 @@ export function getCenteredModalDialogStyle(opts: {
     top: "50%",
     transform: "translate(-50%, -50%)",
     width: opts.width,
-    minWidth: opts.minWidth ?? 700,
-    maxWidth: "calc(100vw - 32px)",
+    maxWidth: "min(700px, calc(100vw - 32px))",
     height: opts.height,
     maxHeight: "calc(100vh - 32px)",
     margin: 0,
