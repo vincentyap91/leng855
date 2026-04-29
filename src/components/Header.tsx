@@ -281,7 +281,7 @@ export function Header({
               >
                 <div
                   className="flex items-center justify-between rounded-lg px-3 py-2"
-                  style={{ background: "var(--surface-3)" }}
+                  style={{ background: "var(--rollover-modal-popup-panel)" }}
                 >
                   <div>
                     <div className="text-sm font-bold" style={{ color: "var(--primary-dark)", lineHeight: 1.2 }}>

@@ -683,11 +683,12 @@
 
 	/*header - balance btn*/
     --balance-btn: linear-gradient(180deg, var(--surface-2) 0%, var(--bg) 100%);
-    /* Light theme: white shell + soft gray inset (see `.header-balance-dropdown`) */
-    --balance-modal-popup: var(--bg);
-    --balance-inner-modal: var(--surface-3);
+    /* Balance dropdown follows rollover dropdown card styling */
+    --balance-modal-popup: var(--rollover-modal-popup-header);
+    --balance-inner-modal: var(--rollover-modal-popup-panel);
 /*header - rollover info modal popup*/
-    --rollover-modal-popup-header: var(--surface-2);
+    --rollover-modal-popup-header: var(--sidebar-bg);
+    --rollover-modal-popup-panel: #FFFFFF;
 }
 
 /* Primary sidebar nav: inactive icons are brand red; hover/active match white label */
@@ -1748,7 +1749,7 @@ button.side-nav-item:not(.side-nav-item--active):hover .side-nav-icon {
     z-index: 120;
     min-width: 220px;
     width: min(280px, calc(100vw - 1rem));
-    padding: 5px;
+    padding: 12px;
     box-sizing: border-box;
     border-radius: 10px;
     border: 1px solid var(--border);
@@ -1764,7 +1765,7 @@ button.side-nav-item:not(.side-nav-item--active):hover .side-nav-icon {
     gap: 8px;
     border-radius: 8px;
     background: var(--balance-inner-modal);
-    padding: 7px 10px;
+    padding: 10px 12px;
 }
 
 .header-balance-dropdown-inner {
