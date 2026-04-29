@@ -60,12 +60,10 @@
     /* ---- Reusable gradients ----
        5-stop metallic shine: dark → body → bright peak → body → dark */
     --cta-gradient: linear-gradient(
-        90deg,
+        180deg,
         var(--primary-dark) 0%,
         var(--primary) 38%,
-        var(--primary-bright) 50%,
-        var(--primary) 62%,
-        var(--primary-dark) 100%
+        var(--primary-bright) 100%
     );
     /* Header — deep crimson anchor (no near-black) → bright red, light R/W/G theme */
     --header-gradient: linear-gradient(
@@ -148,6 +146,31 @@
     --nav-controls-bg: var(--surface-2);
     --nav-controls-color: var(--muted);
     --nav-controls-active: var(--primary-dark);
+    /* Logged-in header controls (match dark panel + orange actions) */
+    --header-auth-panel-bg: linear-gradient(180deg, #1D232A 0%, #12171D 100%);
+    --header-auth-panel-border: color-mix(in srgb, #AAB4BF 36%, transparent);
+    --header-auth-balance-label: #ffffff;
+    --header-auth-balance-amount: #ffff00;
+    --header-auth-chip-bg: linear-gradient(180deg, #2B3139 0%, #1A2027 100%);
+    --header-auth-chip-border: color-mix(in srgb, #AAB4BF 35%, transparent);
+    --header-auth-chip-color: #ffffff;
+    --header-auth-chevron-filter: brightness(0) invert(1);
+    --header-auth-deposit-bg: var(--gold-gradient);
+    --header-auth-deposit-text: var(--on-gold);
+    --header-auth-target-bg: linear-gradient(180deg, #FF9A2F 0%, #C35E09 100%);
+    --header-auth-target-color: #ffffff;
+    --header-auth-profile-name: #ffffff;
+    --header-auth-profile-status: #c5ccd6;
+    --header-auth-profile-subtext: #c5ccd6;
+    --header-auth-logout-color: #e8c766;
+    /** One height for logged-in pills (balance strip, icons, profile, lang) — keeps the row visually even */
+    --header-auth-control-height: 40px;
+
+    /* Balance row — compact wallet DDL chip (lighter top → darker bottom, thin white chevron) */
+    --header-auth-wallet-ddl-bg: linear-gradient(180deg, #484f59 0%, #3a424c 35%, #2d343e 72%, #20262e 100%);
+    --header-auth-wallet-ddl-border: color-mix(in srgb, #8f98a6 42%, transparent);
+    --header-auth-wallet-ddl-inset: inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    --header-auth-wallet-ddl-chevron: rgba(255, 255, 255, 0.94);
 
     /* ============================================================
        LANDING PAGE GOLD ACCENTS — consistent with the Leng855 logo.
@@ -386,7 +409,7 @@
     --modal-footer-border: var(--border);
 
     --modal-body: var(--surface);
-    --modal-backdrop: color-mix(in srgb, var(--primary-dark) 64%, transparent);
+    --modal-backdrop: rgba(0, 0, 0, 0.5);
     --modal-border: 1px solid color-mix(in srgb, var(--gold) 42%, transparent);
     --modal-box-shadow: 0 24px 70px color-mix(in srgb, var(--text) 22%, transparent);
     --modal-field-bg: var(--base-input);
@@ -659,8 +682,9 @@
 
 	/*header - balance btn*/
     --balance-btn: linear-gradient(180deg, var(--surface-2) 0%, var(--bg) 100%);
-    --balance-modal-popup: var(--surface);
-    --balance-inner-modal: var(--surface-2);
+    /* Light theme: white shell + soft gray inset (see `.header-balance-dropdown`) */
+    --balance-modal-popup: var(--bg);
+    --balance-inner-modal: var(--surface-3);
 /*header - rollover info modal popup*/
     --rollover-modal-popup-header: var(--surface-2);
 }
@@ -915,7 +939,7 @@ button.side-nav-item:not(.side-nav-item--active):hover .side-nav-icon {
     z-index: 0;
     border: 0;
     background: var(--modal-backdrop);
-    backdrop-filter: var(--glass-blur);
+    backdrop-filter: none;
     cursor: pointer;
 }
 
@@ -1451,6 +1475,450 @@ button.side-nav-item:not(.side-nav-item--active):hover .side-nav-icon {
     color: var(--theme-color-text-base) !important;
 }
 
+.t3-header-logged-second .t3-header-balance-deposit-box .t3-header-deposit,
+.t3-header-logged-second .t3-header-balance-deposit-box .t3-header-deposit .text {
+    color: var(--header-auth-deposit-text) !important;
+}
+
+.t3-header-logged-second .t3-header-balance-deposit-box .t3-header-deposit .vicon {
+    color: var(--header-auth-deposit-text) !important;
+}
+
+/* Header right cluster — unified control height (--header-auth-control-height), compact typography */
+.second.t3-header-logged-second .t3-header-balance-deposit-box {
+    display: flex;
+    align-items: stretch;
+    gap: 8px;
+    height: var(--header-auth-control-height);
+    min-height: var(--header-auth-control-height);
+    max-height: var(--header-auth-control-height);
+    padding: 0;
+    box-sizing: border-box;
+    border: 1px solid var(--header-auth-panel-border);
+    border-radius: 8px;
+    flex-wrap: nowrap;
+    position: relative;
+}
+
+.second.t3-header-logged-second .t3-balance-btn {
+    flex: 1 1 auto;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    min-width: 0;
+    align-self: stretch;
+    padding-left: 10px;
+}
+
+.second.t3-header-logged-second .t3-balance-btn > button:first-of-type {
+    align-self: center;
+    border-right: 0;
+    padding-right: 0;
+    margin-right: 0;
+}
+
+.second.t3-header-logged-second .header-balance-column {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 0;
+    line-height: 1.1;
+}
+
+.second.t3-header-logged-second .header-balance-column > span.font-size-header-balance {
+    color: var(--header-auth-balance-label);
+    font-size: 11px;
+    font-weight: 700;
+}
+
+.second.t3-header-logged-second .balance-amount {
+    font-size: 12px;
+    font-weight: 800;
+    color: var(--header-auth-balance-amount);
+    letter-spacing: 0.01em;
+}
+
+.second.t3-header-logged-second .t3-chevon-ddl {
+    align-self: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    width: 26px;
+    height: 26px;
+    padding: 0;
+    border-radius: 6px;
+    border: 1px solid var(--header-auth-wallet-ddl-border);
+    background: var(--header-auth-wallet-ddl-bg);
+    box-shadow: var(--header-auth-wallet-ddl-inset);
+    color: var(--header-auth-wallet-ddl-chevron);
+}
+
+.second.t3-header-logged-second .t3-chevon-ddl svg {
+    display: block;
+    width: 10px;
+    height: 10px;
+    flex-shrink: 0;
+}
+
+.second.t3-header-logged-second .t3-header-deposit {
+    align-self: stretch;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    border: 0;
+    border-radius: 6px;
+    padding: 0 10px;
+    min-height: 0;
+    flex: 0 0 auto;
+    box-sizing: border-box;
+}
+
+.second.t3-header-logged-second .t3-header-deposit > div:first-child {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.second.t3-header-logged-second .t3-header-deposit .vicon {
+    width: 18px !important;
+    height: 18px !important;
+}
+
+.second.t3-header-logged-second .t3-header-deposit .text {
+    font-size: 12px;
+    font-weight: 800;
+    line-height: 1.1;
+    white-space: nowrap;
+    letter-spacing: 0.01em;
+}
+
+.second.t3-header-logged-second .t3-rollover-btn {
+    display: grid;
+    place-items: center;
+    border: 0;
+    border-radius: 8px;
+    width: var(--header-auth-control-height);
+    height: var(--header-auth-control-height);
+    min-width: var(--header-auth-control-height);
+    min-height: var(--header-auth-control-height);
+    flex-shrink: 0;
+    cursor: pointer;
+    box-sizing: border-box;
+}
+
+.second.t3-header-logged-second .t3-header-profile-box {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    height: var(--header-auth-control-height);
+    min-height: var(--header-auth-control-height);
+    max-height: var(--header-auth-control-height);
+    border-radius: 8px;
+    padding: 0 8px;
+    min-width: 0;
+    box-sizing: border-box;
+    border: 1px solid var(--header-auth-chip-border);
+    background: var(--header-auth-chip-bg);
+}
+
+.second.t3-header-logged-second .drop-down-language.header-language-container .header-lang-toggle {
+    border-radius: 8px !important;
+    min-height: var(--header-auth-control-height) !important;
+    max-height: var(--header-auth-control-height) !important;
+    height: var(--header-auth-control-height) !important;
+    padding-left: 8px !important;
+    padding-right: 8px !important;
+    gap: 4px !important;
+    box-sizing: border-box !important;
+}
+
+.second.t3-header-logged-second .drop-down-language.header-language-container .language-arrow-down {
+    width: 16px !important;
+    height: 16px !important;
+}
+
+.second.t3-header-logged-second .t3-header-profile-box .second {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    min-width: 0;
+    padding-right: 2px;
+    border-right: 0;
+}
+
+.second.t3-header-logged-second .t3-header-profile-box .second div:first-child {
+    font-weight: 800;
+    font-size: 12px;
+    color: var(--header-auth-profile-name);
+    line-height: 1;
+    max-width: 140px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.second.t3-header-logged-second .t3-header-profile-box .second{
+    line-height: 1;
+}
+.second.t3-header-logged-second .t3-header-profile-box .second span {
+    font-size: 11px;
+    font-weight: 500;
+    line-height: 1.15;
+    color: var(--header-auth-profile-status);
+}
+
+.second.t3-header-logged-second .t3-header-profile-box .third {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    color: var(--header-auth-chip-color);
+}
+
+.second.t3-header-logged-second .t3-header-profile-box .third .profile-expand-svg {
+    display: block;
+    width: 16px;
+    height: 16px;
+}
+
+.second.t3-header-logged-second .t3-rollover-btn svg {
+    display: block;
+    width: 20px;
+    height: 20px;
+}
+
+.second.t3-header-logged-second .header-auth-mobile-logout {
+    width: var(--header-auth-control-height) !important;
+    height: var(--header-auth-control-height) !important;
+}
+
+/* -------- Header balance wallet dropdown (light / red / gold) ---------------- */
+.t3-header-balance-dropdown-wrap {
+    position: static;
+    flex: 1 1 auto;
+    min-width: 0;
+    align-self: stretch;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.second.t3-header-logged-second .t3-balance-btn > .header-balance-ddl-toggle.t3-chevon-ddl {
+    cursor: pointer;
+    border: none;
+    appearance: none;
+}
+
+.second.t3-header-logged-second .header-balance-ddl-toggle.t3-chevon-ddl .img,
+.second.t3-header-logged-second .header-balance-ddl-toggle.t3-chevon-ddl svg {
+    transition: transform 0.2s ease;
+    transform-origin: center;
+}
+
+.second.t3-header-logged-second .header-balance-ddl-toggle.t3-chevon-ddl[aria-expanded="true"] .img,
+.second.t3-header-logged-second .header-balance-ddl-toggle.t3-chevon-ddl[aria-expanded="true"] svg {
+    transform: rotate(180deg);
+}
+
+.header-balance-dropdown {
+    position: absolute;
+    right: 0;
+    left: auto;
+    top: 110%;
+    z-index: 120;
+    min-width: 220px;
+    width: min(280px, calc(100vw - 1rem));
+    padding: 5px;
+    box-sizing: border-box;
+    border-radius: 10px;
+    border: 1px solid var(--border);
+    box-shadow: 0 4px 14px var(--shadow-soft);
+    background: var(--balance-modal-popup);
+    font-family: var(--base-font-family), sans-serif;
+}
+
+.header-balance-dropdown-panel {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 8px;
+    border-radius: 8px;
+    background: var(--balance-inner-modal);
+    padding: 7px 10px;
+}
+
+.header-balance-dropdown-inner {
+    flex: 1 1 auto;
+    min-width: 0;
+    border-radius: 0;
+    padding: 0;
+    background: transparent;
+}
+
+.header-balance-dropdown-rows {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.header-balance-dropdown-row {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 6px;
+    flex-wrap: nowrap;
+    font-size: 13px;
+    line-height: 1.2;
+}
+
+.header-balance-dropdown-wallet-label {
+    font-weight: 600;
+    font-size: 13px;
+    color: var(--text);
+    white-space: nowrap;
+}
+
+.header-balance-dropdown-amount {
+    font-weight: 600;
+    font-size: 13px;
+    font-variant-numeric: tabular-nums;
+    color: var(--gold);
+}
+
+.header-balance-dropdown .vicon--info {
+    width: 15px;
+    height: 15px;
+    flex-shrink: 0;
+    color: var(--muted);
+}
+
+.header-balance-dropdown-refresh {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    align-self: center;
+    width: 24px;
+    height: 24px;
+    padding: 0;
+    border: none;
+    background: var(--balance-inner-modal);
+    cursor: pointer;
+    border-radius: 8px;
+}
+
+.header-balance-dropdown-refresh:focus-visible {
+    outline: 2px solid var(--primary);
+    outline-offset: 2px;
+}
+
+.header-balance-dropdown-refresh .vicon--refresh {
+    width: 18px;
+    height: 18px;
+    color: var(--primary);
+}
+
+@media (max-width: 480px) {
+    .header-balance-dropdown {
+        left: auto;
+        right: 0;
+    }
+}
+
+/* Deposit / reload page — compact tabs; surfaces match homepage game cards (`--surface`, `--game-card-bg`) */
+.deposit-page .deposit-page-tabs {
+    display: flex;
+    justify-content: center;
+    align-items: stretch;
+    gap: 10px;
+    width: 100%;
+    max-width: 380px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 1rem;
+}
+
+.deposit-page .deposit-cash-tab {
+    flex: 1 1 0;
+    min-width: 0;
+    min-height: 42px;
+    max-height: 42px;
+    padding: 0 14px;
+    border-radius: 10px;
+    font-family: var(--base-font-family), sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 1.15;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    transition: filter 150ms ease, box-shadow 150ms ease;
+}
+
+.deposit-page .deposit-cash-tab--active {
+    background: var(--cta-gradient) !important;
+    color: var(--on-primary) !important;
+    border: none !important;
+    box-shadow: var(--card-shadow);
+}
+
+.deposit-page .deposit-cash-tab--active:hover {
+    filter: brightness(1.05);
+}
+
+.deposit-page .deposit-cash-tab--inactive {
+    background: var(--surface-2) !important;
+    color: var(--text) !important;
+    border: 1px solid var(--border) !important;
+    box-shadow: 0 1px 2px var(--shadow-soft);
+}
+
+.deposit-page .deposit-cash-tab--inactive:hover {
+    filter: brightness(1.02);
+}
+
+.deposit-page .deposit-tab-chevron {
+    width: 16px;
+    height: 16px;
+}
+
+.deposit-page .deposit-accordion-item {
+    background: var(--surface-3);
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.deposit-page .deposit-accordion-item > .details,
+.deposit-page .deposit-accordion-item.active > .details {
+    background: var(--surface-3) !important;
+}
+
+.deposit-page .deposit-accordion-item > .head,
+.deposit-page .deposit-accordion-item.active > .head {
+    background: var(--surface-3) !important;
+    color: var(--text) !important;
+    border-radius: 0;
+}
+
+.deposit-page .deposit-accordion-item > .head .vicon {
+    color: var(--primary) !important;
+}
+
+.deposit-page .deposit-bank-card {
+    background: var(--game-card-bg) !important;
+    border: 1px solid var(--panel-item-border) !important;
+    box-shadow: var(--card-shadow);
+}
+
+.deposit-page .deposit-bank-card img {
+    box-shadow: none;
+}
+
 .t3-two-custom-tabs > div {
     background: var(--surface-2) !important;
 }
@@ -1655,4 +2123,59 @@ padding: 0;
 
 .home-announcement-modal-content-box img {
     height: auto;
+}
+
+/* Referral page layout */
+.t3-referral-content {
+    color: var(--text);
+}
+
+.t3-referral-content .referral-login {
+    background: var(--referral-login-box);
+    border: 1px solid var(--referral-login-border);
+    border-radius: 12px;
+}
+
+.t3-referral-content .referral-comm-info-container {
+    background: var(--referral-container-bg);
+    border: 1px solid var(--border);
+}
+
+.t3-referral-content .t3-downline-table-tab > button {
+    border: 0;
+    border-radius: 8px;
+}
+
+.t3-referral-content .t3-custom-table thead > tr > th,
+.t3-referral-content .t3-custom-table tbody > tr > td {
+    white-space: nowrap;
+}
+
+.t3-referral-content .t3-referral-page-tabs > button {
+    position: relative;
+    padding: 10px 4px;
+    margin-right: 18px;
+    border: 0;
+    background: transparent;
+    color: var(--muted);
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    border-bottom: 3px solid transparent;
+    transition:
+        color 160ms ease,
+        border-color 160ms ease;
+}
+
+.t3-referral-content .t3-referral-page-tabs > button:hover {
+    color: var(--primary-dark);
+}
+
+.t3-referral-content .t3-referral-page-tabs > button.active {
+    color: var(--primary-dark);
+    border-bottom-color: var(--gold);
+}
+
+.t3-referral-content .referral-invite-card h1 {
+    color: var(--primary-dark);
 }

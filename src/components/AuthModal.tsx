@@ -1,13 +1,17 @@
-import { useEffect } from "react";
+import { useEffect, useState, type FormEvent } from "react";
 import { assets } from "../data/assets";
 
 export type AuthMode = "login" | "register";
+
+const DEMO_USER = "demo";
+const DEMO_PASSWORD = "123456";
 
 type AuthModalProps = {
   isOpen: boolean;
   mode: AuthMode;
   onClose: () => void;
   onModeChange: (mode: AuthMode) => void;
+  onLoginSuccess?: (username: string) => void;
 };
 
 export function AuthModal({
@@ -15,12 +19,17 @@ export function AuthModal({
   mode,
   onClose,
   onModeChange,
+  onLoginSuccess,
 }: AuthModalProps) {
+  const [loginError, setLoginError] = useState("");
+
   useEffect(() => {
     if (!isOpen) {
+      setLoginError("");
       return undefined;
     }
 
+    setLoginError("");
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === "Escape") {
         onClose();
@@ -34,6 +43,28 @@ export function AuthModal({
   if (!isOpen) {
     return null;
   }
+
+  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    setLoginError("");
+    const fd = new FormData(event.currentTarget);
+    const isLoginMode = mode === "login";
+
+    if (!isLoginMode) {
+      return;
+    }
+
+    const username = String(fd.get("username") ?? "").trim();
+    const password = String(fd.get("password") ?? "");
+
+    if (username === DEMO_USER && password === DEMO_PASSWORD) {
+      onLoginSuccess?.(username);
+      onClose();
+      return;
+    }
+
+    setLoginError("Invalid username or password. Use demo / 123456.");
+  };
 
   const isLogin = mode === "login";
   const usernameLabel = isLogin
@@ -89,7 +120,7 @@ export function AuthModal({
                   </div>
                 </div>
                 <div className="right">
-                  <form onSubmit={(event) => event.preventDefault()}>
+                  <form onSubmit={handleSubmit}>
                     <div className="t3-lr-form">
                       <div className="t3-input-container">
                         <label>{usernameLabel}</label>
@@ -181,6 +212,11 @@ export function AuthModal({
                           </div>
                         </div>
                       )}
+                      {isLogin && loginError ? (
+                        <p className="m-0 mt-2 text-[13px] font-semibold" style={{ color: "var(--primary)" }}>
+                          {loginError}
+                        </p>
+                      ) : null}
                       <div className="t3-lr-button-box mt-4">
                         <div>
                           <button className="t3-custom-light-btn" type="submit">

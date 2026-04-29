@@ -1,6 +1,6 @@
 import { assets } from "../data/assets";
 
-export type AppView = "home" | "hot-games" | "all-games" | "promotion" | "promotion-detail";
+export type AppView = "home" | "hot-games" | "all-games" | "promotion" | "promotion-detail" | "referral" | "deposit" | "profile";
 
 type Item = {
   label: string;
@@ -201,6 +201,7 @@ function navTargetForLabel(label: string): AppView | null {
   if (label === "Hot Games") return "hot-games";
   if (label === "All") return "all-games";
   if (label === "Promotion") return "promotion";
+  if (label === "Referral") return "referral";
   if (label === "Home") return "home";
   return null;
 }
@@ -209,6 +210,7 @@ function isItemActive(view: AppView, label: string): boolean {
   if (view === "hot-games" && label === "Hot Games") return true;
   if (view === "all-games" && label === "All") return true;
   if ((view === "promotion" || view === "promotion-detail") && label === "Promotion") return true;
+  if (view === "referral" && label === "Referral") return true;
   if (view === "home" && label === "Home") return true;
   return false;
 }
@@ -224,14 +226,10 @@ export function Sidebar({ view, onNavigate }: SidebarProps) {
     >
       <div className="flex flex-col gap-[7px] pt-[12px] px-[8px]">
         <PromoStrip variant="daily" icon={assets.iconDailyBonusPromo}>
-          Daily Bonus
-          <br />
-          Claim
+          Daily Bonus Claim
         </PromoStrip>
         <PromoStrip variant="spin" icon={assets.iconSpinWheel}>
-          Spin Wheel
-          <br />
-          Bonus
+          Spin Wheel Bonus
         </PromoStrip>
         <PromoStrip variant="download" icon={assets.iconAndroid}>
           Download
