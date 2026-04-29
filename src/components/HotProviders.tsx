@@ -11,6 +11,10 @@ const providers = [
   { name: "Joker", src: assets.brands.joker },
 ] as const;
 
+const providerRoute: Partial<Record<(typeof providers)[number]["name"], string>> = {
+  "PG Soft": "#/provider/pgsoft",
+};
+
 const sliderSettings: Settings = {
   infinite: true,
   speed: 400,
@@ -40,13 +44,22 @@ export function HotProviders() {
         <Slider {...sliderSettings}>
           {providers.map((p) => (
             <div key={p.name} className="px-2 sm:px-3">
-              <div className="flex h-[72px] items-center justify-center sm:h-[80px]">
+              <a
+                href={providerRoute[p.name] ?? "#"}
+                className="flex h-[72px] items-center justify-center sm:h-[80px]"
+                style={{ cursor: providerRoute[p.name] ? "pointer" : "default" }}
+                onClick={(event) => {
+                  if (!providerRoute[p.name]) {
+                    event.preventDefault();
+                  }
+                }}
+              >
                 <img
                   src={p.src}
                   alt={p.name}
                   className="max-h-[70%] max-w-[min(200px,28vw)] object-contain sm:max-h-[60%] sm:max-w-[min(200px,22vw)]"
                 />
-              </div>
+              </a>
             </div>
           ))}
         </Slider>

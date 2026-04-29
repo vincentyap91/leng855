@@ -20,43 +20,50 @@ import { BrandsGrid } from "./components/BrandsGrid";
 import { Footer } from "./components/Footer";
 import { FloatingOverlays } from "./components/FloatingOverlays";
 import { AuthModal, type AuthMode } from "./components/AuthModal";
+import { ProviderDetailPage } from "./components/ProviderDetailPage";
 
-type RouteState = { view: AppView; promoSlug: string | null };
+type RouteState = { view: AppView; promoSlug: string | null; providerSlug: string | null };
 
 function parseRoute(): RouteState {
   const raw = window.location.hash.replace(/^#\/?/, "").toLowerCase();
   const h = raw.split("?")[0] ?? "";
   if (h === "hot-games" || h === "/hot-games") {
-    return { view: "hot-games", promoSlug: null };
+    return { view: "hot-games", promoSlug: null, providerSlug: null };
   }
   if (h === "games" || h === "all-games" || h === "/games" || h === "/all-games") {
-    return { view: "all-games", promoSlug: null };
+    return { view: "all-games", promoSlug: null, providerSlug: null };
   }
   if (h === "promotion" || h === "/promotion") {
-    return { view: "promotion", promoSlug: null };
+    return { view: "promotion", promoSlug: null, providerSlug: null };
   }
   if (h === "referral" || h === "/referral") {
-    return { view: "referral", promoSlug: null };
+    return { view: "referral", promoSlug: null, providerSlug: null };
   }
   if (h === "deposit" || h === "/deposit") {
-    return { view: "deposit", promoSlug: null };
+    return { view: "deposit", promoSlug: null, providerSlug: null };
   }
   if (h === "profile" || h === "/profile") {
-    return { view: "profile", promoSlug: null };
+    return { view: "profile", promoSlug: null, providerSlug: null };
   }
   if (h === "rebate" || h === "/rebate") {
-    return { view: "rebate", promoSlug: null };
+    return { view: "rebate", promoSlug: null, providerSlug: null };
   }
   if (h === "recent-game" || h === "/recent-game") {
-    return { view: "recent-game", promoSlug: null };
+    return { view: "recent-game", promoSlug: null, providerSlug: null };
+  }
+  if (h.startsWith("provider/")) {
+    const slug = h.slice("provider/".length).replace(/\/$/, "");
+    if (slug) {
+      return { view: "home", promoSlug: null, providerSlug: decodeURIComponent(slug) };
+    }
   }
   if (h.startsWith("promotion/")) {
     const slug = h.slice("promotion/".length).replace(/\/$/, "");
     if (slug) {
-      return { view: "promotion-detail", promoSlug: decodeURIComponent(slug) };
+      return { view: "promotion-detail", promoSlug: decodeURIComponent(slug), providerSlug: null };
     }
   }
-  return { view: "home", promoSlug: null };
+  return { view: "home", promoSlug: null, providerSlug: null };
 }
 
 const USER_TOKEN_KEY = "userToken";
@@ -77,7 +84,7 @@ function loadSession(): HeaderSession | null {
 
 export default function App() {
   const [route, setRoute] = useState<RouteState>(() => parseRoute());
-  const { view, promoSlug } = route;
+  const { view, promoSlug, providerSlug } = route;
   const [session, setSession] = useState<HeaderSession | null>(() => loadSession());
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(() => loadSession() !== null);
   const [authMode, setAuthMode] = useState<AuthMode>("login");
@@ -91,7 +98,7 @@ export default function App() {
   }, []);
 
   const goView = useCallback((next: AppView) => {
-    setRoute({ view: next, promoSlug: null });
+    setRoute({ view: next, promoSlug: null, providerSlug: null });
     if (next === "hot-games") {
       window.location.hash = "#/hot-games";
     } else if (next === "all-games") {
@@ -174,6 +181,8 @@ export default function App() {
                 <RecentGamePage />
               ) : view === "promotion-detail" && promoSlug ? (
                 <PromotionDetailPage slug={promoSlug} />
+              ) : providerSlug === "pgsoft" ? (
+                <ProviderDetailPage provider="pgsoft" />
               ) : (
                 <>
                   <PromoBanners />

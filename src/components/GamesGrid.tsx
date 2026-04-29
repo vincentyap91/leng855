@@ -10,6 +10,7 @@ type Tile = {
   src: string;
   provider: string;
   providerLogo: string;
+  href?: string;
 };
 
 const tiles: Tile[] = [
@@ -19,6 +20,7 @@ const tiles: Tile[] = [
     src: assets.tiles.pgsoft,
     provider: "PGSoft",
     providerLogo: assets.brands.pgsoft,
+    href: "#/provider/pgsoft",
   },
   {
     id: "pragmatic-sugar-rush",
@@ -131,6 +133,7 @@ const tiles: Tile[] = [
     src: assets.tiles.pgsoft,
     provider: "PGSoft",
     providerLogo: assets.brands.pgsoft,
+    href: "#/provider/pgsoft",
   },
   {
     id: "pragmatic-gates-olympus",
@@ -189,27 +192,35 @@ export function GamesGrid() {
       <div className="t3-game-list-grid">
         {tiles.map((t) => (
           <article key={t.id} className="t3-game-list-item">
-            <div className="t3-game-list-image-box">
-              <div className="image">
-                <img
-                  src={t.src}
-                  alt={t.label}
-                  className="t3-game-list-image first"
-                />
+            <a
+              href={t.href ?? "#"}
+              onClick={(event) => {
+                if (!t.href) event.preventDefault();
+              }}
+              className="block no-underline"
+            >
+              <div className="t3-game-list-image-box">
+                <div className="image">
+                  <img
+                    src={t.src}
+                    alt={t.label}
+                    className="t3-game-list-image first"
+                  />
+                </div>
               </div>
-            </div>
 
-            <div className="t3-game-list-meta">
-              <p className="t3-game-list-title">{t.label}</p>
-              <div className="t3-game-list-provider">
-                <img
-                  src={t.providerLogo}
-                  alt={t.provider}
-                  className="t3-game-list-provider-logo"
-                />
-                <span className="t3-game-list-provider-name">{t.provider}</span>
+              <div className="t3-game-list-meta">
+                <p className="t3-game-list-title">{t.label}</p>
+                <div className="t3-game-list-provider">
+                  <img
+                    src={t.providerLogo}
+                    alt={t.provider}
+                    className="t3-game-list-provider-logo"
+                  />
+                  <span className="t3-game-list-provider-name">{t.provider}</span>
+                </div>
               </div>
-            </div>
+            </a>
           </article>
         ))}
       </div>
