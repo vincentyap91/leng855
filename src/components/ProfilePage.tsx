@@ -63,6 +63,8 @@ function UserAvatar() {
 }
 
 export function ProfilePage() {
+  const registeredUsername = localStorage.getItem("username") ?? "test123";
+  const registeredMobile = localStorage.getItem("userMobile") ?? "85512121212";
   const [isMyProfileOpen, setIsMyProfileOpen] = useState(false);
   const [draftFullName, setDraftFullName] = useState("");
   const [isHistoryRecordOpen, setIsHistoryRecordOpen] = useState(false);
@@ -77,8 +79,8 @@ export function ProfilePage() {
           <UserAvatar />
           <div className="min-w-0 flex-1">
             <div className="flex items-center gap-3 text-[var(--primary-dark)]">
-              <h2 className="truncate text-sm font-bold">test123</h2>
-              <span className="truncate text-xs font-normal">85512121212</span>
+              <h2 className="truncate text-sm font-bold">{registeredUsername}</h2>
+              <span className="truncate text-xs font-normal">{registeredMobile}</span>
             </div>
             <p className="mt-1 text-xs font-normal text-[var(--primary-dark)]">Normal</p>
 
@@ -188,9 +190,9 @@ export function ProfilePage() {
         onSave={({ fullName }) => {
           setDraftFullName(fullName);
         }}
-        username="test123"
+        username={registeredUsername}
         birthDate="29-04-2008"
-        phone="85512121212"
+        phone={registeredMobile}
         initialFullName={draftFullName}
       />
 

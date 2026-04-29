@@ -1,17 +1,19 @@
 import { useEffect, useState, type FormEvent } from "react";
 import { assets } from "../data/assets";
+import { authService } from "../data/authService";
 
 export type AuthMode = "login" | "register";
 
 const DEMO_USER = "demo";
 const DEMO_PASSWORD = "123456";
+const USER_MOBILE_KEY = "userMobile";
 
 type AuthModalProps = {
   isOpen: boolean;
   mode: AuthMode;
   onClose: () => void;
   onModeChange: (mode: AuthMode) => void;
-  onLoginSuccess?: (username: string) => void;
+  onLoginSuccess?: (username: string, userToken?: string) => void;
 };
 
 export function AuthModal({
@@ -22,14 +24,25 @@ export function AuthModal({
   onLoginSuccess,
 }: AuthModalProps) {
   const [loginError, setLoginError] = useState("");
+  const [registerError, setRegisterError] = useState("");
+  const [registerFieldErrors, setRegisterFieldErrors] = useState<{
+    username?: string;
+    password?: string;
+  }>({});
+  const [isRegistering, setIsRegistering] = useState(false);
 
   useEffect(() => {
     if (!isOpen) {
       setLoginError("");
+      setRegisterError("");
+      setRegisterFieldErrors({});
+      setIsRegistering(false);
       return undefined;
     }
 
     setLoginError("");
+    setRegisterError("");
+    setRegisterFieldErrors({});
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === "Escape") {
         onClose();
@@ -44,13 +57,51 @@ export function AuthModal({
     return null;
   }
 
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setLoginError("");
+    setRegisterError("");
+    setRegisterFieldErrors({});
     const fd = new FormData(event.currentTarget);
     const isLoginMode = mode === "login";
 
     if (!isLoginMode) {
+      const username = String(fd.get("username") ?? "").trim();
+      const mobileNumber = String(fd.get("mobileNumber") ?? "").trim();
+      const password = String(fd.get("password") ?? "").trim();
+      const referralCode = String(fd.get("referralCode") ?? "").trim();
+      const nextErrors: { username?: string; password?: string } = {};
+
+      if (!/^[A-Za-z0-9_]{3,20}$/.test(username)) {
+        nextErrors.username = "Username must be 3-20 characters and use letters, numbers, or underscore.";
+      }
+
+      if (!/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/.test(password)) {
+        nextErrors.password = "Password must be 8+ characters and alphanumeric.";
+      }
+
+      if (Object.keys(nextErrors).length > 0) {
+        setRegisterFieldErrors(nextErrors);
+        return;
+      }
+
+      setIsRegistering(true);
+      try {
+        const fullMobileNumber = `+855${mobileNumber}`;
+        const response = await authService.register({
+          username,
+          mobileNumber: fullMobileNumber,
+          password,
+          referralCode: referralCode || undefined,
+        });
+        localStorage.setItem(USER_MOBILE_KEY, fullMobileNumber);
+        onLoginSuccess?.(response.username, response.userToken);
+        onClose();
+      } catch {
+        setRegisterError("Registration failed. Please try again.");
+      } finally {
+        setIsRegistering(false);
+      }
       return;
     }
 
@@ -133,9 +184,14 @@ export function AuthModal({
                               placeholder={usernamePlaceholder}
                               autoComplete="off"
                               id="loginUsername"
+                              style={!isLogin && registerFieldErrors.username ? { borderColor: "var(--primary)" } : undefined}
                             />
                           </div>
-                          <small className="text-muted">Phone number must include country code (61xxxxxxxxx)</small>
+                          <small className="text-muted">
+                            {isLogin
+                              ? "Phone number must include country code (61xxxxxxxxx)"
+                              : "Username can use letters, numbers, and underscore."}
+                          </small>
                         </div>
                       </div>
                       {!isLogin && (
@@ -168,6 +224,7 @@ export function AuthModal({
                               placeholder={passwordPlaceholder}
                               id="loginPassword"
                               autoComplete={isLogin ? "current-password" : "new-password"}
+                              style={!isLogin && registerFieldErrors.password ? { borderColor: "var(--primary)" } : undefined}
                             />
                           </div>
                           <div className="vicon-wrapper">
@@ -217,10 +274,30 @@ export function AuthModal({
                           {loginError}
                         </p>
                       ) : null}
+                      {!isLogin && (registerFieldErrors.username || registerFieldErrors.password || registerError) ? (
+                        <p className="m-0 mt-2 text-[13px] font-semibold" style={{ color: "var(--primary)" }}>
+                          {registerFieldErrors.username ?? registerFieldErrors.password ?? registerError}
+                        </p>
+                      ) : null}
                       <div className="t3-lr-button-box mt-4">
                         <div style={!isLogin ? { flex: "0 0 auto" } : undefined}>
-                          <button className={isLogin ? "t3-custom-light-btn" : "t3-profile-action-btn"} type="submit">
-                            {submitLabel}
+                          <button
+                            className={isLogin ? "t3-custom-light-btn" : "t3-profile-action-btn"}
+                            type="submit"
+                            disabled={!isLogin && isRegistering}
+                            style={!isLogin ? { background: "var(--cta-gradient)" } : undefined}
+                          >
+                            {!isLogin && isRegistering ? (
+                              <span className="inline-flex items-center gap-2">
+                                <span
+                                  aria-hidden
+                                  className="inline-block h-3.5 w-3.5 animate-spin rounded-full border-2 border-white border-t-transparent"
+                                />
+                                Registering...
+                              </span>
+                            ) : (
+                              submitLabel
+                            )}
                           </button>
                         </div>
                         {isLogin && (

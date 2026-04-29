@@ -59,15 +59,15 @@ function parseRoute(): RouteState {
   return { view: "home", promoSlug: null };
 }
 
-const SESSION_KEY = "leng855_session";
+const USER_TOKEN_KEY = "userToken";
+const USERNAME_KEY = "username";
 
 function loadSession(): HeaderSession | null {
   try {
-    const raw = sessionStorage.getItem(SESSION_KEY);
-    if (!raw) return null;
-    const parsed = JSON.parse(raw) as { username?: unknown };
-    if (parsed && typeof parsed.username === "string") {
-      return { username: parsed.username };
+    const userToken = localStorage.getItem(USER_TOKEN_KEY);
+    const username = localStorage.getItem(USERNAME_KEY);
+    if (userToken && username) {
+      return { username };
     }
   } catch {
     /* ignore */
@@ -79,6 +79,7 @@ export default function App() {
   const [route, setRoute] = useState<RouteState>(() => parseRoute());
   const { view, promoSlug } = route;
   const [session, setSession] = useState<HeaderSession | null>(() => loadSession());
+  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(() => loadSession() !== null);
   const [authMode, setAuthMode] = useState<AuthMode>("login");
   const [isAuthOpen, setIsAuthOpen] = useState(false);
 
@@ -118,15 +119,19 @@ export default function App() {
     setIsAuthOpen(true);
   };
 
-  const handleLoginSuccess = (username: string) => {
+  const handleLoginSuccess = (username: string, userToken?: string) => {
     const next = { username };
     setSession(next);
-    sessionStorage.setItem(SESSION_KEY, JSON.stringify(next));
+    setIsLoggedIn(true);
+    localStorage.setItem(USERNAME_KEY, username);
+    localStorage.setItem(USER_TOKEN_KEY, userToken ?? `token_${Date.now()}`);
   };
 
   const handleLogout = () => {
     setSession(null);
-    sessionStorage.removeItem(SESSION_KEY);
+    setIsLoggedIn(false);
+    localStorage.removeItem(USER_TOKEN_KEY);
+    localStorage.removeItem(USERNAME_KEY);
   };
 
   return (
@@ -135,7 +140,7 @@ export default function App() {
       style={{ background: "var(--page-bg-gradient)" }}
     >
       <Header
-        session={session}
+        session={isLoggedIn ? session : null}
         balanceDisplay="0.00"
         onLoginClick={() => openAuthModal("login")}
         onRegisterClick={() => openAuthModal("register")}
