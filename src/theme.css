@@ -246,7 +246,7 @@
 
     /* Game List Page */
     /* Game category strip — cream pill bar, dark red labels, solid red active chip */
-    --game-category-tab-color: var(--on-primary);
+    --game-category-tab-color: var(--primary-dark);
     --game-category-tab-bg: #fff9e6;
     --game-category-tab-hover: #f0e4c8;
     --game-category-tab-active: var(--primary-dark);
