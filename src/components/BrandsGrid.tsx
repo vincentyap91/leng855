@@ -33,7 +33,7 @@ const brands = [
 
 export function BrandsGrid() {
   return (
-    <section className="py-4">
+    <section className="rounded-xl px-4 py-4" style={{ background: "var(--nav-footer-gradient)" }}>
       <div className="grid grid-cols-8 gap-x-6 gap-y-5 items-center justify-items-center">
         {brands.map((b) => (
           <div

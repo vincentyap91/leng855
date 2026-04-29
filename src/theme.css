@@ -20,6 +20,10 @@
     /* Foreground colors when painted over brand fills */
     --on-primary: #FFFFFF;     /* text on red/CTA */
     --on-gold: #2A1A00;        /* text on gold */
+    /* Full-bleed footer bar (reference #7F1D1D; distinct from --primary-deep for gradients) */
+    --footer-strip-bg: #7F1D1D;
+    --sidebar-fixed-width: 220px;
+
 
     /* ---- Derived neutrals (never hardcode colors elsewhere) ---- */
     --surface-2: #FFFFFF;      /* header / sidebar panel */
@@ -1424,6 +1428,7 @@ button.side-nav-item:not(.side-nav-item--active):hover .side-nav-icon {
 
 .t3-side-menu {
     background-color: var(--sidebar-bg) !important;
+    z-index: 40;
     -ms-overflow-style: none; /* IE / legacy Edge */
     scrollbar-width: none; /* Firefox */
 }
@@ -1441,13 +1446,238 @@ button.side-nav-item:not(.side-nav-item--active):hover .side-nav-icon {
     background: var(--primary-dark) !important;
 }*/
 
+/* Footer — edge-to-edge red bar; logos + caption constrained (App renders Footer below sidebar row) */
+
+.layout__footer.layout__footer-fullbleed {
+    box-sizing: border-box;
+    width: 100%;
+    min-width: 0;
+    flex-shrink: 0;
+    position: relative;
+    z-index: 5;
+    background: linear-gradient(90deg, #8f0f1f 0%, #b31324 50%, #d8182d 100%);
+    border-top: 1px solid color-mix(in srgb, #ffffff 12%, transparent);
+    border-bottom: 3px solid color-mix(in srgb, #000000 18%, transparent);
+    padding-left: var(--sidebar-fixed-width);
+}
+
+.footer-inner-shell {
+    box-sizing: border-box;
+    max-width: 1430px;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 58px 24px 88px;
+}
+
+@media (max-width: 900px) {
+    .layout__footer.layout__footer-fullbleed {
+        padding-left: 0;
+    }
+}
+
+/* Legacy footer container (BO); keep rules harmless if pasted elsewhere */
+
 .footer-container {
-    /* Match header bar — same red gradient as --header-gradient / --header-bar-gradient */
-    background: var(--nav-footer-gradient) !important;
+    box-sizing: border-box;
 }
 
 .t3-footer {
     border-top: none !important;
+    position: relative;
+    padding-bottom: 0;
+}
+
+.t3-top-footer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+/* Single dense strip: wrap fills rows like reference; ~100px cells, ~39px logos (reference) */
+.t3-top-footer > .first {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 8px 10px;
+    width: 100%;
+}
+
+.t3-footer-logo-item {
+    width: 100px;
+    min-width: 80px;
+    max-width: 110px;
+    flex: 0 0 auto;
+}
+
+.t3-footer-logo-item .first {
+    min-height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.t3-footer-logo-item .provider-logo-light {
+    height: 39px;
+    max-height: 39px;
+    max-width: 100%;
+    width: auto;
+    object-fit: contain;
+}
+
+.t3-top-footer > .second {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.t3-footer-bottom {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 8px;
+    margin-top: 12px;
+    padding-top: 2px;
+    min-height: 52px;
+}
+
+.t3-footer-bottom .t3-copyright {
+    grid-column: 1 / -1;
+    grid-row: 2;
+    margin-top: 2px;
+    justify-self: center;
+    text-align: center;
+    color: var(--nav-footer-copyright-color);
+    font-size: 10px;
+    font-weight: 400;
+}
+
+.footer-actions {
+    grid-column: 2;
+    grid-row: 1;
+    justify-self: end;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.footer-social-links {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.footer-social-link {
+    width: 34px;
+    height: 34px;
+    border-radius: 6px;
+    overflow: hidden;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.footer-social-link > img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.footer-language-container--bottom {
+    display: inline-flex;
+    align-items: center;
+}
+
+.footer-language-container.footer-language-container--bottom .btn.btn-secondary {
+    border: 1px solid var(--nav-footer-control-border);
+    background: transparent;
+    color: var(--nav-footer-color);
+    height: 34px;
+    padding: 0 10px;
+    border-radius: 8px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    font-weight: 400;
+}
+
+.footer-language-container .language-flag {
+    width: 18px;
+    height: 18px;
+    border-radius: 9999px;
+}
+
+.footer-language-container.footer-language-container--bottom .language-flag {
+    flex-shrink: 0;
+}
+
+/* Generic footer-lang style only if not using bottom screenshot variant */
+.footer-language-container:not(.footer-language-container--bottom) .btn.btn-secondary {
+    border: 1px solid var(--nav-footer-control-border);
+    background: transparent;
+    color: var(--nav-footer-color);
+    height: 34px;
+    padding: 0 10px;
+    border-radius: 8px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.t3-copyright {
+    margin-top: 0;
+    text-align: center;
+    color: var(--nav-footer-copyright-color);
+    font-size: 10px;
+    font-weight: 400;
+}
+
+@media (max-width: 640px) {
+    .t3-footer-logo-item {
+        width: calc(33.333% - 8px);
+        min-width: 72px;
+        max-width: none;
+        flex: 1 1 calc(33.333% - 8px);
+    }
+
+    .t3-footer-logo-item .provider-logo-light {
+        height: 30px;
+        max-height: 30px;
+    }
+
+    .t3-footer-bottom {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+
+    .t3-footer-bottom .t3-copyright {
+        grid-column: 1;
+        order: 2;
+        padding-inline: 4px;
+    }
+
+    .footer-actions {
+        grid-column: 1;
+        justify-self: center;
+        order: 1;
+    }
+}
+
+@media (max-width: 800px) {
+    .t3-top-footer {
+        flex-direction: column;
+        gap: 10px;
+    }
+}
+
+/* Deprecated layout hook — kept for BO markup compatibility */
+.t3-footer-channel {
+    display: none;
 }
 
 .t3-team-second-section > div,

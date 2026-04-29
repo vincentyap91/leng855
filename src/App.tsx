@@ -16,7 +16,6 @@ import { GamesGrid } from "./components/GamesGrid";
 import { LiveTransactions } from "./components/LiveTransactions";
 import { RecentBigWins } from "./components/RecentBigWins";
 import { HotProviders } from "./components/HotProviders";
-import { BrandsGrid } from "./components/BrandsGrid";
 import { Footer } from "./components/Footer";
 import { FloatingOverlays } from "./components/FloatingOverlays";
 import { AuthModal, type AuthMode } from "./components/AuthModal";
@@ -157,7 +156,7 @@ export default function App() {
       <div className="flex min-h-0 w-full min-w-0 flex-1">
         <Sidebar view={view} onNavigate={goView} />
 
-        <div className="flex min-w-0 flex-1 flex-col">
+        <div className="ml-[220px] flex min-w-0 flex-1 flex-col">
           <main className="min-w-0 flex-1" style={{ background: "transparent" }}>
             <div className="mx-auto w-full max-w-[1430px] space-y-6 px-6 py-5">
               {view === "hot-games" ? (
@@ -200,16 +199,14 @@ export default function App() {
                   <RecentBigWins />
 
                   <HotProviders />
-
-                  <BrandsGrid />
                 </>
               )}
             </div>
           </main>
-
-          <Footer />
         </div>
       </div>
+
+      <Footer />
 
       <FloatingOverlays />
       <AuthModal
