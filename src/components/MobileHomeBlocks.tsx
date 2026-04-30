@@ -269,10 +269,10 @@ export function DesktopReferralHubBanner() {
         />
         <div className="relative z-[1] flex min-h-[240px] items-center p-5 md:min-h-[300px] md:p-10">
           <div className="home-desktop-referral-hub__card w-full max-w-[400px] rounded-xl border-2 bg-[var(--bg)] p-6 md:p-7 md:ml-[5%]">
-            <h3 className="m-0 text-lg font-extrabold tracking-tight md:text-xl" style={{ color: "var(--gold)" }}>
+            <h3 className="m-0 text-lg font-extrabold tracking-tight md:text-xl" style={{ color: "var(--primary)" }}>
               Your Unique Referral Hub
             </h3>
-            <p className="m-0 mt-5 text-xs font-extrabold md:text-[13px]" style={{ color: "var(--gold)" }}>
+            <p className="m-0 mt-5 text-xs font-medium md:text-[13px]" style={{ color: "#000" }}>
               My Referral Link
             </p>
             <div
