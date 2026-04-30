@@ -101,6 +101,59 @@ function GameViewport({ src, label, iframeUrl }: { src: string; label: string; i
             </div>
           </>
         )}
+        {/* Bottom overlay bar */}
+        <div
+          className="absolute bottom-0 left-0 right-0 z-10 flex items-center justify-between gap-2 px-4 py-2"
+          style={{ background: "rgba(0,0,0,0.78)" }}
+        >
+          {/* Balance */}
+          <div className="flex flex-col items-center min-w-0">
+            <span className="text-[10px] font-semibold tracking-wide" style={{ color: "rgba(255,255,255,0.65)" }}>
+              Balance(USD)
+            </span>
+            <span className="text-[20px] font-black tabular-nums leading-tight" style={{ color: "var(--gold)" }}>
+              0.00
+            </span>
+            <span className="text-[9px]" style={{ color: "rgba(255,255,255,0.45)" }}>
+              2026-04-30, 15:08:53 GMT+8 | NS99FA7791
+            </span>
+          </div>
+
+          {/* Total Win */}
+          <div className="flex flex-col items-center min-w-0">
+            <span className="text-[10px] font-semibold tracking-wide" style={{ color: "rgba(255,255,255,0.65)" }}>
+              Total Win(USD)
+            </span>
+            <span className="text-[20px] font-black tabular-nums leading-tight" style={{ color: "var(--gold)" }}>
+              0.00
+            </span>
+            <span className="text-[9px]" style={{ color: "rgba(255,255,255,0.45)" }}>
+              243 Ways
+            </span>
+          </div>
+
+          {/* Bet */}
+          <div className="flex flex-col items-center min-w-0">
+            <span className="text-[10px] font-semibold tracking-wide" style={{ color: "rgba(255,255,255,0.65)" }}>
+              Bet(USD)
+            </span>
+            <span className="text-[20px] font-black tabular-nums leading-tight" style={{ color: "var(--gold)" }}>
+              0.80
+            </span>
+            <span className="text-[9px]" style={{ color: "rgba(255,255,255,0.45)" }}>
+              Bet Multiplier ×2
+            </span>
+          </div>
+
+          {/* Hamburger */}
+          <button
+            type="button"
+            aria-label="Game menu"
+            className="grid h-9 w-9 shrink-0 place-items-center rounded-full border border-white/30 text-white transition hover:bg-white/10"
+          >
+            <IconHamburger />
+          </button>
+        </div>
       </div>
     </div>
   );
