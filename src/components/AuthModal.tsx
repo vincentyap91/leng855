@@ -14,6 +14,7 @@ type AuthModalProps = {
   onClose: () => void;
   onModeChange: (mode: AuthMode) => void;
   onLoginSuccess?: (username: string, userToken?: string) => void;
+  onRegisterSuccess?: (username: string, mobileNumber: string, userToken?: string) => void;
 };
 
 export function AuthModal({
@@ -22,6 +23,7 @@ export function AuthModal({
   onClose,
   onModeChange,
   onLoginSuccess,
+  onRegisterSuccess,
 }: AuthModalProps) {
   const [loginError, setLoginError] = useState("");
   const [registerError, setRegisterError] = useState("");
@@ -95,7 +97,13 @@ export function AuthModal({
           referralCode: referralCode || undefined,
         });
         localStorage.setItem(USER_MOBILE_KEY, fullMobileNumber);
-        onLoginSuccess?.(response.username, response.userToken);
+        
+        if (onRegisterSuccess) {
+          onRegisterSuccess(response.username, fullMobileNumber, response.userToken);
+        } else {
+          onLoginSuccess?.(response.username, response.userToken);
+        }
+        
         onClose();
       } catch {
         setRegisterError("Registration failed. Please try again.");

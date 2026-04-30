@@ -207,7 +207,7 @@ export function DownlinesModal({ isOpen, onClose }: DownlinesModalProps) {
                     </div>
                   </div>
 
-                  <div style={{ marginTop: 2, color: "var(--primary-dark)", fontSize: 13, fontWeight: 900 }}>
+                  <div style={{ marginTop: 10, color: "var(--primary-dark)", fontSize: 13, fontWeight: 900 }}>
                     Up To Now
                   </div>
 

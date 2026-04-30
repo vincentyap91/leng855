@@ -1209,7 +1209,7 @@ button.side-nav-item:not(.side-nav-item--active):hover .side-nav-icon {
 }
 
 .t3-custom-modal .modal-header .modal-title {
-    font-size: 1.375rem !important;
+    font-size: 18px !important;
     font-weight: 600;
 }
 

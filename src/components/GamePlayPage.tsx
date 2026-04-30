@@ -1,4 +1,4 @@
-import { useState } from "react";
+
 
 // ---------------------------------------------------------------------------
 // Types
@@ -165,38 +165,38 @@ function GameViewport({ src, label, iframeUrl }: { src: string; label: string; i
 function RankingSection({ gameLabel, provider }: { gameLabel: string; provider: string }) {
   return (
     <div
-      className="rounded-xl border p-4"
+      className="rounded-xl p-4"
       style={{
-        background: "var(--surface)",
-        borderColor: "var(--panel-item-border)",
-        boxShadow: "var(--card-shadow)",
+        background: "#f4f4f5",
       }}
     >
-      {/* Title + button */}
-      <p className="mb-3 text-[13px]" style={{ color: "var(--text)" }}>
-        <span className="font-extrabold" style={{ color: "var(--primary)" }}>
+      {/* Title */}
+      <p className="mb-3 text-[14px]">
+        <span className="font-extrabold" style={{ color: "var(--primary-dark, #7f1d1d)" }}>
           {gameLabel}
         </span>{" "}
-        <span className="font-medium" style={{ color: "var(--muted)" }}>
-          by {provider}
+        <span className="font-medium" style={{ color: "var(--primary-dark, #7f1d1d)" }}>
+          by <span className="underline">{provider}</span>
         </span>
       </p>
+
+      {/* Button */}
       <button
         type="button"
-        className="mb-4 rounded-md px-5 py-1.5 text-sm font-bold text-white transition hover:brightness-110"
-        style={{ background: "var(--primary)" }}
+        className="mb-4 rounded-md px-8 py-1.5 text-[13px] font-bold text-white transition hover:brightness-110"
+        style={{ background: "var(--primary-dark, #7f1d1d)" }}
       >
         Ranking
       </button>
 
       {/* Table header */}
       <div
-        className="grid text-[12px] font-bold text-white"
+        className="grid text-[13px] font-bold text-white"
         style={{
           gridTemplateColumns: "1fr 2fr 2fr 2fr 2fr 2fr",
-          background: "var(--primary)",
+          background: "var(--primary-dark, #7f1d1d)",
           borderRadius: "6px 6px 0 0",
-          padding: "8px 12px",
+          padding: "10px 12px",
         }}
       >
         {RANKING_COLS.map((col) => (
@@ -206,16 +206,14 @@ function RankingSection({ gameLabel, provider }: { gameLabel: string; provider: 
 
       {/* Empty state */}
       <div
-        className="flex flex-col items-center justify-center gap-2 py-10"
+        className="flex flex-col items-center justify-center gap-2 py-12"
         style={{
-          border: "1px solid var(--panel-item-border)",
-          borderTop: "none",
           borderRadius: "0 0 6px 6px",
-          background: "#f9f9f9",
+          background: "#ffffff",
         }}
       >
         <IconNoData />
-        <p className="text-[13px] font-medium" style={{ color: "var(--muted)" }}>
+        <p className="text-[13px] font-bold" style={{ color: "#b3b9c4" }}>
           No Data Found
         </p>
       </div>
@@ -227,76 +225,59 @@ function RankingSection({ gameLabel, provider }: { gameLabel: string; provider: 
 // Latest Bets Section
 // ---------------------------------------------------------------------------
 function LatestBetsSection() {
-  const [showAll, setShowAll] = useState(false);
-  const rows = showAll ? LATEST_BETS : LATEST_BETS.slice(0, 10);
-
   return (
     <div
-      className="rounded-xl border"
+      className="rounded-xl p-4"
       style={{
-        background: "var(--surface)",
-        borderColor: "var(--panel-item-border)",
-        boxShadow: "var(--card-shadow)",
-        overflow: "hidden",
+        background: "#f4f4f5",
       }}
     >
       {/* Section title */}
-      <div className="px-4 py-3">
-        <h2 className="text-[15px] font-extrabold" style={{ color: "var(--primary-dark)" }}>
+      <div className="mb-4">
+        <h2 className="text-[14px] font-extrabold" style={{ color: "var(--primary-dark, #7f1d1d)" }}>
           Latest Bets
         </h2>
       </div>
 
       {/* Table */}
-      <table className="w-full text-[13px]" style={{ borderCollapse: "collapse" }}>
-        <thead>
-          <tr style={{ background: "var(--primary)" }}>
-            {["Bet ID", "Username", "Date/Time", "Bet Amount"].map((h) => (
-              <th
-                key={h}
-                className="px-4 py-2.5 text-left font-bold text-white"
-              >
-                {h}
-              </th>
-            ))}
-          </tr>
-        </thead>
-        <tbody>
-          {rows.map((row, i) => (
-            <tr
-              key={row.betId}
-              style={{
-                background: i % 2 === 0 ? "#ffffff" : "#fafafa",
-                borderBottom: "1px solid var(--panel-item-border)",
-              }}
-            >
-              <td className="px-4 py-2.5 font-medium" style={{ color: "var(--text)" }}>
-                {row.betId}
-              </td>
-              <td className="px-4 py-2.5 font-medium" style={{ color: "var(--primary)" }}>
-                {row.username}
-              </td>
-              <td className="px-4 py-2.5" style={{ color: "var(--muted)" }}>
-                {row.dateTime}
-              </td>
-              <td className="px-4 py-2.5 font-extrabold" style={{ color: "var(--gold)" }}>
-                {row.betAmount}
-              </td>
+      <div className="overflow-hidden rounded-md" style={{ background: "#ffffff" }}>
+        <table className="w-full text-[13px]" style={{ borderCollapse: "collapse" }}>
+          <thead>
+            <tr style={{ background: "var(--primary-dark, #7f1d1d)" }}>
+              {["Bet ID", "Username", "Date/Time", "Bet Amount"].map((h) => (
+                <th
+                  key={h}
+                  className="px-4 py-3 text-left font-bold text-white"
+                >
+                  {h}
+                </th>
+              ))}
             </tr>
-          ))}
-        </tbody>
-      </table>
-
-      {/* Show More */}
-      <div className="flex justify-center py-4">
-        <button
-          type="button"
-          onClick={() => setShowAll((v) => !v)}
-          className="rounded-md px-10 py-2 text-sm font-bold text-white transition hover:brightness-110 active:scale-95"
-          style={{ background: "var(--primary)" }}
-        >
-          {showAll ? "Show Less" : "Show More"}
-        </button>
+          </thead>
+          <tbody>
+            {LATEST_BETS.map((row, i) => (
+              <tr
+                key={row.betId}
+                style={{
+                  borderBottom: i === LATEST_BETS.length - 1 ? "none" : "1px solid #f0f0f0",
+                }}
+              >
+                <td className="px-4 py-3 font-medium" style={{ color: "var(--text)" }}>
+                  {row.betId}
+                </td>
+                <td className="px-4 py-3 font-medium" style={{ color: "var(--primary)" }}>
+                  {row.username}
+                </td>
+                <td className="px-4 py-3 font-medium" style={{ color: "var(--primary-dark, #7f1d1d)" }}>
+                  {row.dateTime}
+                </td>
+                <td className="px-4 py-3 font-extrabold text-right sm:text-left" style={{ color: "var(--gold)" }}>
+                  {row.betAmount}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       </div>
     </div>
   );
@@ -320,18 +301,18 @@ export function GamePlayPage({
     >
       {/* Breadcrumbs */}
       <div
-        className="inline-flex w-fit max-w-full items-center gap-2 rounded-full px-5 text-sm font-semibold"
-        style={{ background: "var(--surface-3)", color: "var(--muted)", lineHeight: "36px" }}
+        className="inline-flex w-fit max-w-full items-center gap-2 rounded-full px-5 text-sm"
+        style={{ background: "#fce8e8", lineHeight: "36px" }}
       >
-        <a href="#/games" className="no-underline" style={{ color: "var(--muted)" }}>
+        <a href="#/games" className="no-underline font-medium" style={{ color: "var(--muted)" }}>
           All
         </a>
         <ChevronRight />
-        <a href={`#/provider/${providerSlug}`} className="no-underline" style={{ color: "var(--muted)" }}>
+        <a href={`#/provider/${providerSlug}`} className="no-underline font-medium" style={{ color: "var(--muted)" }}>
           {provider}
         </a>
         <ChevronRight />
-        <span className="rounded-full px-3 py-0.5 text-sm font-bold text-white" style={{ background: "var(--primary)" }}>
+        <span className="font-bold" style={{ color: "var(--primary-dark, #7f1d1d)" }}>
           {gameLabel}
         </span>
       </div>

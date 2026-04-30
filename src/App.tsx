@@ -24,6 +24,8 @@ import { AuthModal, type AuthMode } from "./components/AuthModal";
 import { AllGamesPage } from "./components/AllGamesPage";
 import { ProviderDetailPage } from "./components/ProviderDetailPage";
 import { GamePlayPage } from "./components/GamePlayPage";
+import { VerifyNumberModal } from "./components/VerifyNumberModal";
+import { NoticeModal } from "./components/NoticeModal";
 import { assets } from "./data/assets";
 import { lobbyHeroBannerForView } from "./data/gameCategoryBanners";
 import { isLobbyCategoryPageView, lobbyFilterFromView } from "./data/lobbyGameFilters";
@@ -116,6 +118,11 @@ export default function App() {
   const [authMode, setAuthMode] = useState<AuthMode>("login");
   const [isAuthOpen, setIsAuthOpen] = useState(false);
 
+  // Registration Flow State
+  const [isVerifyModalOpen, setIsVerifyModalOpen] = useState(false);
+  const [isNoticeModalOpen, setIsNoticeModalOpen] = useState(false);
+  const [pendingUser, setPendingUser] = useState<{ username: string; mobileNumber: string; token?: string } | null>(null);
+
   useEffect(() => {
     const onHash = () => setRoute(parseRoute());
     window.addEventListener("hashchange", onHash);
@@ -170,6 +177,26 @@ export default function App() {
     setIsLoggedIn(true);
     localStorage.setItem(USERNAME_KEY, username);
     localStorage.setItem(USER_TOKEN_KEY, userToken ?? `token_${Date.now()}`);
+  };
+
+  const handleRegisterSuccess = (username: string, mobileNumber: string, userToken?: string) => {
+    setPendingUser({ username, mobileNumber, token: userToken });
+    setIsVerifyModalOpen(true);
+  };
+
+  const handleVerifySuccess = () => {
+    setIsVerifyModalOpen(false);
+    setIsNoticeModalOpen(true);
+  };
+
+  const handleNoticeSubmit = (data: { fullName: string; bankName: string; accountNumber: string }) => {
+    console.log("Bank info submitted:", data);
+    setIsNoticeModalOpen(false);
+    // Finally log the user in
+    if (pendingUser) {
+      handleLoginSuccess(pendingUser.username, pendingUser.token);
+      setPendingUser(null);
+    }
   };
 
   const handleLogout = () => {
@@ -309,6 +336,18 @@ export default function App() {
         onClose={() => setIsAuthOpen(false)}
         onModeChange={setAuthMode}
         onLoginSuccess={handleLoginSuccess}
+        onRegisterSuccess={handleRegisterSuccess}
+      />
+      <VerifyNumberModal
+        isOpen={isVerifyModalOpen}
+        onClose={() => setIsVerifyModalOpen(false)}
+        onSuccess={handleVerifySuccess}
+        mobileNumber={pendingUser?.mobileNumber}
+      />
+      <NoticeModal
+        isOpen={isNoticeModalOpen}
+        onClose={() => setIsNoticeModalOpen(false)}
+        onSubmit={handleNoticeSubmit}
       />
     </div>
   );

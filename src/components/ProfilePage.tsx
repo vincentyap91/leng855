@@ -52,16 +52,17 @@ type ProfilePageProps = {
 function UserAvatar() {
   return (
     <div
-      className="grid h-[72px] w-[72px] place-items-center rounded-md border-2"
-      style={{ borderColor: "color-mix(in srgb, var(--primary) 45%, transparent)", background: "var(--surface)" }}
+      className="flex h-[84px] w-[84px] shrink-0 items-center justify-center bg-[#fdfdfd]"
+      style={{ border: "2px solid #dfc790", padding: "4px" }}
       aria-hidden
     >
-      {/* From Figma node `8116:39925` (avatar icon) */}
-      <img
-        src="https://www.figma.com/api/mcp/asset/78f25659-de5b-4941-baee-aec4c4051819"
-        alt=""
-        className="h-[52px] w-[52px] object-contain"
-      />
+      <div className="flex h-full w-full items-center justify-center border border-[#dfc790] bg-white">
+        <img
+          src="https://www.figma.com/api/mcp/asset/78f25659-de5b-4941-baee-aec4c4051819"
+          alt=""
+          className="h-full w-full object-contain"
+        />
+      </div>
     </div>
   );
 }
@@ -78,43 +79,68 @@ export function ProfilePage({ onLogout }: ProfilePageProps) {
 
   return (
     <section className="mx-auto w-full max-w-[760px] px-4 py-6">
-      <article className="rounded-md p-4" style={{ background: "var(--surface-3)" }}>
-        <div className="flex items-start gap-4">
+      {/* Top Card: User Info */}
+      <article className="rounded-md p-4" style={{ background: "#f8f8f8" }}>
+        <div className="flex items-center gap-4">
           <UserAvatar />
           <div className="min-w-0 flex-1">
-            <div className="flex items-center gap-3 text-[var(--primary-dark)]">
-              <h2 className="truncate text-sm font-bold">{registeredUsername}</h2>
-              <span className="truncate text-xs font-normal">{registeredMobile}</span>
+            {/* Username row */}
+            <div className="flex items-center gap-3">
+              <h2 className="text-[17px] font-extrabold" style={{ color: "#992925" }}>Demo</h2>
+              <div className="h-4 w-[1px] bg-gray-300" />
+              <span className="text-[14px] font-medium" style={{ color: "#a56658" }}>6012300001234</span>
             </div>
-            <p className="mt-1 text-xs font-normal text-[var(--primary-dark)]">Normal</p>
 
-            <div className="mt-2 flex items-center justify-between gap-2">
-              <p className="truncate text-xs font-normal text-[var(--primary-dark)]">Please Enjoy Your VIP Privileges !</p>
-              <span className="shrink-0 text-xs text-[var(--muted)]">100%</span>
+            {/* Rank info row */}
+            <div className="mt-2 flex items-center justify-between text-[13px] font-medium" style={{ color: "#a56658" }}>
+              <span>Orichalcum</span>
+              <span>
+                Deposit <span style={{ color: "#d2ac6f" }}>900,723.48</span> to become <span style={{ color: "#d2ac6f" }}>Orichalcum II</span>!
+              </span>
             </div>
-            <div className="mt-2 h-2.5 overflow-hidden rounded" style={{ background: "var(--surface)" }}>
-              <div className="h-full rounded" style={{ width: "100%", background: "var(--cta-gradient)" }} />
+
+            {/* Progress bar row */}
+            <div className="mt-2 flex items-center gap-3">
+              <div className="h-2.5 flex-1 overflow-hidden rounded-full bg-white border border-gray-200">
+                <div className="h-full rounded-full" style={{ width: "10%", background: "#a6332a" }} />
+              </div>
+              <span className="text-[12px] font-medium text-gray-500">10%</span>
             </div>
           </div>
         </div>
       </article>
 
-      <article className="mt-3 rounded-md p-4" style={{ background: "var(--surface-3)" }}>
-        <div className="flex items-center justify-between gap-3 rounded-md px-4 py-2.5" style={{ background: "var(--surface)" }}>
-          <div>
-            <div className="text-xs font-semibold text-[var(--primary)]">Balance</div>
-            <div className="text-sm font-bold text-[var(--primary-dark)]">0.00</div>
+      {/* Bottom Card: Wallet Info */}
+      <article className="mt-3 rounded-md p-3" style={{ background: "#f8f8f8" }}>
+        <div className="rounded-md bg-white p-4 shadow-sm border border-gray-100">
+          <div className="flex items-center justify-between">
+            <div className="flex flex-col">
+              <span className="text-[13px] font-bold" style={{ color: "#d96f5b" }}>Main Wallet</span>
+              <span className="mt-0.5 text-[18px] font-extrabold" style={{ color: "#7a1a1a" }}>100.00</span>
+            </div>
+            <button
+              type="button"
+              onClick={() => {
+                window.location.hash = "#/deposit";
+              }}
+              className="rounded-lg px-6 py-2.5 text-[15px] font-bold text-white shadow-md transition-opacity hover:opacity-90"
+              style={{ background: "linear-gradient(180deg, #b23333 0%, #871919 100%)" }}
+            >
+              Deposit
+            </button>
           </div>
-          <button
-            type="button"
-            onClick={() => {
-              window.location.hash = "#/deposit";
-            }}
-            className="rounded-lg px-5 py-2 text-sm font-bold"
-            style={{ background: "var(--cta-gradient)", color: "var(--on-primary)" }}
-          >
-            Deposit
-          </button>
+
+          <div className="mt-5">
+            <div className="text-[13px] font-semibold" style={{ color: "#a56658" }}>
+              Deposit Rollover <span className="ml-1 font-bold" style={{ color: "#d2ac6f" }}>0 / 100</span>
+            </div>
+            <div className="mt-2 flex items-center gap-3">
+              <div className="h-1.5 flex-1 overflow-hidden rounded-full bg-[#f4f4f5]">
+                <div className="h-full rounded-full" style={{ width: "0%", background: "#a6332a" }} />
+              </div>
+              <span className="text-[12px] font-medium" style={{ color: "#8a584e" }}>0%</span>
+            </div>
+          </div>
         </div>
       </article>
 
