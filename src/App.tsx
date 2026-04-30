@@ -18,6 +18,8 @@ import { RecentBigWins } from "./components/RecentBigWins";
 import { HotProviders } from "./components/HotProviders";
 import { Footer } from "./components/Footer";
 import { FloatingOverlays } from "./components/FloatingOverlays";
+import { MobileBottomNav } from "./components/MobileBottomNav";
+import { MobileAuthBar, MobilePassiveIncomeBanner, MobileProfileCard, DesktopReferralHubBanner } from "./components/MobileHomeBlocks";
 import { AuthModal, type AuthMode } from "./components/AuthModal";
 import { ProviderDetailPage } from "./components/ProviderDetailPage";
 import { gameCategoryBanners } from "./data/gameCategoryBanners";
@@ -172,14 +174,16 @@ export default function App() {
         onLoginClick={() => openAuthModal("login")}
         onRegisterClick={() => openAuthModal("register")}
         onLogout={handleLogout}
+        appView={view}
+        onMenuNavigate={goView}
       />
 
       <div className="flex min-h-0 w-full min-w-0 flex-1">
         <Sidebar view={view} onNavigate={goView} />
 
-        <div className="ml-[220px] flex min-w-0 flex-1 flex-col">
-          <main className="min-w-0 flex-1" style={{ background: "transparent" }}>
-            <div className="mx-auto w-full max-w-[1430px] space-y-6 px-6 py-5">
+        <div className="ml-0 flex min-w-0 flex-1 flex-col lg:ml-[220px]">
+          <main className="min-w-0 flex-1 pb-20 lg:pb-5" style={{ background: "transparent" }}>
+            <div className="mx-auto w-full max-w-[1430px] space-y-6 px-4 py-5 sm:px-6">
               {view === "hot-games" ? (
                 <AllGamesPage bannerSrc={gameCategoryBanners.welcome} bannerAlt="Leng855 hot games" />
               ) : view === "all-games" ? (
@@ -195,7 +199,7 @@ export default function App() {
               ) : view === "promotion" ? (
                 <PromotionPage />
               ) : view === "referral" ? (
-                <ReferralPage />
+                <ReferralPage isLoggedIn={isLoggedIn} onLoginClick={() => openAuthModal("login")} />
               ) : view === "deposit" ? (
                 <DepositPage />
               ) : view === "profile" ? (
@@ -214,15 +218,28 @@ export default function App() {
 
                   <AnnouncementBar />
 
-                  <div className="provider-category-container flex justify-end">
-                    <CategoryChips />
-                  </div>
+                  {session ? <MobileProfileCard username={session.username} balanceDisplay="0.00" /> : null}
 
-                  <GamesGrid />
+                  {!isLoggedIn ? (
+                    <MobileAuthBar
+                      onLoginClick={() => openAuthModal("login")}
+                      onRegisterClick={() => openAuthModal("register")}
+                    />
+                  ) : null}
+
+                  <MobilePassiveIncomeBanner />
 
                   <LiveTransactions />
 
+                  <DesktopReferralHubBanner />
+
                   <RecentBigWins />
+
+                  <div className="provider-category-container flex w-full justify-stretch md:justify-end">
+                    <CategoryChips variant="homeStrip" />
+                  </div>
+
+                  <GamesGrid />
 
                   <HotProviders />
                 </>
@@ -232,6 +249,7 @@ export default function App() {
         </div>
       </div>
 
+      <MobileBottomNav view={view} onNavigate={goView} />
       <Footer />
 
       <FloatingOverlays />

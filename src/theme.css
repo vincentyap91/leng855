@@ -23,6 +23,12 @@
     /* Full-bleed footer bar (reference #7F1D1D; distinct from --primary-deep for gradients) */
     --footer-strip-bg: #7F1D1D;
     --sidebar-fixed-width: 220px;
+    /* Mobile shell (home + global bottom bar) */
+    --mobile-nav-bg: #252525;
+    --mobile-nav-fg: rgba(255, 255, 255, 0.9);
+    --mobile-profile-withdraw-bg: #1d4ed8;
+    --mobile-home-profile-bg: color-mix(in srgb, var(--surface-3) 58%, #e2e8f0 42%);
+    --game-rtp-badge-bg: #2563eb;
 
 
     /* ---- Derived neutrals (never hardcode colors elsewhere) ---- */
@@ -43,9 +49,9 @@
     --nav-surface-border: rgba(0, 0, 0, 0.06);
     --header-logo-backdrop: transparent;
     --card-border: color-mix(in srgb, var(--gold) 55%, transparent);
-    /* ---- Soft elevation for white cards (CAM88 clean look) ---- */
-    --card-shadow: 0 2px 8px color-mix(in srgb, var(--text) 7%, transparent);
-    --card-shadow-hover: 0 6px 18px color-mix(in srgb, var(--text) 11%, transparent);
+    /* ---- Cards: flat (no drop shadow) ---- */
+    --card-shadow: none;
+    --card-shadow-hover: none;
     /* Sidebar nav rows — dark-red active cell + soft glow */
     --nav-side-highlight-ring: var(--primary);
     --nav-side-item-glow: rgba(138, 15, 30, 0.18);
@@ -59,7 +65,7 @@
     --container-gold-glow: var(--card-shadow);
     --panel-item-bg: #FFFFFF;
     --panel-item-border: color-mix(in srgb, var(--gold) 48%, transparent);
-    --panel-item-shadow: var(--shadow-elevated);
+    --panel-item-shadow: none;
 
     /* ---- Reusable gradients ----
        5-stop metallic shine: dark → body → bright peak → body → dark */
@@ -123,7 +129,7 @@
     /* Input */
     --base-input: var(--surface);
     --base-input-color: var(--text);
-    --base-input-border: var(--border);
+    --base-input-border: transparent;
     --base-input-placeholder: var(--muted);
 
     --base-social-button: var(--non-active-bg);
@@ -419,7 +425,7 @@
     --modal-box-shadow: 0 24px 70px color-mix(in srgb, var(--text) 22%, transparent);
     --modal-field-bg: var(--base-input);
     --modal-field-color: var(--base-input-color);
-    --modal-field-border: 1px solid var(--base-input-border);
+    --modal-field-border: none;
     --modal-field-placeholder: var(--base-input-placeholder);
     --modal-field-focus: var(--gold);
     --modal-helper-color: var(--muted);
@@ -848,8 +854,13 @@ button.side-nav-item:not(.side-nav-item--active):hover .side-nav-icon {
     border: 1px solid var(--gold) !important;
 }
 
-.mobile-home-latest-transactions-box>.body{
-   border-bottom: unset !important;
+.mobile-home-latest-transactions-box>.body {
+    border-bottom: unset !important;
+}
+
+/* Live transactions: vertical rule between Deposit and Withdrawal columns */
+.live-transactions-dw-table .live-transactions-dw-table__deposit {
+    border-right: 1px solid var(--border-strong) !important;
 }
 
 .mobile-home-balance-box {
@@ -1095,14 +1106,14 @@ button.side-nav-item:not(.side-nav-item--active):hover .side-nav-icon {
     min-height: 44px;
     padding: 0 14px;
     border-radius: 10px;
-    border: 1px solid var(--base-input-border);
+    border: none;
     background: var(--base-input);
     color: var(--base-input-color);
     font-family: var(--base-font-family);
     font-size: 14px;
     font-weight: 600;
     outline: none;
-    transition: border-color 160ms ease, box-shadow 160ms ease;
+    transition: box-shadow 160ms ease;
 }
 
 .t3-custom-input-text::placeholder {
@@ -1113,8 +1124,16 @@ button.side-nav-item:not(.side-nav-item--active):hover .side-nav-icon {
 }
 
 .t3-custom-input-text:focus {
-    border-color: var(--gold);
-    box-shadow: 0 0 0 3px color-mix(in srgb, var(--gold) 20%, transparent);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--gold) 22%, transparent);
+}
+
+/* No border lines on text-like inputs / textareas / selects (Tailwind `border` included) */
+input:not([type="checkbox"]):not([type="radio"]):not([type="range"]):not([type="file"]):not([type="hidden"]):not([type="button"]):not([type="submit"]):not([type="reset"]):not([type="image"]),
+textarea,
+select {
+    border-width: 0 !important;
+    border-style: none !important;
+    border-color: transparent !important;
 }
 
 .t3-input-container .text-muted {
@@ -1459,7 +1478,7 @@ button.side-nav-item:not(.side-nav-item--active):hover .side-nav-icon {
     flex-shrink: 0;
     position: relative;
     z-index: 5;
-    background: linear-gradient(90deg, #8f0f1f 0%, #b31324 50%, #d8182d 100%);
+    background: var(--primary-dark);
     border-top: 1px solid color-mix(in srgb, #ffffff 12%, transparent);
     border-bottom: 3px solid color-mix(in srgb, #000000 18%, transparent);
     padding-left: var(--sidebar-fixed-width);
@@ -1942,9 +1961,90 @@ button.side-nav-item:not(.side-nav-item--active):hover .side-nav-icon {
     height: 20px;
 }
 
+.second.t3-header-logged-second .header-rollover-dropdown-target-wrap {
+    color: var(--primary-dark);
+}
+
+.second.t3-header-logged-second .header-rollover-dropdown-target-icon {
+    display: block;
+    width: 24px;
+    height: 24px;
+}
+
 .second.t3-header-logged-second .header-auth-mobile-logout {
     width: var(--header-auth-control-height) !important;
     height: var(--header-auth-control-height) !important;
+}
+
+/* Mobile header — logo | dark balance + gold $ pill | target | hamburger (profile & wallet chevron hidden) */
+@media (max-width: 1023px) {
+    .t3-header {
+        gap: 0.5rem;
+        padding-left: 0.75rem;
+        padding-right: 0.75rem;
+    }
+
+    .second.t3-header-logged-second {
+        flex-wrap: nowrap;
+        gap: 0.35rem;
+        min-width: 0;
+    }
+
+    .second.t3-header-logged-second .t3-header-profile-box {
+        display: none !important;
+    }
+
+    .second.t3-header-logged-second .t3-chevon-ddl.header-balance-ddl-toggle {
+        display: none !important;
+    }
+
+    .second.t3-header-logged-second .t3-balance-btn {
+        gap: 0;
+        padding-left: 8px;
+        padding-right: 6px;
+        flex: 1 1 auto;
+        min-width: 0;
+    }
+
+    .second.t3-header-logged-second .t3-header-balance-deposit-box {
+        gap: 0;
+        flex: 1 1 auto;
+        min-width: 0;
+        max-width: min(210px, 46vw);
+        border-radius: 8px;
+        overflow: hidden;
+    }
+
+    .second.t3-header-logged-second .t3-header-deposit {
+        padding: 0 !important;
+        width: var(--header-auth-control-height);
+        min-width: var(--header-auth-control-height);
+        max-width: var(--header-auth-control-height);
+        flex: 0 0 var(--header-auth-control-height);
+        border-radius: 0;
+        border-left: 1px solid color-mix(in srgb, var(--gold) 50%, rgba(0, 0, 0, 0.25) 50%);
+    }
+
+    .second.t3-header-logged-second .t3-header-deposit .text {
+        display: none !important;
+    }
+
+    .second.t3-header-logged-second .t3-header-deposit .vicon {
+        width: 19px !important;
+        height: 19px !important;
+    }
+
+    .second.t3-header-logged-second .header-balance-column > span.font-size-header-balance {
+        font-size: 10px;
+    }
+
+    .second.t3-header-logged-second .balance-amount {
+        font-size: 11px;
+    }
+
+    .mobile-header-open-menu {
+        flex-shrink: 0;
+    }
 }
 
 /* -------- Header balance wallet dropdown (light / red / gold) ---------------- */
@@ -2091,7 +2191,7 @@ button.side-nav-item:not(.side-nav-item--active):hover .side-nav-icon {
     width: 100%;
     margin-left: auto;
     margin-right: auto;
-    margin-bottom: 1rem;
+    margin-bottom: 30px;
 }
 
 .t3-two-custom-tabs > div {
@@ -2244,16 +2344,19 @@ button.side-nav-item:not(.side-nav-item--active):hover .side-nav-icon {
     background: var(--deposit-bank-option-bg) !important;
     color: var(--text);
     border: 1px solid var(--deposit-bank-option-border);
-    border-radius: 12px;
+    border-radius: 8px;
     box-shadow: var(--card-shadow);
     cursor: pointer;
     transition: box-shadow 170ms ease, transform 170ms ease, border-color 0.15s ease;
 }
 
 .deposit-page .t3-settings-menu-list .bank-option-box:hover {
-    box-shadow: var(--card-shadow-hover);
-    transform: translateY(-1px);
-    border-color: var(--panel-item-border);
+    background: var(--cta-gradient) !important;
+}
+
+.deposit-page .t3-settings-menu-list .bank-option-box:hover .bank-option-name, 
+.deposit-page .t3-settings-menu-list .bank-option-box:hover .bank-option-minmax{
+    color: var(--on-primary) !important;
 }
 
 .deposit-page .t3-settings-menu-list .bank-option-box:active {
@@ -2325,6 +2428,634 @@ button.side-nav-item:not(.side-nav-item--active):hover .side-nav-icon {
 
 .deposit-page .deposit-bank-card img {
     box-shadow: none;
+}
+
+/* Deposit — bank transfer details (Normal Bank Transfer) — brand / theme tokens only */
+.deposit-page .deposit-bank-transfer-details {
+    --deposit-bt-accent-deep: var(--primary-dark);
+    --deposit-bt-heading: var(--primary-dark);
+    --deposit-bt-soft-panel: color-mix(in srgb, var(--surface-3) 88%, var(--gold-tint) 12%);
+    --deposit-bt-panel-edge: var(--panel-item-border);
+    --deposit-bt-bank-idle-top: color-mix(in srgb, var(--primary-dark) 52%, var(--surface-3) 48%);
+    --deposit-bt-bank-idle-bot: color-mix(in srgb, var(--primary-dark) 62%, var(--surface-3) 38%);
+    --deposit-bt-chip: color-mix(in srgb, var(--surface-3) 72%, var(--bg) 28%);
+    --deposit-bt-chip-active: color-mix(in srgb, var(--gold-tint) 75%, var(--bg) 25%);
+    --deposit-bt-selected-ring: var(--gold);
+    --deposit-bt-card-border: color-mix(in srgb, var(--gold) 52%, var(--panel-item-border) 48%);
+    --deposit-bt-card-shadow: none;
+    margin-top: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.deposit-page .deposit-bank-transfer__subheader {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.deposit-page .deposit-bank-transfer__back {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    min-height: 40px;
+    padding: 0 14px;
+    border-radius: 10px;
+    border: 1px solid color-mix(in srgb, var(--gold) 35%, var(--primary-dark) 65%);
+    font: inherit;
+    font-weight: 700;
+    font-size: 14px;
+    cursor: pointer;
+    color: var(--on-primary);
+    background: var(--cta-gradient);
+    box-shadow: var(--card-shadow);
+}
+
+.deposit-page .deposit-bank-transfer__back:hover {
+    filter: brightness(1.04);
+}
+
+.deposit-page .deposit-bank-transfer__title {
+    margin: 0;
+    font-size: 17px;
+    font-weight: 800;
+    color: var(--primary-dark);
+}
+
+.deposit-page .deposit-bank-transfer__panel {
+    border-radius: 12px;
+    padding: 16px 18px;
+    border: 1px solid var(--deposit-bt-card-border);
+    background: var(--bg);
+    box-shadow: var(--deposit-bt-card-shadow);
+}
+
+.deposit-page .deposit-bank-transfer__panel--brand-surface {
+    background: var(--deposit-bt-soft-panel);
+    border-color: var(--deposit-bt-panel-edge);
+    box-shadow: var(--card-shadow);
+}
+
+.deposit-page .deposit-bank-transfer__section-title--brand {
+    color: var(--deposit-bt-heading);
+}
+
+.deposit-page .deposit-bank-transfer__upload-section {
+    margin-top: 14px;
+}
+
+.deposit-page .deposit-bank-transfer__info-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--primary-dark);
+}
+
+.deposit-page .deposit-bank-transfer__info-row + .deposit-bank-transfer__info-row {
+    margin-top: 10px;
+}
+
+.deposit-page .deposit-bank-transfer__info-val {
+    font-weight: 800;
+    color: var(--gold);
+    font-variant-numeric: tabular-nums;
+}
+
+.deposit-page .deposit-bank-transfer__notes-rule {
+    margin: 12px 0 0;
+    padding-top: 12px;
+    border-top: 1px solid var(--deposit-bt-card-border);
+}
+
+.deposit-page .deposit-bank-transfer__notes-label {
+    margin: 0 0 6px;
+    font-size: 13px;
+    font-weight: 800;
+    color: var(--primary);
+}
+
+.deposit-page .deposit-bank-transfer__notes-body {
+    margin: 0;
+    font-size: 12px;
+    line-height: 1.45;
+    font-weight: 600;
+    color: var(--text);
+}
+
+.deposit-page .deposit-bank-transfer__section-title {
+    margin: 0 0 12px;
+    font-size: 15px;
+    font-weight: 800;
+    letter-spacing: 0.01em;
+    color: var(--primary-dark);
+}
+
+.deposit-page .deposit-bank-transfer__section-title--tight {
+    margin-bottom: 14px;
+}
+
+.deposit-page .deposit-bank-transfer__bank-scroll {
+    display: flex;
+    flex-direction: row;
+    gap: 11px;
+    overflow-x: auto;
+    padding: 4px 2px 8px;
+    margin: 0 -2px;
+    scrollbar-width: thin;
+    -webkit-overflow-scrolling: touch;
+}
+
+.deposit-page .deposit-bank-transfer__bank-scroll::-webkit-scrollbar {
+    height: 6px;
+}
+
+.deposit-page .deposit-bank-transfer__bank-scroll::-webkit-scrollbar-thumb {
+    background: color-mix(in srgb, var(--deposit-bt-accent-deep) 28%, var(--border));
+    border-radius: 3px;
+}
+
+/* Bank picker cards: logo left, label + range right (horizontal row) */
+.deposit-page .deposit-bank-transfer__bank-card {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 10px;
+    flex: 0 0 auto;
+    min-width: 168px;
+    max-width: 240px;
+    width: auto;
+    min-height: 58px;
+    padding: 10px 12px;
+    border-radius: 10px;
+    border: 2px solid transparent;
+    cursor: pointer;
+    text-align: left;
+    font: inherit;
+    transition:
+        border-color 0.18s ease,
+        box-shadow 0.18s ease,
+        background 0.18s ease;
+    background: #dbdad8;
+}
+
+.deposit-page .deposit-bank-transfer__bank-card.selected {
+    background: var(--deposit-bt-accent-deep);
+}
+
+.deposit-page .deposit-bank-transfer__bank-card-media {
+    flex-shrink: 0;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 6px;
+    overflow: hidden;
+    background: rgba(255, 255, 255, 0.22);
+}
+
+.deposit-page .deposit-bank-transfer__bank-card.selected .deposit-bank-transfer__bank-card-media {
+    background: rgba(255, 255, 255, 0.14);
+}
+
+.deposit-page .deposit-bank-transfer__bank-card-media img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.deposit-page .deposit-bank-transfer__bank-card-body {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 2px;
+}
+
+.deposit-page .deposit-bank-transfer__bank-card .nm {
+    display: block;
+    font-size: 12px;
+    font-weight: 800;
+    line-height: 1.2;
+    color: var(--primary-dark);
+    letter-spacing: 0.02em;
+}
+
+.deposit-page .deposit-bank-transfer__bank-card .mm {
+    display: block;
+    font-size: 11px;
+    font-weight: 700;
+    line-height: 1.2;
+    color: var(--dark-gray);
+}
+
+.deposit-page .deposit-bank-transfer__bank-card.selected .nm {
+    color: #ffffff;
+}
+
+.deposit-page .deposit-bank-transfer__bank-card.selected .mm {
+    color: rgba(255, 255, 255, 0.68);
+}
+
+.deposit-page .deposit-bank-transfer__amount-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin-bottom: 14px;
+}
+
+.deposit-page .deposit-bank-transfer__amount-chip {
+    min-height: 46px;
+    border-radius: 10px;
+    background: var(--bg);
+    font: inherit;
+    font-size: 15px;
+    font-weight: 800;
+    color: var(--primary-dark);
+    cursor: pointer;
+    transition:
+        background 0.15s ease,
+        border-color 0.15s ease,
+        box-shadow 0.15s ease;
+}
+
+.deposit-page .deposit-bank-transfer__amount-chip:hover {
+    border-color: color-mix(in srgb, var(--gold) 65%, var(--border));
+}
+
+.deposit-page .deposit-bank-transfer__amount-chip.active {
+    background: color-mix(in srgb, var(--gold-tint) 85%, var(--bg) 15%);
+    border-color: var(--gold);
+    color: var(--primary-dark);
+    box-shadow: none;
+}
+
+.deposit-page .deposit-bank-transfer__input-row {
+    display: flex;
+    border-radius: 10px;
+    overflow: hidden;
+    border: none;
+    background: var(--bg);
+    box-shadow: none;
+}
+
+.deposit-page .deposit-bank-transfer__input-prefix {
+    flex-shrink: 0;
+    padding: 0 16px;
+    display: flex;
+    align-items: center;
+    font-size: 13px;
+    font-weight: 800;
+    font-style: italic;
+    letter-spacing: 0.06em;
+    color: var(--on-primary);
+    background: var(--primary-dark);
+}
+
+.deposit-page .deposit-bank-transfer__input-field {
+    flex: 1;
+    min-width: 0;
+    border: none;
+    padding: 12px 14px;
+    font: inherit;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text);
+    background: var(--bg);
+}
+
+.deposit-page .deposit-bank-transfer__input-field::placeholder {
+    color: color-mix(in srgb, var(--muted) 72%, var(--gold) 28%);
+    font-weight: 500;
+}
+
+.deposit-page .deposit-bank-transfer__input-hint {
+    margin: 10px 0 0;
+    font-size: 12px;
+    font-weight: 600;
+    text-align: right;
+    color: color-mix(in srgb, var(--gold) 42%, var(--muted) 58%);
+}
+
+/* Amount / input inside brand-tinted panel */
+.deposit-page .deposit-bank-transfer__panel--brand-surface .deposit-bank-transfer__amount-chip {
+    background: #dbdad8;
+    color: var(--deposit-bt-heading);
+    font-size: 20px;
+    font-weight: 700;
+    height: 66px;
+}
+
+.deposit-page .deposit-bank-transfer__panel--brand-surface .deposit-bank-transfer__amount-chip:hover {
+    border-color: color-mix(in srgb, var(--gold) 45%, var(--primary-dark) 25%);
+}
+
+.deposit-page .deposit-bank-transfer__panel--brand-surface .deposit-bank-transfer__amount-chip.active {
+    background: var(--deposit-bt-accent-deep);
+    color: #ffffff;
+}
+
+.deposit-page .deposit-bank-transfer__panel--brand-surface .deposit-bank-transfer__input-row {
+    border: none;
+    background: var(--bg);
+}
+
+.deposit-page .deposit-bank-transfer__panel--brand-surface .deposit-bank-transfer__input-prefix {
+    background: var(--primary-dark);
+    color: var(--on-primary);
+}
+
+.deposit-page .deposit-bank-transfer__panel--brand-surface .deposit-bank-transfer__input-field {
+    text-align: right;
+    color: var(--text);
+}
+
+.deposit-page .deposit-bank-transfer__panel--brand-surface .deposit-bank-transfer__input-field::placeholder {
+    color: var(--muted);
+    text-align: right;
+}
+
+.deposit-page .deposit-bank-transfer__panel--brand-surface .deposit-bank-transfer__input-hint {
+    color: var(--primary-dark);
+}
+
+/* —— Stat cards: label (muted, small) → value (bold primary-dark); used for deposit amount + bank details —— */
+.deposit-page .deposit-bank-transfer__pay-card {
+    text-align: left;
+}
+
+.deposit-page .deposit-bank-transfer__stat-label {
+    display: block;
+    margin: 0 0 8px;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--muted);
+    line-height: 1.3;
+}
+
+.deposit-page .deposit-bank-transfer__pay-line {
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 8px 14px;
+    margin: 0;
+}
+
+.deposit-page .deposit-bank-transfer__pay-usd {
+    font-size: 16px;
+    font-weight: 800;
+    color: var(--primary-dark);
+    letter-spacing: 0.03em;
+}
+
+.deposit-page .deposit-bank-transfer__pay-fig {
+    font-size: 32px;
+    font-weight: 900;
+    font-variant-numeric: tabular-nums;
+    color: var(--primary-dark);
+    line-height: 1.05;
+    letter-spacing: -0.03em;
+}
+
+.deposit-page .deposit-bank-transfer__stat-rule {
+    margin: 16px 0 0;
+    padding: 0;
+    height: 0;
+    border: none;
+    border-top: 1px solid color-mix(in srgb, var(--primary-dark) 20%, var(--deposit-bt-card-border));
+}
+
+.deposit-page .deposit-bank-transfer__bank-detail-card {
+    padding-top: 2px;
+    padding-bottom: 2px;
+}
+
+.deposit-page .deposit-bank-transfer__stat-section {
+    padding: 12px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+}
+
+.deposit-page .deposit-bank-transfer__stat-section .deposit-bank-transfer__stat-label {
+    margin-bottom: 0;
+}
+
+.deposit-page .deposit-bank-transfer__stat-section--row {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+}
+
+.deposit-page .deposit-bank-transfer__stat-stack {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+}
+
+.deposit-page .deposit-bank-transfer__stat-value {
+    font-size: 16px;
+    font-weight: 800;
+    color: var(--primary-dark);
+    line-height: 1.3;
+    word-break: break-word;
+}
+
+.deposit-page .deposit-bank-transfer__stat-divider {
+    height: 0;
+    margin: 0;
+    border: none;
+    border-top: 1px solid color-mix(in srgb, var(--primary-dark) 16%, var(--deposit-bt-card-border));
+}
+
+.deposit-page .deposit-bank-transfer__ref-card {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+    text-align: left;
+}
+
+.deposit-page .deposit-bank-transfer__ref-card .deposit-bank-transfer__stat-label {
+    margin-bottom: 0;
+}
+
+.deposit-page .deposit-bank-transfer__ref-row {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+}
+
+.deposit-page .deposit-bank-transfer__ref-row .deposit-bank-transfer__ref-input {
+    flex: 1;
+    min-width: 0;
+}
+
+.deposit-page .deposit-bank-transfer__ref-row .deposit-bank-transfer__copy {
+    flex-shrink: 0;
+}
+
+.deposit-page .deposit-bank-transfer__qr {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 12px 8px 8px;
+}
+
+.deposit-page .deposit-bank-transfer__qr-box {
+    width: 160px;
+    height: 160px;
+    border-radius: 10px;
+    overflow: hidden;
+    background: var(--bg);
+    border: 1px solid var(--deposit-bt-card-border);
+    box-shadow: none;
+}
+
+.deposit-page .deposit-bank-transfer__qr-link {
+    margin-top: 10px;
+    background: none;
+    border: none;
+    padding: 0;
+    font: inherit;
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--primary-dark);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    cursor: pointer;
+}
+
+.deposit-page .deposit-bank-transfer__qr-link:hover {
+    color: var(--primary);
+}
+
+/* Copy control — match ReferralPage referral link (round hit area, transparent, Figma copy asset) */
+.deposit-page .deposit-bank-transfer__copy {
+    flex-shrink: 0;
+    display: grid;
+    place-items: center;
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    border: none;
+    border-radius: 9999px;
+    cursor: pointer;
+    background: transparent;
+    color: var(--gold);
+    font: inherit;
+    line-height: 0;
+}
+
+.deposit-page .deposit-bank-transfer__copy-img {
+    display: block;
+    width: 18px;
+    height: 18px;
+    object-fit: contain;
+    opacity: 0.95;
+    pointer-events: none;
+}
+
+.deposit-page .deposit-bank-transfer__copy:hover:not(:disabled) {
+    opacity: 0.9;
+    filter: brightness(1.06);
+}
+
+.deposit-page .deposit-bank-transfer__copy:disabled {
+    opacity: 0.35;
+    cursor: not-allowed;
+    filter: none;
+}
+
+.deposit-page .deposit-bank-transfer__ref-input {
+    border: none;
+    border-radius: 10px;
+    padding: 10px 14px;
+    font: inherit;
+    font-size: 14px;
+    font-weight: 600;
+    background: var(--bg);
+    color: var(--text);
+    box-shadow: none;
+}
+
+.deposit-page .deposit-bank-transfer__upload-lead {
+    margin: 0 0 12px;
+    font-size: 13px;
+    line-height: 1.45;
+    font-weight: 600;
+    color: var(--text);
+}
+
+.deposit-page .deposit-bank-transfer__upload {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    min-height: 120px;
+    padding: 20px 16px;
+    border-radius: 10px;
+    border: 1px dashed color-mix(in srgb, var(--border) 75%, var(--muted) 25%);
+    background: var(--bg);
+    cursor: pointer;
+    transition:
+        border-color 0.15s ease,
+        background 0.15s ease;
+}
+
+.deposit-page .deposit-bank-transfer__upload:hover {
+    border-color: color-mix(in srgb, var(--border) 55%, var(--primary-dark) 45%);
+    background: color-mix(in srgb, var(--bg) 88%, var(--surface-3) 12%);
+}
+
+.deposit-page .deposit-bank-transfer__upload-icon {
+    color: var(--primary-dark);
+    margin-bottom: 0;
+    flex-shrink: 0;
+}
+
+.deposit-page .deposit-bank-transfer__upload-text {
+    margin: 0;
+    font-size: 16px;
+    font-weight: 400;
+    color: var(--primary-dark);
+}
+
+.deposit-page .deposit-bank-transfer__submit {
+    display: block;
+    width: 100%;
+    max-width: 320px;
+    margin: 8px auto 0;
+    min-height: 48px;
+    border-radius: 10px;
+    border: 1px solid color-mix(in srgb, var(--gold) 30%, var(--primary-dark) 70%);
+    font: inherit;
+    font-size: 16px;
+    font-weight: 800;
+    cursor: pointer;
+    color: var(--on-primary);
+    background: var(--cta-gradient);
+    box-shadow: var(--card-shadow);
+}
+
+.deposit-page .deposit-bank-transfer__submit:hover {
+    filter: brightness(1.04);
 }
 
 .t3-reload-bank-list-box .border-top {
@@ -2582,4 +3313,298 @@ padding: 0;
 
 .t3-referral-content .referral-invite-card h1 {
     color: var(--primary-dark);
+}
+
+/* Referral — sub-tab strip (flat track + active pill; e.g. single Referral Info) */
+.t3-referral-subtabs {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 6px;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 4px 6px;
+    border-radius: 10px;
+    border: 1px solid var(--panel-item-border);
+    background: color-mix(in srgb, var(--surface-3) 86%, var(--gold-tint) 14%);
+    box-shadow: none;
+}
+
+.t3-referral-subtabs__tab {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 44px;
+    padding: 0 22px;
+    border-radius: 8px;
+    border: 1px solid transparent;
+    font-size: 14px;
+    font-weight: 800;
+    font-family: inherit;
+    line-height: 1.2;
+    box-shadow: none;
+    cursor: default;
+    user-select: none;
+}
+
+.t3-referral-subtabs__tab--active {
+    background: var(--primary-dark);
+    color: var(--on-primary);
+    border-color: color-mix(in srgb, var(--primary-dark) 88%, var(--border) 12%);
+}
+
+.t3-referral-login-banner {
+    margin-top: 20px;
+    border-radius: 10px;
+    padding: 20px 22px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    border: 1px solid color-mix(in srgb, var(--primary) 52%, transparent);
+    background: linear-gradient(
+        145deg,
+        color-mix(in srgb, var(--primary-dark) 92%, #0a0505 8%) 0%,
+        color-mix(in srgb, var(--primary-dark) 58%, var(--surface) 42%) 100%
+    );
+    box-shadow: none;
+}
+
+.t3-referral-login-banner__title {
+    margin: 0;
+    font-size: clamp(15px, 2.5vw, 17px);
+    font-weight: 800;
+    line-height: 1.4;
+    color: var(--text);
+    max-width: 560px;
+}
+
+.t3-referral-login-banner__cta {
+    flex-shrink: 0;
+    min-height: 44px;
+    padding: 0 28px;
+    border-radius: 8px;
+    border: 1px solid color-mix(in srgb, var(--gold) 45%, var(--primary-dark) 55%);
+    font-size: 15px;
+    font-weight: 800;
+    font-family: inherit;
+    cursor: pointer;
+    background: var(--gold-gradient);
+    color: var(--primary-dark);
+    box-shadow: none;
+}
+
+.t3-referral-login-banner__cta:hover {
+    filter: brightness(1.06);
+}
+
+.t3-referral-promo-row {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+    margin-top: 20px;
+}
+
+@media (min-width: 900px) {
+    .t3-referral-promo-row {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+.t3-referral-promo-card {
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+    min-height: 128px;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid var(--panel-item-border);
+    box-shadow: var(--card-shadow);
+}
+
+.t3-referral-promo-card--commission {
+    background: linear-gradient(
+        100deg,
+        var(--primary-bright) 0%,
+        var(--primary-dark) 45%,
+        color-mix(in srgb, var(--primary-dark) 72%, #1a0a0a 28%) 100%
+    );
+}
+
+.t3-referral-promo-card--deposit {
+    background: linear-gradient(
+        100deg,
+        color-mix(in srgb, var(--primary-dark) 55%, #2c1810 45%) 0%,
+        color-mix(in srgb, var(--primary-dark) 40%, var(--gold) 60%) 100%
+    );
+}
+
+.t3-referral-promo-card__art {
+    width: 38%;
+    max-width: 180px;
+    min-width: 100px;
+    object-fit: contain;
+    object-position: bottom center;
+    align-self: flex-end;
+    pointer-events: none;
+    user-select: none;
+}
+
+.t3-referral-promo-card__body {
+    flex: 1;
+    padding: 16px 18px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 6px;
+}
+
+.t3-referral-promo-card__body--end {
+    text-align: right;
+    align-items: flex-end;
+}
+
+.t3-referral-promo-card__body--start {
+    text-align: left;
+    align-items: flex-start;
+}
+
+.t3-referral-promo-card__kicker {
+    margin: 0;
+    font-size: 14px;
+    font-weight: 800;
+    line-height: 1.35;
+    color: var(--text);
+    text-shadow: var(--shadow-promo-text);
+}
+
+.t3-referral-promo-card__accent-commission {
+    color: color-mix(in srgb, var(--gold-bright) 35%, #fecaca 65%);
+}
+
+.t3-referral-promo-card__accent-deposit {
+    color: var(--gold-bright);
+}
+
+.t3-referral-promo-card__sub {
+    margin: 0;
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 1.45;
+    color: color-mix(in srgb, var(--text) 88%, transparent);
+    max-width: 280px;
+    text-shadow: 0 1px 2px color-mix(in srgb, var(--primary-dark) 40%, transparent);
+}
+
+/* -------- Mobile home layout (bottom nav, RTP strip, profile-only sections) -------- */
+
+.home-mobile-only {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+@media (min-width: 1024px) {
+    .home-mobile-only {
+        display: none !important;
+    }
+}
+
+/* Mobile home — logged-in profile card (gold rim, light gray fill) */
+.home-mobile-profile-card {
+    background: #f5f5f5;
+    border-color: color-mix(in srgb, var(--gold) 52%, var(--panel-item-border) 48%);
+    box-shadow: none;
+}
+
+/* Desktop home — referral hub white panel on banner */
+.home-desktop-referral-hub__card {
+    border-color: color-mix(in srgb, var(--gold) 55%, var(--panel-item-border) 45%);
+    box-shadow: none;
+}
+
+.mobile-bottom-nav {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 55;
+    display: flex;
+    align-items: stretch;
+    justify-content: space-around;
+    gap: 0;
+    padding: 6px 4px calc(6px + env(safe-area-inset-bottom, 0px));
+    background: var(--mobile-nav-bg);
+    border-top: 1px solid color-mix(in srgb, var(--text) 22%, transparent);
+}
+
+.mobile-bottom-nav__icon {
+    opacity: 0.8;
+    filter: brightness(0) invert(1);
+}
+
+.mobile-bottom-nav__icon--svg {
+    filter: none;
+    opacity: 0.82;
+    color: rgba(255, 255, 255, 0.92);
+}
+
+.mobile-bottom-nav__btn[data-active="true"] .mobile-bottom-nav__icon {
+    opacity: 1;
+}
+
+.mobile-bottom-nav__btn[data-active="true"] .mobile-bottom-nav__icon--svg {
+    opacity: 1;
+    color: var(--gold);
+}
+
+.mobile-bottom-nav__btn[data-active="true"] {
+    color: var(--gold-bright);
+}
+
+.mobile-bottom-nav__btn--badge {
+    position: relative;
+}
+
+.mobile-bottom-nav__badge {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(10px);
+    min-width: 18px;
+    height: 18px;
+    padding: 0 5px;
+    border-radius: 9999px;
+    background: var(--primary-bright);
+    color: var(--on-primary);
+    font-size: 10px;
+    font-weight: 800;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1;
+}
+
+.t3-game-list-rtp {
+    margin-top: 6px;
+    padding: 4px 6px;
+    border-radius: 4px;
+    background: var(--game-rtp-badge-bg);
+    color: #ffffff;
+    font-size: 10px;
+    font-weight: 800;
+    text-align: center;
+    letter-spacing: 0.02em;
+    line-height: 1.2;
+}
+
+@media (max-width: 700px) {
+    .t3-game-list-provider {
+        display: none;
+    }
+
+    .t3-game-list-image-box {
+        border: 1px solid color-mix(in srgb, var(--gold) 50%, var(--border) 50%);
+    }
 }

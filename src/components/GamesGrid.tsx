@@ -13,6 +13,12 @@ type Tile = {
   href?: string;
 };
 
+function rtpPercentForId(id: string): string {
+  let s = 0;
+  for (let i = 0; i < id.length; i++) s = (s + id.charCodeAt(i) * (i + 3)) % 1000;
+  return (94 + (s % 70) / 10).toFixed(2);
+}
+
 const tiles: Tile[] = [
   {
     id: "pgsoft-mahjong-ways",
@@ -190,39 +196,45 @@ export function GamesGrid() {
   return (
     <section className="t3-game-list-box">
       <div className="t3-game-list-grid">
-        {tiles.map((t) => (
-          <article key={t.id} className="t3-game-list-item">
-            <a
-              href={t.href ?? "#"}
-              onClick={(event) => {
-                if (!t.href) event.preventDefault();
-              }}
-              className="block no-underline"
-            >
-              <div className="t3-game-list-image-box">
-                <div className="image">
-                  <img
-                    src={t.src}
-                    alt={t.label}
-                    className="t3-game-list-image first"
-                  />
+        {tiles.map((t) => {
+          const rtp = rtpPercentForId(t.id);
+          return (
+            <article key={t.id} className="t3-game-list-item">
+              <a
+                href={t.href ?? "#"}
+                onClick={(event) => {
+                  if (!t.href) event.preventDefault();
+                }}
+                className="block no-underline"
+              >
+                <div className="t3-game-list-image-box">
+                  <div className="image">
+                    <img
+                      src={t.src}
+                      alt={t.label}
+                      className="t3-game-list-image first"
+                    />
+                  </div>
                 </div>
-              </div>
 
-              <div className="t3-game-list-meta">
-                <p className="t3-game-list-title">{t.label}</p>
-                <div className="t3-game-list-provider">
-                  <img
-                    src={t.providerLogo}
-                    alt={t.provider}
-                    className="t3-game-list-provider-logo"
-                  />
-                  <span className="t3-game-list-provider-name">{t.provider}</span>
+                <div className="t3-game-list-meta">
+                  <p className="t3-game-list-title">{t.label}</p>
+                  <div className="t3-game-list-rtp" aria-label={`RTP ${rtp} percent`}>
+                    RTP {rtp}%
+                  </div>
+                  <div className="t3-game-list-provider">
+                    <img
+                      src={t.providerLogo}
+                      alt={t.provider}
+                      className="t3-game-list-provider-logo"
+                    />
+                    <span className="t3-game-list-provider-name">{t.provider}</span>
+                  </div>
                 </div>
-              </div>
-            </a>
-          </article>
-        ))}
+              </a>
+            </article>
+          );
+        })}
       </div>
     </section>
   );

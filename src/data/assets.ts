@@ -36,12 +36,20 @@ export const assets = {
   // Header / inline UI icons (kept as inline SVGs in public/)
   menuIcon: `${base}/icon-menu.svg`,
   chevronIcon: `${base}/icon-chevron.svg`,
+  /** Rollover / deposit CTA — target + arrow (source: 88cam target.2dbb81c6.svg) */
+  targetDeposit: `${base}/target-deposit.svg`,
   speakerIcon: `${base}/icon-speaker.svg`,
 
   // Promo banners (landing page hero row)
   bannerExclusive: `${base}/banner-exclusive.jpg`,
   banner50Welcome: `${base}/banner-50-welcome.jpg`,
   banner10Daily: `${base}/banner-10-daily.jpg`,
+
+  /** Homepage referral promo — Azure CDN WebP (mobile + desktop). */
+  referralBannerMobile:
+    "https://pksoftcdn.azureedge.net/media/leng855_referralbannermobile_1024x549-202604271612462600.webp",
+  referralBannerDesktop:
+    "https://pksoftcdn.azureedge.net/media/leng855_referralbannerdesktop_1544x451-202604271612597865.webp",
 
   // Provider game tiles (200×200 red-pedestal PNGs)
   tiles: {
@@ -104,6 +112,10 @@ export const assets = {
 
   chatAvatar: `${base}/chat-avatar.png`,
   floatingDownload: `${base}/floating-download.png`,
+
+  // Referral promos (Figma Riocity 875:20 / 875:28)
+  referralPromoCommission: `${base}/referral-promo-commission.png`,
+  referralPromoDeposit: `${base}/referral-promo-deposit.png`,
 
   // Trophy gif for "Recent Big Wins" header
   trophyGif: `${base}/trophy.gif`,

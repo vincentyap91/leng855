@@ -1,6 +1,18 @@
-import { useEffect, useState, type KeyboardEvent } from "react";
+import { useCallback, useEffect, useId, useMemo, useState, type KeyboardEvent } from "react";
+import { copyIconSrc } from "../data/copyIcon";
 
 type CashTab = "deposit" | "withdrawal";
+
+export type BankTransferRecord = {
+  id: string;
+  name: string;
+  minmax: string;
+  min: number;
+  max: number;
+  logoUrl: string;
+  accountNumber: string;
+  accountName: string;
+};
 
 function tabActivatorKeyDown(e: KeyboardEvent<HTMLDivElement>, fn: () => void) {
   if (e.key === "Enter" || e.key === " ") {
@@ -84,28 +96,79 @@ function CryptoCategoryIcon() {
   );
 }
 
-const BANKS: { name: string; minmax: string; logoUrl: string }[] = [
+function ChevronLeftSm() {
+  return (
+    <svg viewBox="0 0 24 24" width={18} height={18} aria-hidden fill="currentColor">
+      <path d="M15.41 7.41 14 6l-6 6 6 6 1.41-1.41L10.83 12z" />
+    </svg>
+  );
+}
+
+function BankReceiptUploadIcon({ className }: { className?: string }) {
+  return (
+    <svg
+      className={className}
+      viewBox="0 0 1138 1024"
+      aria-hidden
+      style={{ display: "inline-block", stroke: "currentColor", fill: "currentColor" }}
+    >
+      <path d="M1052.444 853.333v56.889c0 62.578-51.2 113.778-113.778 113.778h-796.444c-63.147 0-113.778-51.2-113.778-113.778v-796.444c0-62.578 50.631-113.778 113.778-113.778h796.444c62.578 0 113.778 51.2 113.778 113.778v56.889h-512c-63.147 0-113.778 51.2-113.778 113.778v455.111c0 62.578 50.631 113.778 113.778 113.778h512zM540.444 739.556h568.889v-455.111h-568.889v455.111zM768 597.333c-47.218 0-85.333-38.116-85.333-85.333s38.116-85.333 85.333-85.333c47.218 0 85.333 38.116 85.333 85.333s-38.116 85.333-85.333 85.333z" />
+    </svg>
+  );
+}
+
+async function copyToClipboard(text: string) {
+  try {
+    await navigator.clipboard.writeText(text);
+  } catch {
+    /* ignore */
+  }
+}
+
+const QUICK_AMOUNTS = [5, 10, 50, 100, 500, 1000] as const;
+
+const BANK_TRANSFER_OPTIONS: BankTransferRecord[] = [
   {
+    id: "aba",
     name: "ABA BANK",
     minmax: "3 - 100000",
+    min: 3,
+    max: 100_000,
     logoUrl:
       "https://pksoftcdn.azureedge.net/media/460x0w-202507091830448513-202507101300150058-202511032033402252.png",
+    accountNumber: "095 522 519",
+    accountName: "CHAN VORNG",
   },
   {
+    id: "wing",
     name: "WING BANK",
     minmax: "3 - 100000",
+    min: 3,
+    max: 100_000,
     logoUrl: "https://pksoftcdn.azureedge.net/media/cffec3f2fc237b5e9baefcff21783b7c_icon-202601051724120907.png",
+    accountNumber: "012 555 889",
+    accountName: "CHAN VORNG",
   },
   {
+    id: "acleda",
     name: "ACLEDA BANK",
     minmax: "3 - 100000",
+    min: 3,
+    max: 100_000,
     logoUrl: "https://pksoftcdn.azureedge.net/media/download-logo-blue-202601051743156840.jpg",
+    accountNumber: "010 223 441",
+    accountName: "CHAN VORNG",
   },
   {
+    id: "wing-cash",
     name: "WING CASH",
     minmax: "3 - 10000",
+    min: 3,
+    max: 10_000,
     logoUrl:
       "https://pksoftcdn.azureedge.net/media/cffec3f2fc237b5e9baefcff21783b7c_icon-202601051724120907-202604221327240888.png",
+    accountNumber: "088 901 234",
+    accountName: "CHAN VORNG",
   },
 ];
 
@@ -118,10 +181,348 @@ const CRYPTO_OPTIONS: { name: string; minmax: string; logoUrl: string }[] = [
   },
 ];
 
+function formatMoney(n: number) {
+  return n.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+}
+
+function clampAmount(raw: number, min: number, max: number) {
+  if (Number.isNaN(raw) || raw < min) return min;
+  if (raw > max) return max;
+  return raw;
+}
+
+function pseudoQrCells(seed: string): boolean[][] {
+  const n = 25;
+  let h = 2166136261;
+  for (let i = 0; i < seed.length; i++) h = Math.imul(h ^ seed.charCodeAt(i), 16777619);
+  const m: boolean[][] = [];
+  for (let y = 0; y < n; y++) {
+    const row: boolean[] = [];
+    for (let x = 0; x < n; x++) {
+      const hole = Math.abs(x - 12) < 4 && Math.abs(y - 12) < 4;
+      if (hole) {
+        row.push(false);
+        continue;
+      }
+      const corner =
+        (x < 7 && y < 7) || (x >= n - 7 && y < 7) || (x < 7 && y >= n - 7);
+      const v = corner ? (x + y + h) % 3 !== 0 : ((h + x * 31) ^ (y * 17)) % 5 < 2;
+      row.push(v);
+    }
+    m.push(row);
+  }
+  return m;
+}
+
+function BankTransferQrSvg({ seed, fileBase }: { seed: string; fileBase: string }) {
+  const cells = useMemo(() => pseudoQrCells(seed), [seed]);
+  const sz = 160;
+  const gap = 1;
+  const n = cells.length;
+  const cell = (sz - gap * (n + 1)) / n;
+
+  const downloadSvg = useCallback(() => {
+    let body = "";
+    for (let y = 0; y < n; y++) {
+      for (let x = 0; x < n; x++) {
+        if (!cells[y][x]) continue;
+        const px = gap + x * (cell + gap);
+        const py = gap + y * (cell + gap);
+        body += `<rect x="${px.toFixed(3)}" y="${py.toFixed(3)}" width="${cell.toFixed(3)}" height="${cell.toFixed(3)}" fill="#0f172a"/>`;
+      }
+    }
+    const svg = `<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="${sz}" height="${sz}" viewBox="0 0 ${sz} ${sz}">
+<rect width="${sz}" height="${sz}" fill="#ffffff"/>
+${body}
+<circle cx="${sz / 2}" cy="${sz / 2}" r="14" fill="#991B1B"/>
+<text x="${sz / 2}" y="${sz / 2 + 5}" text-anchor="middle" fill="#ffffff" font-size="16" font-family="system-ui,sans-serif" font-weight="700">$</text>
+</svg>`;
+    const blob = new Blob([svg], { type: "image/svg+xml;charset=utf-8" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = `${fileBase}-qr.svg`;
+    a.click();
+    URL.revokeObjectURL(url);
+  }, [cells, cell, fileBase, gap, n, sz]);
+
+  const rects = [];
+  for (let y = 0; y < n; y++) {
+    for (let x = 0; x < n; x++) {
+      if (!cells[y][x]) continue;
+      const px = gap + x * (cell + gap);
+      const py = gap + y * (cell + gap);
+      rects.push(<rect key={`${x}-${y}`} x={px} y={py} width={cell} height={cell} fill="#0f172a" />);
+    }
+  }
+
+  return (
+    <div className="deposit-bank-transfer__qr">
+      <div className="deposit-bank-transfer__qr-box">
+        <svg width={sz} height={sz} viewBox={`0 0 ${sz} ${sz}`} role="img" aria-label="Deposit QR code placeholder">
+          <rect width={sz} height={sz} fill="#ffffff" />
+          {rects}
+          <circle cx={sz / 2} cy={sz / 2} r={14} fill="var(--primary-dark)" />
+          <text
+            x={sz / 2}
+            y={sz / 2 + 5}
+            textAnchor="middle"
+            fill="#ffffff"
+            fontSize={16}
+            fontFamily="system-ui, sans-serif"
+            fontWeight={700}
+          >
+            $
+          </text>
+        </svg>
+      </div>
+      <button type="button" className="deposit-bank-transfer__qr-link" onClick={downloadSvg}>
+        Download QR Code
+      </button>
+    </div>
+  );
+}
+
+function BankTransferDetailsStep({
+  bank,
+  allBanks,
+  onBack,
+  onSelectBank,
+}: {
+  bank: BankTransferRecord;
+  allBanks: BankTransferRecord[];
+  onBack: () => void;
+  onSelectBank: (id: string) => void;
+}) {
+  const uploadId = useId();
+  const [amountUsd, setAmountUsd] = useState(0);
+  const [amountDraft, setAmountDraft] = useState("");
+  const [reference, setReference] = useState("");
+  const [uploadName, setUploadName] = useState<string | null>(null);
+
+  useEffect(() => {
+    setAmountUsd(0);
+    setAmountDraft("");
+    setReference("");
+    setUploadName(null);
+  }, [bank.id]);
+
+  const displayAmount = amountUsd;
+  const activeQuick = QUICK_AMOUNTS.includes(amountUsd as (typeof QUICK_AMOUNTS)[number]) ? amountUsd : null;
+
+  const setClampedAmount = (next: number) => {
+    const v = clampAmount(next, bank.min, bank.max);
+    setAmountUsd(v);
+    setAmountDraft(v > 0 ? String(v) : "");
+  };
+
+  const onCustomChange = (raw: string) => {
+    setAmountDraft(raw);
+    const n = Number.parseFloat(raw.replace(/,/g, ""));
+    if (raw.trim() === "" || Number.isNaN(n)) {
+      setAmountUsd(0);
+      return;
+    }
+    setAmountUsd(clampAmount(n, bank.min, bank.max));
+  };
+
+  const onSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+  };
+
+  return (
+    <form className="deposit-bank-transfer-details" onSubmit={onSubmit}>
+      <div className="deposit-bank-transfer__subheader">
+        <button type="button" className="deposit-bank-transfer__back" onClick={onBack}>
+          <ChevronLeftSm />
+          Back
+        </button>
+        <h2 className="deposit-bank-transfer__title">Normal Bank Transfer</h2>
+      </div>
+
+      <div className="deposit-bank-transfer__panel">
+        <div className="deposit-bank-transfer__info-row">
+          <span>Balance</span>
+          <span className="deposit-bank-transfer__info-val">0.00</span>
+        </div>
+        <div className="deposit-bank-transfer__info-row">
+          <span>Min Deposit</span>
+          <span className="deposit-bank-transfer__info-val">{bank.min}</span>
+        </div>
+        <div className="deposit-bank-transfer__notes-rule">
+          <p className="deposit-bank-transfer__notes-label">Notes:</p>
+          <p className="deposit-bank-transfer__notes-body">
+            Upload a screenshot of your payment receipt to notify us of your payment.
+          </p>
+        </div>
+      </div>
+
+      <div className="deposit-bank-transfer__panel deposit-bank-transfer__panel--brand-surface">
+        <h3 className="deposit-bank-transfer__section-title deposit-bank-transfer__section-title--brand">
+          Select Bank
+        </h3>
+        <div className="deposit-bank-transfer__bank-scroll" role="list">
+          {allBanks.map((b) => (
+            <button
+              key={b.id}
+              type="button"
+              role="listitem"
+              className={`deposit-bank-transfer__bank-card ${b.id === bank.id ? "selected" : ""}`}
+              onClick={() => onSelectBank(b.id)}
+            >
+              <span className="deposit-bank-transfer__bank-card-media">
+                <img src={b.logoUrl} alt="" loading="lazy" referrerPolicy="no-referrer" />
+              </span>
+              <span className="deposit-bank-transfer__bank-card-body">
+                <span className="nm">{b.name}</span>
+                <span className="mm">{b.minmax}</span>
+              </span>
+            </button>
+          ))}
+        </div>
+      </div>
+
+      <div className="deposit-bank-transfer__panel deposit-bank-transfer__panel--brand-surface">
+        <h3 className="deposit-bank-transfer__section-title deposit-bank-transfer__section-title--brand deposit-bank-transfer__section-title--tight">
+          Please Select or Enter Deposit Amount
+        </h3>
+        <div className="deposit-bank-transfer__amount-grid">
+          {QUICK_AMOUNTS.map((v) => (
+            <button
+              key={v}
+              type="button"
+              className={`deposit-bank-transfer__amount-chip ${activeQuick === v ? "active" : ""}`}
+              onClick={() => setClampedAmount(v)}
+            >
+              {v === 1000 ? "1k" : v}
+            </button>
+          ))}
+        </div>
+        <div className="deposit-bank-transfer__input-row">
+          <span className="deposit-bank-transfer__input-prefix">USD</span>
+          <input
+            type="text"
+            inputMode="decimal"
+            className="deposit-bank-transfer__input-field"
+            placeholder={`Enter the amount (USD ${bank.min} - USD ${bank.max.toLocaleString()})`}
+            value={amountDraft}
+            onChange={(e) => onCustomChange(e.target.value)}
+            aria-label="Deposit amount in USD"
+          />
+        </div>
+        <p className="deposit-bank-transfer__input-hint">
+          USD {bank.min} - USD {bank.max.toLocaleString()}
+        </p>
+      </div>
+
+      <div className="deposit-bank-transfer__panel deposit-bank-transfer__panel--brand-surface deposit-bank-transfer__pay-card">
+        <p className="deposit-bank-transfer__stat-label">Deposit Amount</p>
+        <div className="deposit-bank-transfer__pay-line">
+          <span className="deposit-bank-transfer__pay-usd">USD</span>
+          <span className="deposit-bank-transfer__pay-fig">{formatMoney(displayAmount)}</span>
+        </div>
+        <div className="deposit-bank-transfer__stat-rule" />
+      </div>
+
+      <div className="deposit-bank-transfer__panel">
+        <BankTransferQrSvg seed={`${bank.id}-${bank.accountNumber}`} fileBase={`deposit-${bank.id}`} />
+      </div>
+
+      <div className="deposit-bank-transfer__panel deposit-bank-transfer__panel--brand-surface deposit-bank-transfer__bank-detail-card">
+        <div className="deposit-bank-transfer__stat-section">
+          <span className="deposit-bank-transfer__stat-label">Bank Name</span>
+          <span className="deposit-bank-transfer__stat-value">{bank.name}</span>
+        </div>
+        <div className="deposit-bank-transfer__stat-divider" />
+        <div className="deposit-bank-transfer__stat-section deposit-bank-transfer__stat-section--row">
+          <div className="deposit-bank-transfer__stat-stack">
+            <span className="deposit-bank-transfer__stat-label">Account Number</span>
+            <span className="deposit-bank-transfer__stat-value">{bank.accountNumber}</span>
+          </div>
+          <button
+            type="button"
+            className="deposit-bank-transfer__copy"
+            aria-label="Copy account number"
+            onClick={() => copyToClipboard(bank.accountNumber.replace(/\s+/g, ""))}
+          >
+            <img src={copyIconSrc} alt="" className="deposit-bank-transfer__copy-img" aria-hidden />
+          </button>
+        </div>
+        <div className="deposit-bank-transfer__stat-divider" />
+        <div className="deposit-bank-transfer__stat-section deposit-bank-transfer__stat-section--row">
+          <div className="deposit-bank-transfer__stat-stack">
+            <span className="deposit-bank-transfer__stat-label">Account Name</span>
+            <span className="deposit-bank-transfer__stat-value">{bank.accountName}</span>
+          </div>
+          <button
+            type="button"
+            className="deposit-bank-transfer__copy"
+            aria-label="Copy account name"
+            onClick={() => copyToClipboard(bank.accountName)}
+          >
+            <img src={copyIconSrc} alt="" className="deposit-bank-transfer__copy-img" aria-hidden />
+          </button>
+        </div>
+      </div>
+
+      <div className="deposit-bank-transfer__panel deposit-bank-transfer__panel--brand-surface deposit-bank-transfer__ref-card">
+        <span className="deposit-bank-transfer__stat-label">Reference / Transaction ID (Optional)</span>
+        <div className="deposit-bank-transfer__ref-row">
+          <input
+            type="text"
+            className="deposit-bank-transfer__ref-input"
+            value={reference}
+            onChange={(e) => setReference(e.target.value)}
+            placeholder="Optional"
+            aria-label="Reference or transaction ID"
+          />
+          <button
+            type="button"
+            className="deposit-bank-transfer__copy"
+            aria-label="Copy reference"
+            onClick={() => reference && copyToClipboard(reference)}
+            disabled={!reference.trim()}
+          >
+            <img src={copyIconSrc} alt="" className="deposit-bank-transfer__copy-img" aria-hidden />
+          </button>
+        </div>
+      </div>
+
+      <div className="deposit-bank-transfer__upload-section">
+        <p className="deposit-bank-transfer__upload-lead">
+          Upload a screenshot or PDF of your payment receipt to notify us of your payment *
+        </p>
+        <label htmlFor={uploadId} className="deposit-bank-transfer__upload">
+          <BankReceiptUploadIcon className="deposit-bank-transfer__upload-icon vicon theme-icon-size-20" />
+          <span className="deposit-bank-transfer__upload-text">
+            {uploadName ? uploadName : "Tap to upload file"}
+          </span>
+          <input
+            id={uploadId}
+            type="file"
+            accept="image/*,.pdf,application/pdf"
+            className="sr-only"
+            onChange={(e) => {
+              const f = e.target.files?.[0];
+              setUploadName(f?.name ?? null);
+            }}
+          />
+        </label>
+      </div>
+
+      <button type="submit" className="deposit-bank-transfer__submit">
+        Submit
+      </button>
+    </form>
+  );
+}
+
 export function DepositPage() {
   const [cashTab, setCashTab] = useState<CashTab>("deposit");
   const [bankOpen, setBankOpen] = useState(true);
   const [cryptoOpen, setCryptoOpen] = useState(false);
+  const [bankTransferBankId, setBankTransferBankId] = useState<string | null>(null);
 
   useEffect(() => {
     const applyTabFromHash = () => {
@@ -137,20 +538,29 @@ export function DepositPage() {
     return () => window.removeEventListener("hashchange", applyTabFromHash);
   }, []);
 
+  const activeBank = useMemo(
+    () => BANK_TRANSFER_OPTIONS.find((b) => b.id === bankTransferBankId) ?? null,
+    [bankTransferBankId],
+  );
+
   return (
     <section className="deposit-page mx-auto w-full max-w-4xl px-4 py-4" style={{ background: "var(--bg)" }}>
-      <div
-        className="t3-two-custom-tabs deposit-page-tabs"
-        role="tablist"
-        aria-label="Deposit or withdrawal"
-      >
+      <div className="t3-two-custom-tabs deposit-page-tabs" role="tablist" aria-label="Deposit or withdrawal">
         <div
           role="tab"
           tabIndex={0}
           aria-selected={cashTab === "deposit"}
           className={cashTab === "deposit" ? "active" : ""}
-          onClick={() => setCashTab("deposit")}
-          onKeyDown={(e) => tabActivatorKeyDown(e, () => setCashTab("deposit"))}
+          onClick={() => {
+            setCashTab("deposit");
+            setBankTransferBankId(null);
+          }}
+          onKeyDown={(e) =>
+            tabActivatorKeyDown(e, () => {
+              setCashTab("deposit");
+              setBankTransferBankId(null);
+            })
+          }
         >
           Deposit
         </div>
@@ -159,30 +569,39 @@ export function DepositPage() {
           tabIndex={0}
           aria-selected={cashTab === "withdrawal"}
           className={cashTab === "withdrawal" ? "active" : ""}
-          onClick={() => setCashTab("withdrawal")}
-          onKeyDown={(e) => tabActivatorKeyDown(e, () => setCashTab("withdrawal"))}
+          onClick={() => {
+            setCashTab("withdrawal");
+            setBankTransferBankId(null);
+          }}
+          onKeyDown={(e) =>
+            tabActivatorKeyDown(e, () => {
+              setCashTab("withdrawal");
+              setBankTransferBankId(null);
+            })
+          }
         >
           Withdrawal
           <TabChevronRight className="deposit-tab-chevron shrink-0" />
         </div>
       </div>
 
-      <p className="mb-3 text-sm sm:text-[14px]" style={{ color: "var(--muted)" }}>
-        Select a reload option from the available options.
-      </p>
+      {cashTab === "deposit" && !activeBank ? (
+        <p className="mb-3 text-sm sm:text-[14px]" style={{ color: "var(--muted)" }}>
+          Select a reload option from the available options.
+        </p>
+      ) : null}
 
-      {cashTab === "deposit" ? (
+      {cashTab === "deposit" && activeBank ? (
+        <BankTransferDetailsStep
+          bank={activeBank}
+          allBanks={BANK_TRANSFER_OPTIONS}
+          onBack={() => setBankTransferBankId(null)}
+          onSelectBank={(id) => setBankTransferBankId(id)}
+        />
+      ) : cashTab === "deposit" ? (
         <div className="t3-settings-menu-list mt-2 flex flex-col gap-2">
-          <div
-            className="t3-settings-menu-list-item bank overflow-hidden rounded-xl border"
-            style={{ borderColor: "var(--border)" }}
-          >
-            <button
-              type="button"
-              className="menu-list-item-row"
-              onClick={() => setBankOpen((o) => !o)}
-              aria-expanded={bankOpen}
-            >
+          <div className="t3-settings-menu-list-item bank overflow-hidden rounded-xl border" style={{ borderColor: "var(--border)" }}>
+            <button type="button" className="menu-list-item-row" onClick={() => setBankOpen((o) => !o)} aria-expanded={bankOpen}>
               <div className="first">
                 <div className="flex shrink-0 items-center">
                   <BankCategoryIcon />
@@ -196,11 +615,12 @@ export function DepositPage() {
             </button>
             {bankOpen ? (
               <div className="bank-option-list">
-                {BANKS.map((b) => (
+                {BANK_TRANSFER_OPTIONS.map((b) => (
                   <button
-                    key={b.name}
+                    key={b.id}
                     type="button"
                     className="bank-option-box text-left"
+                    onClick={() => setBankTransferBankId(b.id)}
                   >
                     <div className="bank-option-img">
                       <img src={b.logoUrl} alt={b.name} className="img-100" loading="lazy" referrerPolicy="no-referrer" />
@@ -215,16 +635,8 @@ export function DepositPage() {
             ) : null}
           </div>
 
-          <div
-            className="t3-settings-menu-list-item bank overflow-hidden rounded-xl border"
-            style={{ borderColor: "var(--border)" }}
-          >
-            <button
-              type="button"
-              className="menu-list-item-row"
-              onClick={() => setCryptoOpen((o) => !o)}
-              aria-expanded={cryptoOpen}
-            >
+          <div className="t3-settings-menu-list-item bank overflow-hidden rounded-xl border" style={{ borderColor: "var(--border)" }}>
+            <button type="button" className="menu-list-item-row" onClick={() => setCryptoOpen((o) => !o)} aria-expanded={cryptoOpen}>
               <div className="first">
                 <div className="flex shrink-0 items-center">
                   <CryptoCategoryIcon />
@@ -239,11 +651,7 @@ export function DepositPage() {
             {cryptoOpen ? (
               <div className="bank-option-list">
                 {CRYPTO_OPTIONS.map((c) => (
-                  <button
-                    key={c.name}
-                    type="button"
-                    className="bank-option-box text-left"
-                  >
+                  <button key={c.name} type="button" className="bank-option-box text-left">
                     <div className="bank-option-img">
                       <img src={c.logoUrl} alt={c.name} className="img-100" loading="lazy" referrerPolicy="no-referrer" />
                     </div>
@@ -258,7 +666,10 @@ export function DepositPage() {
           </div>
         </div>
       ) : (
-        <div className="rounded-xl border px-6 py-12 text-center" style={{ borderColor: "var(--border)", background: "var(--surface-2)" }}>
+        <div
+          className="rounded-xl border px-6 py-12 text-center"
+          style={{ borderColor: "var(--border)", background: "var(--surface-2)" }}
+        >
           <p className="text-sm font-semibold" style={{ color: "var(--primary-dark)" }}>
             Withdrawal
           </p>

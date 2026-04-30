@@ -28,17 +28,19 @@ export function LiveTransactions() {
           boxShadow: "var(--card-shadow)",
         }}
       >
-        <table className="t3-custom-table w-full border-collapse text-[13px]">
+        <table className="t3-custom-table live-transactions-dw-table w-full border-collapse text-[13px]">
           <thead>
             <tr>
-              <th className="h-[34px] px-3 text-center font-bold">Deposit</th>
+              <th className="live-transactions-dw-table__deposit h-[34px] px-3 text-center font-bold">
+                Deposit
+              </th>
               <th className="h-[34px] px-3 text-center font-bold">Withdrawal</th>
             </tr>
           </thead>
           <tbody>
             {deposits.map((d, i) => (
               <tr key={`${d.account}-${i}`}>
-                <td className="h-[34px] px-3">
+                <td className="live-transactions-dw-table__deposit h-[34px] px-3">
                   <div className="flex items-center">
                     <span
                       className="mr-2 inline-block h-5 w-5 rounded-full"

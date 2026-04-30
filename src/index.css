@@ -54,3 +54,45 @@ body {
 .hot-providers-slider .slick-slide > div {
   height: 100%;
 }
+
+/* Home hero promos — Slick: 1 slide + dots on mobile, 3-up on lg */
+.promo-banners-slider .slick-list {
+  margin: 0 -7px;
+}
+.promo-banners-slider .slick-slide {
+  padding: 0 7px;
+}
+@media (max-width: 1023px) {
+  .promo-banners-slider .slick-list {
+    margin: 0;
+    overflow: hidden !important;
+  }
+  .promo-banners-slider .slick-slide {
+    padding: 0;
+    width: 100% !important;
+    min-width: 100% !important;
+  }
+  .promo-banners-slider .slick-slide > div {
+    height: 100%;
+  }
+  .promo-banners-slider .slick-track {
+    display: flex;
+    align-items: stretch;
+  }
+  .promo-banners-slider.slick-dotted.slick-slider {
+    margin-bottom: 0;
+    padding-bottom: 20px;
+  }
+  .promo-banners-slider .slick-dots {
+    bottom: 0;
+  }
+  .promo-banners-slider .slick-dots li button:before {
+    font-size: 8px;
+    color: var(--muted, #94a3b8);
+    opacity: 0.85;
+  }
+  .promo-banners-slider .slick-dots li.slick-active button:before {
+    color: var(--gold, #c9a227);
+    opacity: 1;
+  }
+}

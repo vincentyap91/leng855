@@ -15,6 +15,7 @@ const providerRoute: Partial<Record<(typeof providers)[number]["name"], string>>
   "PG Soft": "#/provider/pgsoft",
 };
 
+/** Mobile: 4 logos per row (reference); desktop: 4-up with arrows */
 const sliderSettings: Settings = {
   infinite: true,
   speed: 400,
@@ -26,27 +27,34 @@ const sliderSettings: Settings = {
   arrows: true,
   dots: false,
   responsive: [
-    { breakpoint: 1024, settings: { slidesToShow: 3, slidesToScroll: 1 } },
-    { breakpoint: 640, settings: { slidesToShow: 2, slidesToScroll: 1 } },
-    { breakpoint: 420, settings: { slidesToShow: 1, slidesToScroll: 1 } },
+    {
+      breakpoint: 1024,
+      settings: {
+        slidesToShow: 4,
+        slidesToScroll: 1,
+        arrows: false,
+      },
+    },
   ],
 };
 
 export function HotProviders() {
   return (
     <section className="rounded-xl bg-white p-4">
-      <h2 className="mb-4 text-[15px] font-bold uppercase tracking-wide">
-        <span style={{ color: "var(--primary)" }}>HOT</span>{" "}
-        <span style={{ color: "var(--text)" }}>PROVIDERS</span>
+      <h2
+        className="mb-3 text-[15px] font-extrabold italic uppercase tracking-wide sm:mb-4"
+        style={{ color: "var(--primary-dark)" }}
+      >
+        HOT PROVIDERS
       </h2>
 
-      <div className="hot-providers-slider -mx-1 px-1 sm:mx-0 sm:px-6">
+      <div className="hot-providers-slider -mx-0.5 px-0.5 sm:-mx-1 sm:px-1 lg:mx-0 lg:px-6">
         <Slider {...sliderSettings}>
           {providers.map((p) => (
-            <div key={p.name} className="px-2 sm:px-3">
+            <div key={p.name} className="px-1 sm:px-2 lg:px-3">
               <a
                 href={providerRoute[p.name] ?? "#"}
-                className="flex h-[72px] items-center justify-center sm:h-[80px]"
+                className="flex h-[64px] items-center justify-center sm:h-[72px] lg:h-[80px]"
                 style={{ cursor: providerRoute[p.name] ? "pointer" : "default" }}
                 onClick={(event) => {
                   if (!providerRoute[p.name]) {
@@ -57,7 +65,7 @@ export function HotProviders() {
                 <img
                   src={p.src}
                   alt={p.name}
-                  className="max-h-[70%] max-w-[min(200px,28vw)] object-contain sm:max-h-[60%] sm:max-w-[min(200px,22vw)]"
+                  className="max-h-[58%] max-w-[min(200px,22vw)] object-contain sm:max-h-[62%] sm:max-w-[min(200px,24vw)] lg:max-h-[60%] lg:max-w-[min(200px,22vw)]"
                 />
               </a>
             </div>

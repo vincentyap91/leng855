@@ -3,19 +3,19 @@ import { promotionSectionGroups } from "../data/promotions";
 
 function PromotionCard({ id, title, image }: { id: string; title: string; image: string }) {
   return (
-    <article className="promo-item relative overflow-hidden rounded-xl bg-[var(--surface)]">
-      <a href={`#/promotion/${id}`} className="promo-image block" aria-label={title}>
+    <article className="promo-item overflow-hidden rounded-xl bg-[var(--surface)]">
+      <a href={`#/promotion/${id}`} className="promo-image relative block" aria-label={title}>
         <img
           src={image}
           alt={title}
           className="img-responsive block w-full object-cover"
         />
         <span
-          className="claimable-tag absolute right-2 top-2 rounded-full px-3 py-1 text-[11px] font-bold leading-none"
+          className="claimable-tag absolute right-0 top-0 z-10 rounded-full px-4 py-2 text-sm font-extrabold leading-tight tracking-wide whitespace-nowrap md:px-5 md:py-2.5 md:text-base"
           style={{
-            background: "var(--cta-gradient)",
-            color: "var(--on-primary)",
-            boxShadow: "0 2px 8px var(--active-tint)",
+            background: "linear-gradient(180deg, var(--primary-bright) 0%, var(--primary-dark) 100%)",
+            color: "#ffffff",
+            boxShadow: "0 2px 10px color-mix(in srgb, var(--primary-dark) 45%, transparent)",
           }}
         >
           Claimable

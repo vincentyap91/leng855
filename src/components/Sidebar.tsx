@@ -257,7 +257,7 @@ function isItemActive(view: AppView, label: string): boolean {
 export function Sidebar({ view, onNavigate }: SidebarProps) {
   return (
     <aside
-      className="t3-side-menu t3-sidemenu-box fixed left-0 top-[60px] z-40 h-[calc(100vh-60px)] w-[220px] shrink-0 overflow-y-auto bg-bg-sidebar pb-4 border-r"
+      className="t3-side-menu t3-sidemenu-box fixed left-0 top-[60px] z-40 hidden h-[calc(100vh-60px)] w-[220px] shrink-0 overflow-y-auto border-r bg-bg-sidebar pb-4 lg:block"
       style={{
         borderRightColor: "var(--sidebar-container-border)",
       }}

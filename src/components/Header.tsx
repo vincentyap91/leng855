@@ -1,5 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { assets } from "../data/assets";
+import type { AppView } from "./Sidebar";
+import { MobileNavDrawer } from "./MobileNavDrawer";
 
 export type HeaderSession = {
   username: string;
@@ -14,6 +16,8 @@ type HeaderProps = {
   onRegisterClick: () => void;
   onLogout: () => void;
   onBalanceRefresh?: () => void;
+  appView: AppView;
+  onMenuNavigate: (next: AppView) => void;
 };
 
 /** Wallet dropdown chevron — matches `header.txt` / `t3-chevon-ddl` markup */
@@ -56,6 +60,14 @@ function LanguageExpandDownIcon() {
   );
 }
 
+function MobileLoginAvatarIcon() {
+  return (
+    <svg viewBox="0 0 24 24" width={22} height={22} fill="currentColor" aria-hidden>
+      <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" />
+    </svg>
+  );
+}
+
 function WalletInfoVicon() {
   return (
     <svg
@@ -87,6 +99,7 @@ function WalletRefreshVicon() {
   );
 }
 
+
 export function Header({
   session,
   balanceDisplay = "0.00",
@@ -94,8 +107,11 @@ export function Header({
   onLoginClick,
   onRegisterClick,
   onBalanceRefresh,
+  appView,
+  onMenuNavigate,
 }: HeaderProps) {
   const loggedIn = session != null;
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [langOpen, setLangOpen] = useState(false);
   const [balanceOpen, setBalanceOpen] = useState(false);
   const [rolloverOpen, setRolloverOpen] = useState(false);
@@ -131,8 +147,9 @@ export function Header({
   }, [rolloverOpen]);
 
   return (
-    <header
-      className="t3-header sticky top-0 z-50 flex h-[60px] min-w-0 shrink-0 items-center gap-3 border-b border-t px-4 sm:px-5 md:gap-4"
+    <>
+      <header
+        className="t3-header sticky top-0 z-50 flex h-[60px] min-w-0 shrink-0 items-center gap-3 border-b border-t px-3 sm:px-5 md:gap-4"
       style={{
         borderTopColor: "var(--header-bar-top-line)",
         borderBottomColor: "var(--header-bar-bottom-line)",
@@ -142,7 +159,7 @@ export function Header({
       <button
         type="button"
         aria-label="Menu"
-        className="grid h-[30px] w-[30px] shrink-0 place-items-center opacity-90 hover:opacity-100"
+        className="menu-trigger hidden h-[30px] w-[30px] shrink-0 place-items-center opacity-90 hover:opacity-100 lg:grid"
       >
         <img
           src={assets.menuIcon}
@@ -163,7 +180,7 @@ export function Header({
         <img
           src={assets.leng855Logo}
           alt="Leng855"
-          className="h-[50px] max-h-[50px] w-[min(320px,42vw)] max-w-[320px] object-contain object-left"
+          className="h-10 max-h-10 w-[min(200px,38vw)] max-w-[200px] object-contain object-left lg:h-[50px] lg:max-h-[50px] lg:w-[min(320px,42vw)] lg:max-w-[320px]"
         />
       </a>
 
@@ -266,7 +283,7 @@ export function Header({
                 color: "var(--header-auth-target-color)",
               }}
             >
-              <IconTargetEmbedded />
+              <IconTargetDeposit className="img" />
             </button>
             {rolloverOpen ? (
               <div
@@ -280,20 +297,20 @@ export function Header({
                 }}
               >
                 <div
-                  className="flex items-center justify-between rounded-lg px-3 py-2"
+                  className="header-rollover-dropdown-card flex items-stretch gap-3 rounded-lg px-3 py-2.5"
                   style={{ background: "var(--rollover-modal-popup-panel)" }}
                 >
-                  <div>
+                  <div className="min-w-0 flex-1 self-center">
                     <div className="text-sm font-bold" style={{ color: "var(--primary-dark)", lineHeight: 1.2 }}>
                       Deposit Now
                     </div>
-                    <div className="text-[12px] font-medium" style={{ color: "var(--muted)" }}>
+                    <div className="mt-0.5 text-[12px] font-medium" style={{ color: "var(--muted)" }}>
                       Deposit to View Your Rollover
                     </div>
                   </div>
-                  <span aria-hidden style={{ color: "var(--primary-dark)" }}>
-                    <IconTargetEmbedded />
-                  </span>
+                  <div className="header-rollover-dropdown-target-wrap flex shrink-0 items-center" aria-hidden>
+                    <IconTargetDeposit className="header-rollover-dropdown-target-icon" />
+                  </div>
                 </div>
                 <a
                   href="#/deposit"
@@ -319,49 +336,82 @@ export function Header({
             </div>
           </a>
 
-          <div ref={langRef} className="drop-down-language header-language-container dropdown relative">
-            <button
-              type="button"
-              className="header-lang-toggle btn btn-secondary btn-sm flex shrink-0 items-center gap-2 rounded-[8px] px-2 py-0"
-              aria-haspopup="true"
-              aria-expanded={langOpen}
-              onClick={() => setLangOpen((o) => !o)}
-              style={{
-                borderColor: "var(--header-auth-chip-border)",
-                background: "var(--header-auth-chip-bg)",
-                color: "var(--header-auth-chip-color)",
-              }}
-            >
-              <img src={assets.ukFlag} alt="" height={18} className="img-responsive language-flag h-[18px] w-[18px] shrink-0 rounded-full object-cover" />
-              <LanguageExpandDownIcon />
-            </button>
-            {langOpen ? (
-              <div
-                tabIndex={-1}
-                role="menu"
-                className="language-dropdown-menu dropdown-menu absolute top-full right-0 z-[100] mt-2 max-h-[min(260px,calc(100vh-140px))] min-w-[200px] overflow-auto rounded-xl border shadow-lg"
-                style={{ borderColor: "var(--border)", background: "var(--surface)" }}
+          <div className="hidden lg:block">
+            <div ref={langRef} className="drop-down-language header-language-container dropdown relative">
+              <button
+                type="button"
+                className="header-lang-toggle btn btn-secondary btn-sm flex shrink-0 items-center gap-2 rounded-[8px] px-2 py-0"
+                aria-haspopup="true"
+                aria-expanded={langOpen}
+                onClick={() => setLangOpen((o) => !o)}
+                style={{
+                  borderColor: "var(--header-auth-chip-border)",
+                  background: "var(--header-auth-chip-bg)",
+                  color: "var(--header-auth-chip-color)",
+                }}
               >
-                <button type="button" tabIndex={0} role="menuitem" className="dropdown-item flex w-full items-center gap-2 px-4 py-2 text-left hover:brightness-[0.98]" onClick={() => setLangOpen(false)}>
-                  <img src={assets.cambodiaFlag} alt="" height={20} className="h-5 w-5 rounded-full object-cover" /> <span className="ml-1 text-[13px] text-[var(--text)]">Khmer</span>
-                </button>
-                <button type="button" tabIndex={0} role="menuitem" className="dropdown-item flex w-full items-center gap-2 px-4 py-2 text-left hover:brightness-[0.98]" onClick={() => setLangOpen(false)}>
-                  <img src={assets.ukFlag} alt="" height={20} className="h-5 w-5 rounded-full object-cover" /> <span className="ml-1 text-[13px] text-[var(--text)]">English</span>
-                </button>
-                <button type="button" tabIndex={0} role="menuitem" className="dropdown-item flex w-full items-center gap-2 px-4 py-2 text-left hover:brightness-[0.98]" onClick={() => setLangOpen(false)}>
-                  <img src={assets.chinaFlag} alt="" height={20} className="h-5 w-5 rounded-full object-cover" />{" "}
-                  <span className="ml-1 text-[13px] text-[var(--text)]">简体中文</span>
-                </button>
-              </div>
-            ) : null}
+                <img src={assets.ukFlag} alt="" height={18} className="img-responsive language-flag h-[18px] w-[18px] shrink-0 rounded-full object-cover" />
+                <LanguageExpandDownIcon />
+              </button>
+              {langOpen ? (
+                <div
+                  tabIndex={-1}
+                  role="menu"
+                  className="language-dropdown-menu dropdown-menu absolute top-full right-0 z-[100] mt-2 max-h-[min(260px,calc(100vh-140px))] min-w-[200px] overflow-auto rounded-xl border shadow-lg"
+                  style={{ borderColor: "var(--border)", background: "var(--surface)" }}
+                >
+                  <button type="button" tabIndex={0} role="menuitem" className="dropdown-item flex w-full items-center gap-2 px-4 py-2 text-left hover:brightness-[0.98]" onClick={() => setLangOpen(false)}>
+                    <img src={assets.cambodiaFlag} alt="" height={20} className="h-5 w-5 rounded-full object-cover" /> <span className="ml-1 text-[13px] text-[var(--text)]">Khmer</span>
+                  </button>
+                  <button type="button" tabIndex={0} role="menuitem" className="dropdown-item flex w-full items-center gap-2 px-4 py-2 text-left hover:brightness-[0.98]" onClick={() => setLangOpen(false)}>
+                    <img src={assets.ukFlag} alt="" height={20} className="h-5 w-5 rounded-full object-cover" /> <span className="ml-1 text-[13px] text-[var(--text)]">English</span>
+                  </button>
+                  <button type="button" tabIndex={0} role="menuitem" className="dropdown-item flex w-full items-center gap-2 px-4 py-2 text-left hover:brightness-[0.98]" onClick={() => setLangOpen(false)}>
+                    <img src={assets.chinaFlag} alt="" height={20} className="h-5 w-5 rounded-full object-cover" />{" "}
+                    <span className="ml-1 text-[13px] text-[var(--text)]">简体中文</span>
+                  </button>
+                </div>
+              ) : null}
+            </div>
           </div>
+
+          <button
+            type="button"
+            aria-label="Open menu"
+            className="mobile-header-open-menu grid h-[30px] w-[30px] shrink-0 place-items-center opacity-90 hover:opacity-100 lg:hidden"
+            onClick={() => setMobileMenuOpen(true)}
+          >
+            <img
+              src={assets.menuIcon}
+              alt=""
+              className="h-[24px] w-[24px]"
+              style={{
+                filter:
+                  "brightness(0) saturate(100%) invert(74%) sepia(63%) saturate(438%) hue-rotate(6deg) brightness(95%) contrast(90%)",
+              }}
+            />
+          </button>
         </div>
       ) : (
-        <div className="second ml-auto flex shrink-0 items-center gap-4 sm:gap-5">
+        <div className="second ml-auto flex shrink-0 items-center gap-2 sm:gap-4">
           <button
             type="button"
             onClick={onLoginClick}
-            className="hidden text-sm font-bold hover:opacity-80 sm:inline"
+            className="grid h-10 w-10 shrink-0 place-items-center rounded-full border-2 md:hidden"
+            style={{
+              borderColor: "var(--header-auth-chip-border)",
+              color: "var(--gold)",
+              background: "color-mix(in srgb, var(--surface) 55%, transparent)",
+            }}
+            aria-label="Log in"
+          >
+            <MobileLoginAvatarIcon />
+          </button>
+
+          <button
+            type="button"
+            onClick={onLoginClick}
+            className="hidden text-sm font-bold hover:opacity-80 md:inline"
             style={{ color: "var(--nav-login-color)" }}
           >
             Log in
@@ -370,7 +420,7 @@ export function Header({
           <button
             type="button"
             onClick={onRegisterClick}
-            className="t3-header-register h-[40px] min-w-[96px] rounded-lg px-4 text-sm font-bold transition hover:brightness-110"
+            className="t3-header-register hidden h-[40px] min-w-[96px] rounded-lg px-4 text-sm font-bold transition hover:brightness-110 md:inline-flex"
             style={{
               background: "var(--nav-header-register-bg)",
               color: "var(--nav-header-register-color)",
@@ -381,39 +431,47 @@ export function Header({
 
           <button
             type="button"
-            className="flex h-[40px] items-center gap-1.5 rounded-lg px-2.5 transition hover:brightness-110"
-            style={{
-              background: "var(--header-lang-bg)",
-              border: "var(--header-lang-border)",
-              color: "var(--gold)",
-            }}
-            aria-label="Language"
+            aria-label="Open menu"
+            className="mobile-header-open-menu grid h-[30px] w-[30px] shrink-0 place-items-center opacity-90 hover:opacity-100 lg:hidden"
+            onClick={() => setMobileMenuOpen(true)}
           >
             <img
-              src={assets.ukFlag}
-              alt="EN"
-              className="h-5 w-5 rounded-full ring-1 ring-white/25"
-            />
-            <img
-              src={assets.chevronIcon}
+              src={assets.menuIcon}
               alt=""
-              className="h-3 w-3"
-              style={{ filter: "var(--header-lang-chevron-filter)" }}
+              className="h-[24px] w-[24px]"
+              style={{
+                filter:
+                  "brightness(0) saturate(100%) invert(74%) sepia(63%) saturate(438%) hue-rotate(6deg) brightness(95%) contrast(90%)",
+              }}
             />
           </button>
         </div>
       )}
     </header>
+      <MobileNavDrawer
+        isOpen={mobileMenuOpen}
+        onClose={() => setMobileMenuOpen(false)}
+        view={appView}
+        onNavigate={onMenuNavigate}
+      />
+    </>
   );
 }
 
-/** Bullseye for rollover — matches conceptual `target.svg` placeholder */
-function IconTargetEmbedded() {
+/** Target + arrow — from https://88cam.vip/static/media/target.2dbb81c6.svg (fill → currentColor) */
+function IconTargetDeposit({ className }: { className?: string }) {
   return (
-    <svg className="img" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-      <circle cx="12" cy="12" r="10" />
-      <circle cx="12" cy="12" r="6" />
-      <circle cx="12" cy="12" r="2" fill="currentColor" />
+    <svg
+      className={className}
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 30 30"
+      fill="none"
+      aria-hidden
+    >
+      <path
+        fill="currentColor"
+        d="M28.788 6.288 25.975 9.1a.94.94 0 0 1-.663.275h-3.361l-6.288 6.288a.934.934 0 0 1-1.326 0 .937.937 0 0 1 0-1.326l6.288-6.288V4.688c0-.25.099-.488.275-.663l2.812-2.813a.936.936 0 0 1 1.6.663v2.813h2.813a.938.938 0 0 1 .663 1.6m-7.61 6.509-4.19 4.19a2.8 2.8 0 0 1-1.988.826 2.813 2.813 0 0 1-1.988-4.8l4.191-4.191A6.3 6.3 0 0 0 15 8.438 6.57 6.57 0 0 0 8.438 15 6.57 6.57 0 0 0 15 21.563 6.57 6.57 0 0 0 21.563 15c0-.778-.132-1.519-.385-2.203M29.062 15c0 7.753-6.309 14.063-14.062 14.063S.938 22.753.938 15 7.247.938 15 .938c1.828 0 3.619.356 5.288 1.05l-.713.712a2.8 2.8 0 0 0-.825 1.987v2.588l-.113.112A8.45 8.45 0 0 0 15 6.563c-4.65 0-8.437 3.787-8.437 8.437S10.35 23.438 15 23.438 23.438 19.65 23.438 15c0-1.303-.3-2.531-.825-3.637l.112-.113h2.587c.75 0 1.453-.29 1.988-.825l.712-.713A13.7 13.7 0 0 1 29.062 15"
+      />
     </svg>
   );
 }

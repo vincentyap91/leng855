@@ -1,3 +1,7 @@
+import type { Settings } from "react-slick";
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 import { assets } from "../data/assets";
 
 // Left → right order matches the live leng855.live/en landing page.
@@ -7,18 +11,49 @@ const banners = [
   { alt: "10% Daily Bonus", src: assets.banner10Daily },
 ];
 
+const promoBannerSliderSettings: Settings = {
+  infinite: true,
+  speed: 450,
+  slidesToShow: 3,
+  slidesToScroll: 1,
+  autoplay: true,
+  autoplaySpeed: 5000,
+  pauseOnHover: true,
+  arrows: false,
+  dots: false,
+  responsive: [
+    {
+      breakpoint: 1024,
+      settings: {
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        centerMode: false,
+        variableWidth: false,
+        dots: true,
+        arrows: false,
+      },
+    },
+  ],
+};
+
 export function PromoBanners() {
   return (
-    <div className="grid grid-cols-3 gap-[14px]">
-      {banners.map((b) => (
-        <div key={b.alt} className="overflow-hidden rounded-lg">
-          <img
-            src={b.src}
-            alt={b.alt}
-            className="w-full aspect-[580/320] object-cover block"
-          />
-        </div>
-      ))}
+    <div className="promo-banners-wrap max-lg:mx-2 lg:mx-0">
+      <Slider className="promo-banners-slider" {...promoBannerSliderSettings}>
+        {banners.map((b) => (
+          <div key={b.alt}>
+            <div className="max-lg:mx-1 overflow-hidden rounded-2xl shadow-sm lg:mx-0 lg:rounded-lg">
+              <div className="overflow-hidden max-lg:aspect-[2/1] lg:aspect-[580/320]">
+                <img
+                  src={b.src}
+                  alt={b.alt}
+                  className="block h-full w-full object-cover object-center"
+                />
+              </div>
+            </div>
+          </div>
+        ))}
+      </Slider>
     </div>
   );
 }
