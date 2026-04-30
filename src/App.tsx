@@ -210,8 +210,8 @@ export default function App() {
                 <RecentGamePage />
               ) : view === "promotion-detail" && promoSlug ? (
                 <PromotionDetailPage slug={promoSlug} />
-              ) : providerSlug === "pgsoft" ? (
-                <ProviderDetailPage provider="pgsoft" />
+              ) : providerSlug === "pgsoft" || providerSlug === "nextspin" ? (
+                <ProviderDetailPage provider={providerSlug} />
               ) : isLobbyCategoryPageView(view) ? (
                 <AllGamesPage bannerSrc={lobbyHeroBannerForView(view)} gridFilter={lobbyFilterFromView(view)} />
               ) : (

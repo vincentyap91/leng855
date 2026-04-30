@@ -57,6 +57,7 @@ const tiles: Tile[] = [
     src: assets.tiles.nextspin,
     provider: "Nextspin",
     providerLogo: assets.brands.nextspin,
+    href: "#/provider/nextspin",
   },
   {
     id: "jili-super-ace",
@@ -198,6 +199,7 @@ const tiles: Tile[] = [
     src: assets.tiles.nextspin,
     provider: "Nextspin",
     providerLogo: assets.brands.nextspin,
+    href: "#/provider/nextspin",
   },
   {
     id: "fachai-power-lion",

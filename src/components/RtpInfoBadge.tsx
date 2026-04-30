@@ -7,17 +7,27 @@ export type RtpInfoBadgeProps = {
   gameName: string;
   /** Numeric string only, e.g. "94.99" — `%` is appended in UI */
   rtpPercent: string;
+  /** When false, hide the game title inside the badge (title is shown separately above). */
+  showGameName?: boolean;
 };
 
-export function RtpInfoBadge({ thumbUrl, gameName, rtpPercent }: RtpInfoBadgeProps) {
+export function RtpInfoBadge({ thumbUrl, gameName, rtpPercent, showGameName = true }: RtpInfoBadgeProps) {
   return (
-    <div className="t3-game-rtp-info-badge">
+    <div
+      className={[
+        "t3-game-rtp-info-badge",
+        showGameName ? "" : "t3-game-rtp-info-badge--rtp-only",
+      ]
+        .filter(Boolean)
+        .join(" ")}
+      title={gameName}
+    >
       <div className="t3-game-rtp-info-badge__thumb-wrap">
         <img src={thumbUrl} alt="" className="t3-game-rtp-info-badge__thumb" loading="lazy" decoding="async" />
         <img src={RTP_BADGE_CROWN_SRC} alt="" className="t3-game-rtp-info-badge__crown" aria-hidden />
       </div>
       <div className="t3-game-rtp-info-badge__text">
-        <span className="t3-game-rtp-info-badge__game">{gameName}</span>
+        {showGameName ? <span className="t3-game-rtp-info-badge__game">{gameName}</span> : null}
         <div className="t3-game-rtp-info-badge__rtp-row">
           <span className="t3-game-rtp-info-badge__rtp-label">RTP</span>
           <span className="t3-game-rtp-info-badge__rtp-value">{rtpPercent}%</span>
