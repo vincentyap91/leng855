@@ -15,7 +15,7 @@ type MobileAuthBarProps = {
 
 export function MobileAuthBar({ onLoginClick, onRegisterClick }: MobileAuthBarProps) {
   return (
-    <div className="home-mobile-only mt-4 flex w-full gap-3 px-0">
+    <div className="home-mobile-only mt-4 flex w-full gap-3 px-0 flex-row">
       <button
         type="button"
         className="min-h-[48px] flex-1 rounded-lg border-2 text-sm font-extrabold transition hover:brightness-[0.98]"
