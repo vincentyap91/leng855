@@ -1,6 +1,20 @@
 import { assets } from "../data/assets";
 
-export type AppView = "home" | "hot-games" | "all-games" | "promotion" | "promotion-detail" | "referral" | "deposit" | "profile" | "rebate" | "recent-game";
+export type AppView =
+  | "home"
+  | "hot-games"
+  | "all-games"
+  | "live-casino"
+  | "slots"
+  | "sports"
+  | "fish-hunt"
+  | "promotion"
+  | "promotion-detail"
+  | "referral"
+  | "deposit"
+  | "profile"
+  | "rebate"
+  | "recent-game";
 
 type Item = {
   label: string;
@@ -213,6 +227,10 @@ type SidebarProps = {
 function navTargetForLabel(label: string): AppView | null {
   if (label === "Hot Games") return "hot-games";
   if (label === "All") return "all-games";
+  if (label === "Live Casino") return "live-casino";
+  if (label === "Slots") return "slots";
+  if (label === "Sports") return "sports";
+  if (label === "Fish Hunt") return "fish-hunt";
   if (label === "Promotion") return "promotion";
   if (label === "Referral") return "referral";
   if (label === "Home") return "home";
@@ -224,6 +242,10 @@ function navTargetForLabel(label: string): AppView | null {
 function isItemActive(view: AppView, label: string): boolean {
   if (view === "hot-games" && label === "Hot Games") return true;
   if (view === "all-games" && label === "All") return true;
+  if (view === "live-casino" && label === "Live Casino") return true;
+  if (view === "slots" && label === "Slots") return true;
+  if (view === "sports" && label === "Sports") return true;
+  if (view === "fish-hunt" && label === "Fish Hunt") return true;
   if ((view === "promotion" || view === "promotion-detail") && label === "Promotion") return true;
   if (view === "referral" && label === "Referral") return true;
   if (view === "rebate" && label === "Rebate") return true;

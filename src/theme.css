@@ -451,6 +451,14 @@
     --deposit-tab-button: var(--non-active-bg);
     --deposit-tab-button-color: var(--on-primary);
 
+    /* Deposit page — accordion + bank cards: align with homepage game cards (--game-card-*) */
+    --deposit-accordion-bg: var(--surface-2);
+    --deposit-accordion-row-hover: var(--surface-3);
+    --deposit-bank-option-bg: var(--game-card-bg);
+    --deposit-bank-option-border: var(--panel-item-border);
+    --deposit-bank-option-text: var(--game-card-title);
+    --deposit-bank-option-muted: var(--game-card-provider);
+
 
     /* Deposit NumberPad*/
     --numberpad-bg: var(--surface);
@@ -2081,20 +2089,20 @@ button.side-nav-item:not(.side-nav-item--active):hover .side-nav-icon {
     display: flex;
     justify-content: center;
     align-items: stretch;
-    gap: 10px;
+    gap: 8px;
     width: 100%;
-    max-width: 380px;
+    max-width: 360px;
     margin-left: auto;
     margin-right: auto;
-    margin-bottom: 1rem;
+    margin-bottom: 0.75rem;
 }
 
 .deposit-page .deposit-cash-tab {
     flex: 1 1 0;
     min-width: 0;
-    min-height: 42px;
-    max-height: 42px;
-    padding: 0 14px;
+    min-height: 38px;
+    max-height: 38px;
+    padding: 0 12px;
     border-radius: 10px;
     font-family: var(--base-font-family), sans-serif;
     font-size: 15px;
@@ -2133,6 +2141,159 @@ button.side-nav-item:not(.side-nav-item--active):hover .side-nav-icon {
 .deposit-page .deposit-tab-chevron {
     width: 16px;
     height: 16px;
+}
+
+/* Deposit — settings menu list (bank / crypto): compact + hovers; surfaces use --deposit-* tokens */
+.deposit-page .theme-icon-size-20 {
+    width: 18px;
+    height: 18px;
+}
+
+.deposit-page .t3-settings-menu-list .t3-settings-menu-list-item.bank {
+    background: var(--deposit-accordion-bg) !important;
+    color: var(--text) !important;
+    border-color: var(--panel-item-border) !important;
+}
+
+/* Override global settings list hover (red gradient) on deposit accordions */
+.deposit-page .t3-settings-menu-list .t3-settings-menu-list-item.bank:hover {
+    background: var(--deposit-accordion-bg) !important;
+    color: var(--text) !important;
+}
+
+.deposit-page .t3-settings-menu-list .t3-settings-menu-list-item.bank:hover > .menu-list-item-row svg,
+.deposit-page .t3-settings-menu-list .t3-settings-menu-list-item.bank:hover .vicon {
+    color: var(--primary) !important;
+}
+
+.deposit-page .t3-settings-menu-list .menu-list-item-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    min-height: 40px;
+    padding: 6px 8px 6px 10px;
+    width: 100%;
+    margin: 0;
+    background: transparent;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font: inherit;
+    text-align: left;
+    color: inherit;
+    transition: background-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.deposit-page .t3-settings-menu-list .menu-list-item-row:hover {
+    background: var(--deposit-accordion-row-hover);
+}
+
+.deposit-page .t3-settings-menu-list .menu-list-item-row:focus-visible {
+    outline: 2px solid var(--gold-bright);
+    outline-offset: 1px;
+}
+
+.deposit-page .t3-settings-menu-list .menu-list-item-row .first {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex: 1;
+    min-width: 0;
+}
+
+.deposit-page .t3-settings-menu-list .menu-list-item-row .second {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+    color: var(--muted);
+}
+
+.deposit-page .t3-settings-menu-list .title {
+    font-size: 15px;
+    font-weight: 700;
+    line-height: 1.2;
+    color: var(--game-card-title);
+}
+
+.deposit-page .t3-settings-menu-list .remark {
+    display: block;
+    margin-top: 1px;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 1.3;
+    color: var(--muted);
+}
+
+.deposit-page .t3-settings-menu-list .bank-option-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    padding: 0 10px 10px 10px;
+    margin-top: 0;
+}
+
+.deposit-page .t3-settings-menu-list .bank-option-box {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex: 1 1 160px;
+    min-width: 0;
+    max-width: 100%;
+    margin: 0;
+    padding: 8px 10px;
+    background: var(--deposit-bank-option-bg) !important;
+    color: var(--text);
+    border: 1px solid var(--deposit-bank-option-border);
+    border-radius: 12px;
+    box-shadow: var(--card-shadow);
+    cursor: pointer;
+    transition: box-shadow 170ms ease, transform 170ms ease, border-color 0.15s ease;
+}
+
+.deposit-page .t3-settings-menu-list .bank-option-box:hover {
+    box-shadow: var(--card-shadow-hover);
+    transform: translateY(-1px);
+    border-color: var(--panel-item-border);
+}
+
+.deposit-page .t3-settings-menu-list .bank-option-box:active {
+    transform: translateY(0);
+    box-shadow: var(--card-shadow);
+}
+
+.deposit-page .t3-settings-menu-list .bank-option-box:focus-visible {
+    outline: 2px solid var(--gold-bright);
+    outline-offset: 2px;
+}
+
+.deposit-page .t3-settings-menu-list .bank-option-img {
+    width: 40px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.deposit-page .t3-settings-menu-list .bank-option-img .img-100 {
+    display: block;
+    width: 100%;
+    height: auto;
+    max-height: 34px;
+    object-fit: contain;
+}
+
+.deposit-page .t3-settings-menu-list .bank-option-name {
+    font-size: 13px;
+    font-weight: 700;
+    line-height: 1.25;
+    color: var(--deposit-bank-option-text);
+}
+
+.deposit-page .t3-settings-menu-list .bank-option-minmax {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--deposit-bank-option-muted);
 }
 
 .deposit-page .deposit-accordion-item {

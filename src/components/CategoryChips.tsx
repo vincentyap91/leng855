@@ -1,20 +1,38 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { assets } from "../data/assets";
 
-type Chip = { label: string; icon: string };
+type Chip = { label: string; icon: string; routeHash?: string };
 
 const chips: Chip[] = [
-  { label: "Hot Games", icon: assets.iconHotGames },
-  { label: "All", icon: assets.iconAll },
-  { label: "Live Casino", icon: assets.iconCasino },
-  { label: "Slots", icon: assets.iconSlots },
-  { label: "Sports", icon: assets.iconSport },
-  { label: "Fish Hunt", icon: assets.iconFish },
+  { label: "Hot Games", icon: assets.iconHotGames, routeHash: "#/hot-games" },
+  { label: "All", icon: assets.iconAll, routeHash: "#/games" },
+  { label: "Live Casino", icon: assets.iconCasino, routeHash: "#/live-casino" },
+  { label: "Slots", icon: assets.iconSlots, routeHash: "#/slots" },
+  { label: "Sports", icon: assets.iconSport, routeHash: "#/sports" },
+  { label: "Fish Hunt", icon: assets.iconFish, routeHash: "#/fish-hunt" },
   { label: "RNG", icon: assets.iconRng },
 ];
 
+function hashToActiveLabel(): string {
+  const raw = window.location.hash.replace(/^#\/?/, "").toLowerCase().split("?")[0] ?? "";
+  if (raw === "hot-games" || raw === "/hot-games") return "Hot Games";
+  if (raw === "games" || raw === "all-games" || raw === "/games" || raw === "/all-games") return "All";
+  if (raw === "live-casino" || raw === "/live-casino") return "Live Casino";
+  if (raw === "slots" || raw === "/slots") return "Slots";
+  if (raw === "sports" || raw === "/sports") return "Sports";
+  if (raw === "fish-hunt" || raw === "/fish-hunt") return "Fish Hunt";
+  return "Slots";
+}
+
 export function CategoryChips() {
   const [activeLabel, setActiveLabel] = useState("Slots");
+
+  useEffect(() => {
+    const sync = () => setActiveLabel(hashToActiveLabel());
+    window.addEventListener("hashchange", sync);
+    sync();
+    return () => window.removeEventListener("hashchange", sync);
+  }, []);
 
   return (
     <div
@@ -34,7 +52,13 @@ export function CategoryChips() {
             type="button"
             role="tab"
             aria-selected={isActive}
-            onClick={() => setActiveLabel(c.label)}
+            onClick={() => {
+              if (c.routeHash) {
+                window.location.hash = c.routeHash;
+              } else {
+                setActiveLabel(c.label);
+              }
+            }}
             className={[
               "t3-game-category-item flex shrink-0 items-center gap-2 rounded-full px-4 py-2 text-[12.5px] font-bold leading-none whitespace-nowrap transition-[background-color,color]",
               isActive ? "active" : "",

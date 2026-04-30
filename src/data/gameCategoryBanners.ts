@@ -1,0 +1,11 @@
+/** CDN hero banners for game category and promotion list routes. */
+const base = "https://pksoftcdn.azureedge.net/media";
+
+export const gameCategoryBanners = {
+  welcome: `${base}/welcome_gamecategorybanner-202604271609013392.webp`,
+  liveCasino: `${base}/casino_gamecategorybanner-202604271609275344.webp`,
+  slots: `${base}/slots_gamecategorybanner-202604271609360524.webp`,
+  sports: `${base}/sports_gamecategorybanner-202604271609135329.webp`,
+  fishHunt: `${base}/fishing_gamecategorybanner-202604271609448383.webp`,
+  promotion: `${base}/promotion_gamecategorybanner-202604271610051933.webp`,
+} as const;

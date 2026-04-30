@@ -1,8 +1,9 @@
+import { gameCategoryBanners } from "../data/gameCategoryBanners";
 import { GamesGrid } from "./GamesGrid";
 
 /**
- * Game-list style view: welcome banner + full games grid.
- * Reached from the left sidebar "All" item.
+ * Game-list style view: category hero banner + full games grid.
+ * Used for All, Hot Games, Live Casino, and Slots routes.
  */
 type AllGamesPageProps = {
   bannerSrc?: string;
@@ -10,8 +11,8 @@ type AllGamesPageProps = {
 };
 
 export function AllGamesPage({
-  bannerSrc = "https://pksoftcdn.azureedge.net/media/kh168_gamecategory_welcome-202507070958451856.jpg",
-  bannerAlt = "KH168 game category welcome",
+  bannerSrc = gameCategoryBanners.welcome,
+  bannerAlt = "Leng855 games",
 }: AllGamesPageProps) {
   return (
     <div className="all-games-page space-y-5">

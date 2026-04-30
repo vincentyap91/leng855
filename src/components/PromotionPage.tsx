@@ -1,4 +1,5 @@
-import { promotionSectionGroups, promoAsset } from "../data/promotions";
+import { gameCategoryBanners } from "../data/gameCategoryBanners";
+import { promotionSectionGroups } from "../data/promotions";
 
 function PromotionCard({ id, title, image }: { id: string; title: string; image: string }) {
   return (
@@ -29,7 +30,7 @@ export function PromotionPage() {
     <section className="t3-promotion-content banner-layout">
       <div className="mb-5 overflow-hidden rounded-xl">
         <img
-          src={promoAsset("promo-hero.png")}
+          src={gameCategoryBanners.promotion}
           alt="Promotion"
           className="t3-categories-img block w-full object-cover"
         />

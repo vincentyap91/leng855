@@ -20,6 +20,7 @@ import { Footer } from "./components/Footer";
 import { FloatingOverlays } from "./components/FloatingOverlays";
 import { AuthModal, type AuthMode } from "./components/AuthModal";
 import { ProviderDetailPage } from "./components/ProviderDetailPage";
+import { gameCategoryBanners } from "./data/gameCategoryBanners";
 
 type RouteState = { view: AppView; promoSlug: string | null; providerSlug: string | null };
 
@@ -31,6 +32,18 @@ function parseRoute(): RouteState {
   }
   if (h === "games" || h === "all-games" || h === "/games" || h === "/all-games") {
     return { view: "all-games", promoSlug: null, providerSlug: null };
+  }
+  if (h === "live-casino" || h === "/live-casino") {
+    return { view: "live-casino", promoSlug: null, providerSlug: null };
+  }
+  if (h === "slots" || h === "/slots") {
+    return { view: "slots", promoSlug: null, providerSlug: null };
+  }
+  if (h === "sports" || h === "/sports") {
+    return { view: "sports", promoSlug: null, providerSlug: null };
+  }
+  if (h === "fish-hunt" || h === "/fish-hunt") {
+    return { view: "fish-hunt", promoSlug: null, providerSlug: null };
   }
   if (h === "promotion" || h === "/promotion") {
     return { view: "promotion", promoSlug: null, providerSlug: null };
@@ -102,6 +115,14 @@ export default function App() {
       window.location.hash = "#/hot-games";
     } else if (next === "all-games") {
       window.location.hash = "#/games";
+    } else if (next === "live-casino") {
+      window.location.hash = "#/live-casino";
+    } else if (next === "slots") {
+      window.location.hash = "#/slots";
+    } else if (next === "sports") {
+      window.location.hash = "#/sports";
+    } else if (next === "fish-hunt") {
+      window.location.hash = "#/fish-hunt";
     } else if (next === "promotion") {
       window.location.hash = "#/promotion";
     } else if (next === "referral") {
@@ -160,12 +181,17 @@ export default function App() {
           <main className="min-w-0 flex-1" style={{ background: "transparent" }}>
             <div className="mx-auto w-full max-w-[1430px] space-y-6 px-6 py-5">
               {view === "hot-games" ? (
-                <AllGamesPage
-                  bannerSrc="https://pksoftcdn.azureedge.net/media/kh168_gamecategory_hotgames-202507070909452469.jpg"
-                  bannerAlt="Leng855 hot games"
-                />
+                <AllGamesPage bannerSrc={gameCategoryBanners.welcome} bannerAlt="Leng855 hot games" />
               ) : view === "all-games" ? (
                 <AllGamesPage />
+              ) : view === "live-casino" ? (
+                <AllGamesPage bannerSrc={gameCategoryBanners.liveCasino} bannerAlt="Leng855 live casino" />
+              ) : view === "slots" ? (
+                <AllGamesPage bannerSrc={gameCategoryBanners.slots} bannerAlt="Leng855 slots" />
+              ) : view === "sports" ? (
+                <AllGamesPage bannerSrc={gameCategoryBanners.sports} bannerAlt="Leng855 sports" />
+              ) : view === "fish-hunt" ? (
+                <AllGamesPage bannerSrc={gameCategoryBanners.fishHunt} bannerAlt="Leng855 fish hunt" />
               ) : view === "promotion" ? (
                 <PromotionPage />
               ) : view === "referral" ? (
