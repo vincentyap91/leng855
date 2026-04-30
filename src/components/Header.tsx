@@ -52,21 +52,7 @@ function ProfileExpandIcon() {
   );
 }
 
-function LanguageExpandDownIcon() {
-  return (
-    <svg focusable="false" aria-hidden color="#ffffff" viewBox="0 0 24 24" fill="white" height="20px" className="language-arrow-down shrink-0">
-      <path d="M16.59 8.59 12 13.17 7.41 8.59 6 10l6 6 6-6z" />
-    </svg>
-  );
-}
 
-function MobileLoginAvatarIcon() {
-  return (
-    <svg viewBox="0 0 24 24" width={22} height={22} fill="currentColor" aria-hidden>
-      <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" />
-    </svg>
-  );
-}
 
 function WalletInfoVicon() {
   return (
@@ -104,8 +90,6 @@ export function Header({
   session,
   balanceDisplay = "0.00",
   gameWalletDisplay = "0.00",
-  onLoginClick,
-  onRegisterClick,
   onBalanceRefresh,
   appView,
   onMenuNavigate,
@@ -184,269 +168,213 @@ export function Header({
         />
       </a>
 
-      {loggedIn ? (
-        <div className="second t3-header-logged-second ml-auto flex min-w-0 flex-1 flex-wrap items-center justify-end gap-2">
-          <div
-            className="t3-header-balance-deposit-box"
-            style={{
-              background: "var(--header-auth-panel-bg)",
-              borderColor: "var(--header-auth-panel-border)",
-            }}
-          >
-            <div className="t3-header-balance-dropdown-wrap" ref={balanceWrapRef}>
-              <div className="t3-balance-btn">
-                <button
-                  type="button"
-                  style={{ cursor: "pointer", display: "flex", alignItems: "center", position: "relative" }}
-                  aria-label="Balance wallet"
-                >
-                  <div className="header-balance-column">
-                    <span className="font-size-header-balance">Balance:</span>
-                    <b className="font-size-header-balance balance-amount" style={{ fontVariantNumeric: "tabular-nums" }}>
-                      {balanceDisplay}
-                    </b>
-                  </div>
-                </button>
-                <button
-                  type="button"
-                  className="t3-chevon-ddl header-balance-ddl-toggle"
-                  aria-label="Toggle wallet breakdown"
-                  aria-expanded={balanceOpen}
-                  aria-haspopup="dialog"
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    setBalanceOpen((o) => !o);
-                  }}
-                >
-                  <WalletDdlChevron />
-                </button>
-              </div>
+      <div className="second ml-auto flex shrink-0 items-center gap-3 sm:gap-5">
+        {loggedIn ? (
+          <>
+            <div
+              className="t3-header-balance-deposit-box"
+              style={{
+                background: "var(--header-auth-panel-bg)",
+                borderColor: "var(--header-auth-panel-border)",
+              }}
+            >
+              <div className="t3-header-balance-dropdown-wrap" ref={balanceWrapRef}>
+                <div className="t3-balance-btn">
+                  <button
+                    type="button"
+                    style={{ cursor: "pointer", display: "flex", alignItems: "center", position: "relative" }}
+                    aria-label="Balance wallet"
+                  >
+                    <div className="header-balance-column">
+                      <span className="font-size-header-balance">Balance:</span>
+                      <b className="font-size-header-balance balance-amount" style={{ fontVariantNumeric: "tabular-nums" }}>
+                        {balanceDisplay}
+                      </b>
+                    </div>
+                  </button>
+                  <button
+                    type="button"
+                    className="t3-chevon-ddl header-balance-ddl-toggle"
+                    aria-label="Toggle wallet breakdown"
+                    aria-expanded={balanceOpen}
+                    aria-haspopup="dialog"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setBalanceOpen((o) => !o);
+                    }}
+                  >
+                    <WalletDdlChevron />
+                  </button>
+                </div>
 
-              {balanceOpen ? (
-                <div
-                  className="header-balance-dropdown"
-                  role="dialog"
-                  aria-label="Wallet balances"
-                  aria-modal="false"
-                >
-                  <div className="header-balance-dropdown-panel">
-                    <div className="header-balance-dropdown-inner">
-                      <div className="header-balance-dropdown-rows">
-                        <div className="header-balance-dropdown-row">
-                          <span className="header-balance-dropdown-wallet-label">Main Wallet :</span>
-                          <span className="header-balance-dropdown-amount">{balanceDisplay}</span>
-                        </div>
-                        <div className="header-balance-dropdown-row">
-                          <WalletInfoVicon />
-                          <span className="header-balance-dropdown-wallet-label">Game Wallet :</span>
-                          <span className="header-balance-dropdown-amount" style={{ fontVariantNumeric: "tabular-nums" }}>
-                            {gameWalletDisplay}
-                          </span>
+                {balanceOpen ? (
+                  <div
+                    className="header-balance-dropdown"
+                    role="dialog"
+                    aria-label="Wallet balances"
+                    aria-modal="false"
+                  >
+                    <div className="header-balance-dropdown-panel">
+                      <div className="header-balance-dropdown-inner">
+                        <div className="header-balance-dropdown-rows">
+                          <div className="header-balance-dropdown-row">
+                            <span className="header-balance-dropdown-wallet-label">Main Wallet :</span>
+                            <span className="header-balance-dropdown-amount">{balanceDisplay}</span>
+                          </div>
+                          <div className="header-balance-dropdown-row">
+                            <WalletInfoVicon />
+                            <span className="header-balance-dropdown-wallet-label">Game Wallet :</span>
+                            <span className="header-balance-dropdown-amount" style={{ fontVariantNumeric: "tabular-nums" }}>
+                              {gameWalletDisplay}
+                            </span>
+                          </div>
                         </div>
                       </div>
+                      <button
+                        type="button"
+                        className="header-balance-dropdown-refresh"
+                        aria-label="Refresh balances"
+                        onClick={() => onBalanceRefresh?.()}
+                      >
+                        <WalletRefreshVicon />
+                      </button>
                     </div>
-                    <button
-                      type="button"
-                      className="header-balance-dropdown-refresh"
-                      aria-label="Refresh balances"
-                      onClick={() => onBalanceRefresh?.()}
-                    >
-                      <WalletRefreshVicon />
-                    </button>
                   </div>
-                </div>
-              ) : null}
-            </div>
-
-            <a
-              href="#/deposit"
-              className="t3-header-deposit inline-flex cursor-pointer items-center text-inherit no-underline"
-              style={{ background: "var(--header-auth-deposit-bg)" }}
-            >
-              <div>
-                <DepositViconSvg />
+                ) : null}
               </div>
-              <div className="text">Deposit</div>
-            </a>
-          </div>
 
-          <div ref={rolloverRef} className="relative">
-            <button
-              type="button"
-              className="t3-rollover-btn"
-              aria-label="Activity"
-              aria-haspopup="dialog"
-              aria-expanded={rolloverOpen}
-              onClick={() => setRolloverOpen((v) => !v)}
-              style={{
-                background: "var(--header-auth-target-bg)",
-                color: "var(--header-auth-target-color)",
-              }}
-            >
-              <IconTargetDeposit className="img" />
-            </button>
-            {rolloverOpen ? (
-              <div
-                role="dialog"
-                aria-label="Rollover information"
-                className="absolute right-0 top-[calc(100%+8px)] z-[120] w-[290px] rounded-xl border p-3"
-                style={{
-                  background: "var(--rollover-modal-popup-header)",
-                  borderColor: "var(--header-auth-panel-border)",
-                  boxShadow: "var(--card-shadow)",
-                }}
+              <a
+                href="#/deposit"
+                className="t3-header-deposit inline-flex cursor-pointer items-center text-inherit no-underline"
+                style={{ background: "var(--header-auth-deposit-bg)" }}
               >
-                <div
-                  className="header-rollover-dropdown-card flex items-stretch gap-3 rounded-lg px-3 py-2.5"
-                  style={{ background: "var(--rollover-modal-popup-panel)" }}
-                >
-                  <div className="min-w-0 flex-1 self-center">
-                    <div className="text-sm font-bold" style={{ color: "var(--primary-dark)", lineHeight: 1.2 }}>
-                      Deposit Now
-                    </div>
-                    <div className="mt-0.5 text-[12px] font-medium" style={{ color: "var(--muted)" }}>
-                      Deposit to View Your Rollover
-                    </div>
-                  </div>
-                  <div className="header-rollover-dropdown-target-wrap flex shrink-0 items-center" aria-hidden>
-                    <IconTargetDeposit className="header-rollover-dropdown-target-icon" />
-                  </div>
+                <div>
+                  <DepositViconSvg />
                 </div>
-                <a
-                  href="#/deposit"
-                  className="mt-3 block rounded-lg px-4 py-2 text-center text-sm font-bold no-underline"
-                  style={{ background: "var(--cta-gradient)", color: "var(--on-primary)" }}
-                  onClick={() => setRolloverOpen(false)}
-                >
-                  Deposit Now
-                </a>
-              </div>
-            ) : null}
-          </div>
-
-          <a href="#/profile" className="t3-header-profile-box no-underline">
-            <div className="second">
-              <div>{session.username}</div>
-              <div>
-                <span>Normal</span>
-              </div>
+                <div className="text">Deposit</div>
+              </a>
             </div>
-            <div className="third" style={{ color: "var(--header-auth-chip-color)" }} aria-hidden>
-              <ProfileExpandIcon />
-            </div>
-          </a>
 
-          <div className="hidden lg:block">
-            <div ref={langRef} className="drop-down-language header-language-container dropdown relative">
+            <div ref={rolloverRef} className="relative">
               <button
                 type="button"
-                className="header-lang-toggle btn btn-secondary btn-sm flex shrink-0 items-center gap-2 rounded-[8px] px-2 py-0"
-                aria-haspopup="true"
-                aria-expanded={langOpen}
-                onClick={() => setLangOpen((o) => !o)}
+                className="t3-rollover-btn"
+                aria-label="Activity"
+                aria-haspopup="dialog"
+                aria-expanded={rolloverOpen}
+                onClick={() => setRolloverOpen((v) => !v)}
                 style={{
-                  borderColor: "var(--header-auth-chip-border)",
-                  background: "var(--header-auth-chip-bg)",
-                  color: "var(--header-auth-chip-color)",
+                  background: "var(--header-auth-target-bg)",
+                  color: "var(--header-auth-target-color)",
                 }}
               >
-                <img src={assets.ukFlag} alt="" height={18} className="img-responsive language-flag h-[18px] w-[18px] shrink-0 rounded-full object-cover" />
-                <LanguageExpandDownIcon />
+                <IconTargetDeposit className="img" />
               </button>
-              {langOpen ? (
+              {rolloverOpen ? (
                 <div
-                  tabIndex={-1}
-                  role="menu"
-                  className="language-dropdown-menu dropdown-menu absolute top-full right-0 z-[100] mt-2 max-h-[min(260px,calc(100vh-140px))] min-w-[200px] overflow-auto rounded-xl border shadow-lg"
-                  style={{ borderColor: "var(--border)", background: "var(--surface)" }}
+                  role="dialog"
+                  aria-label="Rollover information"
+                  className="absolute right-0 top-[calc(100%+8px)] z-[120] w-[290px] rounded-xl border p-3"
+                  style={{
+                    background: "var(--rollover-modal-popup-header)",
+                    borderColor: "var(--header-auth-panel-border)",
+                    boxShadow: "var(--card-shadow)",
+                  }}
                 >
-                  <button type="button" tabIndex={0} role="menuitem" className="dropdown-item flex w-full items-center gap-2 px-4 py-2 text-left hover:brightness-[0.98]" onClick={() => setLangOpen(false)}>
-                    <img src={assets.cambodiaFlag} alt="" height={20} className="h-5 w-5 rounded-full object-cover" /> <span className="ml-1 text-[13px] text-[var(--text)]">Khmer</span>
-                  </button>
-                  <button type="button" tabIndex={0} role="menuitem" className="dropdown-item flex w-full items-center gap-2 px-4 py-2 text-left hover:brightness-[0.98]" onClick={() => setLangOpen(false)}>
-                    <img src={assets.ukFlag} alt="" height={20} className="h-5 w-5 rounded-full object-cover" /> <span className="ml-1 text-[13px] text-[var(--text)]">English</span>
-                  </button>
-                  <button type="button" tabIndex={0} role="menuitem" className="dropdown-item flex w-full items-center gap-2 px-4 py-2 text-left hover:brightness-[0.98]" onClick={() => setLangOpen(false)}>
-                    <img src={assets.chinaFlag} alt="" height={20} className="h-5 w-5 rounded-full object-cover" />{" "}
-                    <span className="ml-1 text-[13px] text-[var(--text)]">简体中文</span>
-                  </button>
+                  <div
+                    className="header-rollover-dropdown-card flex items-stretch gap-3 rounded-lg px-3 py-2.5"
+                    style={{ background: "var(--rollover-modal-popup-panel)" }}
+                  >
+                    <div className="min-w-0 flex-1 self-center">
+                      <div className="text-sm font-bold" style={{ color: "var(--primary-dark)", lineHeight: 1.2 }}>
+                        Deposit Now
+                      </div>
+                      <div className="mt-0.5 text-[12px] font-medium" style={{ color: "var(--muted)" }}>
+                        Deposit to View Your Rollover
+                      </div>
+                    </div>
+                    <div className="header-rollover-dropdown-target-wrap flex shrink-0 items-center" aria-hidden>
+                      <IconTargetDeposit className="header-rollover-dropdown-target-icon" />
+                    </div>
+                  </div>
+                  <a
+                    href="#/deposit"
+                    className="mt-3 block rounded-lg px-4 py-2 text-center text-sm font-bold no-underline"
+                    style={{ background: "var(--cta-gradient)", color: "var(--on-primary)" }}
+                    onClick={() => setRolloverOpen(false)}
+                  >
+                    Deposit Now
+                  </a>
                 </div>
               ) : null}
             </div>
-          </div>
 
+            <a href="#/profile" className="t3-header-profile-box no-underline">
+              <div className="second">
+                <div>{session.username}</div>
+                <div>
+                  <span>Normal</span>
+                </div>
+              </div>
+              <div className="third" style={{ color: "var(--header-auth-chip-color)" }} aria-hidden>
+                <ProfileExpandIcon />
+              </div>
+            </a>
+          </>
+        ) : null}
+
+        <div ref={langRef} className="drop-down-language header-language-container dropdown relative">
           <button
             type="button"
-            aria-label="Open menu"
-            className="mobile-header-open-menu grid h-[30px] w-[30px] shrink-0 place-items-center opacity-90 hover:opacity-100 lg:hidden"
-            onClick={() => setMobileMenuOpen(true)}
-          >
-            <img
-              src={assets.menuIcon}
-              alt=""
-              className="h-[24px] w-[24px]"
-              style={{
-                filter:
-                  "brightness(0) saturate(100%) invert(74%) sepia(63%) saturate(438%) hue-rotate(6deg) brightness(95%) contrast(90%)",
-              }}
-            />
-          </button>
-        </div>
-      ) : (
-        <div className="second ml-auto flex shrink-0 items-center gap-4 sm:gap-5">
-          <button
-            type="button"
-            onClick={onLoginClick}
-            className="grid h-10 w-10 shrink-0 place-items-center rounded-full border-2 sm:hidden"
+            className="header-lang-toggle flex h-10 w-10 shrink-0 items-center justify-center rounded-lg border-0 transition hover:brightness-110"
+            aria-haspopup="true"
+            aria-expanded={langOpen}
+            onClick={() => setLangOpen((o) => !o)}
             style={{
-              borderColor: "var(--header-auth-chip-border)",
-              color: "var(--gold)",
-              background: "color-mix(in srgb, var(--surface) 55%, transparent)",
-            }}
-            aria-label="Log in"
-          >
-            <MobileLoginAvatarIcon />
-          </button>
-
-          <button
-            type="button"
-            onClick={onLoginClick}
-            className="hidden text-sm font-bold hover:opacity-80 sm:inline"
-            style={{ color: "var(--nav-login-color)" }}
-          >
-            Log in
-          </button>
-
-          <button
-            type="button"
-            onClick={onRegisterClick}
-            className="t3-header-register h-[40px] min-w-[96px] shrink-0 rounded-lg px-4 text-sm font-bold transition hover:brightness-110"
-            style={{
-              background: "var(--nav-header-register-bg)",
-              color: "var(--nav-header-register-color)",
+              background: "#2b1b09",
             }}
           >
-            Register
+            <img src={assets.ukFlag} alt="" className="h-6 w-6 rounded-full object-cover shadow-sm" />
           </button>
-
-          <button
-            type="button"
-            aria-label="Open menu"
-            className="mobile-header-open-menu grid h-[30px] w-[30px] shrink-0 place-items-center opacity-90 hover:opacity-100 lg:hidden"
-            onClick={() => setMobileMenuOpen(true)}
-          >
-            <img
-              src={assets.menuIcon}
-              alt=""
-              className="h-[24px] w-[24px]"
-              style={{
-                filter:
-                  "brightness(0) saturate(100%) invert(74%) sepia(63%) saturate(438%) hue-rotate(6deg) brightness(95%) contrast(90%)",
-              }}
-            />
-          </button>
+          {langOpen ? (
+            <div
+              tabIndex={-1}
+              role="menu"
+              className="language-dropdown-menu dropdown-menu absolute top-full right-0 z-[100] mt-2 max-h-[min(260px,calc(100vh-140px))] min-w-[200px] overflow-auto rounded-xl border shadow-lg"
+              style={{ borderColor: "var(--border)", background: "var(--surface)" }}
+            >
+              <button type="button" tabIndex={0} role="menuitem" className="dropdown-item flex w-full items-center gap-2 px-4 py-2 text-left hover:brightness-[0.98]" onClick={() => setLangOpen(false)}>
+                <img src={assets.cambodiaFlag} alt="" height={20} className="h-5 w-5 rounded-full object-cover" /> <span className="ml-1 text-[13px] text-[var(--text)]">Khmer</span>
+              </button>
+              <button type="button" tabIndex={0} role="menuitem" className="dropdown-item flex w-full items-center gap-2 px-4 py-2 text-left hover:brightness-[0.98]" onClick={() => setLangOpen(false)}>
+                <img src={assets.ukFlag} alt="" height={20} className="h-5 w-5 rounded-full object-cover" /> <span className="ml-1 text-[13px] text-[var(--text)]">English</span>
+              </button>
+              <button type="button" tabIndex={0} role="menuitem" className="dropdown-item flex w-full items-center gap-2 px-4 py-2 text-left hover:brightness-[0.98]" onClick={() => setLangOpen(false)}>
+                <img src={assets.chinaFlag} alt="" height={20} className="h-5 w-5 rounded-full object-cover" />{" "}
+                <span className="ml-1 text-[13px] text-[var(--text)]">简体中文</span>
+              </button>
+            </div>
+          ) : null}
         </div>
-      )}
+
+        <button
+          type="button"
+          aria-label="Open menu"
+          className="mobile-header-open-menu grid h-[30px] w-[30px] shrink-0 place-items-center opacity-90 hover:opacity-100 lg:hidden"
+          onClick={() => setMobileMenuOpen(true)}
+        >
+          <img
+            src={assets.menuIcon}
+            alt=""
+            className="h-[24px] w-[24px]"
+            style={{
+              filter:
+                "brightness(0) saturate(100%) invert(74%) sepia(63%) saturate(438%) hue-rotate(6deg) brightness(95%) contrast(90%)",
+            }}
+          />
+        </button>
+      </div>
+
     </header>
       <MobileNavDrawer
         isOpen={mobileMenuOpen}
