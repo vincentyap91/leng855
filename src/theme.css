@@ -938,7 +938,7 @@ button.side-nav-item:not(.side-nav-item--active):hover .side-nav-icon {
 }
 
 .t3-custom-gray-btn {
-    width: 100%;
+    padding: 0 25px;
     min-height: 44px;
     border-radius: 10px;
     border: 1px solid var(--border);
@@ -1155,6 +1155,7 @@ button.side-nav-item:not(.side-nav-item--active):hover .side-nav-icon {
     grid-template-columns: 42% 58%;
     align-items: center;
     background: var(--modal-body);
+    position: relative;
 }
 
 .t3-auth-register-mode .t3-lr-modal-body {
@@ -1182,6 +1183,68 @@ button.side-nav-item:not(.side-nav-item--active):hover .side-nav-icon {
 .img-responsive {
     width: 100%;
     height: auto;
+    display: block;
+}
+
+/* Login modal — illustration column stacks art + optional error alert */
+.t3-lr-modal-body .left.t3-lr-modal-left-stack {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.t3-auth-login-alert-slot {
+    color: var(--text);
+    line-height: 14px;
+    margin: 0;
+    position: absolute;
+    width: 38%;
+    bottom: 28px;
+    display: flex;
+    justify-content: space-between;
+    font-size: 14px;
+}
+
+.t3-auth-login-alert-slot--open {
+    max-height: 4.5rem;
+    opacity: 1;
+    margin-top: 10px;
+}
+
+.t3-auth-login-alert {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    width: 100%;
+    box-sizing: border-box;
+    background: var(--sidebar-bg);
+    /* background: var(--surface-2, #dde4f0); */
+    font-family: var(--base-font-family);
+    font-size: 13px;
+    font-weight: 600;
+    line-height: 1.35;
+    border: 1px solid color-mix(in srgb, var(--border) 55%, transparent);
+}
+
+.t3-auth-login-alert__text {
+    flex: 1;
+    min-width: 0;
+    text-align: left;
+}
+
+.t3-auth-login-alert__icon {
+    flex-shrink: 0;
+    display: grid;
+    place-items: center;
+    color: var(--primary-dark);
+}
+
+.t3-auth-login-alert__icon-svg {
+    width: 20px;
+    height: 20px;
     display: block;
 }
 
@@ -1331,6 +1394,7 @@ select:not(.t3-custom-input-text) {
 .t3-lr-button-box {
     display: flex;
     align-items: center;
+    justify-content: center;
     gap: 10px;
     flex-wrap: wrap;
 }
@@ -1339,10 +1403,6 @@ select:not(.t3-custom-input-text) {
     justify-content: center;
 }
 
-.t3-lr-button-box > div {
-    flex: 1;
-    min-width: 140px;
-}
 
 .t3-lr-button-box .header-login-btn {
     border: 0;
@@ -1410,7 +1470,7 @@ select:not(.t3-custom-input-text) {
 }
 
 .t3-custom-light-btn {
-    width: 100%;
+    padding: 0 25px;
     min-height: 44px;
     border-radius: 10px;
     border: 0;
@@ -3593,6 +3653,52 @@ padding: 0;
 .t3-referral-promo-card--deposit .t3-referral-promo-card__eyebrow,
 .t3-referral-promo-card--deposit .t3-referral-promo-card__headline {
     text-shadow: 0 1px 3px color-mix(in srgb, #5c4200 45%, transparent);
+}
+
+/* Rebate page — logged-out login gate (white panel, gold-tint border, centered CTA) */
+.t3-rebate-login-gate {
+    border-radius: 14px;
+    border: 1px solid #e0d5c1;
+    background: #f2f2f2;
+    margin-top: 20px;
+    border-radius: 14px;
+    padding: 26px 24px 28px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 18px;
+    text-align: center;
+    box-sizing: border-box;
+}
+
+.t3-rebate-login-gate__title {
+    margin: 0;
+    max-width: 420px;
+    font-size: clamp(16px, 2.4vw, 18px);
+    font-weight: 700;
+    line-height: 1.35;
+    letter-spacing: -0.01em;
+    color: #2b2b2b;
+    font-family: var(--base-font-family, Poppins, system-ui, sans-serif);
+}
+
+.t3-rebate-login-gate__cta {
+    flex-shrink: 0;
+    min-height: 46px;
+    padding: 0 40px;
+    border-radius: 5px;
+    border: none;
+    font-size: 15px;
+    font-weight: 700;
+    font-family: var(--base-font-family, Poppins, system-ui, sans-serif);
+    cursor: pointer;
+    color: #ffffff;
+    background: linear-gradient(180deg, #e53935 0%, #b71c1c 55%, #8e0000 100%);
+}
+
+.t3-rebate-login-gate__cta:hover {
+    filter: brightness(1.05);
 }
 
 /* -------- Mobile home layout (bottom nav, RTP strip, profile-only sections) -------- */

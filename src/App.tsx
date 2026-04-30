@@ -188,7 +188,7 @@ export default function App() {
 
         <div className="ml-0 flex min-w-0 flex-1 flex-col lg:ml-[220px]">
           <main className="min-w-0 flex-1 pb-20 lg:pb-5" style={{ background: "transparent" }}>
-            <div className="mx-auto w-full max-w-[1430px] space-y-6 px-4 py-5 sm:px-6">
+            <div className="mx-auto w-full min-h-screen max-w-[1430px] space-y-6 px-4 py-5 sm:px-6">
               {view === "promotion" ? (
                 <PromotionPage />
               ) : view === "referral" ? (
@@ -203,7 +203,7 @@ export default function App() {
                   }}
                 />
               ) : view === "rebate" ? (
-                <RebatePage />
+                <RebatePage isLoggedIn={isLoggedIn} onLoginClick={() => openAuthModal("login")} />
               ) : view === "recent-game" ? (
                 <RecentGamePage />
               ) : view === "promotion-detail" && promoSlug ? (

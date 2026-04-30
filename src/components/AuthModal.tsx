@@ -4,9 +4,9 @@ import { authService } from "../data/authService";
 
 export type AuthMode = "login" | "register";
 
-const DEMO_USER = "demo";
-const DEMO_PASSWORD = "123456";
 const USER_MOBILE_KEY = "userMobile";
+
+const LOGIN_ALERT_MESSAGE = "Invalid username or password";
 
 type AuthModalProps = {
   isOpen: boolean;
@@ -108,13 +108,18 @@ export function AuthModal({
     const username = String(fd.get("username") ?? "").trim();
     const password = String(fd.get("password") ?? "");
 
-    if (username === DEMO_USER && password === DEMO_PASSWORD) {
-      onLoginSuccess?.(username);
-      onClose();
+    if (!username || !password) {
+      setLoginError(LOGIN_ALERT_MESSAGE);
       return;
     }
 
-    setLoginError("Invalid username or password. Use demo / 123456.");
+    try {
+      const result = await authService.login({ username, password });
+      onLoginSuccess?.(result.username, result.userToken);
+      onClose();
+    } catch {
+      setLoginError(LOGIN_ALERT_MESSAGE);
+    }
   };
 
   const isLogin = mode === "login";
@@ -161,7 +166,7 @@ export function AuthModal({
                 </button>
               </div>
               <div className="t3-lr-modal-body">
-                <div className="left">
+                <div className={`left${isLogin ? " t3-lr-modal-left-stack" : ""}`}>
                   <div className="image">
                     <img
                       src="https://riocity-cdn.azureedge.net/riocity/login-register-202403302309448938.png"
@@ -169,6 +174,30 @@ export function AuthModal({
                       alt="BUILD THE BEST CASINO TOGETHER"
                     />
                   </div>
+                  {isLogin ? (
+                    <div
+                      className={`t3-auth-login-alert-slot${loginError ? " t3-auth-login-alert-slot--open" : ""}`}
+                      aria-live="polite"
+                    >
+                      {loginError ? (
+                        <div className="t3-auth-login-alert rounded-lg px-4 py-2" role="alert">
+                          <span className="t3-auth-login-alert__text">{loginError}</span>
+                          <span className="t3-auth-login-alert__icon" aria-hidden>
+                            <svg className="t3-auth-login-alert__icon-svg" viewBox="0 0 24 24" fill="none" aria-hidden>
+                              <circle cx="12" cy="12" r="10" fill="currentColor" />
+                              <path
+                                d="M12 7v5M12 16h.01"
+                                stroke="#ffffff"
+                                strokeWidth="2"
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                              />
+                            </svg>
+                          </span>
+                        </div>
+                      ) : null}
+                    </div>
+                  ) : null}
                 </div>
                 <div className="right">
                   <form onSubmit={handleSubmit}>
@@ -269,11 +298,6 @@ export function AuthModal({
                           </div>
                         </div>
                       )}
-                      {isLogin && loginError ? (
-                        <p className="m-0 mt-2 text-[13px] font-semibold" style={{ color: "var(--primary)" }}>
-                          {loginError}
-                        </p>
-                      ) : null}
                       {!isLogin && (registerFieldErrors.username || registerFieldErrors.password || registerError) ? (
                         <p className="m-0 mt-2 text-[13px] font-semibold" style={{ color: "var(--primary)" }}>
                           {registerFieldErrors.username ?? registerFieldErrors.password ?? registerError}

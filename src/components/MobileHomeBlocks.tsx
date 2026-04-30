@@ -184,8 +184,8 @@ export function MobileProfileCard({
 const referralHubGoldBtn =
   "rounded-lg border-0 py-3 text-sm font-extrabold transition hover:brightness-105 min-h-[44px]";
 const referralHubGoldBtnStyle = {
-  background: "var(--gold)",
-  color: "var(--primary-dark)",
+  background: "var(--nav-header-register-bg)",
+  color: "var(--nav-header-register-color)",
 } as const;
 
 function goReferralPage() {
