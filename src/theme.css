@@ -1264,7 +1264,7 @@ button.side-nav-item:not(.side-nav-item--active):hover .side-nav-icon {
     color: var(--modal-container-title);
     font-family: var(--base-font-family);
     font-size: 12px;
-    font-weight: 600;
+    font-weight: 400;
     line-height: 1.35;
 }
 
@@ -1278,7 +1278,7 @@ button.side-nav-item:not(.side-nav-item--active):hover .side-nav-icon {
     color: var(--base-input-color);
     font-family: var(--base-font-family);
     font-size: 14px;
-    font-weight: 600;
+    font-weight: 400;
     outline: none;
     transition: box-shadow 160ms ease;
 }
@@ -1287,7 +1287,7 @@ button.side-nav-item:not(.side-nav-item--active):hover .side-nav-icon {
     color: var(--base-input-placeholder);
     font-family: var(--base-font-family);
     font-size: 14px;
-    font-weight: 600;
+    font-weight: 400;
 }
 
 .t3-custom-input-text:focus {
@@ -1304,10 +1304,10 @@ select:not(.t3-custom-input-text) {
 }
 
 .t3-input-container .text-muted {
-    color: var(--muted) !important;
+    color: #726957 !important;
     font-family: var(--base-font-family);
     font-size: 12px;
-    font-weight: 500;
+    font-weight: 400;
     line-height: 1.5;
 }
 

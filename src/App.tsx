@@ -20,8 +20,10 @@ import { FloatingOverlays } from "./components/FloatingOverlays";
 import { MobileBottomNav } from "./components/MobileBottomNav";
 import { MobileAuthBar, MobilePassiveIncomeBanner, MobileProfileCard, DesktopReferralHubBanner } from "./components/MobileHomeBlocks";
 import { AuthModal, type AuthMode } from "./components/AuthModal";
+import { AllGamesPage } from "./components/AllGamesPage";
 import { ProviderDetailPage } from "./components/ProviderDetailPage";
-import { lobbyFilterFromView } from "./data/lobbyGameFilters";
+import { lobbyHeroBannerForView } from "./data/gameCategoryBanners";
+import { isLobbyCategoryPageView, lobbyFilterFromView } from "./data/lobbyGameFilters";
 
 type RouteState = { view: AppView; promoSlug: string | null; providerSlug: string | null };
 
@@ -210,6 +212,8 @@ export default function App() {
                 <PromotionDetailPage slug={promoSlug} />
               ) : providerSlug === "pgsoft" ? (
                 <ProviderDetailPage provider="pgsoft" />
+              ) : isLobbyCategoryPageView(view) ? (
+                <AllGamesPage bannerSrc={lobbyHeroBannerForView(view)} gridFilter={lobbyFilterFromView(view)} />
               ) : (
                 <>
                   <PromoBanners />

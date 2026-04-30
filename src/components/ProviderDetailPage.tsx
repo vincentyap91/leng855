@@ -68,10 +68,6 @@ export function ProviderDetailPage({ provider }: ProviderDetailPageProps) {
               </div>
               <div className="t3-game-list-meta">
                 <p className="t3-game-list-title">{t.label}</p>
-                <div className="t3-game-list-provider">
-                  <img src={assets.brands.pgsoft} alt="PG Soft" className="t3-game-list-provider-logo" />
-                  <span className="t3-game-list-provider-name">PGSoft</span>
-                </div>
               </div>
             </article>
           ))}

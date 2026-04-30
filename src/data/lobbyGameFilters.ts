@@ -68,3 +68,18 @@ export function tileMatchesLobbyFilter(tileId: string, filter: LobbyGameFilter):
   const tags = LOBBY_TAGS_BY_TILE_ID[tileId];
   return tags != null && tags.includes(filter);
 }
+
+/** Routes that use category hero + games grid (not the full home promo stack). */
+const LOBBY_CATEGORY_PAGE_VIEWS = new Set<AppView>([
+  "hot-games",
+  "all-games",
+  "live-casino",
+  "slots",
+  "sports",
+  "fish-hunt",
+  "rng",
+]);
+
+export function isLobbyCategoryPageView(view: AppView): boolean {
+  return LOBBY_CATEGORY_PAGE_VIEWS.has(view);
+}
