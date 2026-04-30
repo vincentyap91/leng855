@@ -1,6 +1,13 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, type KeyboardEvent } from "react";
 
 type CashTab = "deposit" | "withdrawal";
+
+function tabActivatorKeyDown(e: KeyboardEvent<HTMLDivElement>, fn: () => void) {
+  if (e.key === "Enter" || e.key === " ") {
+    e.preventDefault();
+    fn();
+  }
+}
 
 function TabChevronRight({ className }: { className?: string }) {
   return (
@@ -132,22 +139,32 @@ export function DepositPage() {
 
   return (
     <section className="deposit-page mx-auto w-full max-w-4xl px-4 py-4" style={{ background: "var(--bg)" }}>
-      <div className="deposit-page-tabs">
-        <button
-          type="button"
+      <div
+        className="t3-two-custom-tabs deposit-page-tabs"
+        role="tablist"
+        aria-label="Deposit or withdrawal"
+      >
+        <div
+          role="tab"
+          tabIndex={0}
+          aria-selected={cashTab === "deposit"}
+          className={cashTab === "deposit" ? "active" : ""}
           onClick={() => setCashTab("deposit")}
-          className={["deposit-cash-tab", cashTab === "deposit" ? "deposit-cash-tab--active" : "deposit-cash-tab--inactive"].join(" ")}
+          onKeyDown={(e) => tabActivatorKeyDown(e, () => setCashTab("deposit"))}
         >
           Deposit
-        </button>
-        <button
-          type="button"
+        </div>
+        <div
+          role="tab"
+          tabIndex={0}
+          aria-selected={cashTab === "withdrawal"}
+          className={cashTab === "withdrawal" ? "active" : ""}
           onClick={() => setCashTab("withdrawal")}
-          className={["deposit-cash-tab", cashTab === "withdrawal" ? "deposit-cash-tab--active" : "deposit-cash-tab--inactive"].join(" ")}
+          onKeyDown={(e) => tabActivatorKeyDown(e, () => setCashTab("withdrawal"))}
         >
           Withdrawal
           <TabChevronRight className="deposit-tab-chevron shrink-0" />
-        </button>
+        </div>
       </div>
 
       <p className="mb-3 text-sm sm:text-[14px]" style={{ color: "var(--muted)" }}>

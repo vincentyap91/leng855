@@ -1278,10 +1278,6 @@ button.side-nav-item:not(.side-nav-item--active):hover .side-nav-icon {
 
 }
 
-.t3-two-custom-tabs > .active {
-    color: var(--primary-dark) !important;
-}
-
 .yellow-note-title {
     color: var(--gold) !important;
 }
@@ -2084,69 +2080,74 @@ button.side-nav-item:not(.side-nav-item--active):hover .side-nav-icon {
     }
 }
 
-/* Deposit / reload page — compact tabs; surfaces match homepage game cards (`--surface`, `--game-card-bg`) */
-.deposit-page .deposit-page-tabs {
+/* Deposit / reload — two tabs use .t3-two-custom-tabs (see DepositPage) */
+.deposit-page .t3-two-custom-tabs.deposit-page-tabs {
     display: flex;
+    flex-wrap: wrap;
     justify-content: center;
-    align-items: stretch;
-    gap: 8px;
+    align-items: center;
+    column-gap: 10px;
+    row-gap: 10px;
     width: 100%;
-    max-width: 360px;
     margin-left: auto;
     margin-right: auto;
-    margin-bottom: 0.75rem;
+    margin-bottom: 1rem;
 }
 
-.deposit-page .deposit-cash-tab {
-    flex: 1 1 0;
-    min-width: 0;
-    min-height: 38px;
-    max-height: 38px;
-    padding: 0 12px;
-    border-radius: 10px;
-    font-family: var(--base-font-family), sans-serif;
-    font-size: 15px;
-    font-weight: 600;
-    line-height: 1.15;
-    cursor: pointer;
-    display: inline-flex;
+.t3-two-custom-tabs > div {
+    width: 210px;
+    display: flex;
     align-items: center;
     justify-content: center;
-    gap: 6px;
+    border-radius: 0.45rem;
+    cursor: pointer;
+    height: 50px;
+    font-weight: 700;
+    column-gap: 10px;
+    font-size: 16px;
+    line-height: 1;
+    font-family: var(--base-font-family), sans-serif;
+    box-sizing: border-box;
     transition: filter 150ms ease, box-shadow 150ms ease;
 }
 
-.deposit-page .deposit-cash-tab--active {
-    background: var(--cta-gradient) !important;
-    color: var(--on-primary) !important;
-    border: none !important;
-    box-shadow: var(--card-shadow);
-}
-
-.deposit-page .deposit-cash-tab--active:hover {
-    filter: brightness(1.05);
-}
-
-.deposit-page .deposit-cash-tab--inactive {
+.t3-two-custom-tabs > div:not(.active) {
     background: var(--non-active-bg) !important;
     color: var(--on-primary) !important;
     border: 1px solid var(--border) !important;
     box-shadow: 0 1px 2px var(--shadow-soft);
 }
 
-.deposit-page .deposit-cash-tab--inactive:hover {
+.t3-two-custom-tabs > div:not(.active):hover {
     filter: brightness(1.02);
+}
+
+.t3-two-custom-tabs > div.active {
+    background: var(--cta-gradient) !important;
+    color: var(--on-primary) !important;
+    border: none !important;
+    box-shadow: var(--card-shadow);
+}
+
+.t3-two-custom-tabs > div.active:hover {
+    filter: brightness(1.05);
+}
+
+.t3-two-custom-tabs > div:focus-visible {
+    outline: 2px solid var(--gold-bright);
+    outline-offset: 2px;
 }
 
 .deposit-page .deposit-tab-chevron {
     width: 16px;
     height: 16px;
+    flex-shrink: 0;
 }
 
 /* Deposit — settings menu list (bank / crypto): compact + hovers; surfaces use --deposit-* tokens */
 .deposit-page .theme-icon-size-20 {
-    width: 18px;
-    height: 18px;
+    width: 25px;
+    height: 25px;
 }
 
 .deposit-page .t3-settings-menu-list .t3-settings-menu-list-item.bank {
@@ -2172,7 +2173,7 @@ button.side-nav-item:not(.side-nav-item--active):hover .side-nav-icon {
     justify-content: space-between;
     gap: 8px;
     min-height: 40px;
-    padding: 6px 8px 6px 10px;
+    padding: 10px 10px;
     width: 100%;
     margin: 0;
     background: transparent;
@@ -2185,9 +2186,6 @@ button.side-nav-item:not(.side-nav-item--active):hover .side-nav-icon {
     transition: background-color 0.15s ease, box-shadow 0.15s ease;
 }
 
-.deposit-page .t3-settings-menu-list .menu-list-item-row:hover {
-    background: var(--deposit-accordion-row-hover);
-}
 
 .deposit-page .t3-settings-menu-list .menu-list-item-row:focus-visible {
     outline: 2px solid var(--gold-bright);
@@ -2197,9 +2195,10 @@ button.side-nav-item:not(.side-nav-item--active):hover .side-nav-icon {
 .deposit-page .t3-settings-menu-list .menu-list-item-row .first {
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 14px;
     flex: 1;
     min-width: 0;
+    min-height: 41px;
 }
 
 .deposit-page .t3-settings-menu-list .menu-list-item-row .second {
@@ -2326,10 +2325,6 @@ button.side-nav-item:not(.side-nav-item--active):hover .side-nav-icon {
 
 .deposit-page .deposit-bank-card img {
     box-shadow: none;
-}
-
-.t3-two-custom-tabs > div {
-    background: var(--non-active-bg) !important;
 }
 
 .t3-reload-bank-list-box .border-top {
