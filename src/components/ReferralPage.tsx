@@ -176,7 +176,7 @@ function GameCommissionAccordionTable({
   const thTdBase = "px-[20px] py-[14px] align-middle";
 
   return (
-    <div className="overflow-x-auto" style={{ background: "var(--bg)" }}>
+    <div className="overflow-x-auto" style={{ background: "#f2f2f2" }}>
       <table className="w-full min-w-[440px] border-collapse text-[13px]">
         <thead>
           <tr style={{ borderBottom: "1px solid var(--border)" }}>
@@ -277,7 +277,7 @@ export function ReferralPage({ isLoggedIn = false, onLoginClick }: ReferralPageP
           <div
             key={label}
             className="relative rounded-xl border p-[20px] text-center"
-            style={{ borderColor: "var(--panel-item-border)", background: "var(--surface)" }}
+            style={{ borderColor: "var(--panel-item-border)", background: "#f2f2f2" }}
           >
             <div
               className="absolute left-0 top-0 w-fit px-5 py-1 text-[14px] font-extrabold"

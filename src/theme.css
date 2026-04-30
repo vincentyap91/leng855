@@ -1297,7 +1297,7 @@ button.side-nav-item:not(.side-nav-item--active):hover .side-nav-icon {
     display: grid;
     grid-template-columns: 42% 58%;
     align-items: center;
-    background: var(--modal-body);
+    background: #f7f7f7;
     position: relative;
 }
 
@@ -1306,7 +1306,6 @@ button.side-nav-item:not(.side-nav-item--active):hover .side-nav-icon {
 }
 
 .t3-lr-modal-body .left {
-    background: var(--surface-gradient);
     padding: 24px 22px;
     display: grid;
     place-items: center;
@@ -1568,7 +1567,6 @@ select:not(.t3-custom-input-text) {
     padding: 12px 10px;
     border-top: 1px solid var(--modal-footer-border);
     border-radius: 12px;
-    background: var(--modal-footer);
 }
 
 .t3-lr-modal-footer .t3-lr-button-box {
