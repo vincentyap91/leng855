@@ -27,6 +27,14 @@ function rtpPercentForId(id: string): string {
 
 const tiles: Tile[] = [
   {
+    id: "nextspin-dragon-burst",
+    label: "Dragon Burst",
+    src: assets.tiles.nextspin,
+    provider: "Nextspin",
+    providerLogo: assets.brands.nextspin,
+    href: "#/provider/nextspin",
+  },
+  {
     id: "live22-metaspace",
     label: "Live22 Showcase",
     src: assets.tiles.nextspin,
@@ -50,14 +58,6 @@ const tiles: Tile[] = [
     src: assets.tiles.pragmatic,
     provider: "Pragmatic Play",
     providerLogo: assets.brands.pragmatic,
-  },
-  {
-    id: "nextspin-dragon-burst",
-    label: "Dragon Burst",
-    src: assets.tiles.nextspin,
-    provider: "Nextspin",
-    providerLogo: assets.brands.nextspin,
-    href: "#/provider/nextspin",
   },
   {
     id: "jili-super-ace",

@@ -7,6 +7,7 @@ import { ReferralPage } from "./components/ReferralPage";
 import { DepositPage } from "./components/DepositPage";
 import { ProfilePage } from "./components/ProfilePage";
 import { RebatePage } from "./components/RebatePage";
+import { MembershipPage } from "./components/MembershipPage";
 import { RecentGamePage } from "./components/RecentGamePage";
 import { AnnouncementBar } from "./components/AnnouncementBar";
 import { PromoBanners } from "./components/PromoBanners";
@@ -22,66 +23,73 @@ import { MobileAuthBar, MobilePassiveIncomeBanner, MobileProfileCard, DesktopRef
 import { AuthModal, type AuthMode } from "./components/AuthModal";
 import { AllGamesPage } from "./components/AllGamesPage";
 import { ProviderDetailPage } from "./components/ProviderDetailPage";
+import { GamePlayPage } from "./components/GamePlayPage";
+import { assets } from "./data/assets";
 import { lobbyHeroBannerForView } from "./data/gameCategoryBanners";
 import { isLobbyCategoryPageView, lobbyFilterFromView } from "./data/lobbyGameFilters";
 
-type RouteState = { view: AppView; promoSlug: string | null; providerSlug: string | null };
+type RouteState = { view: AppView; promoSlug: string | null; providerSlug: string | null; gameSlug: string | null };
 
 function parseRoute(): RouteState {
   const raw = window.location.hash.replace(/^#\/?/, "").toLowerCase();
   const h = raw.split("?")[0] ?? "";
   if (h === "hot-games" || h === "/hot-games") {
-    return { view: "hot-games", promoSlug: null, providerSlug: null };
+    return { view: "hot-games", promoSlug: null, providerSlug: null, gameSlug: null };
   }
   if (h === "games" || h === "all-games" || h === "/games" || h === "/all-games") {
-    return { view: "all-games", promoSlug: null, providerSlug: null };
+    return { view: "all-games", promoSlug: null, providerSlug: null, gameSlug: null };
   }
   if (h === "live-casino" || h === "/live-casino") {
-    return { view: "live-casino", promoSlug: null, providerSlug: null };
+    return { view: "live-casino", promoSlug: null, providerSlug: null, gameSlug: null };
   }
   if (h === "slots" || h === "/slots") {
-    return { view: "slots", promoSlug: null, providerSlug: null };
+    return { view: "slots", promoSlug: null, providerSlug: null, gameSlug: null };
   }
   if (h === "sports" || h === "/sports") {
-    return { view: "sports", promoSlug: null, providerSlug: null };
+    return { view: "sports", promoSlug: null, providerSlug: null, gameSlug: null };
   }
   if (h === "fish-hunt" || h === "/fish-hunt") {
-    return { view: "fish-hunt", promoSlug: null, providerSlug: null };
+    return { view: "fish-hunt", promoSlug: null, providerSlug: null, gameSlug: null };
   }
   if (h === "rng" || h === "/rng") {
-    return { view: "rng", promoSlug: null, providerSlug: null };
+    return { view: "rng", promoSlug: null, providerSlug: null, gameSlug: null };
   }
   if (h === "promotion" || h === "/promotion") {
-    return { view: "promotion", promoSlug: null, providerSlug: null };
+    return { view: "promotion", promoSlug: null, providerSlug: null, gameSlug: null };
   }
   if (h === "referral" || h === "/referral") {
-    return { view: "referral", promoSlug: null, providerSlug: null };
+    return { view: "referral", promoSlug: null, providerSlug: null, gameSlug: null };
   }
   if (h === "deposit" || h === "/deposit") {
-    return { view: "deposit", promoSlug: null, providerSlug: null };
+    return { view: "deposit", promoSlug: null, providerSlug: null, gameSlug: null };
   }
   if (h === "profile" || h === "/profile") {
-    return { view: "profile", promoSlug: null, providerSlug: null };
+    return { view: "profile", promoSlug: null, providerSlug: null, gameSlug: null };
   }
   if (h === "rebate" || h === "/rebate") {
-    return { view: "rebate", promoSlug: null, providerSlug: null };
+    return { view: "rebate", promoSlug: null, providerSlug: null, gameSlug: null };
+  }
+  if (h === "membership" || h === "/membership") {
+    return { view: "membership", promoSlug: null, providerSlug: null, gameSlug: null };
   }
   if (h === "recent-game" || h === "/recent-game") {
-    return { view: "recent-game", promoSlug: null, providerSlug: null };
+    return { view: "recent-game", promoSlug: null, providerSlug: null, gameSlug: null };
   }
   if (h.startsWith("provider/")) {
-    const slug = h.slice("provider/".length).replace(/\/$/, "");
+    const parts = h.slice("provider/".length).replace(/\/$/, "").split("/");
+    const slug = parts[0] ?? "";
+    const gameSlug = parts[1] ?? null;
     if (slug) {
-      return { view: "home", promoSlug: null, providerSlug: decodeURIComponent(slug) };
+      return { view: "home", promoSlug: null, providerSlug: decodeURIComponent(slug), gameSlug: gameSlug ? decodeURIComponent(gameSlug) : null };
     }
   }
   if (h.startsWith("promotion/")) {
     const slug = h.slice("promotion/".length).replace(/\/$/, "");
     if (slug) {
-      return { view: "promotion-detail", promoSlug: decodeURIComponent(slug), providerSlug: null };
+      return { view: "promotion-detail", promoSlug: decodeURIComponent(slug), providerSlug: null, gameSlug: null };
     }
   }
-  return { view: "home", promoSlug: null, providerSlug: null };
+  return { view: "home", promoSlug: null, providerSlug: null, gameSlug: null };
 }
 
 const USER_TOKEN_KEY = "userToken";
@@ -102,7 +110,7 @@ function loadSession(): HeaderSession | null {
 
 export default function App() {
   const [route, setRoute] = useState<RouteState>(() => parseRoute());
-  const { view, promoSlug, providerSlug } = route;
+  const { view, promoSlug, providerSlug, gameSlug } = route;
   const [session, setSession] = useState<HeaderSession | null>(() => loadSession());
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(() => loadSession() !== null);
   const [authMode, setAuthMode] = useState<AuthMode>("login");
@@ -116,7 +124,7 @@ export default function App() {
   }, []);
 
   const goView = useCallback((next: AppView) => {
-    setRoute({ view: next, promoSlug: null, providerSlug: null });
+    setRoute({ view: next, promoSlug: null, providerSlug: null, gameSlug: null });
     if (next === "hot-games") {
       window.location.hash = "#/hot-games";
     } else if (next === "all-games") {
@@ -141,6 +149,8 @@ export default function App() {
       window.location.hash = "#/profile";
     } else if (next === "rebate") {
       window.location.hash = "#/rebate";
+    } else if (next === "membership") {
+      window.location.hash = "#/membership";
     } else if (next === "recent-game") {
       window.location.hash = "#/recent-game";
     } else {
@@ -206,12 +216,47 @@ export default function App() {
                 />
               ) : view === "rebate" ? (
                 <RebatePage isLoggedIn={isLoggedIn} onLoginClick={() => openAuthModal("login")} />
+              ) : view === "membership" ? (
+                <MembershipPage />
               ) : view === "recent-game" ? (
                 <RecentGamePage />
               ) : view === "promotion-detail" && promoSlug ? (
                 <PromotionDetailPage slug={promoSlug} />
               ) : providerSlug === "pgsoft" || providerSlug === "nextspin" ? (
-                <ProviderDetailPage provider={providerSlug} />
+                gameSlug ? (() => {
+                  const GAME_LABELS: Record<string, string> = {
+                    "ns-5-fortune-stars": "5 Fortune Stars",
+                    "ns-7-dragons": "7 Dragons",
+                    "ns-golden-phoenix": "Golden Phoenix",
+                    "ns-emerald-treasure": "Emerald Treasure",
+                    "ns-royal-tiger": "Royal Tiger",
+                    "ns-lucky-jade": "Lucky Jade",
+                    "ns-mega-wheel": "Mega Wheel",
+                    "ns-dragon-burst": "Dragon Burst",
+                    "ns-moon-festival": "Moon Festival",
+                    "ns-wealth-god": "Wealth God",
+                    "ns-candy-blast": "Candy Blast",
+                    "ns-phoenix-flame": "Phoenix Flame",
+                    "pg-1": "Mahjong Ways", "pg-2": "Fortune Tiger", "pg-3": "Lucky Neko",
+                  };
+                  const gameLabel = GAME_LABELS[gameSlug] ?? gameSlug.replace(/-/g, " ").replace(/\b(ns|pg)\b\s*/gi, "").trim().replace(/\b\w/g, c => c.toUpperCase());
+                  const iframeUrl = gameSlug === "ns-5-fortune-stars" 
+                    ? "https://lobby.2umdjcuk.com/ZBH4082/auth/?acctId=NSS01967759&language=en_US&token=94c1dbba-fb0c-407b-9860-7f9c5664cd55&game=s5ForStar"
+                    : undefined;
+                    
+                  return (
+                    <GamePlayPage
+                      gameId={gameSlug}
+                      gameLabel={gameLabel}
+                      provider={providerSlug === "nextspin" ? "Nextspin" : "PG Soft"}
+                      providerSlug={providerSlug}
+                      gameSrc={providerSlug === "nextspin" ? assets.tiles.nextspin : assets.tiles.pgsoft}
+                      iframeUrl={iframeUrl}
+                    />
+                  );
+                })() : (
+                  <ProviderDetailPage provider={providerSlug} />
+                )
               ) : isLobbyCategoryPageView(view) ? (
                 <AllGamesPage bannerSrc={lobbyHeroBannerForView(view)} gridFilter={lobbyFilterFromView(view)} />
               ) : (

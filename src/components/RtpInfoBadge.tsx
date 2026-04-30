@@ -12,14 +12,28 @@ export type RtpInfoBadgeProps = {
 };
 
 export function RtpInfoBadge({ thumbUrl, gameName, rtpPercent, showGameName = true }: RtpInfoBadgeProps) {
+  if (!showGameName) {
+    const isUp = parseFloat(rtpPercent) >= 92.2;
+    return (
+      <div
+        className="mx-auto mt-1 flex w-fit items-center justify-center gap-1.5 rounded-[4px] px-2 py-[2px]"
+        style={{ background: "var(--primary)" }}
+        title={gameName}
+      >
+        <span className="text-[10px] font-extrabold text-white">RTP</span>
+        <span className="text-[11px] font-bold text-white">{rtpPercent}%</span>
+        <img
+          src={isUp ? "/assets/up.png" : "/assets/down.png"}
+          alt=""
+          className="h-[10px] w-[10px] object-contain"
+        />
+      </div>
+    );
+  }
+
   return (
     <div
-      className={[
-        "t3-game-rtp-info-badge",
-        showGameName ? "" : "t3-game-rtp-info-badge--rtp-only",
-      ]
-        .filter(Boolean)
-        .join(" ")}
+      className="t3-game-rtp-info-badge"
       title={gameName}
     >
       <div className="t3-game-rtp-info-badge__thumb-wrap">
@@ -27,7 +41,7 @@ export function RtpInfoBadge({ thumbUrl, gameName, rtpPercent, showGameName = tr
         <img src={RTP_BADGE_CROWN_SRC} alt="" className="t3-game-rtp-info-badge__crown" aria-hidden />
       </div>
       <div className="t3-game-rtp-info-badge__text">
-        {showGameName ? <span className="t3-game-rtp-info-badge__game">{gameName}</span> : null}
+        <span className="t3-game-rtp-info-badge__game">{gameName}</span>
         <div className="t3-game-rtp-info-badge__rtp-row">
           <span className="t3-game-rtp-info-badge__rtp-label">RTP</span>
           <span className="t3-game-rtp-info-badge__rtp-value">{rtpPercent}%</span>

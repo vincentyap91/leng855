@@ -210,4 +210,3 @@ export function ProfilePage({ onLogout }: ProfilePageProps) {
     </section>
   );
 }
-

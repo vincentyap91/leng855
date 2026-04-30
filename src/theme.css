@@ -7,19 +7,31 @@
        BRAND PALETTE — single source of truth
        Edit these 7 tokens to retheme the entire app.
        ============================================================ */
-    --primary: #B91C1C;        /* primary red */
-    --primary-dark: #991B1B;   /* deep red */
-    --primary-bright: #D81E2F; /* crimson highlight */
-    --crimson-deep: #8A0F1E;   /* header / vibrant anchor (not muddy black-red) */
-    --gold: #D4AF37;           /* premium gold */
-    --gold-bright: #E9C96A;    /* soft gold gleam */
-    --bg: #FFFFFF;             /* pure white page base (CAM88 clean feel) */
-    --surface: #FFFFFF;        /* cards / sections */
-    --text: #3A1515;           /* high-contrast dark red-brown */
-    --muted: #8A6B2A;          /* secondary text (muted gold-brown) */
+    --primary: #B91C1C;
+    /* primary red */
+    --primary-dark: #991B1B;
+    /* deep red */
+    --primary-bright: #D81E2F;
+    /* crimson highlight */
+    --crimson-deep: #8A0F1E;
+    /* header / vibrant anchor (not muddy black-red) */
+    --gold: #D4AF37;
+    /* premium gold */
+    --gold-bright: #E9C96A;
+    /* soft gold gleam */
+    --bg: #FFFFFF;
+    /* pure white page base (CAM88 clean feel) */
+    --surface: #FFFFFF;
+    /* cards / sections */
+    --text: #3A1515;
+    /* high-contrast dark red-brown */
+    --muted: #8A6B2A;
+    /* secondary text (muted gold-brown) */
     /* Foreground colors when painted over brand fills */
-    --on-primary: #FFFFFF;     /* text on red/CTA */
-    --on-gold: #2A1A00;        /* text on gold */
+    --on-primary: #FFFFFF;
+    /* text on red/CTA */
+    --on-gold: #2A1A00;
+    /* text on gold */
     /* Full-bleed footer bar (reference #7F1D1D; distinct from --primary-deep for gradients) */
     --footer-strip-bg: #7F1D1D;
     --sidebar-fixed-width: 220px;
@@ -31,8 +43,10 @@
 
 
     /* ---- Derived neutrals (never hardcode colors elsewhere) ---- */
-    --surface-2: #FFFFFF;      /* header / sidebar panel */
-    --surface-3: #F5F5F5;      /* muted panel / chip */
+    --surface-2: #FFFFFF;
+    /* header / sidebar panel */
+    --surface-3: #F5F5F5;
+    /* muted panel / chip */
     --border: rgba(0, 0, 0, 0.06);
     --border-strong: rgba(0, 0, 0, 0.12);
     --shadow-soft: rgba(0, 0, 0, 0.06);
@@ -68,21 +82,17 @@
 
     /* ---- Reusable gradients ----
        5-stop metallic shine: dark → body → bright peak → body → dark */
-    --cta-gradient: linear-gradient(
-        180deg,
-        var(--primary-dark) 0%,
-        var(--primary) 38%,
-        var(--primary-bright) 100%
-    );
+    --cta-gradient: linear-gradient(180deg,
+            var(--primary-dark) 0%,
+            var(--primary) 38%,
+            var(--primary-bright) 100%);
     /* Header — deep crimson anchor (no near-black) → bright red, light R/W/G theme */
-    --header-gradient: linear-gradient(
-        90deg,
-        var(--crimson-deep) 0%,
-        #7A1120 24%,
-        var(--primary-dark) 48%,
-        var(--primary) 78%,
-        var(--primary-bright) 100%
-    );
+    --header-gradient: linear-gradient(90deg,
+            var(--crimson-deep) 0%,
+            #7A1120 24%,
+            var(--primary-dark) 48%,
+            var(--primary) 78%,
+            var(--primary-bright) 100%);
     --header-bar-gradient: var(--header-gradient);
     --header-bar-top-line: color-mix(in srgb, var(--gold) 38%, transparent);
     --header-bar-bottom-line: color-mix(in srgb, var(--gold-bright) 28%, transparent);
@@ -92,12 +102,10 @@
     --header-lang-chevron-filter: brightness(0) invert(1);
     --nav-header-register-bg: var(--gold-gradient);
     --nav-header-register-color: var(--on-gold);
-    --gold-gradient: linear-gradient(
-        90deg,
-        var(--gold) 0%,
-        var(--gold-bright) 50%,
-        var(--gold) 100%
-    );
+    --gold-gradient: linear-gradient(90deg,
+            var(--gold) 0%,
+            var(--gold-bright) 50%,
+            var(--gold) 100%);
     --surface-gradient: linear-gradient(90deg, var(--surface-2) 0%, var(--surface) 100%);
 
     /* Gold CTA — same shine as --gold-gradient (Register + chip active) */
@@ -160,7 +168,7 @@
     --header-auth-panel-bg: linear-gradient(180deg, #1D232A 0%, #12171D 100%);
     --header-auth-panel-border: color-mix(in srgb, #AAB4BF 36%, transparent);
     --header-auth-balance-label: #ffffff;
-    --header-auth-balance-amount: #ffff00;
+    --header-auth-balance-amount: #ffe176;
     --header-auth-chip-bg: linear-gradient(180deg, #2B3139 0%, #1A2027 100%);
     --header-auth-chip-border: color-mix(in srgb, #AAB4BF 35%, transparent);
     --header-auth-chip-color: #ffffff;
@@ -186,55 +194,54 @@
        LANDING PAGE GOLD ACCENTS — consistent with the Leng855 logo.
        Edit these to tune the amount of gold across the home page.
        ============================================================ */
-    --landing-accent-gold:    var(--gold);
+    --landing-accent-gold: var(--gold);
     --landing-heading-accent: var(--gold);
-    --landing-link-gold:      var(--gold);
-    --landing-cta-ring:       var(--gold);
-    --landing-divider-gold:   var(--gold);
+    --landing-link-gold: var(--gold);
+    --landing-cta-ring: var(--gold);
+    --landing-divider-gold: var(--gold);
 
     /* ============================================================
        SIDEBAR PALETTE — screenshot hierarchy:
        dark-red active row; light-gray default rows; red text/icons.
        ============================================================ */
-    --sidebar-bg:              #EBEBEB;
-    --sidebar-text:            var(--primary-dark);
-    --sidebar-item-bg:         #DBDAD8;
-    --sidebar-item-hover:      var(--sidebar-item-active);
-    --sidebar-item-active:     var(--crimson-deep);
+    --sidebar-bg: #EBEBEB;
+    --sidebar-text: var(--primary-dark);
+    --sidebar-item-bg: #DBDAD8;
+    --sidebar-item-hover: var(--sidebar-item-active);
+    --sidebar-item-active: var(--crimson-deep);
     --sidebar-item-active-ring: transparent;
     --sidebar-container-border: #D7DBE2;
-    --sidebar-item-radius:     8px;
-    --sidebar-item-gap:        6px;
-    --sidebar-icon-filter: brightness(0) saturate(100%) invert(17%) sepia(83%)
-      saturate(2920%) hue-rotate(341deg) brightness(96%) contrast(95%);
+    --sidebar-item-radius: 8px;
+    --sidebar-item-gap: 6px;
+    --sidebar-icon-filter: brightness(0) saturate(100%) invert(17%) sepia(83%) saturate(2920%) hue-rotate(341deg) brightness(96%) contrast(95%);
     --sidebar-icon-filter-active: brightness(0) invert(1);
     /* Text on dark-red row stays white for active and hover */
     --sidebar-text-active: var(--on-primary);
-    --sidebar-text-hover:  var(--on-primary);
+    --sidebar-text-hover: var(--on-primary);
 
-    --sidebar-daily-bg:    linear-gradient(180deg, #430000 0%, #771405 100%);
-    --sidebar-spin-bg:     linear-gradient(180deg, #432800 0%, #774505 100%);
+    --sidebar-daily-bg: linear-gradient(180deg, #430000 0%, #771405 100%);
+    --sidebar-spin-bg: linear-gradient(180deg, #432800 0%, #774505 100%);
     --sidebar-download-bg: linear-gradient(180deg, #001F3F 0%, #003366 100%);
 
     /* Consumers of the sidebar palette */
-    --nav-side-bg:       var(--sidebar-bg);
-    --nav-side-item:     var(--sidebar-item-bg);
-    --nav-side-color:    var(--sidebar-text);
-    --nav-side-active:   var(--sidebar-item-active);
-    --nav-side-border:   1px solid var(--border);
+    --nav-side-bg: var(--sidebar-bg);
+    --nav-side-item: var(--sidebar-item-bg);
+    --nav-side-color: var(--sidebar-text);
+    --nav-side-active: var(--sidebar-item-active);
+    --nav-side-border: 1px solid var(--border);
     --nav-side-text-active: var(--sidebar-text-active);
-    --nav-side-text-hover:  var(--sidebar-text-hover);
+    --nav-side-text-hover: var(--sidebar-text-hover);
 
     /* Sidebar — top promo strips (reuse shared tokens defined below) */
-    --nav-side-promo-daily-bg:    var(--sidebar-daily-bg);
-    --nav-side-promo-spin-bg:     var(--sidebar-spin-bg);
+    --nav-side-promo-daily-bg: var(--sidebar-daily-bg);
+    --nav-side-promo-spin-bg: var(--sidebar-spin-bg);
     --nav-side-promo-download-bg: var(--sidebar-download-bg);
     --nav-side-promo-text-shadow: var(--shadow-promo-text);
-    --nav-side-promo-icon-size:   34px;
+    --nav-side-promo-icon-size: 34px;
 
     /* Sidebar nav row states */
-    --nav-side-item-hover:         var(--sidebar-item-hover);
-    --nav-side-item-border:        transparent;
+    --nav-side-item-hover: var(--sidebar-item-hover);
+    --nav-side-item-border: transparent;
     --nav-side-item-active-border: var(--sidebar-item-active-ring);
 
     /* Chat SVG */
@@ -277,22 +284,20 @@
     /* RTP chip — balance widget palette: charcoal panel, white game name, neon RTP */
     --game-rtp-badge-bg: #1a1d23;
     --game-rtp-badge-game: #ffffff;
-    --game-rtp-badge-neon: #e1ff00;
+    --game-rtp-badge-neon: #ffe176;
 
     /* Mobile profile card — rollover bar fill (red gradient) */
-    --mobile-profile-rollover-fill: linear-gradient(
-        90deg,
-        var(--primary-dark) 0%,
-        var(--primary) 42%,
-        var(--primary-bright) 100%
-    );
+    --mobile-profile-rollover-fill: linear-gradient(90deg,
+            var(--primary-dark) 0%,
+            var(--primary) 42%,
+            var(--primary-bright) 100%);
 
 
     /* Dashboard Table */
     --dashboard-table-th: var(--primary-dark);
     --dashboard-table-th-color: var(--on-primary);
     --dashboard-table-row-even: #FAFAFA;
-    --dashboard-table-row-odd:  var(--surface);
+    --dashboard-table-row-odd: var(--surface);
     --dashboard-table-border: var(--border);
 
     /* Payout Container — dark surface + subtle border */
@@ -631,7 +636,7 @@
     --referral-dots-bg: var(--surface-3);
     --referral-inner-section-bg: var(--surface);
 
-     /* apk download */
+    /* apk download */
     --apk-banner-mobile-bg: var(--primary-dark);
     --apk-banner-mobile-bg-color: var(--text);
     --apk-banner-color: var(--text);
@@ -643,6 +648,7 @@
     from {
         transform: translateX(100%);
     }
+
     to {
         transform: translateX(-100%);
     }
@@ -714,12 +720,12 @@
     --theme-chat-gradient-color-first: var(--primary);
     --theme-chat-gradient-color-second: var(--primary-dark);
 
-	/*header - balance btn*/
+    /*header - balance btn*/
     --balance-btn: linear-gradient(180deg, var(--surface-2) 0%, var(--bg) 100%);
     /* Balance dropdown follows rollover dropdown card styling */
     --balance-modal-popup: var(--rollover-modal-popup-header);
     --balance-inner-modal: var(--rollover-modal-popup-panel);
-/*header - rollover info modal popup*/
+    /*header - rollover info modal popup*/
     --rollover-modal-popup-header: var(--sidebar-bg);
     --rollover-modal-popup-panel: #FFFFFF;
 }
@@ -736,7 +742,7 @@ button.side-nav-item:not(.side-nav-item--active):hover .side-nav-icon {
 
 .slider-item {
     background: var(--surface-gradient) !important;
-  }
+}
 
 .t3-game-category-list .t3-game-category-item.active h6 {
     color: var(--on-primary) !important;
@@ -1114,18 +1120,19 @@ button.side-nav-item:not(.side-nav-item--active):hover .side-nav-icon {
     background: var(--surface-gradient) !important;
 }
 
-.t3-accordion-item.active > .head {
-  background: var(--primary-dark) !important;
-  color: var(--on-primary) !important;
+.t3-accordion-item.active>.head {
+    background: var(--primary-dark) !important;
+    color: var(--on-primary) !important;
 }
 
 .t3-mobile-side-menu-content .t3-sidemenu-item {
     background-image: linear-gradient(90deg, var(--surface-2) 0%, var(--primary-dark) 100%) !important;
 }
+
 .add-remove-week-filter li.active {
-  background: var(--cta-gradient) !important;
-  border: 1px solid var(--primary-dark) !important;
-  color: var(--on-primary) !important;
+    background: var(--cta-gradient) !important;
+    border: 1px solid var(--primary-dark) !important;
+    color: var(--on-primary) !important;
 }
 
 #deposit-id .all-flex-box-gray {
@@ -1133,50 +1140,52 @@ button.side-nav-item:not(.side-nav-item--active):hover .side-nav-icon {
 }
 
 .search-with-icon-box input {
-   border: unset !important;
-   background: var(--theme-color-bg-search) !important;
+    border: unset !important;
+    background: var(--theme-color-bg-search) !important;
 }
 
 .t3-team-second-income-box>div>.details {
     color: var(--gold) !important;
 }
-.t3-team-second-total-box>.first .details{
-   color: var(--gold) !important;
+
+.t3-team-second-total-box>.first .details {
+    color: var(--gold) !important;
 }
-.t3-team-banner-code-box .t3-team-banner-details{
-  color: var(--text) !important;
+
+.t3-team-banner-code-box .t3-team-banner-details {
+    color: var(--text) !important;
 }
 
 .btn-custom-small {
-  background: var(--cta-gradient) !important;
-  color: var(--on-primary) !important;
+    background: var(--cta-gradient) !important;
+    color: var(--on-primary) !important;
 }
 
-.add-remove-week-filter li{
-  background: var(--surface-2) !important;
+.add-remove-week-filter li {
+    background: var(--surface-2) !important;
 }
 
 .t3-upload-file-box {
-  border: 1px dashed var(--border-strong) !important;
+    border: 1px dashed var(--border-strong) !important;
 }
 
-.payout-container{
-  border: 1px solid var(--theme-color-text-secondary) !important;
-  box-shadow: 0 0 20px 0 var(--active-tint) inset !important;
+.payout-container {
+    border: 1px solid var(--theme-color-text-secondary) !important;
+    box-shadow: 0 0 20px 0 var(--active-tint) inset !important;
 }
 
-.payout-container .payout-list .item{
-  background: var(--surface-gradient) !important;
+.payout-container .payout-list .item {
+    background: var(--surface-gradient) !important;
 }
 
 .t3-m-sm-header .t3-close-modal .vicon {
-  color: var(--theme-color-text-secondary) !important;
-  width: 25px;
-  height: 25px;
+    color: var(--theme-color-text-secondary) !important;
+    width: 25px;
+    height: 25px;
 }
 
 .promotion-time {
-  color: var(--theme-color-text-secondary) !important;
+    color: var(--theme-color-text-secondary) !important;
 }
 
 .home-login-register-box>div:first-child {
@@ -1242,7 +1251,7 @@ button.side-nav-item:not(.side-nav-item--active):hover .side-nav-icon {
     overflow: hidden;
 }
 
-.modal-content.t3-login-register-modal > .modal-body {
+.modal-content.t3-login-register-modal>.modal-body {
     padding: 0;
     background: var(--modal-body);
 }
@@ -1400,7 +1409,7 @@ button.side-nav-item:not(.side-nav-item--active):hover .side-nav-icon {
     gap: 12px;
 }
 
-.t3-input-container > label {
+.t3-input-container>label {
     display: block;
     margin-bottom: 6px;
     color: var(--modal-container-title);
@@ -1571,7 +1580,8 @@ select:not(.t3-custom-input-text) {
 
 .t3-lr-modal-footer .t3-lr-button-box {
     justify-content: center;
-    font-size: 14px;;
+    font-size: 14px;
+    ;
 }
 
 @media (max-width: 820px) {
@@ -1607,7 +1617,7 @@ select:not(.t3-custom-input-text) {
     color: var(--gold) !important;
 }
 
-.t3-deposit-amount-list-box > .item.disabled:hover {
+.t3-deposit-amount-list-box>.item.disabled:hover {
     background: var(--surface-2) !important;
 }
 
@@ -1652,11 +1662,11 @@ select:not(.t3-custom-input-text) {
     border-top-right-radius: 0.75rem;
 }
 
-.t3-vip-user-image-box > .t3-vip-user-image:before {
+.t3-vip-user-image-box>.t3-vip-user-image:before {
     border: 1px solid var(--theme-color-text-secondary) !important;
 }
 
-.t3-vip-user-image-box > .t3-vip-user-image:after {
+.t3-vip-user-image-box>.t3-vip-user-image:after {
     border: 3px solid var(--theme-color-text-secondary) !important;
 }
 
@@ -1664,7 +1674,7 @@ select:not(.t3-custom-input-text) {
     background: var(--cta-gradient) !important;
 }
 
-.mobile-home-balance-box > .body .second button {
+.mobile-home-balance-box>.body .second button {
     background: var(--cta-gradient) !important;
     color: var(--on-primary) !important;
 }
@@ -1673,14 +1683,14 @@ select:not(.t3-custom-input-text) {
     color: var(--on-primary) !important;
 }
 
-.home-login-register-box > div:first-child {
+.home-login-register-box>div:first-child {
     border: 1px solid var(--theme-color-text-secondary) !important;
     background: none !important;
     box-shadow: unset !important;
     color: var(--theme-color-text-secondary) !important;
 }
 
-.home-login-register-box > div:last-child {
+.home-login-register-box>div:last-child {
     background: var(--cta-gradient) !important;
     color: var(--on-primary) !important;
 }
@@ -1693,29 +1703,31 @@ select:not(.t3-custom-input-text) {
     color: var(--muted) !important;
 }
 
-.t3-downline-table-tab > button.active, .t3-downline-status-table-tab > button.active {
+.t3-downline-table-tab>button.active,
+.t3-downline-status-table-tab>button.active {
     background: var(--cta-gradient) !important;
     color: var(--on-primary) !important;
 }
 
-.t3-downline-table-tab > button, .t3-downline-status-table-tab > button {
+.t3-downline-table-tab>button,
+.t3-downline-status-table-tab>button {
     background: var(--theme-color-bg-modal-body) !important;
     color: var(--muted) !important;
     border-top: 2px solid var(--border) !important;
     border-bottom: 2px solid var(--border) !important;
 }
 
-.t3-custom-table tbody > tr > td.downline-table-username {
+.t3-custom-table tbody>tr>td.downline-table-username {
     color: var(--gold) !important;
 }
 
-.t3-custom-table thead > tr > th {
+.t3-custom-table thead>tr>th {
     background-color: var(--dashboard-table-th) !important;
     color: var(--dashboard-table-th-color) !important;
     border-bottom: unset !important;
 }
 
-.t3-custom-table tbody > tr > td {
+.t3-custom-table tbody>tr>td {
     background-color: var(--surface) !important;
     border-bottom: 1px solid var(--border) !important;
 }
@@ -1739,35 +1751,39 @@ select:not(.t3-custom-input-text) {
 }
 
 .t3-sidemenu-box .t3-sidemenu-item h6 {
- color: var(--muted) !important;
+    color: var(--muted) !important;
 }
 
 /* Preserve live-site sidebar state colors when using t3-sidemenu-item + h6 */
 .t3-sidemenu-box .t3-sidemenu-item.side-nav-item--active h6 {
- color: var(--nav-side-text-active) !important;
+    color: var(--nav-side-text-active) !important;
 }
 
 .t3-sidemenu-box .t3-sidemenu-item:hover h6 {
- color: var(--nav-side-text-hover) !important;
+    color: var(--nav-side-text-hover) !important;
 }
 
-.t3-header > .second .t3-header-register {
+.t3-header>.second .t3-header-register {
     color: var(--nav-header-register-color) !important;
 }
 
 .t3-side-menu {
     background-color: var(--sidebar-bg) !important;
     z-index: 40;
-    -ms-overflow-style: none; /* IE / legacy Edge */
-    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none;
+    /* IE / legacy Edge */
+    scrollbar-width: none;
+    /* Firefox */
 }
+
 .t3-side-menu::-webkit-scrollbar {
-    display: none; /* Chrome, Safari, Edge */
+    display: none;
+    /* Chrome, Safari, Edge */
     width: 0;
     height: 0;
 }
 
-.mobile-latest-deposit-withdraw-box > div:first-child > .mobile-home-latest-transactions-box {
+.mobile-latest-deposit-withdraw-box>div:first-child>.mobile-home-latest-transactions-box {
     border-right: 1px solid var(--border) !important;
 }
 
@@ -1825,7 +1841,7 @@ select:not(.t3-custom-input-text) {
 }
 
 /* Single dense strip: wrap fills rows like reference; ~100px cells, ~39px logos (reference) */
-.t3-top-footer > .first {
+.t3-top-footer>.first {
     flex: 1;
     min-width: 0;
     display: flex;
@@ -1858,7 +1874,7 @@ select:not(.t3-custom-input-text) {
     object-fit: contain;
 }
 
-.t3-top-footer > .second {
+.t3-top-footer>.second {
     display: flex;
     align-items: center;
     gap: 8px;
@@ -1910,7 +1926,7 @@ select:not(.t3-custom-input-text) {
     justify-content: center;
 }
 
-.footer-social-link > img {
+.footer-social-link>img {
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -2009,22 +2025,22 @@ select:not(.t3-custom-input-text) {
     display: none;
 }
 
-.t3-team-second-section > div,
+.t3-team-second-section>div,
 .t3-team-third-section,
-.t3-team-third-section > div {
+.t3-team-third-section>div {
     background: var(--theme-color-bg-search) !important;
 }
 
-.t3-accordion-item.active > .details {
+.t3-accordion-item.active>.details {
     background: var(--surface-2) !important;
 }
 
-.t3-accordion-item.active > .details > div:not(:last-child),
-.vip-details-list-table > tr:not(:last-child) {
+.t3-accordion-item.active>.details>div:not(:last-child),
+.vip-details-list-table>tr:not(:last-child) {
     border-bottom: 1px solid var(--border) !important;
 }
 
-.t3-accordion-item > .head {
+.t3-accordion-item>.head {
     background: var(--primary-dark) !important;
     color: var(--on-primary) !important;
 }
@@ -2033,11 +2049,11 @@ select:not(.t3-custom-input-text) {
     background: var(--theme-color-bg-search) !important;
 }
 
-.vip-tab-buttons > div {
+.vip-tab-buttons>div {
     background: var(--surface-2) !important;
 }
 
-.vip-details-list-table > tr > td.details.active {
+.vip-details-list-table>tr>td.details.active {
     background: var(--primary-dark) !important;
     border-left: 1px solid var(--primary-dark) !important;
     border-right: 1px solid var(--primary-dark) !important;
@@ -2087,7 +2103,7 @@ select:not(.t3-custom-input-text) {
     padding-left: 10px;
 }
 
-.second.t3-header-logged-second .t3-balance-btn > button:first-of-type {
+.second.t3-header-logged-second .t3-balance-btn>button:first-of-type {
     align-self: center;
     border-right: 0;
     padding-right: 0;
@@ -2103,7 +2119,7 @@ select:not(.t3-custom-input-text) {
     line-height: 1.1;
 }
 
-.second.t3-header-logged-second .header-balance-column > span.font-size-header-balance {
+.second.t3-header-logged-second .header-balance-column>span.font-size-header-balance {
     color: var(--header-auth-balance-label);
     font-size: 11px;
     font-weight: 700;
@@ -2153,7 +2169,7 @@ select:not(.t3-custom-input-text) {
     box-sizing: border-box;
 }
 
-.second.t3-header-logged-second .t3-header-deposit > div:first-child {
+.second.t3-header-logged-second .t3-header-deposit>div:first-child {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -2237,9 +2253,11 @@ select:not(.t3-custom-input-text) {
     text-overflow: ellipsis;
     white-space: nowrap;
 }
-.second.t3-header-logged-second .t3-header-profile-box .second{
+
+.second.t3-header-logged-second .t3-header-profile-box .second {
     line-height: 1;
 }
+
 .second.t3-header-logged-second .t3-header-profile-box .second span {
     font-size: 11px;
     font-weight: 500;
@@ -2340,7 +2358,7 @@ select:not(.t3-custom-input-text) {
         height: 19px !important;
     }
 
-    .second.t3-header-logged-second .header-balance-column > span.font-size-header-balance {
+    .second.t3-header-logged-second .header-balance-column>span.font-size-header-balance {
         font-size: 10px;
     }
 
@@ -2364,7 +2382,7 @@ select:not(.t3-custom-input-text) {
     justify-content: center;
 }
 
-.second.t3-header-logged-second .t3-balance-btn > .header-balance-ddl-toggle.t3-chevon-ddl {
+.second.t3-header-logged-second .t3-balance-btn>.header-balance-ddl-toggle.t3-chevon-ddl {
     cursor: pointer;
     border: none;
     appearance: none;
@@ -2500,7 +2518,7 @@ select:not(.t3-custom-input-text) {
     margin-bottom: 30px;
 }
 
-.t3-two-custom-tabs > div {
+.t3-two-custom-tabs>div {
     width: 210px;
     display: flex;
     align-items: center;
@@ -2517,29 +2535,29 @@ select:not(.t3-custom-input-text) {
     transition: filter 150ms ease, box-shadow 150ms ease;
 }
 
-.t3-two-custom-tabs > div:not(.active) {
+.t3-two-custom-tabs>div:not(.active) {
     background: var(--non-active-bg) !important;
     color: var(--on-primary) !important;
     border: 1px solid var(--border) !important;
     box-shadow: 0 1px 2px var(--shadow-soft);
 }
 
-.t3-two-custom-tabs > div:not(.active):hover {
+.t3-two-custom-tabs>div:not(.active):hover {
     filter: brightness(1.02);
 }
 
-.t3-two-custom-tabs > div.active {
+.t3-two-custom-tabs>div.active {
     background: var(--cta-gradient) !important;
     color: var(--on-primary) !important;
     border: none !important;
     box-shadow: var(--card-shadow);
 }
 
-.t3-two-custom-tabs > div.active:hover {
+.t3-two-custom-tabs>div.active:hover {
     filter: brightness(1.05);
 }
 
-.t3-two-custom-tabs > div:focus-visible {
+.t3-two-custom-tabs>div:focus-visible {
     outline: 2px solid var(--gold-bright);
     outline-offset: 2px;
 }
@@ -2568,7 +2586,7 @@ select:not(.t3-custom-input-text) {
     color: var(--text) !important;
 }
 
-.deposit-page .t3-settings-menu-list .t3-settings-menu-list-item.bank:hover > .menu-list-item-row svg,
+.deposit-page .t3-settings-menu-list .t3-settings-menu-list-item.bank:hover>.menu-list-item-row svg,
 .deposit-page .t3-settings-menu-list .t3-settings-menu-list-item.bank:hover .vicon {
     color: var(--primary) !important;
 }
@@ -2660,8 +2678,8 @@ select:not(.t3-custom-input-text) {
     background: var(--cta-gradient) !important;
 }
 
-.deposit-page .t3-settings-menu-list .bank-option-box:hover .bank-option-name, 
-.deposit-page .t3-settings-menu-list .bank-option-box:hover .bank-option-minmax{
+.deposit-page .t3-settings-menu-list .bank-option-box:hover .bank-option-name,
+.deposit-page .t3-settings-menu-list .bank-option-box:hover .bank-option-minmax {
     color: var(--on-primary) !important;
 }
 
@@ -2710,19 +2728,19 @@ select:not(.t3-custom-input-text) {
     overflow: hidden;
 }
 
-.deposit-page .deposit-accordion-item > .details,
-.deposit-page .deposit-accordion-item.active > .details {
+.deposit-page .deposit-accordion-item>.details,
+.deposit-page .deposit-accordion-item.active>.details {
     background: var(--surface-3) !important;
 }
 
-.deposit-page .deposit-accordion-item > .head,
-.deposit-page .deposit-accordion-item.active > .head {
+.deposit-page .deposit-accordion-item>.head,
+.deposit-page .deposit-accordion-item.active>.head {
     background: var(--surface-3) !important;
     color: var(--text) !important;
     border-radius: 0;
 }
 
-.deposit-page .deposit-accordion-item > .head .vicon {
+.deposit-page .deposit-accordion-item>.head .vicon {
     color: var(--primary) !important;
 }
 
@@ -2821,7 +2839,7 @@ select:not(.t3-custom-input-text) {
     color: var(--primary-dark);
 }
 
-.deposit-page .deposit-bank-transfer__info-row + .deposit-bank-transfer__info-row {
+.deposit-page .deposit-bank-transfer__info-row+.deposit-bank-transfer__info-row {
     margin-top: 10px;
 }
 
@@ -3381,7 +3399,7 @@ select:not(.t3-custom-input-text) {
     background: var(--theme-color-bg-search) !important;
 }
 
-.t3-settings-withdrawal-box > div {
+.t3-settings-withdrawal-box>div {
     background: var(--surface-2) !important;
 }
 
@@ -3394,7 +3412,7 @@ select:not(.t3-custom-input-text) {
     color: var(--on-primary) !important;
 }
 
-.t3-statistics-dropdown-box > .first {
+.t3-statistics-dropdown-box>.first {
     color: var(--theme-color-text-base) !important;
 }
 
@@ -3406,11 +3424,11 @@ select:not(.t3-custom-input-text) {
     color: var(--muted) !important;
 }
 
-.t3-statistics-dropdown-box > .second select {
+.t3-statistics-dropdown-box>.second select {
     color: var(--bg) !important;
 }
 
-.t3-custom-table thead > tr > th:after {
+.t3-custom-table thead>tr>th:after {
     background: var(--border-strong) !important;
 }
 
@@ -3426,9 +3444,9 @@ select:not(.t3-custom-input-text) {
     background: var(--theme-color-bg-deposit) !important;
 }
 
-.t3-deposit-amount-list-box > .item.disabled > .first,
-.t3-deposit-amount-list-box > .active > .first,
-.t3-deposit-amount-list-box > .item:hover > .first {
+.t3-deposit-amount-list-box>.item.disabled>.first,
+.t3-deposit-amount-list-box>.active>.first,
+.t3-deposit-amount-list-box>.item:hover>.first {
     color: var(--theme-color-text-base) !important;
 }
 
@@ -3454,7 +3472,7 @@ select:not(.t3-custom-input-text) {
     opacity: 0.7;
 }
 
-.play-icon{
+.play-icon {
     color: var(--gold) !important;
 }
 
@@ -3462,11 +3480,11 @@ select:not(.t3-custom-input-text) {
     background: var(--theme-color-bg-base) !important;
 }
 
-.mobile-home-balance-box > .body .second .theme-icon-size-20 {
+.mobile-home-balance-box>.body .second .theme-icon-size-20 {
     color: var(--theme-color-text-base) !important;
 }
 
-.t3-settings-ep-username-box .item ,
+.t3-settings-ep-username-box .item,
 .sweet-alert .t3-rollover-box {
     background: var(--theme-color-bg-deposit) !important;
 }
@@ -3479,19 +3497,22 @@ select:not(.t3-custom-input-text) {
     background: var(--theme-color-bg-btn-number);
 }
 
-#spin-wheel { display: none !important; }
+#spin-wheel {
+    display: none !important;
+}
 
 
 
 /* TEMPORARY FIXES */
 
-.ml-3.verify-otp{
-display: none;
+.ml-3.verify-otp {
+    display: none;
 }
 
-#team-section > div.right.active.pt-0 > div > div.t3-team-second-section.mt-4 {
-display: none;
+#team-section>div.right.active.pt-0>div>div.t3-team-second-section.mt-4 {
+    display: none;
 }
+
 /*
 .home-announcement-modal-content-box p {
 margin: 0;
@@ -3517,40 +3538,51 @@ padding: 0;
 }
 }*/
 
-.t3-promotion-content.banner-layout .promo-info .promo-info-description{
+.t3-promotion-content.banner-layout .promo-info .promo-info-description {
     color: var(--text);
-  }
-.referral-login{
+}
+
+.referral-login {
     box-shadow: 0 4px 30px 0 var(--active-tint) inset;
-  }
-  .deposit-comm-table table thead > tr > th{
+}
+
+.deposit-comm-table table thead>tr>th {
     color: var(--primary);
-  }
-  .deposit-comm-table table tbody > tr:last-child > td{
+}
+
+.deposit-comm-table table tbody>tr:last-child>td {
     border-bottom: 0 !important;
-  }
- .bank-option-minmax{
+}
+
+.bank-option-minmax {
     color: var(--muted);
-  }
-.t3-settings-menu-list .t3-settings-menu-list-item{
+}
+
+.t3-settings-menu-list .t3-settings-menu-list-item {
     background: var(--surface-2);
-  }
-.referral-comm-info-container{
+}
+
+.referral-comm-info-container {
     background: var(--surface-2);
-  }
- .t3-custom-modal-with-back-btn .modal-header .modal-title>.first .vicon{
+}
+
+.t3-custom-modal-with-back-btn .modal-header .modal-title>.first .vicon {
     color: var(--text);
-  }
-.mobile-apk-banner .close-button svg{
+}
+
+.mobile-apk-banner .close-button svg {
     fill: var(--text) !important;
-  }
+}
+
 .vip-tab-buttons button:disabled {
     background: var(--membership-tab-button) !important;
 }
+
 .deposit-now-btn {
     background: var(--cta-gradient);
 }
-.home-progress-identifier{
+
+.home-progress-identifier {
     background: var(--cta-gradient);
 }
 
@@ -3574,17 +3606,17 @@ padding: 0;
     border: 1px solid var(--border);
 }
 
-.t3-referral-content .t3-downline-table-tab > button {
+.t3-referral-content .t3-downline-table-tab>button {
     border: 0;
     border-radius: 8px;
 }
 
-.t3-referral-content .t3-custom-table thead > tr > th,
-.t3-referral-content .t3-custom-table tbody > tr > td {
+.t3-referral-content .t3-custom-table thead>tr>th,
+.t3-referral-content .t3-custom-table tbody>tr>td {
     white-space: nowrap;
 }
 
-.t3-referral-content .t3-referral-page-tabs > button {
+.t3-referral-content .t3-referral-page-tabs>button {
     position: relative;
     padding: 10px 4px;
     margin-right: 18px;
@@ -3600,11 +3632,11 @@ padding: 0;
         border-color 160ms ease;
 }
 
-.t3-referral-content .t3-referral-page-tabs > button:hover {
+.t3-referral-content .t3-referral-page-tabs>button:hover {
     color: var(--primary-dark);
 }
 
-.t3-referral-content .t3-referral-page-tabs > button.active {
+.t3-referral-content .t3-referral-page-tabs>button.active {
     color: var(--primary-dark);
     border-bottom-color: var(--gold);
 }
@@ -3730,12 +3762,10 @@ padding: 0;
 
 .t3-referral-promo-card--deposit {
     background:
-        linear-gradient(
-            118deg,
+        linear-gradient(118deg,
             color-mix(in srgb, #ffffff 42%, transparent) 0%,
             transparent 42%,
-            transparent 100%
-        ),
+            transparent 100%),
         linear-gradient(180deg, #fbc02d 0%, #f9a825 100%);
 }
 
@@ -3922,7 +3952,7 @@ padding: 0;
 
 .mobile-bottom-nav__btn[data-active="true"] .mobile-bottom-nav__icon {
     opacity: 1;
-    filter:brightness(100) invert(1);
+    filter: brightness(100) invert(1);
 }
 
 .mobile-bottom-nav__btn[data-active="true"] .mobile-bottom-nav__icon--svg {

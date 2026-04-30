@@ -76,23 +76,22 @@ function ChevronRight() {
 
 function IconRefresh() {
   return (
-    <svg className="t3-provider-info-bar__icon" viewBox="0 0 24 24" fill="none" aria-hidden>
-      <path
-        d="M21 12a9 9 0 00-9-9 9.75 9.75 0 00-6.74 2.74L3 8M3 3v5h5M3 12a9 9 0 009 9 9.75 9.75 0 006.74-2.74L21 16M21 21v-5h-5"
-        stroke="currentColor"
-        strokeWidth="1.65"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
+    <svg
+      className="t3-provider-info-bar__icon"
+      viewBox="0 0 1024 1024"
+      style={{ display: "inline-block", stroke: "currentColor", fill: "currentColor" }}
+      aria-hidden="true"
+    >
+      <path d="M303.9 573.127c14.206-16.295 2.634-41.738-18.986-41.738h-64.727c-0.422-6.405-0.658-12.859-0.658-19.367 0-161.27 131.201-292.471 292.47-292.471 77.5 0 148.042 30.31 200.431 79.684l91.273-106.776c-79.895-73.090-182.721-113.125-291.703-113.125-115.575 0-224.232 45.009-305.956 126.731-81.722 81.724-126.731 190.381-126.731 305.956 0 6.48 0.162 12.935 0.444 19.367h-54.52c-21.619 0-33.193 25.444-18.985 41.741l148.824 170.706 148.825-170.706z" />
+      <path d="M1017.748 490.819l-148.821-170.708-148.821 170.708c-14.205 16.296-2.634 41.74 18.984 41.74h64.649c-10.576 151.723-137.375 271.935-291.736 271.935-67.383 0-129.508-22.921-179.015-61.355l-91.278 106.786c76.467 61.406 170.808 94.783 270.295 94.783 115.572 0 224.23-45.005 305.956-126.731 76.863-76.863 121.236-177.556 126.242-285.416h54.562c21.618-0.002 33.189-25.446 18.984-41.742z" />
     </svg>
   );
 }
 
 function IconLock() {
   return (
-    <svg className="t3-provider-info-bar__icon t3-provider-info-bar__icon--lock" viewBox="0 0 24 24" fill="none" aria-hidden>
-      <rect x="5" y="10" width="14" height="11" rx="2" stroke="currentColor" strokeWidth="1.7" />
-      <path d="M8 10V7a4 4 0 018 0v3" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" />
+    <svg className="t3-provider-info-bar__icon t3-provider-info-bar__icon--lock" viewBox="0 0 1024 1024" style={{ display: "inline-block", stroke: "currentColor", fill: "currentColor" }}>
+      <path d="M204.8 409.6v-102.4c0-169.662 137.538-307.2 307.2-307.2s307.2 137.538 307.2 307.2v0 102.4h51.2c56.554 0 102.4 45.846 102.4 102.4v0 409.6c0 56.554-45.846 102.4-102.4 102.4v0h-716.8c-56.554 0-102.4-45.846-102.4-102.4v0-409.6c0-56.32 46.080-102.4 102.4-102.4h51.2zM460.8 754.176v116.224h102.4v-116.224c30.824-18.035 51.2-50.978 51.2-88.681 0-56.554-45.846-102.4-102.4-102.4s-102.4 45.846-102.4 102.4c0 37.703 20.376 70.646 50.717 88.419l0.483 0.262zM358.4 307.2v102.4h307.2v-102.4c0-84.831-68.769-153.6-153.6-153.6s-153.6 68.769-153.6 153.6v0z"></path>
     </svg>
   );
 }
@@ -143,32 +142,46 @@ function NextspinProviderLayout() {
         <img src={NEXTSPIN_BANNER} alt="Nextspin" className="block h-auto w-full object-cover" />
       </div>
 
-      <div className="t3-provider-info-bar grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-6">
-        <div className="t3-provider-info-bar__cell">
-          <div className="t3-provider-info-bar__labels">
-            <span className="t3-provider-info-bar__label">Wallet</span>
-            <span className="t3-provider-info-bar__value t3-provider-info-bar__value--gold">0.00</span>
+      <div
+        className="rounded-lg p-2"
+        style={{
+          background: "#f4f4f5",
+        }}
+      >
+        <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
+          <div className="flex items-center justify-between rounded-md bg-white px-4 py-2.5 shadow-sm">
+            <div className="flex flex-col leading-tight">
+              <span className="text-[12px] font-medium" style={{ color: "var(--gold)" }}>Wallet</span>
+              <span className="mt-0.5 text-[15px] font-bold" style={{ color: "var(--primary-dark)" }}>0.00</span>
+            </div>
+            <button type="button" className="flex h-[22px] w-[22px] items-center justify-center transition-opacity hover:opacity-80" aria-label="Refresh wallet" style={{ color: "var(--primary-dark)" }}>
+              <IconRefresh />
+            </button>
           </div>
-          <button type="button" className="t3-provider-info-bar__action" aria-label="Refresh wallet">
-            <IconRefresh />
-          </button>
-        </div>
-        <div className="t3-provider-info-bar__cell">
-          <div className="t3-provider-info-bar__labels">
-            <span className="t3-provider-info-bar__label">Membership Rebate</span>
-            <span className="t3-provider-info-bar__value t3-provider-info-bar__value--gold">0.00%</span>
+          <div className="flex items-center justify-between rounded-md bg-white px-4 py-2.5 shadow-sm">
+            <div className="flex flex-col leading-tight">
+              <span className="text-[12px] font-medium" style={{ color: "var(--gold)" }}>Membership Rebate</span>
+              <span className="mt-0.5 text-[15px] font-bold" style={{ color: "var(--primary-dark)" }}>0.00%</span>
+            </div>
+            <span className="flex h-[20px] w-[20px] items-center justify-center" aria-hidden style={{ color: "var(--primary-dark)" }}>
+              <IconLock />
+            </span>
           </div>
-          <span className="t3-provider-info-bar__action t3-provider-info-bar__action--static" aria-hidden>
-            <IconLock />
-          </span>
         </div>
       </div>
 
-      <div className="t3-provider-search">
-        <IconSearch />
+
+      <div
+        className="flex items-center gap-3 rounded-lg border bg-white px-[20px] py-[12px]"
+        style={{ borderColor: "var(--panel-item-border)" }}
+      >
+        <span className="flex h-5 w-5 items-center justify-center" style={{ color: "var(--primary-dark)" }}>
+          <IconSearch />
+        </span>
         <input
           type="search"
-          className="t3-provider-search__input"
+          className="w-full bg-transparent text-[14px] font-medium outline-none placeholder:text-[#b89b7b]"
+          style={{ color: "var(--text)" }}
           placeholder="Search games..."
           value={query}
           onChange={(e) => setQuery(e.target.value)}
@@ -176,11 +189,12 @@ function NextspinProviderLayout() {
         />
       </div>
 
+
       <div className="t3-game-list-box t3-provider-game-page__game-box">
         <div className="t3-game-list-grid t3-provider-game-page__grid">
           {filtered.map((g) => (
             <article key={g.id} className="t3-game-list-item">
-              <a href="#" className="block no-underline" onClick={(e) => e.preventDefault()}>
+              <a href={`#/provider/nextspin/${g.id}`} className="block no-underline">
                 <div className="t3-game-list-image-box">
                   <div className="image">
                     <img src={g.src} alt={g.label} className="t3-game-list-image t3-provider-game-page__thumb" />

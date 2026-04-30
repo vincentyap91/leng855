@@ -15,6 +15,7 @@ export type AppView =
   | "deposit"
   | "profile"
   | "rebate"
+  | "membership"
   | "recent-game";
 
 type Item = {
@@ -22,6 +23,9 @@ type Item = {
   icon: string;
   badge?: number;
 };
+
+const MEMBERSHIP_ICON_URL =
+  "https://pksoftcdn.azureedge.net/media/icon-membership-202604301500460027.webp";
 
 const mainItems: Item[] = [
   { label: "Home", icon: assets.iconHome },
@@ -35,6 +39,7 @@ const mainItems: Item[] = [
   { label: "Promotion", icon: assets.iconPromo, badge: 1 },
   { label: "Referral", icon: assets.iconReferral },
   { label: "Rebate", icon: assets.iconRebate },
+  { label: "Membership", icon: MEMBERSHIP_ICON_URL },
 ];
 
 /** Live Chat — same 24×24 + filter treatment as other sidebar rows */
@@ -237,6 +242,7 @@ function navTargetForLabel(label: string): AppView | null {
   if (label === "Referral") return "referral";
   if (label === "Home") return "home";
   if (label === "Rebate") return "rebate";
+  if (label === "Membership") return "membership";
   if (label === "Recent Game") return "recent-game";
   return null;
 }
@@ -252,6 +258,7 @@ function isItemActive(view: AppView, label: string): boolean {
   if ((view === "promotion" || view === "promotion-detail") && label === "Promotion") return true;
   if (view === "referral" && label === "Referral") return true;
   if (view === "rebate" && label === "Rebate") return true;
+  if (view === "membership" && label === "Membership") return true;
   if (view === "recent-game" && label === "Recent Game") return true;
   if (view === "home" && label === "Home") return true;
   return false;

@@ -25,22 +25,30 @@ export function RebatePage({ isLoggedIn = false, onLoginClick }: RebatePageProps
           </div>
         ) : (
           <div
-            className="rounded-[12px] border px-4 py-3"
+            className="rounded-xl border p-[20px]"
             style={{
-              background: "var(--surface-3)",
+              background: "var(--surface)",
               borderColor: "var(--panel-item-border)",
               boxShadow: "var(--card-shadow)",
             }}
           >
-            <p
-              className="m-0 text-[13px] font-semibold leading-snug"
-              style={{ color: "var(--primary-dark)", fontFamily: "var(--base-font-family, Poppins, system-ui, sans-serif)" }}
+            <div
+              className="rounded-xl border px-[20px] py-[14px]"
+              style={{
+                background: "#f2f2f2",
+                borderColor: "var(--panel-item-border)",
+              }}
             >
-              Claimable Rebate:{" "}
-              <span className="font-extrabold" style={{ color: "var(--gold)" }}>
-                0.000
-              </span>
-            </p>
+              <p
+                className="m-0 text-[13px] font-semibold leading-snug"
+                style={{ color: "var(--primary-dark)", fontFamily: "var(--base-font-family, Poppins, system-ui, sans-serif)" }}
+              >
+                Claimable Rebate:{" "}
+                <span className="font-extrabold" style={{ color: "var(--gold)" }}>
+                  0.000
+                </span>
+              </p>
+            </div>
           </div>
         )}
       </div>
