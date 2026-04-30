@@ -77,6 +77,9 @@ type MobileProfileCardProps = {
   balanceDisplay: string;
   membershipStatus?: string;
   onBalanceRefresh?: () => void;
+  /** Rollover wagering progress (display only until API wired). */
+  rolloverCurrent?: number;
+  rolloverTarget?: number;
 };
 
 export function MobileProfileCard({
@@ -84,8 +87,12 @@ export function MobileProfileCard({
   balanceDisplay,
   membershipStatus = "Normal",
   onBalanceRefresh,
+  rolloverCurrent = 50,
+  rolloverTarget = 100,
 }: MobileProfileCardProps) {
   const labelColor = "var(--primary-dark)";
+  const rolloverPct =
+    rolloverTarget > 0 ? Math.min(100, Math.max(0, Math.round((rolloverCurrent / rolloverTarget) * 100))) : 0;
 
   return (
     <section className="home-mobile-profile-card home-mobile-only mt-4 overflow-hidden rounded-xl border p-4">
@@ -147,6 +154,27 @@ export function MobileProfileCard({
             <IconRefresh />
             Refresh
           </button>
+        </div>
+      </div>
+
+      <div className="home-mobile-profile-card__rollover">
+        <p className="m-0 text-[11px] font-bold leading-snug" style={{ color: labelColor }}>
+          Your Rollover Progress is{" "}
+          <span className="font-extrabold" style={{ color: "var(--gold)" }}>
+            {rolloverCurrent} / {rolloverTarget}
+          </span>
+          .
+        </p>
+        <div className="mt-2.5 flex items-center gap-2">
+          <div className="home-mobile-profile-card__rollover-track min-w-0 flex-1">
+            <div className="home-mobile-profile-card__rollover-fill" style={{ width: `${rolloverPct}%` }} />
+          </div>
+          <span
+            className="shrink-0 text-xs font-extrabold tabular-nums leading-none"
+            style={{ color: "var(--primary-dark)" }}
+          >
+            {rolloverPct}%
+          </span>
         </div>
       </div>
     </section>

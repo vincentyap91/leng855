@@ -28,7 +28,6 @@
     --mobile-nav-fg: rgba(255, 255, 255, 0.9);
     --mobile-profile-withdraw-bg: #1d4ed8;
     --mobile-home-profile-bg: color-mix(in srgb, var(--surface-3) 58%, #e2e8f0 42%);
-    --game-rtp-badge-bg: #2563eb;
 
 
     /* ---- Derived neutrals (never hardcode colors elsewhere) ---- */
@@ -255,13 +254,17 @@
     --announcement-shadow: none;
 
     /* Game List Page */
-    /* Game category strip — cream pill bar, dark red labels, solid red active chip */
+    /* Game category strip — white bar, dark red labels, solid red active chip (desktop "all") */
     --game-category-tab-color: var(--primary-dark);
-    --game-category-tab-bg: #fff9e6;
-    --game-category-tab-hover: #f0e4c8;
+    --game-category-tab-bg: #ffffff;
+    --game-category-tab-hover: color-mix(in srgb, var(--primary-dark) 8%, var(--bg) 92%);
     --game-category-tab-active: var(--primary-dark);
     --game-category-tab-active-color: var(--on-primary);
     --game-category-pill-shadow: 0 2px 12px color-mix(in srgb, var(--text) 9%, transparent);
+    /* Mobile home strip only (CategoryChips homeStrip) — white rail + dark red caps */
+    --game-category-mobile-strip-bg: var(--bg);
+    --game-category-mobile-strip-cap-bg: var(--primary-dark);
+    --game-category-mobile-strip-shadow: 0 2px 10px color-mix(in srgb, var(--text) 10%, transparent);
 
     --game-title-color: inherit;
     --game-title-highlight-color: var(--primary);
@@ -271,6 +274,18 @@
     --game-card-border: 1px solid var(--gold);
     --game-card-title: #1F2937;
     --game-card-provider: var(--muted);
+    /* RTP chip — balance widget palette: charcoal panel, white game name, neon RTP */
+    --game-rtp-badge-bg: #1a1d23;
+    --game-rtp-badge-game: #ffffff;
+    --game-rtp-badge-neon: #e1ff00;
+
+    /* Mobile profile card — rollover bar fill (red gradient) */
+    --mobile-profile-rollover-fill: linear-gradient(
+        90deg,
+        var(--primary-dark) 0%,
+        var(--primary) 42%,
+        var(--primary-bright) 100%
+    );
 
 
     /* Dashboard Table */
@@ -727,6 +742,74 @@ button.side-nav-item:not(.side-nav-item--active):hover .side-nav-icon {
     color: var(--on-primary) !important;
 }
 
+/* Mobile category home strip — outer rail: white center, dark red chevron caps */
+.t3-game-category-home-strip {
+    display: flex;
+    width: 100%;
+    min-width: 0;
+    align-items: stretch;
+    overflow: hidden;
+    border-radius: 12px;
+    background: var(--game-category-mobile-strip-bg);
+    box-shadow: var(--game-category-mobile-strip-shadow);
+}
+
+.t3-game-category-home-strip__cap {
+    display: flex;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: center;
+    padding: 3px;
+    border: none;
+    margin: 0;
+    cursor: pointer;
+    background: var(--game-category-mobile-strip-cap-bg);
+    color: var(--on-primary);
+    -webkit-tap-highlight-color: transparent;
+}
+
+.t3-game-category-home-strip__cap:focus-visible {
+    outline: 2px solid var(--gold-bright);
+    outline-offset: -2px;
+}
+
+.t3-game-category-home-strip__cap--start {
+    border-radius: 12px 0 0 12px;
+}
+
+.t3-game-category-home-strip__cap--end {
+    border-radius: 0 12px 12px 0;
+}
+
+.t3-game-category-home-strip__scroller {
+    flex: 1 1 auto;
+    min-width: 0;
+    min-height: 48px;
+    background: var(--game-category-mobile-strip-bg);
+    overflow-x: auto;
+}
+
+.t3-game-category-home-strip__tablist {
+    display: flex;
+    height: 100%;
+    min-height: 48px;
+    width: max-content;
+    min-width: 100%;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 0 10px;
+    box-sizing: border-box;
+}
+
+.t3-game-category-item--mobile-strip:not(.active):hover {
+    background: color-mix(in srgb, var(--primary-dark) 7%, transparent);
+}
+
+.t3-game-category-item--mobile-strip:not(.active):hover h6 {
+    color: var(--game-category-tab-color) !important;
+}
+
 .t3-game-list-box {
     background: var(--surface);
     border-radius: 16px;
@@ -770,8 +853,12 @@ button.side-nav-item:not(.side-nav-item--active):hover .side-nav-icon {
 }
 
 .t3-game-list-meta {
-    padding: 8px 6px 2px;
+    padding: 0px 6px 2px;
     text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
 }
 
 .t3-game-list-title {
@@ -789,6 +876,23 @@ button.side-nav-item:not(.side-nav-item--active):hover .side-nav-icon {
     justify-content: center;
     gap: 5px;
     max-width: 100%;
+}
+
+.t3-game-list-provider--emphasis {
+    margin-top: 2px;
+    margin-bottom: 6px;
+}
+
+.t3-game-list-provider--emphasis .t3-game-list-provider-logo {
+    width: 16px;
+    height: 16px;
+}
+
+.t3-game-list-provider--emphasis .t3-game-list-provider-name {
+    color: var(--primary);
+    font-weight: 700;
+    font-size: 12px;
+    max-width: 140px;
 }
 
 .t3-game-list-provider-logo {
@@ -2021,7 +2125,7 @@ select {
         min-width: var(--header-auth-control-height);
         max-width: var(--header-auth-control-height);
         flex: 0 0 var(--header-auth-control-height);
-        border-radius: 0;
+        border-radius: 5px;
         border-left: 1px solid color-mix(in srgb, var(--gold) 50%, rgba(0, 0, 0, 0.25) 50%);
     }
 
@@ -3139,10 +3243,6 @@ select {
     box-shadow: 0 0 50px 20px var(--theme-color-text-secondary) !important;
 }
 
-.provider-category-container>div {
-    background: var(--theme-color-bg-search) !important;
-}
-
 .vip-tab-buttons button {
     background: var(--gold) !important;
     box-shadow: 0 0 10px 0 var(--gold-tint);
@@ -3162,10 +3262,6 @@ select {
 
 .mobile-home-balance-box > .body .second .theme-icon-size-20 {
     color: var(--theme-color-text-base) !important;
-}
-
-.provider-category-container{
-    background: var(--theme-color-bg-search) !important;
 }
 
 .t3-settings-ep-username-box .item ,
@@ -3518,6 +3614,30 @@ padding: 0;
     box-shadow: none;
 }
 
+/* Rollover progress — nested panel inside profile card */
+.home-mobile-profile-card__rollover {
+    margin-top: 14px;
+    padding: 10px 12px;
+    border-radius: 8px;
+    border: 1px solid color-mix(in srgb, var(--text) 26%, var(--border) 74%);
+    background: color-mix(in srgb, var(--bg) 82%, var(--surface-3) 18%);
+}
+
+.home-mobile-profile-card__rollover-track {
+    height: 8px;
+    border-radius: 9999px;
+    background: color-mix(in srgb, var(--border-strong) 45%, var(--surface-3) 55%);
+    overflow: hidden;
+}
+
+.home-mobile-profile-card__rollover-fill {
+    height: 100%;
+    min-width: 0;
+    border-radius: 9999px;
+    background: var(--mobile-profile-rollover-fill);
+    transition: width 240ms ease;
+}
+
 /* Desktop home — referral hub white panel on banner */
 .home-desktop-referral-hub__card {
     border-color: color-mix(in srgb, var(--gold) 55%, var(--panel-item-border) 45%);
@@ -3534,7 +3654,7 @@ padding: 0;
     align-items: stretch;
     justify-content: space-around;
     gap: 0;
-    padding: 6px 4px calc(6px + env(safe-area-inset-bottom, 0px));
+    padding: 0px;
     background: var(--mobile-nav-bg);
     border-top: 1px solid color-mix(in srgb, var(--text) 22%, transparent);
 }
@@ -3552,6 +3672,7 @@ padding: 0;
 
 .mobile-bottom-nav__btn[data-active="true"] .mobile-bottom-nav__icon {
     opacity: 1;
+    filter:brightness(100) invert(1);
 }
 
 .mobile-bottom-nav__btn[data-active="true"] .mobile-bottom-nav__icon--svg {
@@ -3560,7 +3681,8 @@ padding: 0;
 }
 
 .mobile-bottom-nav__btn[data-active="true"] {
-    color: var(--gold-bright);
+    color: #2a1a00;
+    background: var(--gold-gradient);
 }
 
 .mobile-bottom-nav__btn--badge {
@@ -3586,12 +3708,109 @@ padding: 0;
     z-index: 1;
 }
 
+/* Compact RTP info badge (thumb + crown + game + RTP) — under provider title */
+.t3-game-rtp-info-badge {
+    font-family: var(--base-font-family);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    height: 42px;
+    max-width: 137px;
+    width: 100%;
+    padding: 0 6px 0 0;
+    margin-inline: auto;
+    border-radius: 8px;
+    background: var(--game-rtp-badge-bg);
+    box-sizing: border-box;
+    overflow: visible;
+    transition: transform 160ms ease, filter 160ms ease;
+    align-self: center;
+}
+
+.t3-game-rtp-info-badge:hover {
+    transform: scale(1.02);
+    filter: brightness(1.06);
+}
+
+.t3-game-rtp-info-badge__thumb-wrap {
+    position: relative;
+    flex: 0 0 auto;
+    width: auto;
+    height: auto;
+    align-self: center;
+}
+
+.t3-game-rtp-info-badge__thumb {
+    width: 40px;
+    height: auto;
+    object-fit: cover;
+    border-radius: 0;
+    border-top-left-radius: 8px;
+    border-bottom-left-radius: 8px;
+    display: block;
+}
+
+.t3-game-rtp-info-badge__crown {
+    position: absolute;
+    top: -4px;
+    left: -4px;
+    width: 15px;
+    height: auto;
+    pointer-events: none;
+    filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.4));
+}
+
+.t3-game-rtp-info-badge__text {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 2px;
+    min-width: 0;
+    flex: 1 1 auto;
+    text-align: left;
+}
+
+.t3-game-rtp-info-badge__game {
+    color: var(--game-rtp-badge-game);
+    font-size: 11px;
+    font-weight: 700;
+    line-height: 1.15;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
+}
+
+.t3-game-rtp-info-badge__rtp-row {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: baseline;
+    gap: 3px;
+    line-height: 1.15;
+}
+
+.t3-game-rtp-info-badge__rtp-label {
+    color: var(--game-rtp-badge-neon);
+    font-size: 10px;
+    font-weight: 700;
+    flex-shrink: 0;
+}
+
+.t3-game-rtp-info-badge__rtp-value {
+    color: var(--game-rtp-badge-neon);
+    font-size: 12px;
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+    flex-shrink: 0;
+}
+
 .t3-game-list-rtp {
     margin-top: 6px;
     padding: 4px 6px;
     border-radius: 4px;
     background: var(--game-rtp-badge-bg);
-    color: #ffffff;
+    color: var(--game-rtp-badge-neon);
     font-size: 10px;
     font-weight: 800;
     text-align: center;
@@ -3600,10 +3819,6 @@ padding: 0;
 }
 
 @media (max-width: 700px) {
-    .t3-game-list-provider {
-        display: none;
-    }
-
     .t3-game-list-image-box {
         border: 1px solid color-mix(in srgb, var(--gold) 50%, var(--border) 50%);
     }

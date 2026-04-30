@@ -27,6 +27,7 @@ const routeItems: RouteItem[] = [
   { label: "Slots", icon: assets.iconSlots, target: "slots" },
   { label: "Sports", icon: assets.iconSport, target: "sports" },
   { label: "Fish Hunt", icon: assets.iconFish, target: "fish-hunt" },
+  { label: "RNG", icon: assets.iconRng, target: "rng" },
   { label: "Promotion", icon: assets.iconPromo, target: "promotion", badge: 1 },
   { label: "Referral", icon: assets.iconReferral, target: "referral" },
   { label: "Rebate", icon: assets.iconRebate, target: "rebate" },
@@ -86,7 +87,7 @@ export function MobileNavDrawer({ isOpen, onClose, view, onNavigate }: MobileNav
   };
 
   const cardBase =
-    "mobile-nav-drawer__card relative flex w-full items-center gap-2.5 rounded-[10px] border bg-white px-3 py-3 text-left shadow-sm outline-none transition hover:brightness-[1.01] active:brightness-[0.98]";
+    "mobile-nav-drawer__card relative flex w-full items-center gap-2.5 rounded-lg bg-white px-1 py-1 text-left outline-none transition  active:brightness-[0.98]";
 
   const cardStyle = { borderColor: MENU.cardBorder, boxShadow: "0 1px 2px rgba(0,0,0,0.07)" } as const;
 
@@ -123,10 +124,9 @@ export function MobileNavDrawer({ isOpen, onClose, view, onNavigate }: MobileNav
               aria-haspopup="listbox"
               onClick={() => setLangOpen((v) => !v)}
             >
-              <img src={assets.ukFlag} alt="" className="h-6 w-6 shrink-0 rounded-full object-cover ring-1 ring-white/20" />
-              <span className="min-w-0 flex-1 truncate">English</span>
-              <span className="shrink-0 text-base font-bold leading-none opacity-95" aria-hidden style={{ color: MENU.langAccent }}>
-                ›
+              <img src={assets.ukFlag} alt="" className="h-6 w-6 shrink-0 rounded-lg object-cover ring-1 ring-white/20" />
+              <span className="min-w-0 flex-1 truncate font-medium text-sm">English</span>
+              <span className="-rotate-90"><svg focusable="false" color="#ffffff" aria-hidden="true" viewBox="0 0 24 24" data-testid="ExpandMoreIcon" fill="white" height="20px" className="language-arrow-down"><path d="M16.59 8.59 12 13.17 7.41 8.59 6 10l6 6 6-6z"></path></svg>
               </span>
             </button>
             {langOpen ? (

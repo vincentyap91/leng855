@@ -1,7 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
 import { Header, type HeaderSession } from "./components/Header";
 import { Sidebar, type AppView } from "./components/Sidebar";
-import { AllGamesPage } from "./components/AllGamesPage";
 import { PromotionPage } from "./components/PromotionPage";
 import { PromotionDetailPage } from "./components/PromotionDetailPage";
 import { ReferralPage } from "./components/ReferralPage";
@@ -22,7 +21,7 @@ import { MobileBottomNav } from "./components/MobileBottomNav";
 import { MobileAuthBar, MobilePassiveIncomeBanner, MobileProfileCard, DesktopReferralHubBanner } from "./components/MobileHomeBlocks";
 import { AuthModal, type AuthMode } from "./components/AuthModal";
 import { ProviderDetailPage } from "./components/ProviderDetailPage";
-import { gameCategoryBanners } from "./data/gameCategoryBanners";
+import { lobbyFilterFromView } from "./data/lobbyGameFilters";
 
 type RouteState = { view: AppView; promoSlug: string | null; providerSlug: string | null };
 
@@ -46,6 +45,9 @@ function parseRoute(): RouteState {
   }
   if (h === "fish-hunt" || h === "/fish-hunt") {
     return { view: "fish-hunt", promoSlug: null, providerSlug: null };
+  }
+  if (h === "rng" || h === "/rng") {
+    return { view: "rng", promoSlug: null, providerSlug: null };
   }
   if (h === "promotion" || h === "/promotion") {
     return { view: "promotion", promoSlug: null, providerSlug: null };
@@ -125,6 +127,8 @@ export default function App() {
       window.location.hash = "#/sports";
     } else if (next === "fish-hunt") {
       window.location.hash = "#/fish-hunt";
+    } else if (next === "rng") {
+      window.location.hash = "#/rng";
     } else if (next === "promotion") {
       window.location.hash = "#/promotion";
     } else if (next === "referral") {
@@ -161,6 +165,7 @@ export default function App() {
     setIsLoggedIn(false);
     localStorage.removeItem(USER_TOKEN_KEY);
     localStorage.removeItem(USERNAME_KEY);
+    localStorage.removeItem("userMobile");
   };
 
   return (
@@ -184,26 +189,19 @@ export default function App() {
         <div className="ml-0 flex min-w-0 flex-1 flex-col lg:ml-[220px]">
           <main className="min-w-0 flex-1 pb-20 lg:pb-5" style={{ background: "transparent" }}>
             <div className="mx-auto w-full max-w-[1430px] space-y-6 px-4 py-5 sm:px-6">
-              {view === "hot-games" ? (
-                <AllGamesPage bannerSrc={gameCategoryBanners.welcome} bannerAlt="Leng855 hot games" />
-              ) : view === "all-games" ? (
-                <AllGamesPage />
-              ) : view === "live-casino" ? (
-                <AllGamesPage bannerSrc={gameCategoryBanners.liveCasino} bannerAlt="Leng855 live casino" />
-              ) : view === "slots" ? (
-                <AllGamesPage bannerSrc={gameCategoryBanners.slots} bannerAlt="Leng855 slots" />
-              ) : view === "sports" ? (
-                <AllGamesPage bannerSrc={gameCategoryBanners.sports} bannerAlt="Leng855 sports" />
-              ) : view === "fish-hunt" ? (
-                <AllGamesPage bannerSrc={gameCategoryBanners.fishHunt} bannerAlt="Leng855 fish hunt" />
-              ) : view === "promotion" ? (
+              {view === "promotion" ? (
                 <PromotionPage />
               ) : view === "referral" ? (
                 <ReferralPage isLoggedIn={isLoggedIn} onLoginClick={() => openAuthModal("login")} />
               ) : view === "deposit" ? (
                 <DepositPage />
               ) : view === "profile" ? (
-                <ProfilePage />
+                <ProfilePage
+                  onLogout={() => {
+                    handleLogout();
+                    goView("home");
+                  }}
+                />
               ) : view === "rebate" ? (
                 <RebatePage />
               ) : view === "recent-game" ? (
@@ -235,11 +233,14 @@ export default function App() {
 
                   <RecentBigWins />
 
-                  <div className="provider-category-container flex w-full justify-stretch md:justify-end">
+                  <div className="provider-category-container hidden w-full justify-end lg:flex">
+                    <CategoryChips variant="all" />
+                  </div>
+                  <div className="provider-category-container flex w-full justify-stretch lg:hidden">
                     <CategoryChips variant="homeStrip" />
                   </div>
 
-                  <GamesGrid />
+                  <GamesGrid filter={lobbyFilterFromView(view)} />
 
                   <HotProviders />
                 </>

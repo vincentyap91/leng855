@@ -1,4 +1,7 @@
 import { assets } from "../data/assets";
+import type { LobbyGameFilter } from "../data/lobbyGameFilters";
+import { tileMatchesLobbyFilter } from "../data/lobbyGameFilters";
+import { RtpInfoBadge } from "./RtpInfoBadge";
 
 /**
  * "All Game" grid. Uses t3-game-list-* class names so theme.css tokens can
@@ -11,6 +14,9 @@ type Tile = {
   provider: string;
   providerLogo: string;
   href?: string;
+  rtpBadgeThumbUrl?: string;
+  rtpGameName?: string;
+  rtpPercentOverride?: string;
 };
 
 function rtpPercentForId(id: string): string {
@@ -20,6 +26,16 @@ function rtpPercentForId(id: string): string {
 }
 
 const tiles: Tile[] = [
+  {
+    id: "live22-metaspace",
+    label: "Live22 Showcase",
+    src: assets.tiles.nextspin,
+    provider: "Live22",
+    providerLogo: assets.logoNextspin,
+    rtpBadgeThumbUrl: assets.rtpMetaSpaceThumb,
+    rtpGameName: "MetaSpace",
+    rtpPercentOverride: "94.99",
+  },
   {
     id: "pgsoft-mahjong-ways",
     label: "Mahjong Ways",
@@ -192,12 +208,19 @@ const tiles: Tile[] = [
   },
 ];
 
-export function GamesGrid() {
+export type GamesGridProps = {
+  /** When set, only tiles tagged for this lobby tab are shown. */
+  filter?: LobbyGameFilter;
+};
+
+export function GamesGrid({ filter = "all" }: GamesGridProps) {
+  const visible = tiles.filter((t) => tileMatchesLobbyFilter(t.id, filter));
+
   return (
     <section className="t3-game-list-box">
       <div className="t3-game-list-grid">
-        {tiles.map((t) => {
-          const rtp = rtpPercentForId(t.id);
+        {visible.map((t) => {
+          const rtp = t.rtpPercentOverride ?? rtpPercentForId(t.id);
           return (
             <article key={t.id} className="t3-game-list-item">
               <a
@@ -209,27 +232,19 @@ export function GamesGrid() {
               >
                 <div className="t3-game-list-image-box">
                   <div className="image">
-                    <img
-                      src={t.src}
-                      alt={t.label}
-                      className="t3-game-list-image first"
-                    />
+                    <img src={t.src} alt={t.label} className="t3-game-list-image first" />
                   </div>
                 </div>
 
                 <div className="t3-game-list-meta">
-                  <p className="t3-game-list-title">{t.label}</p>
-                  <div className="t3-game-list-rtp" aria-label={`RTP ${rtp} percent`}>
-                    RTP {rtp}%
-                  </div>
-                  <div className="t3-game-list-provider">
-                    <img
-                      src={t.providerLogo}
-                      alt={t.provider}
-                      className="t3-game-list-provider-logo"
-                    />
+                  <div className="t3-game-list-provider t3-game-list-provider--emphasis">
                     <span className="t3-game-list-provider-name">{t.provider}</span>
                   </div>
+                  <RtpInfoBadge
+                    thumbUrl={t.rtpBadgeThumbUrl ?? t.src}
+                    gameName={t.rtpGameName ?? t.label}
+                    rtpPercent={rtp}
+                  />
                 </div>
               </a>
             </article>

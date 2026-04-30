@@ -45,6 +45,10 @@ function RowChevron() {
   );
 }
 
+type ProfilePageProps = {
+  onLogout?: () => void;
+};
+
 function UserAvatar() {
   return (
     <div
@@ -62,7 +66,7 @@ function UserAvatar() {
   );
 }
 
-export function ProfilePage() {
+export function ProfilePage({ onLogout }: ProfilePageProps) {
   const registeredUsername = localStorage.getItem("username") ?? "test123";
   const registeredMobile = localStorage.getItem("userMobile") ?? "85512121212";
   const [isMyProfileOpen, setIsMyProfileOpen] = useState(false);
@@ -179,6 +183,9 @@ export function ProfilePage() {
         <button
           type="button"
           className="t3-profile-action-btn"
+          onClick={() => {
+            onLogout?.();
+          }}
         >
           Logout
         </button>

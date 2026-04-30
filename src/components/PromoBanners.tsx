@@ -38,11 +38,11 @@ const promoBannerSliderSettings: Settings = {
 
 export function PromoBanners() {
   return (
-    <div className="promo-banners-wrap max-lg:mx-2 lg:mx-0">
+    <div className="promo-banners-wrap w-full max-lg:px-4 lg:max-w-none lg:px-0">
       <Slider className="promo-banners-slider" {...promoBannerSliderSettings}>
         {banners.map((b) => (
           <div key={b.alt}>
-            <div className="max-lg:mx-1 overflow-hidden rounded-2xl shadow-sm lg:mx-0 lg:rounded-lg">
+            <div className="overflow-hidden rounded-[20px] shadow-[0_2px_12px_rgba(0,0,0,0.08)] lg:rounded-lg lg:shadow-sm">
               <div className="overflow-hidden max-lg:aspect-[2/1] lg:aspect-[580/320]">
                 <img
                   src={b.src}

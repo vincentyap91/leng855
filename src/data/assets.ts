@@ -98,6 +98,11 @@ export const assets = {
     m2: `${base}/brand-m2.png`,
   },
 
+  /** Game grid RTP badge — MetaSpace reference thumb (Live22 CDN) */
+  rtpMetaSpaceThumb: "https://gth.l22play.com/thumbs/web/30013.png",
+  /** Red banner strip logo (used for Live22-style tile row; local asset) */
+  logoNextspin: `${base}/logo-nextspin.png`,
+
   // Recent big wins — small game thumbnails
   bigwins: {
     chargeBuffalo: `${base}/bigwin-charge-buffalo.png`,

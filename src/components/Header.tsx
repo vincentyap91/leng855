@@ -393,11 +393,11 @@ export function Header({
           </button>
         </div>
       ) : (
-        <div className="second ml-auto flex shrink-0 items-center gap-2 sm:gap-4">
+        <div className="second ml-auto flex shrink-0 items-center gap-4 sm:gap-5">
           <button
             type="button"
             onClick={onLoginClick}
-            className="grid h-10 w-10 shrink-0 place-items-center rounded-full border-2 md:hidden"
+            className="grid h-10 w-10 shrink-0 place-items-center rounded-full border-2 sm:hidden"
             style={{
               borderColor: "var(--header-auth-chip-border)",
               color: "var(--gold)",
@@ -411,7 +411,7 @@ export function Header({
           <button
             type="button"
             onClick={onLoginClick}
-            className="hidden text-sm font-bold hover:opacity-80 md:inline"
+            className="hidden text-sm font-bold hover:opacity-80 sm:inline"
             style={{ color: "var(--nav-login-color)" }}
           >
             Log in
@@ -420,7 +420,7 @@ export function Header({
           <button
             type="button"
             onClick={onRegisterClick}
-            className="t3-header-register hidden h-[40px] min-w-[96px] rounded-lg px-4 text-sm font-bold transition hover:brightness-110 md:inline-flex"
+            className="t3-header-register h-[40px] min-w-[96px] shrink-0 rounded-lg px-4 text-sm font-bold transition hover:brightness-110"
             style={{
               background: "var(--nav-header-register-bg)",
               color: "var(--nav-header-register-color)",

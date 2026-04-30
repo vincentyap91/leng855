@@ -7,7 +7,7 @@ type MobileBottomNavProps = {
 };
 
 const itemClass =
-  "mobile-bottom-nav__btn flex flex-1 flex-col items-center justify-center gap-0.5 border-0 bg-transparent p-1.5 text-[10px] font-semibold leading-tight text-[var(--mobile-nav-fg)] min-w-0";
+  "mobile-bottom-nav__btn flex flex-1 flex-col items-center rounded-lg justify-center gap-0.5 border-0 bg-transparent p-2 text-[10px] font-semibold leading-tight text-[var(--mobile-nav-fg)] min-w-0";
 
 function NavIcon({ src, active }: { src: string; active: boolean }) {
   return (

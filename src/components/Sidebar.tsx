@@ -8,6 +8,7 @@ export type AppView =
   | "slots"
   | "sports"
   | "fish-hunt"
+  | "rng"
   | "promotion"
   | "promotion-detail"
   | "referral"
@@ -231,6 +232,7 @@ function navTargetForLabel(label: string): AppView | null {
   if (label === "Slots") return "slots";
   if (label === "Sports") return "sports";
   if (label === "Fish Hunt") return "fish-hunt";
+  if (label === "RNG") return "rng";
   if (label === "Promotion") return "promotion";
   if (label === "Referral") return "referral";
   if (label === "Home") return "home";
@@ -246,6 +248,7 @@ function isItemActive(view: AppView, label: string): boolean {
   if (view === "slots" && label === "Slots") return true;
   if (view === "sports" && label === "Sports") return true;
   if (view === "fish-hunt" && label === "Fish Hunt") return true;
+  if (view === "rng" && label === "RNG") return true;
   if ((view === "promotion" || view === "promotion-detail") && label === "Promotion") return true;
   if (view === "referral" && label === "Referral") return true;
   if (view === "rebate" && label === "Rebate") return true;
