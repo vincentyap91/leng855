@@ -416,23 +416,17 @@ export function ReferralPage({ isLoggedIn = false, onLoginClick }: ReferralPageP
                   height={160}
                 />
                 <div className="t3-referral-promo-card__body t3-referral-promo-card__body--end">
-                  <p className="t3-referral-promo-card__kicker">
-                    <span className="t3-referral-promo-card__accent-commission">Referral Commission Bonus</span>
-                    {" — "}Unlimited rewards from your friends&apos; valid bets.
-                  </p>
-                  <p className="t3-referral-promo-card__sub">
-                    The more active players you invite, the more passive income you can earn every day.
+                  <p className="t3-referral-promo-card__eyebrow">Invite friends to receive</p>
+                  <p className="t3-referral-promo-card__headline">
+                    Referral Commission Bonus when your downlines play
                   </p>
                 </div>
               </div>
               <div className="t3-referral-promo-card t3-referral-promo-card--deposit">
                 <div className="t3-referral-promo-card__body t3-referral-promo-card__body--start">
-                  <p className="t3-referral-promo-card__kicker">
-                    <span className="t3-referral-promo-card__accent-deposit">Referral Deposit Bonus</span>
-                    {" — "}Extra credits when referrals fund their wallets.
-                  </p>
-                  <p className="t3-referral-promo-card__sub">
-                    Stack welcome-style deposit bonuses on top of your rolling commission.
+                  <p className="t3-referral-promo-card__eyebrow">Invite friends to receive</p>
+                  <p className="t3-referral-promo-card__headline">
+                    Referral Deposit Bonus when your downlines make a valid deposit
                   </p>
                 </div>
                 <img

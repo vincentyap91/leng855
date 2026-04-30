@@ -1210,7 +1210,7 @@ button.side-nav-item:not(.side-nav-item--active):hover .side-nav-icon {
     min-height: 44px;
     padding: 0 14px;
     border-radius: 10px;
-    border: none;
+    border: 1px solid var(--border);
     background: var(--base-input);
     color: var(--base-input-color);
     font-family: var(--base-font-family);
@@ -1231,10 +1231,10 @@ button.side-nav-item:not(.side-nav-item--active):hover .side-nav-icon {
     box-shadow: 0 0 0 3px color-mix(in srgb, var(--gold) 22%, transparent);
 }
 
-/* No border lines on text-like inputs / textareas / selects (Tailwind `border` included) */
-input:not([type="checkbox"]):not([type="radio"]):not([type="range"]):not([type="file"]):not([type="hidden"]):not([type="button"]):not([type="submit"]):not([type="reset"]):not([type="image"]),
-textarea,
-select {
+/* No border lines on text-like inputs / textareas / selects (Tailwind `border` included); keep borders on auth modal fields */
+input:not([type="checkbox"]):not([type="radio"]):not([type="range"]):not([type="file"]):not([type="hidden"]):not([type="button"]):not([type="submit"]):not([type="reset"]):not([type="image"]):not(.t3-custom-input-text),
+textarea:not(.t3-custom-input-text),
+select:not(.t3-custom-input-text) {
     border-width: 0 !important;
     border-style: none !important;
     border-color: transparent !important;
@@ -3449,46 +3449,49 @@ padding: 0;
     border-color: color-mix(in srgb, var(--primary-dark) 88%, var(--border) 12%);
 }
 
+/* Logged-out referral hero: light panel + gold frame + centered copy (matches design reference) */
+.t3-referral-content .referral-login.t3-referral-login-banner {
+    background: #f2f2f2;
+    border: 1px solid #d4af37;
+    box-shadow: none;
+}
+
 .t3-referral-login-banner {
     margin-top: 20px;
-    border-radius: 10px;
-    padding: 20px 22px;
+    border-radius: 14px;
+    padding: 26px 24px 28px;
     display: flex;
-    flex-wrap: wrap;
+    flex-direction: column;
     align-items: center;
-    justify-content: space-between;
-    gap: 16px;
-    border: 1px solid color-mix(in srgb, var(--primary) 52%, transparent);
-    background: linear-gradient(
-        145deg,
-        color-mix(in srgb, var(--primary-dark) 92%, #0a0505 8%) 0%,
-        color-mix(in srgb, var(--primary-dark) 58%, var(--surface) 42%) 100%
-    );
-    box-shadow: none;
+    justify-content: center;
+    gap: 18px;
+    text-align: center;
+    box-sizing: border-box;
 }
 
 .t3-referral-login-banner__title {
     margin: 0;
-    font-size: clamp(15px, 2.5vw, 17px);
-    font-weight: 800;
-    line-height: 1.4;
-    color: var(--text);
-    max-width: 560px;
+    font-size: clamp(22px, 2.4vw, 18px);
+    font-weight: 700;
+    line-height: 1.35;
+    letter-spacing: -0.01em;
+    color: #1a1a1a;
+    max-width: 520px;
+    font-family: var(--base-font-family, system-ui, -apple-system, sans-serif);
 }
 
 .t3-referral-login-banner__cta {
     flex-shrink: 0;
-    min-height: 44px;
-    padding: 0 28px;
-    border-radius: 8px;
-    border: 1px solid color-mix(in srgb, var(--gold) 45%, var(--primary-dark) 55%);
+    min-height: 46px;
+    padding: 0 36px;
+    border-radius: 5px;
+    border: none;
     font-size: 15px;
-    font-weight: 800;
-    font-family: inherit;
+    font-weight: 700;
+    font-family: var(--base-font-family, system-ui, -apple-system, sans-serif);
     cursor: pointer;
-    background: var(--gold-gradient);
-    color: var(--primary-dark);
-    box-shadow: none;
+    background: linear-gradient(180deg, #e53935 0%, #b71c1c 55%, #8e0000 100%);
+    color: #ffffff;
 }
 
 .t3-referral-login-banner__cta:hover {
@@ -3512,28 +3515,26 @@ padding: 0;
     display: flex;
     flex-direction: row;
     align-items: stretch;
-    min-height: 128px;
-    border-radius: 12px;
+    min-height: 140px;
+    border-radius: 14px;
     overflow: hidden;
-    border: 1px solid var(--panel-item-border);
+    border: 1px solid color-mix(in srgb, var(--panel-item-border) 55%, transparent);
     box-shadow: var(--card-shadow);
 }
 
 .t3-referral-promo-card--commission {
-    background: linear-gradient(
-        100deg,
-        var(--primary-bright) 0%,
-        var(--primary-dark) 45%,
-        color-mix(in srgb, var(--primary-dark) 72%, #1a0a0a 28%) 100%
-    );
+    background: linear-gradient(180deg, #c62828 0%, #8e0000 100%);
 }
 
 .t3-referral-promo-card--deposit {
-    background: linear-gradient(
-        100deg,
-        color-mix(in srgb, var(--primary-dark) 55%, #2c1810 45%) 0%,
-        color-mix(in srgb, var(--primary-dark) 40%, var(--gold) 60%) 100%
-    );
+    background:
+        linear-gradient(
+            118deg,
+            color-mix(in srgb, #ffffff 42%, transparent) 0%,
+            transparent 42%,
+            transparent 100%
+        ),
+        linear-gradient(180deg, #fbc02d 0%, #f9a825 100%);
 }
 
 .t3-referral-promo-card__art {
@@ -3541,19 +3542,20 @@ padding: 0;
     max-width: 180px;
     min-width: 100px;
     object-fit: contain;
-    object-position: bottom center;
-    align-self: flex-end;
+    object-position: center;
+    align-self: center;
+    padding: 10px 8px;
     pointer-events: none;
     user-select: none;
 }
 
 .t3-referral-promo-card__body {
     flex: 1;
-    padding: 16px 18px;
+    padding: 20px 22px;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    gap: 6px;
+    gap: 0;
 }
 
 .t3-referral-promo-card__body--end {
@@ -3564,33 +3566,33 @@ padding: 0;
 .t3-referral-promo-card__body--start {
     text-align: left;
     align-items: flex-start;
+    padding: 20px 0px 20px 22px;
 }
 
-.t3-referral-promo-card__kicker {
+.t3-referral-promo-card__eyebrow {
     margin: 0;
-    font-size: 14px;
-    font-weight: 800;
+    font-size: 13px;
+    font-weight: 400;
     line-height: 1.35;
-    color: var(--text);
-    text-shadow: var(--shadow-promo-text);
+    color: rgba(255, 255, 255, 0.95);
+    font-family: var(--base-font-family, system-ui, -apple-system, sans-serif);
 }
 
-.t3-referral-promo-card__accent-commission {
-    color: color-mix(in srgb, var(--gold-bright) 35%, #fecaca 65%);
-}
-
-.t3-referral-promo-card__accent-deposit {
-    color: var(--gold-bright);
-}
-
-.t3-referral-promo-card__sub {
+.t3-referral-promo-card__headline {
     margin: 0;
-    font-size: 12px;
-    font-weight: 600;
-    line-height: 1.45;
-    color: color-mix(in srgb, var(--text) 88%, transparent);
-    max-width: 280px;
-    text-shadow: 0 1px 2px color-mix(in srgb, var(--primary-dark) 40%, transparent);
+    margin-top: 8px;
+    font-size: clamp(22px, 2.2vw, 17px);
+    font-weight: 700;
+    line-height: 1.35;
+    color: #ffffff;
+    max-width: 24.5rem;
+    font-family: var(--base-font-family, system-ui, -apple-system, sans-serif);
+    text-shadow: 0 1px 2px color-mix(in srgb, #000000 28%, transparent);
+}
+
+.t3-referral-promo-card--deposit .t3-referral-promo-card__eyebrow,
+.t3-referral-promo-card--deposit .t3-referral-promo-card__headline {
+    text-shadow: 0 1px 3px color-mix(in srgb, #5c4200 45%, transparent);
 }
 
 /* -------- Mobile home layout (bottom nav, RTP strip, profile-only sections) -------- */
