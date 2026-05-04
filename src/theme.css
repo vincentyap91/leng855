@@ -86,13 +86,13 @@
             var(--primary-dark) 0%,
             var(--primary) 38%,
             var(--primary-bright) 100%);
-    /* Header — deep crimson anchor (no near-black) → bright red, light R/W/G theme */
+    /* Header — dark red-black → bright crimson (matches Figma 5-stop gradient) */
     --header-gradient: linear-gradient(90deg,
-            var(--crimson-deep) 0%,
-            #7A1120 24%,
-            var(--primary-dark) 48%,
-            var(--primary) 78%,
-            var(--primary-bright) 100%);
+            #2C0308 0%,
+            #520711 24%,
+            #991B1B 48%,
+            #B91C1C 78%,
+            #D81E2F 100%);
     --header-bar-gradient: var(--header-gradient);
     --header-bar-top-line: color-mix(in srgb, var(--gold) 38%, transparent);
     --header-bar-bottom-line: color-mix(in srgb, var(--gold-bright) 28%, transparent);
