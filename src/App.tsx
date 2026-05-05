@@ -12,6 +12,7 @@ import { RecentGamePage } from "./components/RecentGamePage";
 import { AnnouncementBar } from "./components/AnnouncementBar";
 import { PromoBanners } from "./components/PromoBanners";
 import { CategoryChips } from "./components/CategoryChips";
+import type { LobbyGameFilter } from "./data/lobbyGameFilters";
 import { GamesGrid } from "./components/GamesGrid";
 import { LiveTransactions } from "./components/LiveTransactions";
 import { RecentBigWins } from "./components/RecentBigWins";
@@ -117,6 +118,20 @@ export default function App() {
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(() => loadSession() !== null);
   const [authMode, setAuthMode] = useState<AuthMode>("login");
   const [isAuthOpen, setIsAuthOpen] = useState(false);
+  const [homeTab, setHomeTab] = useState<string>("Slots");
+
+  const getHomeFilter = (): LobbyGameFilter => {
+    switch (homeTab) {
+      case "Hot Games": return "hot-games";
+      case "All": return "all";
+      case "Live Casino": return "live-casino";
+      case "Slots": return "slots";
+      case "Sports": return "sports";
+      case "Fish Hunt": return "fish-hunt";
+      case "RNG": return "rng";
+      default: return "slots";
+    }
+  };
 
   // Registration Flow State
   const [isVerifyModalOpen, setIsVerifyModalOpen] = useState(false);
@@ -310,13 +325,21 @@ export default function App() {
                   <RecentBigWins />
 
                   <div className="provider-category-container hidden w-full justify-end lg:flex">
-                    <CategoryChips variant="all" />
+                    <CategoryChips 
+                      variant="all" 
+                      activeTab={homeTab} 
+                      onTabChange={(label) => setHomeTab(label)} 
+                    />
                   </div>
                   <div className="provider-category-container flex w-full justify-stretch lg:hidden">
-                    <CategoryChips variant="homeStrip" />
+                    <CategoryChips 
+                      variant="homeStrip" 
+                      activeTab={homeTab} 
+                      onTabChange={(label) => setHomeTab(label)} 
+                    />
                   </div>
 
-                  <GamesGrid filter={lobbyFilterFromView(view)} />
+                  <GamesGrid filter={getHomeFilter()} />
 
                   <HotProviders />
                 </>

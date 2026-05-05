@@ -47,19 +47,26 @@ function CategoryScrollChevron({ dir }: { dir: "left" | "right" }) {
 
 export type CategoryChipsVariant = "all" | "homeStrip";
 
-type CategoryChipsProps = { variant?: CategoryChipsVariant };
+type CategoryChipsProps = { 
+  variant?: CategoryChipsVariant;
+  activeTab?: string;
+  onTabChange?: (label: string, routeHash?: string) => void;
+};
 
-export function CategoryChips({ variant = "all" }: CategoryChipsProps) {
+export function CategoryChips({ variant = "all", activeTab, onTabChange }: CategoryChipsProps) {
   const chips = variant === "homeStrip" ? chipsHomeStrip : chipsAll;
-  const [activeLabel, setActiveLabel] = useState(() => hashToActiveLabel());
+  const [internalActiveLabel, setInternalActiveLabel] = useState(() => hashToActiveLabel());
   const scrollRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const sync = () => setActiveLabel(hashToActiveLabel());
+    if (activeTab !== undefined) return;
+    const sync = () => setInternalActiveLabel(hashToActiveLabel());
     window.addEventListener("hashchange", sync);
     sync();
     return () => window.removeEventListener("hashchange", sync);
-  }, []);
+  }, [activeTab]);
+
+  const currentActiveLabel = activeTab !== undefined ? activeTab : internalActiveLabel;
 
   const scrollBy = (delta: number) => {
     scrollRef.current?.scrollBy({ left: delta, behavior: "smooth" });
@@ -71,7 +78,7 @@ export function CategoryChips({ variant = "all" }: CategoryChipsProps) {
   } as const;
 
   const chipNodes = chips.map((c) => {
-    const isActive = activeLabel === c.label;
+    const isActive = currentActiveLabel === c.label;
     return (
       <button
         key={c.label}
@@ -79,10 +86,14 @@ export function CategoryChips({ variant = "all" }: CategoryChipsProps) {
         role="tab"
         aria-selected={isActive}
         onClick={() => {
-          if (c.routeHash) {
-            window.location.hash = c.routeHash;
+          if (onTabChange) {
+            onTabChange(c.label, c.routeHash);
           } else {
-            setActiveLabel(c.label);
+            if (c.routeHash) {
+              window.location.hash = c.routeHash;
+            } else {
+              setInternalActiveLabel(c.label);
+            }
           }
         }}
         className={[

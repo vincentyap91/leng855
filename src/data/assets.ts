@@ -47,9 +47,9 @@ export const assets = {
 
   /** Homepage referral promo — Azure CDN WebP (mobile + desktop). */
   referralBannerMobile:
-    "https://pksoftcdn.azureedge.net/media/leng855_referralbannermobile_1024x549-202604271612462600.webp",
+    "https://pksoftcdn.azureedge.net/media/leng855_referralbannermobile_1024x549-202605041123121081.webp",
   referralBannerDesktop:
-    "https://pksoftcdn.azureedge.net/media/leng855_referralbannerdesktop_1544x451-202604271612597865.webp",
+    "https://pksoftcdn.azureedge.net/media/leng855_referralbannerdesktop_1544x451-202605041122582326.webp",
 
   // Provider game tiles (200×200 red-pedestal PNGs)
   tiles: {
