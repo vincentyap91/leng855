@@ -89,9 +89,9 @@
     /* Header — dark red-black → bright crimson (matches Figma 5-stop gradient) */
     --header-gradient: linear-gradient(90deg,
             #2C0308 0%,
-            #520711 24%,
-            #991B1B 48%,
-            #B91C1C 78%,
+            #40080F 24%,
+            #581717 48%,
+            #8E1515 78%,
             #D81E2F 100%);
     --header-bar-gradient: var(--header-gradient);
     --header-bar-top-line: color-mix(in srgb, var(--gold) 38%, transparent);
@@ -1267,7 +1267,7 @@ button.side-nav-item:not(.side-nav-item--active):hover .side-nav-icon {
     align-items: center;
     justify-content: space-between;
     gap: 12px;
-    background: linear-gradient(90deg, #8A0F1E 0%, #7A1120 24%, #991B1B 48%, #B91C1C 78%, #D81E2F 100%);
+    background: linear-gradient(90deg, #2C0308 0%, #40080F 24%, #581717 48%, #8E1515 78%, #D81E2F 100%);
     border-bottom: none;
 }
 
