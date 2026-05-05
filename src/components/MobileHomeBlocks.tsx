@@ -268,18 +268,20 @@ export function DesktopReferralHubBanner() {
           referrerPolicy="no-referrer"
         />
         <div className="relative z-[1] flex min-h-[240px] items-center p-5 md:min-h-[300px] md:p-10">
-          <div className="home-desktop-referral-hub__card w-full max-w-[400px] rounded-xl border-2 bg-[var(--bg)] p-6 md:p-7 md:ml-[5%]">
-            <h3 className="m-0 text-lg font-extrabold tracking-tight md:text-xl" style={{ color: "var(--primary)" }}>
+          <div className="home-desktop-referral-hub__card w-full max-w-[380px] rounded-[14px] bg-white p-6 md:p-8 md:ml-[5%] shadow-lg border-0">
+            <h3 className="m-0 text-center text-[22px] font-extrabold tracking-tight" style={{ color: "var(--primary)" }}>
               Your Unique Referral Hub
             </h3>
-            <p className="m-0 mt-5 text-xs font-medium md:text-[13px]" style={{ color: "#000" }}>
+            <p className="m-0 mt-1.5 text-center text-[15px] font-bold tracking-tight" style={{ color: "#000" }}>
+              Share & Grow Your Network
+            </p>
+            <p className="m-0 mt-5 text-[13px] font-medium" style={{ color: "#000" }}>
               My Referral Link
             </p>
             <div
-              className="relative mt-2 flex min-h-[46px] items-center rounded-[10px] border px-3 pr-12"
+              className="relative mt-2 flex min-h-[48px] items-center rounded-xl border-0 px-4 pr-12"
               style={{
-                borderColor: "color-mix(in srgb, var(--gold) 35%, var(--border) 65%)",
-                background: "var(--surface-3)",
+                background: "#f4f4f4",
               }}
             >
               <span
@@ -298,27 +300,27 @@ export function DesktopReferralHubBanner() {
                 <img src={copyIconSrc} alt="" className="h-[18px] w-[18px] object-contain opacity-95" aria-hidden />
               </button>
             </div>
-            <div className="mt-5 grid grid-cols-2 gap-2.5">
+            <div className="mt-5 grid grid-cols-2 gap-3">
               <button
                 type="button"
-                className={referralHubGoldBtn}
-                style={referralHubGoldBtnStyle}
+                className="rounded-xl border-0 py-3 text-[14px] font-bold transition hover:opacity-90 min-h-[48px]"
+                style={{ background: "#DCB54A", color: "#2A1A00" }}
                 onClick={goReferralPage}
               >
                 Share
               </button>
               <button
                 type="button"
-                className={referralHubGoldBtn}
-                style={referralHubGoldBtnStyle}
+                className="rounded-xl border-0 py-3 text-[14px] font-bold transition hover:opacity-90 min-h-[48px]"
+                style={{ background: "#DCB54A", color: "#2A1A00" }}
                 onClick={goReferralPage}
               >
                 Downlines
               </button>
               <button
                 type="button"
-                className={`${referralHubGoldBtn} col-span-2`}
-                style={referralHubGoldBtnStyle}
+                className="rounded-xl border-0 py-3 text-[14px] font-bold transition hover:opacity-90 min-h-[48px] col-span-2"
+                style={{ background: "#DCB54A", color: "#2A1A00" }}
                 onClick={goReferralPage}
               >
                 More Info
