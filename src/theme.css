@@ -3954,7 +3954,7 @@ padding: 0;
 
 .mobile-bottom-nav__btn[data-active="true"] .mobile-bottom-nav__icon {
     opacity: 1;
-    filter: brightness(100) invert(1);
+    filter: brightness(0) saturate(100%) invert(74%) sepia(63%) saturate(438%) hue-rotate(6deg) brightness(95%) contrast(90%);
 }
 
 .mobile-bottom-nav__btn[data-active="true"] .mobile-bottom-nav__icon--svg {
@@ -3963,8 +3963,8 @@ padding: 0;
 }
 
 .mobile-bottom-nav__btn[data-active="true"] {
-    color: #2a1a00;
-    background: var(--gold-gradient);
+    color: var(--gold);
+    background: var(--primary);
 }
 
 .mobile-bottom-nav__btn--badge {

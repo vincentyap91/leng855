@@ -142,22 +142,6 @@ export function Header({
           background: "var(--header-bar-gradient)",
         }}
       >
-        <button
-          type="button"
-          aria-label="Menu"
-          className="menu-trigger hidden h-[30px] w-[30px] shrink-0 place-items-center opacity-90 hover:opacity-100 lg:grid"
-        >
-          <img
-            src={assets.menuIcon}
-            alt=""
-            className="h-[24px] w-[24px]"
-            style={{
-              filter:
-                "brightness(0) saturate(100%) invert(74%) sepia(63%) saturate(438%) hue-rotate(6deg) brightness(95%) contrast(90%)",
-            }}
-          />
-        </button>
-
         <a
           href="#"
           className="ml-0.5 block shrink-0 rounded-[4px] px-1 py-0.5 sm:ml-1"
@@ -328,7 +312,7 @@ export function Header({
               <button
                 type="button"
                 id="header-login-btn"
-                className="header-login-btn"
+                className="header-login-btn hidden md:block"
                 onClick={onLoginClick}
                 style={{
                   background: "transparent",
@@ -348,7 +332,7 @@ export function Header({
               <button
                 type="button"
                 id="header-register-btn"
-                className="header-register-btn"
+                className="header-register-btn hidden md:block"
                 onClick={onRegisterClick}
                 style={{
                   background: "var(--register-btn-bg, var(--gold-gradient))",
