@@ -119,6 +119,11 @@ export default function App() {
   const [authMode, setAuthMode] = useState<AuthMode>("login");
   const [isAuthOpen, setIsAuthOpen] = useState(false);
   const [homeTab, setHomeTab] = useState<string>("Slots");
+  const [desktopSidebarOpen, setDesktopSidebarOpen] = useState(true);
+
+  const toggleDesktopSidebar = useCallback(() => {
+    setDesktopSidebarOpen(prev => !prev);
+  }, []);
 
   const getHomeFilter = (): LobbyGameFilter => {
     switch (homeTab) {
@@ -235,12 +240,17 @@ export default function App() {
         onLogout={handleLogout}
         appView={view}
         onMenuNavigate={goView}
+        onToggleDesktopSidebar={toggleDesktopSidebar}
       />
 
       <div className="flex min-h-0 w-full min-w-0 flex-1">
-        <Sidebar view={view} onNavigate={goView} />
+        <Sidebar 
+          view={view} 
+          onNavigate={goView} 
+          isOpen={desktopSidebarOpen} 
+        />
 
-        <div className="ml-0 flex min-w-0 flex-1 flex-col lg:ml-[220px]">
+        <div className={`ml-0 flex min-w-0 flex-1 flex-col transition-[margin] duration-300 ${desktopSidebarOpen ? "lg:ml-[220px]" : "lg:ml-0"}`}>
           <main className="min-w-0 flex-1 pb-20 lg:pb-5" style={{ background: "transparent" }}>
             <div className="mx-auto w-full min-h-screen max-w-[1430px] space-y-6 px-4 py-5 sm:px-6">
               {view === "promotion" ? (

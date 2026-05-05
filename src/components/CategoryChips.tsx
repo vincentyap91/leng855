@@ -72,10 +72,7 @@ export function CategoryChips({ variant = "all", activeTab, onTabChange }: Categ
     scrollRef.current?.scrollBy({ left: delta, behavior: "smooth" });
   };
 
-  const stripStyle = {
-    backgroundColor: "var(--game-category-tab-bg)",
-    boxShadow: "var(--game-category-pill-shadow)",
-  } as const;
+
 
   const chipNodes = chips.map((c) => {
     const isActive = currentActiveLabel === c.label;
@@ -101,13 +98,7 @@ export function CategoryChips({ variant = "all", activeTab, onTabChange }: Categ
             ? "t3-game-category-item t3-game-category-item--mobile-strip flex shrink-0 items-center justify-center gap-2 rounded-lg px-4 py-2 text-[12.5px] font-bold leading-none whitespace-nowrap transition-[background-color,color]"
             : "t3-game-category-item flex shrink-0 items-center gap-2 rounded-lg px-4 py-2 text-[12.5px] font-bold leading-none whitespace-nowrap transition-[background-color,color]",
           isActive ? "active" : "",
-          isActive
-            ? "text-[var(--game-category-tab-active-color)]"
-            : variant === "homeStrip"
-              ? "text-[var(--game-category-tab-color)]"
-              : "text-[var(--game-category-tab-color)] hover:bg-[var(--game-category-tab-hover)]",
         ].join(" ")}
-        style={isActive ? { background: "var(--game-category-tab-active)" } : undefined}
       >
         <img
           src={c.icon}
@@ -161,7 +152,6 @@ export function CategoryChips({ variant = "all", activeTab, onTabChange }: Categ
       role="tablist"
       aria-label="Game categories"
       className="t3-game-category-list t3-game-category-list--all inline-flex max-w-full items-center overflow-x-auto rounded-lg py-1.5 pl-1.5 pr-2"
-      style={stripStyle}
     >
       {chipNodes}
     </div>

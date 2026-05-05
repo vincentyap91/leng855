@@ -18,6 +18,7 @@ type HeaderProps = {
   onBalanceRefresh?: () => void;
   appView: AppView;
   onMenuNavigate: (next: AppView) => void;
+  onToggleDesktopSidebar?: () => void;
 };
 
 /** Wallet dropdown chevron — matches `header.txt` / `t3-chevon-ddl` markup */
@@ -95,6 +96,7 @@ export function Header({
   onBalanceRefresh,
   appView,
   onMenuNavigate,
+  onToggleDesktopSidebar,
 }: HeaderProps) {
   const loggedIn = session != null;
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -134,14 +136,38 @@ export function Header({
 
   return (
     <>
-      <header
-        className="t3-header sticky top-0 z-50 flex h-[60px] min-w-0 shrink-0 items-center gap-3 border-b border-t px-3 sm:px-5 md:gap-4"
-        style={{
-          borderTopColor: "var(--header-bar-top-line)",
-          borderBottomColor: "var(--header-bar-bottom-line)",
-          background: "var(--header-bar-gradient)",
-        }}
-      >
+      <header className="t3-header sticky top-0 z-50 flex h-[60px] min-w-0 shrink-0 items-center gap-3 border-b border-t px-3 sm:px-5 md:gap-4">
+        {/* Mobile Hamburger (Visible on Mobile) */}
+        <button
+          type="button"
+          aria-label="Open mobile menu"
+          className="mobile-header-open-menu grid h-[30px] w-[30px] shrink-0 place-items-center opacity-90 hover:opacity-100 lg:hidden"
+          onClick={() => setMobileMenuOpen(true)}
+        >
+          <img
+            src={assets.menuIcon}
+            alt=""
+            className="h-[24px] w-[24px]"
+            style={{
+              filter:
+                "brightness(0) saturate(100%) invert(74%) sepia(63%) saturate(438%) hue-rotate(6deg) brightness(95%) contrast(90%)",
+            }}
+          />
+        </button>
+
+        {/* Desktop Hamburger (Visible on Desktop only) */}
+        <button
+          type="button"
+          aria-label="Toggle desktop sidebar"
+          className="hidden lg:block outline-none"
+          onClick={onToggleDesktopSidebar}
+        >
+          <div className="burger cursor-pointer">
+            <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg" className="theme-menu-icon">
+              <path fillRule="evenodd" clipRule="evenodd" d="M4.5 22.5C4.5 21.6715 5.17156 21 6 21H24C24.8284 21 25.5 21.6715 25.5 22.5C25.5 23.3284 24.8284 24 24 24H6C5.17156 24 4.5 23.3284 4.5 22.5ZM4.5 7.5C4.5 6.67156 5.17156 6 6 6H24C24.8284 6 25.5 6.67156 25.5 7.5C25.5 8.32842 24.8284 9 24 9H6C5.17156 9 4.5 8.32842 4.5 7.5ZM4.5 15C4.5 14.1716 5.17156 13.5 6 13.5H15C15.8285 13.5 16.5 14.1716 16.5 15C16.5 15.8285 15.8285 16.5 15 16.5H6C5.17156 16.5 4.5 15.8285 4.5 15Z"></path>
+            </svg>
+          </div>
+        </button>
         <a
           href="#"
           className="ml-0.5 block shrink-0 rounded-[4px] px-1 py-0.5 sm:ml-1"
@@ -314,18 +340,6 @@ export function Header({
                 id="header-login-btn"
                 className="header-login-btn hidden md:block"
                 onClick={onLoginClick}
-                style={{
-                  background: "transparent",
-                  border: "none",
-                  color: "var(--gold)",
-                  fontWeight: 700,
-                  fontSize: "14px",
-                  cursor: "pointer",
-                  padding: "0 4px",
-                  fontFamily: "var(--base-font-family), sans-serif",
-                  letterSpacing: "0.01em",
-                  whiteSpace: "nowrap",
-                }}
               >
                 Log In
               </button>
@@ -334,20 +348,6 @@ export function Header({
                 id="header-register-btn"
                 className="header-register-btn hidden md:block"
                 onClick={onRegisterClick}
-                style={{
-                  background: "var(--register-btn-bg, var(--gold-gradient))",
-                  color: "var(--register-btn-color, var(--on-gold))",
-                  border: "none",
-                  borderRadius: "8px",
-                  fontWeight: 800,
-                  fontSize: "13px",
-                  cursor: "pointer",
-                  padding: "0 16px",
-                  height: "40px",
-                  fontFamily: "var(--base-font-family), sans-serif",
-                  letterSpacing: "0.01em",
-                  whiteSpace: "nowrap",
-                }}
               >
                 Register
               </button>
@@ -405,25 +405,7 @@ export function Header({
               </div>
             ) : null}
           </div>
-
-          <button
-            type="button"
-            aria-label="Open menu"
-            className="mobile-header-open-menu grid h-[30px] w-[30px] shrink-0 place-items-center opacity-90 hover:opacity-100 lg:hidden"
-            onClick={() => setMobileMenuOpen(true)}
-          >
-            <img
-              src={assets.menuIcon}
-              alt=""
-              className="h-[24px] w-[24px]"
-              style={{
-                filter:
-                  "brightness(0) saturate(100%) invert(74%) sepia(63%) saturate(438%) hue-rotate(6deg) brightness(95%) contrast(90%)",
-              }}
-            />
-          </button>
         </div>
-
       </header>
       <MobileNavDrawer
         isOpen={mobileMenuOpen}

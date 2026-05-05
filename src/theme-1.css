@@ -4,64 +4,59 @@
    Extra custom properties are safe; BO can ignore unused variables. */
 :root {
     /* ============================================================
-       1. BRAND PALETTE (Core Colors - Edit these for new sites)
+       [Brand]: Primary and accent colors
        ============================================================ */
-    /* primary red */
-    --primary: #B91C1C;
-    /* primary red */
-    --primary-dark: #991B1B;
-    /* deep red */
-    --primary-bright: #D81E2F;
-    /* crimson highlight */
-    --crimson-deep: #8A0F1E;
-    /* header / vibrant anchor (not muddy black-red) */
-    --gold: #D4AF37;
-    /* premium gold */
-    --gold-bright: #E9C96A;
-    /* soft gold gleam */
-    --bg: #FFFFFF;
-    /* pure white page base (CAM88 clean feel) */
-    --surface: #FFFFFF;
-    /* cards / sections */
-    --text: #3A1515;
-    /* high-contrast dark red-brown */
-    --muted: #8A6B2A;
-    /* secondary text (muted gold-brown) */
-    /* Foreground colors when painted over brand fills */
-    --on-primary: #FFFFFF;
-    /* text on red/CTA */
-    --on-gold: #2A1A00;
-    /* text on gold */
-    /* Full-bleed footer bar (reference #7F1D1D; distinct from --primary-deep for gradients) */
-    --footer-strip-bg: #7F1D1D;
-    /* Mobile shell (home + global bottom bar) */
-    --mobile-nav-bg: #252525;
+    --color-primary: #28E16C;
+    --color-secondary: #F39C12;
+    --color-accent: #E74C3C;
 
     /* ============================================================
-       2. COMPONENT SPECIFIC COLORS (Also edit these if needed)
+       [Backgrounds]: Page, surface, and element levels
        ============================================================ */
-    /* Header — dark red-black → bright crimson (matches Figma 5-stop gradient) */
-    --header-gradient: linear-gradient(90deg, #2C0308 0%, #40080F 24%, #581717 48%, #8E1515 78%, #D81E2F 100%);
-    /* Logged-in header controls (match dark panel + orange actions) */
-    --header-auth-panel-bg: linear-gradient(180deg, #1D232A 0%, #12171D 100%);
-    --header-auth-chip-bg: linear-gradient(180deg, #2B3139 0%, #1A2027 100%);
-    --header-auth-target-bg: linear-gradient(180deg, #FF9A2F 0%, #C35E09 100%);
-    /* Balance row — compact wallet DDL chip (lighter top → darker bottom, thin white chevron) */
-    --header-auth-wallet-ddl-bg: linear-gradient(180deg, #484f59 0%, #3a424c 35%, #2d343e 72%, #20262e 100%);
-    --header-auth-logout-color: #e8c766;
-    --header-auth-balance-amount: #ffe176;
-    /* Sidebar */
-    --sidebar-bg: #EBEBEB;
-    --sidebar-item-bg: #DBDAD8;
-    --sidebar-daily-bg: linear-gradient(180deg, #430000 0%, #771405 100%);
-    --sidebar-spin-bg: linear-gradient(180deg, #432800 0%, #774505 100%);
-    --sidebar-download-bg: linear-gradient(180deg, #001F3F 0%, #003366 100%);
-    /* RTP chip — balance widget palette: charcoal panel, white game name, neon RTP */
-    --game-rtp-badge-bg: #1a1d23;
-    --game-rtp-badge-neon: #ffe176;
-    /* Announcement — light cream bar, dark brown/red copy (no heavy shadows) */
-    --announcement-bg: #FDF0C5;
-    --non-active-bg: #3E2621;
+    --bg-main: #0F0F0F;
+    --bg-surface: #1A1A1A;
+    --bg-element: #242424;
+
+    /* ============================================================
+       [Typography]: Main, muted, and inverse text colors
+       ============================================================ */
+    --text-main: #FFFFFF;
+    --text-muted: #A0A0A0;
+    --text-inverse: #000000;
+
+    /* ============================================================
+       [Interactive]: Borders, hover states, and status colors
+       ============================================================ */
+    --border-default: #333333;
+    --hover-overlay: rgba(255, 255, 255, 0.08);
+    --status-success: #28E16C;
+
+    /* ------------------------------------------------------------
+       [Internal Mappings]: Keeping codebase functional
+       (Do not edit these; they derive from the Brand section)
+       ------------------------------------------------------------ */
+    --primary: var(--color-primary);
+    --primary-dark: color-mix(in srgb, var(--color-primary) 80%, black);
+    --primary-bright: color-mix(in srgb, var(--color-primary) 80%, white);
+    --gold: var(--color-secondary);
+    --gold-bright: color-mix(in srgb, var(--color-secondary) 85%, white);
+    --bg: var(--bg-main);
+    --surface: var(--bg-surface);
+    --text: var(--text-main);
+    --muted: var(--text-muted);
+    --on-primary: var(--text-inverse);
+    --on-gold: var(--text-inverse);
+
+    --header-gradient: #1b1b1b;
+    --footer-strip-bg: var(--bg-main);
+    --mobile-nav-bg: var(--bg-main);
+    --sidebar-bg: var(--bg-main);
+    --sidebar-item-bg: #242424;
+    --sidebar-daily-bg: #014F2E;
+    --sidebar-spin-bg: #522A00;
+    --sidebar-download-bg: #002D5E;
+    --announcement-bg: var(--bg-surface);
+    --non-active-bg: var(--bg-main);
 
     /* ============================================================
        3. SEMANTIC TOKENS (Do Not Edit - These auto-update)
@@ -74,7 +69,7 @@
     --sidebar-fixed-width: 220px;
     --mobile-nav-fg: rgba(255, 255, 255, 0.9);
     --mobile-profile-withdraw-bg: #1d4ed8;
-    --mobile-home-profile-bg: color-mix(in srgb, #F5F5F5 58%, #e2e8f0 42%);
+    --mobile-home-profile-bg: color-mix(in srgb, var(--surface-3) 58%, #e2e8f0 42%);
 
 
     /* ---- Derived neutrals (never hardcode colors elsewhere) ---- */
@@ -86,141 +81,120 @@
     --border-strong: rgba(0, 0, 0, 0.12);
     --shadow-soft: rgba(0, 0, 0, 0.06);
     /* Light theme: elevation from ink color, not flat black */
-    --shadow-elevated-color: color-mix(in srgb, #3A1515 12%, transparent);
-    --shadow-elevated: 0 4px 12px 0 color-mix(in srgb, #3A1515 12%, transparent);
-    --shadow-promo-text: 0 1px 2px color-mix(in srgb, #991B1B 42%, transparent);
+    --shadow-elevated-color: color-mix(in srgb, var(--text) 12%, transparent);
+    --shadow-elevated: 0 4px 12px 0 var(--shadow-elevated-color);
+    --shadow-promo-text: 0 1px 2px color-mix(in srgb, var(--primary-dark) 42%, transparent);
     --active-tint: rgba(179, 13, 30, 0.10);
     --gold-tint: rgba(199, 154, 44, 0.14);
     --page-bg-glow: #FFFFFF;
-    --page-bg-gradient: linear-gradient(180deg, #FFFFFF 0%, #FFFFFF 100%);
+    --page-bg-gradient: linear-gradient(180deg, var(--bg) 0%, var(--bg) 100%);
     --glass-blur: blur(6px);
     --nav-surface-border: rgba(0, 0, 0, 0.06);
     --header-logo-backdrop: transparent;
-    --card-border: color-mix(in srgb, #D4AF37 55%, transparent);
+    --card-border: color-mix(in srgb, var(--primary) 55%, transparent);
     /* ---- Cards: flat (no drop shadow) ---- */
     --card-shadow: none;
     --card-shadow-hover: none;
     /* Sidebar nav rows — dark-red active cell + soft glow */
-    --nav-side-highlight-ring: #B91C1C;
-    --nav-side-item-glow: rgba(138, 15, 30, 0.18);
-    --nav-side-item-active-shadow: 0 2px 6px rgba(138, 15, 30, 0.18);
+    --nav-side-highlight-ring: var(--primary);
+    --nav-side-item-glow: rgba(0, 230, 118, 0.18);
+    --nav-side-item-active-shadow: 0 2px 6px var(--nav-side-item-glow);
     /* Live Chat row — light cell + subtle section borders */
-    --nav-side-chat-bg: #F5F5F5;
-    --nav-side-chat-section-border: #ECECEC;
+    --nav-side-chat-bg: #121212;
+    --nav-side-chat-section-border: #1A1A1A;
 
     /* ---- Premium container treatment — white card + soft elevation ---- */
     --container-gold-border: 1px solid transparent;
-    --container-gold-glow: none;
-    --panel-item-bg: #FFFFFF;
-    --panel-item-border: color-mix(in srgb, #D4AF37 48%, transparent);
+    --container-gold-glow: var(--card-shadow);
+    --panel-item-bg: #1A1A1A;
+    --panel-item-border: color-mix(in srgb, var(--primary) 48%, transparent);
     --panel-item-shadow: none;
 
     /* ---- Reusable gradients ----
        5-stop metallic shine: dark → body → bright peak → body → dark */
     --cta-gradient: linear-gradient(180deg,
-            #991B1B 0%,
-            #B91C1C 38%,
-            #D81E2F 100%);
+            var(--primary-dark) 0%,
+            var(--primary) 38%,
+            var(--primary-bright) 100%);
 
     /* Header — dark red-black → bright crimson (matches Figma 5-stop gradient) */
-    --header-bar-gradient: linear-gradient(90deg, #2C0308 0%, #40080F 24%, #581717 48%, #8E1515 78%, #D81E2F 100%);
-    --header-bar-top-line: color-mix(in srgb, #D4AF37 38%, transparent);
-    --header-bar-bottom-line: color-mix(in srgb, #E9C96A 28%, transparent);
+    --header-bar-gradient: var(--header-gradient);
+    --header-bar-top-line: color-mix(in srgb, var(--gold) 38%, transparent);
+    --header-bar-bottom-line: color-mix(in srgb, var(--gold-bright) 28%, transparent);
     /* Language chip — same fill as Register *text* (on-gold), no border */
-    --header-lang-bg: #2A1A00;
+    --header-lang-bg: var(--on-gold);
     --header-lang-border: none;
     --header-lang-chevron-filter: brightness(0) invert(1);
-    --nav-header-register-bg: linear-gradient(90deg,
-            #D4AF37 0%,
-            #E9C96A 50%,
-            #D4AF37 100%);
-    --nav-header-register-color: #2A1A00;
+    --nav-header-register-bg: var(--gold-gradient);
+    --nav-header-register-color: var(--on-gold);
     --gold-gradient: linear-gradient(90deg,
-            #D4AF37 0%,
-            #E9C96A 50%,
-            #D4AF37 100%);
-    --surface-gradient: linear-gradient(90deg, #FFFFFF 0%, #FFFFFF 100%);
+            var(--gold) 0%,
+            var(--gold-bright) 50%,
+            var(--gold) 100%);
+    --surface-gradient: linear-gradient(90deg, var(--surface-2) 0%, var(--surface) 100%);
 
     /* Gold CTA — same shine as --gold-gradient (Register + chip active) */
-    --gold-cta-gradient: linear-gradient(90deg,
-            #D4AF37 0%,
-            #E9C96A 50%,
-            #D4AF37 100%);
-    --register-btn-bg: linear-gradient(90deg,
-            #D4AF37 0%,
-            #E9C96A 50%,
-            #D4AF37 100%);
-    --register-btn-color: #2A1A00;
+    --gold-cta-gradient: var(--gold-gradient);
+    --register-btn-bg: var(--color-primary);
+    --register-btn-color: var(--text-inverse);
 
     --base-font-family: Poppins, sans-serif;
-    --base-color: #3A1515;
-    --base-bg: #FFFFFF;
+    --base-color: var(--text);
+    --base-bg: var(--bg);
 
-    --base-highlight: #B91C1C;
-    --base-link: #D4AF37;
+    --base-highlight: var(--primary);
+    --base-link: var(--gold);
 
-    --base-main-button: linear-gradient(180deg,
-            #991B1B 0%,
-            #B91C1C 38%,
-            #D81E2F 100%);
-    --base-main-button-color: #FFFFFF;
-    --base-main-button-second: #3E2621;
-    --base-main-button-second-color: #FFFFFF;
-    --base-main-button-third: linear-gradient(180deg,
-            #991B1B 0%,
-            #B91C1C 38%,
-            #D81E2F 100%);
-    --base-main-button-third-color: #FFFFFF;
-    --base-main-button-four: linear-gradient(90deg,
-            #D4AF37 0%,
-            #E9C96A 50%,
-            #D4AF37 100%);
-    --base-main-button-four-color: #2A1A00;
+    --base-main-button: var(--cta-gradient);
+    --base-main-button-color: var(--on-primary);
+    --base-main-button-second: var(--non-active-bg);
+    --base-main-button-second-color: var(--on-primary);
+    --base-main-button-third: var(--cta-gradient);
+    --base-main-button-third-color: var(--on-primary);
+    --base-main-button-four: var(--gold-gradient);
+    --base-main-button-four-color: var(--on-gold);
 
     /* referral-button */
-    --base-sub-button: #D4AF37;
-    --base-sub-button-color: #991B1B;
+    --base-sub-button: var(--gold);
+    --base-sub-button-color: var(--primary-dark);
 
     /* Input */
-    --base-input: #FFFFFF;
-    --base-input-color: #3A1515;
+    --base-input: var(--surface);
+    --base-input-color: var(--text);
     --base-input-border: transparent;
-    --base-input-placeholder: #8A6B2A;
+    --base-input-placeholder: var(--muted);
 
-    --base-social-button: #3E2621;
+    --base-social-button: var(--non-active-bg);
 
     /* referral/vip container */
-    --base-container-bg: #FFFFFF;
-    --base-container-body-bg: #FFFFFF;
+    --base-container-bg: var(--surface);
+    --base-container-body-bg: var(--surface-2);
 
     /* Skeleton Loading */
-    --skeleton-base-color: #FFFFFF;
-    --skeleton-highlight-color: #F5F5F5;
+    --skeleton-base-color: var(--surface-2);
+    --skeleton-highlight-color: var(--surface-3);
 
 
     /* Header (fallback when bar gradient is not applied) */
     --nav-header-bg: #FFFDF2;
-    --nav-hamburger: #B91C1C;
+    --nav-hamburger: var(--primary);
     --nav-login-btn: unset;
     --nav-login-btn-hover: unset;
 
-    --nav-login-color: #D4AF37;
+    --nav-login-color: var(--gold);
 
 
     /* Balance/username/language */
-    --nav-controls-bg: #FFFFFF;
-    --nav-controls-color: #8A6B2A;
-    --nav-controls-active: #991B1B;
+    --nav-controls-bg: var(--surface-2);
+    --nav-controls-color: var(--muted);
+    --nav-controls-active: var(--primary-dark);
     --header-auth-panel-border: color-mix(in srgb, #AAB4BF 36%, transparent);
     --header-auth-balance-label: #ffffff;
     --header-auth-chip-border: color-mix(in srgb, #AAB4BF 35%, transparent);
     --header-auth-chip-color: #ffffff;
     --header-auth-chevron-filter: brightness(0) invert(1);
-    --header-auth-deposit-bg: linear-gradient(90deg,
-            #D4AF37 0%,
-            #E9C96A 50%,
-            #D4AF37 100%);
-    --header-auth-deposit-text: #2A1A00;
+    --header-auth-deposit-bg: var(--gold-gradient);
+    --header-auth-deposit-text: var(--on-gold);
     --header-auth-target-color: #ffffff;
     --header-auth-profile-name: #ffffff;
     --header-auth-profile-status: #c5ccd6;
@@ -236,466 +210,446 @@
        LANDING PAGE GOLD ACCENTS — consistent with the Leng855 logo.
        Edit these to tune the amount of gold across the home page.
        ============================================================ */
-    --landing-accent-gold: #D4AF37;
-    --landing-heading-accent: #D4AF37;
-    --landing-link-gold: #D4AF37;
-    --landing-cta-ring: #D4AF37;
-    --landing-divider-gold: #D4AF37;
+    --landing-accent-gold: var(--gold);
+    --landing-heading-accent: var(--gold);
+    --landing-link-gold: var(--gold);
+    --landing-cta-ring: var(--gold);
+    --landing-divider-gold: var(--gold);
 
     /* ============================================================
        SIDEBAR PALETTE — screenshot hierarchy:
        dark-red active row; light-gray default rows; red text/icons.
        ============================================================ */
-    --sidebar-text: #991B1B;
-    --sidebar-item-hover: #8A0F1E;
-    --sidebar-item-active: #8A0F1E;
+    --sidebar-text: #28E16C;
+    --sidebar-item-hover: rgba(255, 255, 255, 0.08);
+    --sidebar-item-active: #28E16C;
     --sidebar-item-active-ring: transparent;
-    --sidebar-container-border: #D7DBE2;
+    --sidebar-container-border: #333333;
     --sidebar-item-radius: 8px;
     --sidebar-item-gap: 6px;
-    --sidebar-icon-filter: brightness(0) saturate(100%) invert(17%) sepia(83%) saturate(2920%) hue-rotate(341deg) brightness(96%) contrast(95%);
-    --sidebar-icon-filter-active: brightness(0) invert(1);
-    /* Text on dark-red row stays white for active and hover */
-    --sidebar-text-active: #FFFFFF;
-    --sidebar-text-hover: #FFFFFF;
+    --sidebar-icon-filter: none;
+    --sidebar-icon-filter-active: brightness(0) invert(0);
+    /* Text on active row */
+    --sidebar-text-active: #000000;
+    --sidebar-text-hover: #28E16C;
 
 
     /* Consumers of the sidebar palette */
-    --nav-side-bg: #EBEBEB;
-    --nav-side-item: #DBDAD8;
-    --nav-side-color: #991B1B;
-    --nav-side-active: #8A0F1E;
-    --nav-side-border: 1px solid rgba(0, 0, 0, 0.06);
-    --nav-side-text-active: #FFFFFF;
-    --nav-side-text-hover: #FFFFFF;
+    --nav-side-bg: var(--sidebar-bg);
+    --nav-side-item: var(--sidebar-item-bg);
+    --nav-side-color: var(--sidebar-text);
+    --nav-side-active: var(--sidebar-item-active);
+    --nav-side-border: 1px solid var(--border);
+    --nav-side-text-active: var(--sidebar-text-active);
+    --nav-side-text-hover: var(--sidebar-text-hover);
 
     /* Sidebar — top promo strips (reuse shared tokens defined below) */
-    --nav-side-promo-daily-bg: linear-gradient(180deg, #430000 0%, #771405 100%);
-    --nav-side-promo-spin-bg: linear-gradient(180deg, #432800 0%, #774505 100%);
-    --nav-side-promo-download-bg: linear-gradient(180deg, #001F3F 0%, #003366 100%);
-    --nav-side-promo-text-shadow: 0 1px 2px color-mix(in srgb, #991B1B 42%, transparent);
+    --nav-side-promo-daily-bg: var(--sidebar-daily-bg);
+    --nav-side-promo-spin-bg: var(--sidebar-spin-bg);
+    --nav-side-promo-download-bg: var(--sidebar-download-bg);
+    --nav-side-promo-text-shadow: var(--shadow-promo-text);
     --nav-side-promo-icon-size: 34px;
 
     /* Sidebar nav row states */
-    --nav-side-item-hover: #8A0F1E;
+    --nav-side-item-hover: var(--sidebar-item-hover);
     --nav-side-item-border: transparent;
-    --nav-side-item-active-border: transparent;
+    --nav-side-item-active-border: var(--sidebar-item-active-ring);
 
     /* Chat SVG */
-    --nav-side-chat-btn-gradient: #B91C1C;
-    --nav-side-chat-btn-gradient2: #991B1B;
+    --nav-side-chat-btn-gradient: var(--primary);
+    --nav-side-chat-btn-gradient2: var(--primary-dark);
 
     /* BO / legacy bridge (was “Hotfix”) — keep in :root for single source */
-    --theme-color-nav-menu-active: #991B1B;
-    --theme-color-text-tab-active: #B91C1C;
-    --theme-color-bet-table-row: #FFFFFF;
+    --theme-color-nav-menu-active: var(--primary-dark);
+    --theme-color-nav-menu-active: var(--primary-dark);
+    --theme-color-text-tab-active: var(--primary);
+    --theme-color-bet-table-row: var(--surface-2);
 
-    --announcement-color: #991B1B;
-    --announcement-muted: color-mix(in srgb, #D4AF37 74%, #991B1B 26%);
-    --announcement-icon-color: #991B1B;
-    --announcement-shadow: none;
+    --announcement-color: var(--primary-dark);
+    --announcement-muted: color-mix(in srgb, var(--gold) 74%, var(--primary-dark) 26%);
+    --announcement-icon-color: var(--primary-dark);
 
     /* Game List Page */
-    /* Game category strip — white bar, dark red labels, solid red active chip (desktop "all") */
-    --game-category-tab-color: #991B1B;
-    --game-category-tab-bg: #ffffff;
-    --game-category-tab-hover: color-mix(in srgb, #991B1B 8%, #FFFFFF 92%);
-    --game-category-tab-active: #991B1B;
-    --game-category-tab-active-color: #FFFFFF;
-    --game-category-pill-shadow: 0 2px 12px color-mix(in srgb, #3A1515 9%, transparent);
-    /* Mobile home strip only (CategoryChips homeStrip) — white rail + dark red caps */
-    --game-category-mobile-strip-bg: #FFFFFF;
-    --game-category-mobile-strip-cap-bg: #991B1B;
-    --game-category-mobile-strip-shadow: 0 2px 10px color-mix(in srgb, #3A1515 10%, transparent);
+    /* Game category strip — dark bar, white labels, neon green active chip */
+    --game-category-tab-color: var(--text);
+    --game-category-tab-bg: var(--surface);
+    --game-category-tab-hover: rgba(255, 255, 255, 0.08);
+    --game-category-tab-active: var(--primary);
+    --game-category-tab-active-color: #000000;
+    --game-category-pill-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+    /* Mobile home strip only (CategoryChips homeStrip) — dark rail + green caps */
+    --game-category-mobile-strip-bg: var(--bg);
+    --game-category-mobile-strip-cap-bg: var(--primary);
+    --game-category-mobile-strip-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
 
-    --game-title-color: inherit;
-    --game-title-highlight-color: #B91C1C;
+    --game-title-color: var(--text);
+    --game-title-highlight-color: var(--primary);
 
-    --game-item-border: 1px solid rgba(0, 0, 0, 0.06);
-    --game-card-bg: #FFFFFF;
-    --game-card-border: 1px solid #D4AF37;
-    --game-card-title: #1F2937;
-    --game-card-provider: #8A6B2A;
+    --game-item-border: 1px solid var(--primary);
+    --game-card-bg: var(--bg);
+    --game-card-border: 1px solid var(--primary);
+    --game-card-title: var(--text);
+    --game-card-provider: var(--muted);
     --game-rtp-badge-game: #ffffff;
 
     /* Mobile profile card — rollover bar fill (red gradient) */
-    --mobile-profile-rollover-fill: linear-gradient(90deg,
-            #991B1B 0%,
-            #B91C1C 42%,
-            #D81E2F 100%);
+    --mobile-profile-rollover-fill: linear-gradient(90deg, var(--primary-dark) 0%, var(--primary) 42%, var(--primary-bright) 100%);
+
 
 
     /* Dashboard Table */
-    --dashboard-table-th: #991B1B;
-    --dashboard-table-th-color: #FFFFFF;
+    --dashboard-table-th: var(--primary-dark);
+    --dashboard-table-th-color: var(--on-primary);
     --dashboard-table-row-even: #FAFAFA;
-    --dashboard-table-row-odd: #FFFFFF;
-    --dashboard-table-border: rgba(0, 0, 0, 0.06);
+    --dashboard-table-row-odd: var(--surface);
+    --dashboard-table-border: var(--border);
 
     /* Payout Container — dark surface + subtle border */
-    --payout-bg: #FFFFFF;
-    --payout-border: 1px solid rgba(0, 0, 0, 0.06);
-    --payout-box-shadow: 0 4px 10px 0 rgba(0, 0, 0, 0.06);
+    --payout-bg: var(--surface);
+    --payout-border: 1px solid var(--border);
+    --payout-box-shadow: 0 4px 10px 0 var(--shadow-soft);
 
 
-    --payout-title: #3A1515;
-    --payout-highlight: #B91C1C;
-    --payout-item-bg: linear-gradient(90deg, #FFFFFF 0%, #FFFFFF 100%);
+    --payout-title: var(--text);
+    --payout-highlight: var(--primary);
+    --payout-item-bg: var(--surface-gradient);
     --payout-item-color: inherit;
-    --payout-item-highlight: #D4AF37;
-    --payout-item-sub-highlight: #D4AF37;
+    --payout-item-highlight: var(--gold);
+    --payout-item-sub-highlight: var(--gold);
 
-    --payout-item-hover-svg: #B91C1C;
-    --payout-item-hover-border: 1px solid #991B1B;
+    --payout-item-hover-svg: var(--primary);
+    --payout-item-hover-border: 1px solid var(--primary-dark);
 
 
     /* Breadcrumb */
-    --breadcrumb-bg: #FFFFFF;
-    --breadcrumb-highlight: #B91C1C;
+    --breadcrumb-bg: var(--surface-2);
+    --breadcrumb-highlight: var(--primary);
 
 
     /* Chat Page */
-    --chat-bg: #FFFFFF;
-    --chat-message-box: #FFFFFF;
+    --chat-bg: var(--surface);
+    --chat-message-box: var(--surface-2);
     --chat-message-color: inherit;
-    --chat-input-container: #FFFFFF;
-    --chat-input-box: #F5F5F5;
-    --chat-input-border: rgba(0, 0, 0, 0.06);
+    --chat-input-container: var(--surface);
+    --chat-input-box: var(--surface-3);
+    --chat-input-border: var(--border);
     --chat-input-color: inherit;
-    --chat-attach: #991B1B;
-    --chat-voice: #F5F5F5;
-    --chat-send: #B91C1C;
+    --chat-attach: var(--primary-dark);
+    --chat-voice: var(--surface-3);
+    --chat-send: var(--primary);
 
 
     /* Game List Tab */
-    --game-list-tab-bg: #FFFFFF;
-    --game-list-tab-btn: #3E2621;
-    --game-list-tab-btn-active: #991B1B;
-    --game-list-tab-btn-active-border: 1px solid #D4AF37;
-    --game-list-tab-scroll: #991B1B;
+    --game-list-tab-bg: var(--surface);
+    --game-list-tab-btn: var(--non-active-bg);
+    --game-list-tab-btn-active: var(--primary-dark);
+    --game-list-tab-btn-active-border: 1px solid var(--gold);
+    --game-list-tab-scroll: var(--primary-dark);
 
-    --game-list-search-box: #FFFFFF;
-    --game-list-search-box-placeholder: #8A6B2A;
+    --game-list-search-box: var(--surface);
+    --game-list-search-box-placeholder: var(--muted);
 
 
     /* Profile page / Game Wallet Detail */
-    --game-wallet-info-bg: #FFFFFF;
-    --game-wallet-info-item-bg: #FFFFFF;
+    --game-wallet-info-bg: var(--surface);
+    --game-wallet-info-item-bg: var(--surface-2);
     --game-wallet-info-color: inherit;
-    --game-wallet-info-label: #D4AF37;
+    --game-wallet-info-label: var(--gold);
 
 
     /* Membership Level */
-    --membership-tab-bg: #FFFFFF;
-    --membership-tab-border: 1px solid rgba(0, 0, 0, 0.06);
-    --membership-tab-active: #991B1B;
-    --membership-tab-active-color: #FFFFFF;
-    --membership-tab-active-border: #D4AF37;
-    --membership-tab-active-box-shadow: 0 0 20px 0 rgba(179, 13, 30, 0.10) inset;
+    --membership-tab-bg: var(--surface-2);
+    --membership-tab-border: 1px solid var(--border);
+    --membership-tab-active: var(--primary-dark);
+    --membership-tab-active-color: var(--on-primary);
+    --membership-tab-active-border: var(--gold);
+    --membership-tab-active-box-shadow: 0 0 20px 0 var(--active-tint) inset;
 
 
-    --membership-tab-button: #3E2621;
-    --membership-tab-button-color: #FFFFFF;
+    --membership-tab-button: var(--non-active-bg);
+    --membership-tab-button-color: var(--on-primary);
     --membership-tap-button-box-shadow: none;
 
-    --membership-tab-button-active: #D4AF37;
-    --membership-tab-button-active-color: #2A1A00;
-    --membership-tab-bitton-active-box-shadow: 0 0 10px 0 rgba(199, 154, 44, 0.14);
+    --membership-tab-button-active: var(--gold);
+    --membership-tab-button-active-color: var(--on-gold);
+    --membership-tab-bitton-active-box-shadow: 0 0 10px 0 var(--gold-tint);
 
     /* Accordion Container */
-    --accordion-header-bg: #991B1B;
-    --accordion-header-color: #FFFFFF;
-    --accordion-header-bg-active: #991B1B;
+    --accordion-header-bg: var(--primary-dark);
+    --accordion-header-color: var(--on-primary);
+    --accordion-header-bg-active: var(--primary-dark);
 
-    --accordion-body-bg: #FFFFFF;
+    --accordion-body-bg: var(--surface-2);
     --accordian-body-color: inherit;
-    --accordian-body-title: #B91C1C;
-    --accordian-body-border: rgba(0, 0, 0, 0.06);
+    --accordian-body-title: var(--primary);
+    --accordian-body-border: var(--border);
 
 
     /* Promotion */
-    --promotion-bg: #FFFFFF;
-    --promotion-date: #F5F5F5;
-    --promotion-highlight: #D4AF37;
-    --promotion-button: linear-gradient(180deg,
-            #991B1B 0%,
-            #B91C1C 38%,
-            #D81E2F 100%);
-    --promotion-button-color: #FFFFFF;
+    --promotion-bg: var(--surface);
+    --promotion-date: var(--surface-3);
+    --promotion-highlight: var(--gold);
+    --promotion-button: var(--cta-gradient);
+    --promotion-button-color: var(--on-primary);
 
-    --promotion-status-active: #D4AF37;
-    --promotion-status-active-color: #2A1A00;
-    --promotion-status-end: #B91C1C;
-    --promotion-status-end-color: #3A1515;
+    --promotion-status-active: var(--gold);
+    --promotion-status-active-color: var(--on-gold);
+    --promotion-status-end: var(--primary);
+    --promotion-status-end-color: var(--text);
 
-    --promotion-time: #FFFFFF;
-    --promotion-time-color: #B91C1C;
+    --promotion-time: var(--surface-2);
+    --promotion-time-color: var(--primary);
 
     /* Date Picker */
-    --date-button-bg: #3E2621;
-    --date-button-color: #FFFFFF;
-    --date-button-active: #991B1B;
-    --date-button-active-color: #FFFFFF;
+    --date-button-bg: var(--non-active-bg);
+    --date-button-color: var(--on-primary);
+    --date-button-active: var(--primary-dark);
+    --date-button-active-color: var(--on-primary);
 
 
     /* Game Page */
-    --game-tab: #3E2621;
-    --game-tab-color: #FFFFFF;
-    --game-tab-active: #991B1B;
-    --game-tab-active-color: #FFFFFF;
+    --game-tab: var(--non-active-bg);
+    --game-tab-color: var(--on-primary);
+    --game-tab-active: var(--primary-dark);
+    --game-tab-active-color: var(--on-primary);
 
-    --game-table-header: #991B1B;
-    --game-table-header-color: #FFFFFF;
-    --game-table-body: #FFFFFF;
-    --game-table-border: rgba(0, 0, 0, 0.06);
+    --game-table-header: var(--primary-dark);
+    --game-table-header-color: var(--on-primary);
+    --game-table-body: var(--surface-2);
+    --game-table-border: var(--border);
 
-    --game-win-amount: #D4AF37;
-    --game-lose-amount: #B91C1C;
+    --game-win-amount: var(--gold);
+    --game-lose-amount: var(--primary);
 
 
     /* Setting Page Wallet Info */
-    --setting-wallet-bg: #FFFFFF;
-    --setting-wallet-item: #FFFFFF;
-    --setting-wallet-frame: #B91C1C;
-    --setting-wallet-end-promo: #D4AF37;
-    --setting-wallet-end-promo-color: #2A1A00;
-    --setting-progress-bg: #F5F5F5;
-    --setting-progress-bar: linear-gradient(180deg,
-            #991B1B 0%,
-            #B91C1C 38%,
-            #D81E2F 100%);
-    --setting-primary-btn: linear-gradient(180deg,
-            #991B1B 0%,
-            #B91C1C 38%,
-            #D81E2F 100%);
-    --setting-primary-btn-color: #FFFFFF;
-    --setting-secondary-btn: #FFFFFF;
-    --setting-secondary-btn-color: #3A1515;
+    --setting-wallet-bg: var(--surface);
+    --setting-wallet-item: var(--surface-2);
+    --setting-wallet-frame: var(--primary);
+    --setting-wallet-end-promo: var(--gold);
+    --setting-wallet-end-promo-color: var(--on-gold);
+    --setting-progress-bg: var(--surface-3);
+    --setting-progress-bar: var(--cta-gradient);
+    --setting-primary-btn: var(--cta-gradient);
+    --setting-primary-btn-color: var(--on-primary);
+    --setting-secondary-btn: var(--surface-2);
+    --setting-secondary-btn-color: var(--text);
 
 
     /* Modal */
-    --modal-header: #FFFFFF;
-    --modal-header-color: #B91C1C;
-    --modal-header-close: #3A1515;
-    --modal-footer: #FFFFFF;
-    --modal-footer-border: rgba(0, 0, 0, 0.06);
+    --modal-header: var(--surface-2);
+    --modal-header-color: var(--primary);
+    --modal-header-close: var(--text);
+    --modal-footer: var(--surface-2);
+    --modal-footer-border: var(--border);
 
-    --modal-body: #FFFFFF;
+    --modal-body: var(--surface);
     --modal-backdrop: rgba(0, 0, 0, 0.5);
-    --modal-border: 1px solid color-mix(in srgb, #D4AF37 42%, transparent);
-    --modal-box-shadow: 0 24px 70px color-mix(in srgb, #3A1515 22%, transparent);
-    --modal-field-bg: #FFFFFF;
-    --modal-field-color: #3A1515;
+    --modal-border: 1px solid color-mix(in srgb, var(--gold) 42%, transparent);
+    --modal-box-shadow: 0 24px 70px color-mix(in srgb, var(--text) 22%, transparent);
+    --modal-field-bg: var(--base-input);
+    --modal-field-color: var(--base-input-color);
     --modal-field-border: none;
-    --modal-field-placeholder: #8A6B2A;
-    --modal-field-focus: #D4AF37;
-    --modal-helper-color: #8A6B2A;
-    --modal-submit-bg: linear-gradient(180deg,
-            #991B1B 0%,
-            #B91C1C 38%,
-            #D81E2F 100%);
-    --modal-submit-color: #FFFFFF;
+    --modal-field-placeholder: var(--base-input-placeholder);
+    --modal-field-focus: var(--gold);
+    --modal-helper-color: var(--muted);
+    --modal-submit-bg: var(--theme-color-bg-btn-submit);
+    --modal-submit-color: var(--base-main-button-color);
 
 
-    --modal-tab-border: 2px solid rgba(0, 0, 0, 0.06);
+    --modal-tab-border: 2px solid var(--border);
     --modal-tab: transparent;
-    --modal-tab-color: #8A6B2A;
-    --modal-tab-active: #991B1B;
-    --modal-tab-active-color: #FFFFFF;
+    --modal-tab-color: var(--muted);
+    --modal-tab-active: var(--primary-dark);
+    --modal-tab-active-color: var(--on-primary);
 
-    --modal-container: #FFFFFF;
-    --modal-container-title: #8A6B2A;
+    --modal-container: var(--surface);
+    --modal-container-title: var(--muted);
 
-    --modal-table-header: #FFFFFF;
-    --modal-table-header-color: #3A1515;
+    --modal-table-header: var(--surface-2);
+    --modal-table-header-color: var(--text);
 
-    --modal-table-header-boder: rgba(0, 0, 0, 0.06);
-    --modal-table-body: #FFFFFF;
-    --modal-table-border: rgba(0, 0, 0, 0.06);
+    --modal-table-header-boder: var(--border);
+    --modal-table-body: var(--surface);
+    --modal-table-border: var(--border);
 
 
 
     /* Deposit Withdrawal Tab */
-    --deposit-tab-button-active: #991B1B;
-    --deposit-tab-button-active-color: #FFFFFF;
-    --deposit-tab-button: #3E2621;
-    --deposit-tab-button-color: #FFFFFF;
+    --deposit-tab-button-active: var(--primary-dark);
+    --deposit-tab-button-active-color: var(--on-primary);
+    --deposit-tab-button: var(--non-active-bg);
+    --deposit-tab-button-color: var(--on-primary);
 
     /* Deposit page — accordion + bank cards: align with homepage game cards (--game-card-*) */
-    --deposit-accordion-bg: #FFFFFF;
-    --deposit-accordion-row-hover: #F5F5F5;
-    --deposit-bank-option-bg: #FFFFFF;
-    --deposit-bank-option-border: color-mix(in srgb, #D4AF37 48%, transparent);
-    --deposit-bank-option-text: #1F2937;
-    --deposit-bank-option-muted: #8A6B2A;
+    --deposit-accordion-bg: var(--surface-2);
+    --deposit-accordion-row-hover: var(--surface-3);
+    --deposit-bank-option-bg: var(--game-card-bg);
+    --deposit-bank-option-border: var(--panel-item-border);
+    --deposit-bank-option-text: var(--game-card-title);
+    --deposit-bank-option-muted: var(--game-card-provider);
 
 
     /* Deposit NumberPad*/
-    --numberpad-bg: #FFFFFF;
+    --numberpad-bg: var(--surface);
     --numberpad-color: inherit;
 
-    --numberpad-button: #3E2621;
-    --numberpad-button-color: #FFFFFF;
+    --numberpad-button: var(--non-active-bg);
+    --numberpad-button-color: var(--on-primary);
 
-    --numberpad-button-active: #991B1B;
-    --numberpad-button-active-color: #FFFFFF;
+    --numberpad-button-active: var(--primary-dark);
+    --numberpad-button-active-color: var(--on-primary);
 
-    --numberpad-button-disabled: #F5F5F5;
-    --numberpad-button-disabled-color: #8A6B2A;
+    --numberpad-button-disabled: var(--surface-3);
+    --numberpad-button-disabled-color: var(--muted);
 
-    --amount-input-group: #FFFFFF;
-    --amount-input-group-color: #3A1515;
+    --amount-input-group: var(--surface-2);
+    --amount-input-group-color: var(--text);
 
-    --amount-input-box: #3A1515;
-    --amount-input-box-color: #FFFFFF;
+    --amount-input-box: var(--text);
+    --amount-input-box-color: var(--bg);
 
 
     /* Warning Alret box */
-    --warning-info-bg: #FFFFFF;
-    --warning-info-color: #B91C1C;
-    --warning-info-border: #B91C1C;
-    --warning-info-link: #B91C1C;
+    --warning-info-bg: var(--surface-2);
+    --warning-info-color: var(--primary);
+    --warning-info-border: var(--primary);
+    --warning-info-link: var(--primary);
 
 
     /* Footer — matching header gradient with gold-tinted copy on red */
-    --nav-footer-bg: #B91C1C;
-    --nav-footer-gradient: linear-gradient(90deg, #2C0308 0%, #40080F 24%, #581717 48%, #8E1515 78%, #D81E2F 100%);
-    --nav-footer-bottom-accent: #991B1B;
-    --nav-footer-color: color-mix(in srgb, #E9C96A 72%, #FFFFFF);
-    --nav-footer-copyright-color: color-mix(in srgb, #E9C96A 58%, #FFFDF5);
-    --nav-footer-control-border: color-mix(in srgb, #D4AF37 55%, transparent);
-    --nav-footer-active: #991B1B;
-    --nav-footer-active-color: #3A1515;
-    --nav-footer-border: 3px solid #991B1B;
+    --nav-footer-bg: var(--bg-main);
+    --nav-footer-gradient: var(--header-gradient);
+    --nav-footer-bottom-accent: var(--primary-dark);
+    --nav-footer-color: color-mix(in srgb, var(--gold-bright) 72%, #FFFFFF);
+    --nav-footer-copyright-color: color-mix(in srgb, var(--gold-bright) 58%, #FFFDF5);
+    --nav-footer-control-border: color-mix(in srgb, var(--gold) 55%, transparent);
+    --nav-footer-active: var(--primary-dark);
+    --nav-footer-active-color: var(--text);
+    --nav-footer-border: 3px solid var(--nav-footer-bottom-accent);
+
+    .footer-container {
+        padding: 0;
+        background: var(--nav-footer-bg, #1b1b1b);
+    }
 
 
 
     /* Register Pin Box */
-    --pin-number: #FFFFFF;
+    --pin-number: var(--surface-2);
     --pin-number-color: inherit;
 
     /* Daily Check-In */
-    --daily-checkin-button: linear-gradient(180deg, #430000 0%, #771405 100%);
+    --daily-checkin-button: var(--sidebar-daily-bg);
 
-    --daily-checkin-bg: #FFFFFF;
-    --daily-checkin-icon: #B91C1C;
-    --daily-checkin-border: rgba(0, 0, 0, 0.06);
-    --daily-checkin-day-label: #F5F5F5;
-    --daily-checkin-day-label-color: #8A6B2A;
-    --daily-checkin-day-amount-color: #B91C1C;
+    --daily-checkin-bg: var(--surface-2);
+    --daily-checkin-icon: var(--primary);
+    --daily-checkin-border: var(--border);
+    --daily-checkin-day-label: var(--surface-3);
+    --daily-checkin-day-label-color: var(--muted);
+    --daily-checkin-day-amount-color: var(--primary);
 
-    --daily-checkin-active-bg: linear-gradient(90deg,
-            #D4AF37 0%,
-            #E9C96A 50%,
-            #D4AF37 100%);
-    --daily-checkin-active-icon: #D4AF37;
-    --daily-checkin-active-border: #D4AF37;
-    --daily-checkin-active-day-label: #991B1B;
-    --daily-checkin-active-day-label-color: #3A1515;
-    --daily-checkin-active-amount-color: #D4AF37;
-    --daily-checkin-avtive-box-shadow: 0 0 4px 0 rgba(179, 13, 30, 0.10);
+    --daily-checkin-active-bg: var(--gold-gradient);
+    --daily-checkin-active-icon: var(--gold);
+    --daily-checkin-active-border: var(--gold);
+    --daily-checkin-active-day-label: var(--primary-dark);
+    --daily-checkin-active-day-label-color: var(--text);
+    --daily-checkin-active-amount-color: var(--gold);
+    --daily-checkin-avtive-box-shadow: 0 0 4px 0 var(--active-tint);
 
 
-    --daily-checkin-claimed-bg: #FFFFFF;
-    --daily-checkin-claimed-icon: #8A6B2A;
-    --daily-checkin-claimed-border: rgba(0, 0, 0, 0.06);
-    --daily-checkin-claimed-day-label: #F5F5F5;
-    --daily-checkin-claimed-day-label-color: #8A6B2A;
-    --daily-checkin-claimed-amount-color: #8A6B2A;
-    --daily-checkin-claimed-thick: rgba(0, 0, 0, 0.06);
+    --daily-checkin-claimed-bg: var(--surface-2);
+    --daily-checkin-claimed-icon: var(--muted);
+    --daily-checkin-claimed-border: var(--border);
+    --daily-checkin-claimed-day-label: var(--surface-3);
+    --daily-checkin-claimed-day-label-color: var(--muted);
+    --daily-checkin-claimed-amount-color: var(--muted);
+    --daily-checkin-claimed-thick: var(--border);
 
     /* mobile */
     --provider-icon-bg: transparent;
-    --mobile-profile-bg: linear-gradient(90deg, #FFFFFF 0%, #FFFFFF 100%);
+    --mobile-profile-bg: var(--surface-gradient);
     --nav-side-mobile-header: transparent;
-    --nav-side-mobile-header-color: #B91C1C;
+    --nav-side-mobile-header-color: var(--primary);
 
-    --nav-side-mobile-item: linear-gradient(90deg, #FFFFFF 0%, #FFFFFF 100%);
+    --nav-side-mobile-item: linear-gradient(90deg, var(--surface) 0%, var(--surface-2) 100%);
 
-    --nav-side-mobile-item-hover: #991B1B;
-    --nav-side-mobile-item-hover-color: #3A1515;
+    --nav-side-mobile-item-hover: var(--primary-dark);
+    --nav-side-mobile-item-hover-color: var(--text);
 
     /* spinwheel */
-    --spin-wheel-button: linear-gradient(180deg, #432800 0%, #774505 100%);
-    --spin-wheel-bg: #FFFFFF;
-    --spin-wheel-title: #B91C1C;
+    --spin-wheel-button: var(--sidebar-spin-bg);
+    --spin-wheel-bg: var(--surface);
+    --spin-wheel-title: var(--primary);
     --spin-wheel-color: inherit;
-    --spin-wheel-time: #F5F5F5;
-    --spin-wheel-time-color: #D4AF37;
-    --spin-wheel-time-icon: #D4AF37;
+    --spin-wheel-time: var(--surface-3);
+    --spin-wheel-time-color: var(--gold);
+    --spin-wheel-time-icon: var(--gold);
 
     /* music player*/
-    --music-player-bg: linear-gradient(90deg, #FFFFFF 0%, #FFFFFF 100%);
-    --music-player-control-btn-color: #FFFFFF;
-    --music-player-control-btn-hover: #FFFFFF;
-    --music-player-control-active-btn-hover: #D4AF37;
-    --music-player-icon-color: #D4AF37;
-    --music-player-info-text-color: #8A6B2A;
-    --music-player-info-icon-color: #8A6B2A;
+    --music-player-bg: var(--surface-gradient);
+    --music-player-control-btn-color: var(--surface);
+    --music-player-control-btn-hover: var(--surface-2);
+    --music-player-control-active-btn-hover: var(--gold);
+    --music-player-icon-color: var(--gold);
+    --music-player-info-text-color: var(--muted);
+    --music-player-info-icon-color: var(--muted);
 
-    --music-player-custom-modal-bg: #FFFFFF;
-    --music-player-custom-modal-title-color: #3A1515;
-    --music-track-bg-color: #FFFFFF;
-    --music-track-border-color: rgba(0, 0, 0, 0.06);
-    --music-track-info-icon-color: #D4AF37;
-    --music-track-info-time-color: #8A6B2A;
-    --music-track-play-btn-bg-color: #F5F5F5;
-    --music-player-custom-modal-control-btn: #F5F5F5;
-    --music-player-custom-modal-control-btn-hover: #FFFFFF;
+    --music-player-custom-modal-bg: var(--surface-2);
+    --music-player-custom-modal-title-color: var(--text);
+    --music-track-bg-color: var(--surface);
+    --music-track-border-color: var(--border);
+    --music-track-info-icon-color: var(--gold);
+    --music-track-info-time-color: var(--muted);
+    --music-track-play-btn-bg-color: var(--surface-3);
+    --music-player-custom-modal-control-btn: var(--surface-3);
+    --music-player-custom-modal-control-btn-hover: var(--surface-2);
 
     /* Referral Container */
-    --referral-login-box: linear-gradient(180deg, #991B1B 0%, #FFFFFF 100%);
-    --referral-login-border: #B91C1C;
-    --referral-login-left: linear-gradient(180deg, #B91C1C 0%, #991B1B 100%);
-    --referral-login-right: linear-gradient(90deg,
-            #D4AF37 0%,
-            #E9C96A 50%,
-            #D4AF37 100%);
-    --referral-login-left-before: #991B1B;
-    --referral-login-right-before: #D4AF37;
+    --referral-login-box: linear-gradient(180deg, var(--primary-dark) 0%, var(--surface) 100%);
+    --referral-login-border: var(--primary);
+    --referral-login-left: linear-gradient(180deg, var(--primary) 0%, var(--primary-dark) 100%);
+    --referral-login-right: var(--gold-gradient);
+    --referral-login-left-before: var(--primary-dark);
+    --referral-login-right-before: var(--gold);
     --referral-login-color: inherit;
-    --referral-tab: #3E2621;
-    --referral-tab-color: #FFFFFF;
-    --referral-tab-btn-active: #991B1B;
-    --referral-tab-btn-active-color: #3A1515;
+    --referral-tab: var(--non-active-bg);
+    --referral-tab-color: var(--on-primary);
+    --referral-tab-btn-active: var(--primary-dark);
+    --referral-tab-btn-active-color: var(--text);
 
-    --referral-table-header: #FFFFFF;
-    --referral-notice: #FFFFFF;
-    --referral-notice-color: #8A6B2A;
-    --referral-bg: #FFFFFF;
-    --referral-container-bg: #FFFFFF;
-    --referral-container-title: #3A1515;
-    --referral-container-msg: #3A1515;
+    --referral-table-header: var(--surface-2);
+    --referral-notice: var(--surface-2);
+    --referral-notice-color: var(--muted);
+    --referral-bg: var(--surface);
+    --referral-container-bg: var(--surface-2);
+    --referral-container-title: var(--text);
+    --referral-container-msg: var(--text);
 
-    --referral-title: #D4AF37;
-    --referral-input-box: #FFFFFF;
-    --referral-input-color: #8A6B2A;
-    --referral-channel: #FFFFFF;
-    --referral-input-svg: #D4AF37;
+    --referral-title: var(--gold);
+    --referral-input-box: var(--surface);
+    --referral-input-color: var(--muted);
+    --referral-channel: var(--surface);
+    --referral-input-svg: var(--gold);
 
     /* Referral Container - home page*/
-    --referral-home-bg: linear-gradient(180deg,
-            #991B1B 0%,
-            #B91C1C 38%,
-            #D81E2F 100%);
-    --referral-home-container-bg: #FFFFFF;
-    --referral-home-title: #D4AF37;
-    --referral-home-input-box: #F5F5F5;
-    --referral-home-input-color: #3A1515;
-    --referral-home-input-svg: #D4AF37;
+    --referral-home-bg: var(--cta-gradient);
+    --referral-home-container-bg: var(--surface-2);
+    --referral-home-title: var(--gold);
+    --referral-home-input-box: var(--surface-3);
+    --referral-home-input-color: var(--text);
+    --referral-home-input-svg: var(--gold);
 
-    --referral-step-bg: linear-gradient(180deg, #B91C1C 0%, #991B1B 100%);
-    --referral-way-to-earn-more-item-bg: linear-gradient(90deg, #FFFFFF 0%, #FFFFFF 100%);
-    --referral-dots-bg: #F5F5F5;
-    --referral-inner-section-bg: #FFFFFF;
+    --referral-step-bg: linear-gradient(180deg, var(--primary) 0%, var(--primary-dark) 100%);
+    --referral-way-to-earn-more-item-bg: var(--surface-gradient);
+    --referral-dots-bg: var(--surface-3);
+    --referral-inner-section-bg: var(--surface);
 
     /* apk download */
-    --apk-banner-mobile-bg: #991B1B;
-    --apk-banner-mobile-bg-color: #3A1515;
-    --apk-banner-mobile-bg: #991B1B;
-    --apk-banner-mobile-bg-color: #3A1515;
-    --apk-banner-color: #3A1515;
-    --apk-banner-button: linear-gradient(180deg, #001F3F 0%, #003366 100%);
+    --apk-banner-mobile-bg: var(--primary-dark);
+    --apk-banner-mobile-bg-color: var(--text);
+    --apk-banner-color: var(--text);
+    --apk-banner-button: var(--sidebar-download-bg);
 }
 
 /* Landing page announcement — infinite horizontal scroll */
@@ -739,7 +693,7 @@
 .header-login-btn {
     background: transparent !important;
     border: none !important;
-    color: var(--nav-login-color, #45ff8b);
+    color: var(--color-primary) !important;
     font-weight: 700 !important;
     font-size: 14px !important;
     cursor: pointer !important;
@@ -762,9 +716,6 @@
     font-family: var(--base-font-family), sans-serif !important;
     letter-spacing: 0.01em !important;
     white-space: nowrap !important;
-    display: inline-flex !important;
-    align-items: center !important;
-    justify-content: center !important;
 }
 
 /* Sidebar Promo Buttons */
@@ -783,118 +734,98 @@
     color: #2F80ED !important;
 }
 
-.theme-menu-icon {
-    color: #D4AF37;
-    transition: color 0.2s ease;
-}
-
-.theme-menu-icon:hover {
-    color: #FBC400;
-}
-
-.theme-menu-icon path {
-    fill: currentColor;
-}
-
 .announcement-marquee-track {
     display: inline-flex;
     align-items: center;
     white-space: nowrap;
-    animation: announcement-marquee 35s linear infinite;
+    width: max-content;
+    animation: announcement-marquee 26s linear infinite;
+    will-change: transform;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .announcement-marquee-track {
+        animation: none;
+        transform: translateX(0);
+    }
 }
 
 :root {
-    --theme-color-bg-base: #FFFFFF;
-    --theme-color-bg-primary: #FFFFFF;
-    --theme-color-bg-secondary: #FFFFFF;
-    --theme-color-bg-special: #FFFFFF;
-    --theme-color-bg-deposit: #FFFFFF;
-    --theme-color-bg-search: #FFFFFF;
-    --theme-color-bg-selected: linear-gradient(180deg,
-            #991B1B 0%,
-            #B91C1C 38%,
-            #D81E2F 100%);
-    --theme-color-bg-selected-border: #D4AF37;
-    --theme-color-bg-selected-box-shadow: 0 0 20px 0 rgba(199, 154, 44, 0.14) inset;
-    --theme-color-bg-modal-body: #FFFFFF;
-    --theme-color-bg-modal-header: #FFFFFF;
-    --theme-color-bg-team: linear-gradient(180deg,
-            #991B1B 0%,
-            #B91C1C 38%,
-            #D81E2F 100%);
-    --theme-color-bg-progress: #D4AF37;
+    --theme-font-family-base: Poppins, sans-serif;
+    --theme-img-bg-base: unset;
+    --theme-color-bg-base: var(--bg);
+    --theme-color-bg-primary: var(--surface);
+    --theme-color-bg-secondary: var(--surface-2);
+    --theme-color-bg-special: var(--surface-2);
+    --theme-color-bg-deposit: var(--surface);
+    --theme-color-bg-search: var(--surface);
+    --theme-color-bg-selected: var(--cta-gradient);
+    --theme-color-bg-selected-border: var(--gold);
+    --theme-color-bg-selected-box-shadow: 0 0 20px 0 var(--gold-tint) inset;
+    --theme-color-bg-modal-body: var(--surface);
+    --theme-color-bg-modal-header: var(--surface-2);
+    --theme-color-bg-team: var(--cta-gradient);
+    --theme-color-bg-progress: var(--gold);
 
-    --theme-color-text-base: #3A1515;
-    --theme-color-text-primary: #FFFFFF;
-    --theme-color-text-secondary: #B91C1C;
-    --theme-color-text-third: #3A1515;
-    --theme-color-text-placeholder: #8A6B2A;
-    --theme-color-text-special: #D4AF37;
-    --theme-color-text-table-header: #3A1515;
+    --theme-color-text-base: var(--text);
+    --theme-color-text-primary: var(--bg);
+    --theme-color-text-secondary: var(--primary);
+    --theme-color-text-third: var(--text);
+    --theme-color-text-placeholder: var(--muted);
+    --theme-color-text-special: var(--gold);
+    --theme-color-text-table-header: var(--text);
 
-    --theme-color-bg-side-menu-active: #8A0F1E;
-    --theme-color-bg-nav: #FFFDF2;
-    --theme-color-bg-table-header: #991B1B;
-    --theme-color-bg-table-row: #FFFFFF;
+    --theme-color-bg-side-menu-active: var(--sidebar-item-active);
+    --theme-color-bg-nav: var(--nav-header-bg);
+    --theme-color-bg-table-header: var(--primary-dark);
+    --theme-color-bg-table-row: var(--surface-2);
 
-    --theme-color-bg-btn-primary: linear-gradient(180deg,
-            #991B1B 0%,
-            #B91C1C 38%,
-            #D81E2F 100%);
-    --theme-color-bg-btn-secondary: #3E2621;
-    --theme-color-bg-btn-submit: linear-gradient(180deg,
-            #991B1B 0%,
-            #B91C1C 38%,
-            #D81E2F 100%);
-    --theme-color-bg-btn-alert: linear-gradient(180deg,
-            #991B1B 0%,
-            #B91C1C 38%,
-            #D81E2F 100%);
-    --theme-color-bg-btn-special: #D4AF37;
-    --theme-color-bg-btn-info: #FFFFFF;
-    --theme-color-bg-btn-login: linear-gradient(90deg,
-            #D4AF37 0%,
-            #E9C96A 50%,
-            #D4AF37 100%);
-    --theme-color-bg-btn-number: #FFFFFF;
-    --theme-color-bg-btn-number-active: #B91C1C;
-    --theme-color-bg-btn-disable: #F5F5F5;
-    --theme-color-bg-btn-gold: #D4AF37;
+    --theme-color-bg-btn-primary: var(--cta-gradient);
+    --theme-color-bg-btn-secondary: var(--non-active-bg);
+    --theme-color-bg-btn-submit: var(--cta-gradient);
+    --theme-color-bg-btn-alert: var(--cta-gradient);
+    --theme-color-bg-btn-special: var(--gold);
+    --theme-color-bg-btn-info: var(--surface-2);
+    --theme-color-bg-btn-login: var(--gold-gradient);
+    --theme-color-bg-btn-number: var(--surface-2);
+    --theme-color-bg-btn-number-active: var(--primary);
+    --theme-color-bg-btn-disable: var(--surface-3);
+    --theme-color-bg-btn-gold: var(--gold);
 
-    --theme-color-bg-input-primary: #3A1515;
-    --theme-color-bg-input-default: #3A1515;
-    --theme-color-bg-input-special: #F5F5F5;
+    --theme-color-bg-input-primary: var(--text);
+    --theme-color-bg-input-default: var(--theme-color-bg-input-primary);
+    --theme-color-bg-input-special: var(--surface-3);
 
     --theme-min-width-html: 500px;
-    --theme-chat-gradient-color-first: #B91C1C;
-    --theme-chat-gradient-color-second: #991B1B;
+    --theme-chat-gradient-color-first: var(--primary);
+    --theme-chat-gradient-color-second: var(--primary-dark);
 
     /*header - balance btn*/
-    --balance-btn: linear-gradient(180deg, #FFFFFF 0%, #FFFFFF 100%);
+    --balance-btn: linear-gradient(180deg, var(--surface-2) 0%, var(--bg) 100%);
     /* Balance dropdown follows rollover dropdown card styling */
-    --balance-modal-popup: #EBEBEB;
-    --balance-inner-modal: #FFFFFF;
+    --balance-modal-popup: var(--rollover-modal-popup-header);
+    --balance-inner-modal: var(--rollover-modal-popup-panel);
     /*header - rollover info modal popup*/
-    --rollover-modal-popup-header: #EBEBEB;
+    --rollover-modal-popup-header: var(--sidebar-bg);
     --rollover-modal-popup-panel: #FFFFFF;
 }
 
 /* Primary sidebar nav: inactive icons are brand red; hover/active match white label */
 button.side-nav-item:not(.side-nav-item--active) .side-nav-icon {
-    filter: brightness(0) saturate(100%) invert(17%) sepia(83%) saturate(2920%) hue-rotate(341deg) brightness(96%) contrast(95%);
+    filter: var(--sidebar-icon-filter);
 }
 
 button.side-nav-item--active .side-nav-icon,
 button.side-nav-item:not(.side-nav-item--active):hover .side-nav-icon {
-    filter: brightness(0) invert(1);
+    filter: var(--sidebar-icon-filter-active);
 }
 
 .slider-item {
-    background: linear-gradient(90deg, #FFFFFF 0%, #FFFFFF 100%) !important;
+    background: var(--surface-gradient) !important;
 }
 
 .t3-game-category-list .t3-game-category-item.active h6 {
-    color: #FFFFFF !important;
+    color: var(--game-category-tab-active-color) !important;
 }
 
 /* Mobile category home strip — outer rail: white center, dark red chevron caps */
@@ -905,8 +836,8 @@ button.side-nav-item:not(.side-nav-item--active):hover .side-nav-icon {
     align-items: stretch;
     overflow: hidden;
     border-radius: 12px;
-    background: #FFFFFF;
-    box-shadow: 0 2px 10px color-mix(in srgb, #3A1515 10%, transparent);
+    background: var(--game-category-mobile-strip-bg);
+    box-shadow: var(--game-category-mobile-strip-shadow);
 }
 
 .t3-game-category-home-strip__cap {
@@ -918,13 +849,13 @@ button.side-nav-item:not(.side-nav-item--active):hover .side-nav-icon {
     border: none;
     margin: 0;
     cursor: pointer;
-    background: #991B1B;
-    color: #FFFFFF;
+    background: var(--game-category-mobile-strip-cap-bg);
+    color: var(--game-category-tab-active-color);
     -webkit-tap-highlight-color: transparent;
 }
 
 .t3-game-category-home-strip__cap:focus-visible {
-    outline: 2px solid #E9C96A;
+    outline: 2px solid var(--gold-bright);
     outline-offset: -2px;
 }
 
@@ -940,7 +871,7 @@ button.side-nav-item:not(.side-nav-item--active):hover .side-nav-icon {
     flex: 1 1 auto;
     min-width: 0;
     min-height: 48px;
-    background: #FFFFFF;
+    background: var(--game-category-mobile-strip-bg);
     overflow-x: auto;
 }
 
@@ -958,15 +889,14 @@ button.side-nav-item:not(.side-nav-item--active):hover .side-nav-icon {
 }
 
 .t3-game-category-item--mobile-strip:not(.active):hover {
-    background: color-mix(in srgb, #991B1B 7%, transparent);
+    background: color-mix(in srgb, var(--primary-dark) 7%, transparent);
 }
 
 .t3-game-category-item--mobile-strip:not(.active):hover h6 {
-    color: #991B1B !important;
+    color: var(--game-category-tab-color) !important;
 }
 
 .t3-game-list-box {
-    background: #FFFFFF;
     border-radius: 16px;
     padding: 6px 2px 2px;
 }
@@ -984,7 +914,7 @@ button.side-nav-item:not(.side-nav-item--active):hover .side-nav-icon {
 .t3-game-list-image-box {
     border: none;
     border-radius: 14px;
-    background: #FFFFFF;
+    background: var(--game-card-bg);
     box-shadow: none;
     padding: 6px;
     transition: box-shadow 170ms ease, transform 170ms ease;
@@ -1018,7 +948,7 @@ button.side-nav-item:not(.side-nav-item--active):hover .side-nav-icon {
 
 .t3-game-list-title {
     margin: 0;
-    color: #1F2937;
+    color: var(--game-card-title);
     font-size: 13px;
     font-weight: 700;
     line-height: 1.25;
@@ -1031,10 +961,10 @@ button.side-nav-item:not(.side-nav-item--active):hover .side-nav-icon {
     justify-content: space-between;
     gap: 12px;
     padding: 14px 16px;
-    background: #FFFFFF;
-    border: 1px solid rgba(0, 0, 0, 0.06);
+    background: var(--bg);
+    border: 1px solid var(--border);
     border-radius: 12px;
-    box-shadow: none;
+    box-shadow: var(--card-shadow);
     box-sizing: border-box;
 }
 
@@ -1046,21 +976,21 @@ button.side-nav-item:not(.side-nav-item--active):hover .side-nav-icon {
 }
 
 .t3-provider-info-bar__label {
-    font-family: Poppins, sans-serif;
+    font-family: var(--base-font-family);
     font-size: 12px;
     font-weight: 600;
-    color: color-mix(in srgb, #D4AF37 82%, #8A6B2A 18%);
+    color: color-mix(in srgb, var(--gold) 82%, var(--muted) 18%);
 }
 
 .t3-provider-info-bar__value {
-    font-family: Poppins, sans-serif;
+    font-family: var(--base-font-family);
     font-size: 18px;
     font-weight: 800;
     line-height: 1.15;
 }
 
 .t3-provider-info-bar__value--gold {
-    color: #D4AF37;
+    color: var(--gold);
 }
 
 .t3-provider-info-bar__action {
@@ -1071,14 +1001,14 @@ button.side-nav-item:not(.side-nav-item--active):hover .side-nav-icon {
     border: none;
     background: transparent;
     cursor: pointer;
-    color: #8A6B2A;
+    color: var(--muted);
     border-radius: 8px;
     transition: background-color 0.15s ease, color 0.15s ease;
 }
 
 .t3-provider-info-bar__action:hover {
-    background: color-mix(in srgb, rgba(0, 0, 0, 0.06) 45%, transparent);
-    color: #3A1515;
+    background: color-mix(in srgb, var(--border) 45%, transparent);
+    color: var(--text);
 }
 
 .t3-provider-info-bar__action--static {
@@ -1097,7 +1027,7 @@ button.side-nav-item:not(.side-nav-item--active):hover .side-nav-icon {
 }
 
 .t3-provider-info-bar__icon--lock {
-    color: #B91C1C;
+    color: var(--primary);
 }
 
 .t3-provider-search {
@@ -1107,17 +1037,17 @@ button.side-nav-item:not(.side-nav-item--active):hover .side-nav-icon {
     padding: 0 14px;
     min-height: 48px;
     box-sizing: border-box;
-    background: #FFFFFF;
-    border: 1px solid rgba(0, 0, 0, 0.06);
+    background: var(--bg);
+    border: 1px solid var(--border);
     border-radius: 12px;
-    box-shadow: none;
+    box-shadow: var(--card-shadow);
 }
 
 .t3-provider-search__icon {
     width: 20px;
     height: 20px;
     flex-shrink: 0;
-    color: #8A6B2A;
+    color: var(--muted);
     display: block;
 }
 
@@ -1126,22 +1056,22 @@ button.side-nav-item:not(.side-nav-item--active):hover .side-nav-icon {
     min-width: 0;
     border: none;
     background: transparent;
-    font-family: Poppins, sans-serif;
+    font-family: var(--base-font-family);
     font-size: 14px;
     font-weight: 600;
-    color: #3A1515;
+    color: var(--text);
     outline: none;
 }
 
 .t3-provider-search__input::placeholder {
-    color: #8A6B2A;
+    color: var(--muted);
 }
 
 .t3-provider-game-page__title {
     margin: 0;
     margin-top: 6px;
-    font-family: Poppins, sans-serif;
-    color: #B91C1C;
+    font-family: var(--base-font-family);
+    color: var(--primary);
     font-size: 13px;
     font-weight: 700;
     line-height: 1.25;
@@ -1187,7 +1117,7 @@ button.side-nav-item:not(.side-nav-item--active):hover .side-nav-icon {
 }
 
 .t3-game-list-provider--emphasis .t3-game-list-provider-name {
-    color: #B91C1C;
+    color: var(--primary);
     font-weight: 700;
     font-size: 12px;
     max-width: 140px;
@@ -1201,7 +1131,7 @@ button.side-nav-item:not(.side-nav-item--active):hover .side-nav-icon {
 }
 
 .t3-game-list-provider-name {
-    color: #8A6B2A;
+    color: var(--game-card-provider);
     font-size: 11px;
     font-weight: 600;
     white-space: nowrap;
@@ -1239,10 +1169,10 @@ button.side-nav-item:not(.side-nav-item--active):hover .side-nav-icon {
     padding: 0 25px;
     min-height: 44px;
     border-radius: 10px;
-    border: 1px solid rgba(0, 0, 0, 0.06);
-    background: #3E2621 !important;
-    color: #FFFFFF !important;
-    font-family: Poppins, sans-serif;
+    border: 1px solid var(--border);
+    background: var(--non-active-bg) !important;
+    color: var(--on-primary) !important;
+    font-family: var(--base-font-family);
     font-size: 16px;
     font-weight: 700;
     transition: filter 160ms ease;
@@ -1253,7 +1183,7 @@ button.side-nav-item:not(.side-nav-item--active):hover .side-nav-icon {
 }
 
 .provider-category-container>div.active {
-    border: 1px solid #D4AF37 !important;
+    border: 1px solid var(--gold) !important;
 }
 
 .mobile-home-latest-transactions-box>.body {
@@ -1262,105 +1192,99 @@ button.side-nav-item:not(.side-nav-item--active):hover .side-nav-icon {
 
 /* Live transactions: vertical rule between Deposit and Withdrawal columns */
 .live-transactions-dw-table .live-transactions-dw-table__deposit {
-    border-right: 1px solid rgba(0, 0, 0, 0.12) !important;
+    border-right: 1px solid var(--border-strong) !important;
 }
 
 .mobile-home-balance-box {
-    background: linear-gradient(90deg, #FFFFFF 0%, #FFFFFF 100%) !important;
+    background: var(--surface-gradient) !important;
 }
 
 .t3-accordion-item.active>.head {
-    background: #991B1B !important;
-    color: #FFFFFF !important;
+    background: var(--primary-dark) !important;
+    color: var(--on-primary) !important;
 }
 
 .t3-mobile-side-menu-content .t3-sidemenu-item {
-    background-image: linear-gradient(90deg, #FFFFFF 0%, #991B1B 100%) !important;
+    background-image: linear-gradient(90deg, var(--surface-2) 0%, var(--primary-dark) 100%) !important;
 }
 
 .add-remove-week-filter li.active {
-    background: linear-gradient(180deg,
-            #991B1B 0%,
-            #B91C1C 38%,
-            #D81E2F 100%) !important;
-    border: 1px solid #991B1B !important;
-    color: #FFFFFF !important;
+    background: var(--cta-gradient) !important;
+    border: 1px solid var(--primary-dark) !important;
+    color: var(--on-primary) !important;
 }
 
 #deposit-id .all-flex-box-gray {
-    background: linear-gradient(90deg, #FFFFFF 0%, #FFFFFF 100%) !important;
+    background: var(--surface-gradient) !important;
 }
 
 .search-with-icon-box input {
     border: unset !important;
-    background: #FFFFFF !important;
+    background: var(--theme-color-bg-search) !important;
 }
 
 .t3-team-second-income-box>div>.details {
-    color: #D4AF37 !important;
+    color: var(--gold) !important;
 }
 
 .t3-team-second-total-box>.first .details {
-    color: #D4AF37 !important;
+    color: var(--gold) !important;
 }
 
 .t3-team-banner-code-box .t3-team-banner-details {
-    color: #3A1515 !important;
+    color: var(--text) !important;
 }
 
 .btn-custom-small {
-    background: linear-gradient(180deg,
-            #991B1B 0%,
-            #B91C1C 38%,
-            #D81E2F 100%) !important;
-    color: #FFFFFF !important;
+    background: var(--cta-gradient) !important;
+    color: var(--on-primary) !important;
 }
 
 .add-remove-week-filter li {
-    background: #FFFFFF !important;
+    background: var(--surface-2) !important;
 }
 
 .t3-upload-file-box {
-    border: 1px dashed rgba(0, 0, 0, 0.12) !important;
+    border: 1px dashed var(--border-strong) !important;
 }
 
 .payout-container {
-    border: 1px solid #B91C1C !important;
-    box-shadow: 0 0 20px 0 rgba(179, 13, 30, 0.10) inset !important;
+    border: 1px solid var(--theme-color-text-secondary) !important;
+    box-shadow: 0 0 20px 0 var(--active-tint) inset !important;
 }
 
 .payout-container .payout-list .item {
-    background: linear-gradient(90deg, #FFFFFF 0%, #FFFFFF 100%) !important;
+    background: var(--surface-gradient) !important;
 }
 
 .t3-m-sm-header .t3-close-modal .vicon {
-    color: #B91C1C !important;
+    color: var(--theme-color-text-secondary) !important;
     width: 25px;
     height: 25px;
 }
 
 .promotion-time {
-    color: #B91C1C !important;
+    color: var(--theme-color-text-secondary) !important;
 }
 
 .home-login-register-box>div:first-child {
-    background: #D4AF37 !important;
+    background: var(--gold) !important;
 }
 
 .t3-mobile-side-menu-content .t3-sidemenu-item:hover {
-    background-image: linear-gradient(90deg, #991B1B 0%, #991B1B 100%) !important;
+    background-image: linear-gradient(90deg, var(--primary-dark) 0%, var(--primary-dark) 100%) !important;
 }
 
 .mobile-home-balance-box>.head {
-    border-bottom: 1px solid rgba(0, 0, 0, 0.06) !important;
+    border-bottom: 1px solid var(--border) !important;
 }
 
 .t3-default-lobby .progress-identifier {
-    background: #D4AF37;
+    background: var(--gold);
 }
 
 .t3-custom-modal .modal-header {
-    background-color: #EBEBEB !important;
+    background-color: var(--sidebar-bg) !important;
 }
 
 .t3-custom-modal .modal-header .modal-title {
@@ -1379,7 +1303,7 @@ button.side-nav-item:not(.side-nav-item--active):hover .side-nav-icon {
     inset: 0;
     z-index: 0;
     border: 0;
-    background: rgba(0, 0, 0, 0.5);
+    background: var(--modal-backdrop);
     backdrop-filter: none;
     cursor: pointer;
 }
@@ -1503,7 +1427,7 @@ button.side-nav-item:not(.side-nav-item--active):hover .side-nav-icon {
 }
 
 .t3-auth-login-alert-slot {
-    color: #3A1515;
+    color: var(--text);
     line-height: 14px;
     margin: 0;
     position: absolute;
@@ -1528,13 +1452,13 @@ button.side-nav-item:not(.side-nav-item--active):hover .side-nav-icon {
     gap: 10px;
     width: 100%;
     box-sizing: border-box;
-    background: #EBEBEB;
+    background: var(--sidebar-bg);
     /* background: var(--surface-2, #dde4f0); */
-    font-family: Poppins, sans-serif;
+    font-family: var(--base-font-family);
     font-size: 13px;
     font-weight: 600;
     line-height: 1.35;
-    border: 1px solid color-mix(in srgb, rgba(0, 0, 0, 0.06) 55%, transparent);
+    border: 1px solid color-mix(in srgb, var(--border) 55%, transparent);
 }
 
 .t3-auth-login-alert__text {
@@ -1547,7 +1471,7 @@ button.side-nav-item:not(.side-nav-item--active):hover .side-nav-icon {
     flex-shrink: 0;
     display: grid;
     place-items: center;
-    color: #991B1B;
+    color: var(--primary-dark);
 }
 
 .t3-auth-login-alert__icon-svg {
@@ -1569,8 +1493,8 @@ button.side-nav-item:not(.side-nav-item--active):hover .side-nav-icon {
 .t3-input-container>label {
     display: block;
     margin-bottom: 6px;
-    color: #8A6B2A;
-    font-family: Poppins, sans-serif;
+    color: var(--modal-container-title);
+    font-family: var(--base-font-family);
     font-size: 12px;
     font-weight: 400;
     line-height: 1.35;
@@ -1581,10 +1505,10 @@ button.side-nav-item:not(.side-nav-item--active):hover .side-nav-icon {
     min-height: 44px;
     padding: 0 14px;
     border-radius: 10px;
-    border: 1px solid rgba(0, 0, 0, 0.06);
-    background: #FFFFFF;
-    color: #3A1515;
-    font-family: Poppins, sans-serif;
+    border: 1px solid var(--border);
+    background: var(--base-input);
+    color: var(--base-input-color);
+    font-family: var(--base-font-family);
     font-size: 14px;
     font-weight: 400;
     outline: none;
@@ -1592,14 +1516,14 @@ button.side-nav-item:not(.side-nav-item--active):hover .side-nav-icon {
 }
 
 .t3-custom-input-text::placeholder {
-    color: #8A6B2A;
-    font-family: Poppins, sans-serif;
+    color: var(--base-input-placeholder);
+    font-family: var(--base-font-family);
     font-size: 14px;
     font-weight: 400;
 }
 
 .t3-custom-input-text:focus {
-    box-shadow: 0 0 0 3px color-mix(in srgb, #D4AF37 22%, transparent);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--gold) 22%, transparent);
 }
 
 /* No border lines on text-like inputs / textareas / selects (Tailwind `border` included); keep borders on auth modal fields */
@@ -1613,7 +1537,7 @@ select:not(.t3-custom-input-text) {
 
 .t3-input-container .text-muted {
     color: #726957 !important;
-    font-family: Poppins, sans-serif;
+    font-family: var(--base-font-family);
     font-size: 12px;
     font-weight: 400;
     line-height: 1.5;
@@ -1632,8 +1556,8 @@ select:not(.t3-custom-input-text) {
 .t3-register-rules {
     display: grid;
     gap: 2px;
-    color: #B91C1C;
-    font-family: Poppins, sans-serif;
+    color: var(--primary);
+    font-family: var(--base-font-family);
     font-size: 12px;
     font-weight: 600;
     line-height: 1.35;
@@ -1645,7 +1569,7 @@ select:not(.t3-custom-input-text) {
 
 .t3-register-rules p::before {
     content: "◉ ";
-    color: #3A1515;
+    color: var(--text);
 }
 
 .position-relative {
@@ -1657,7 +1581,7 @@ select:not(.t3-custom-input-text) {
     right: 12px;
     top: 50%;
     transform: translateY(-50%);
-    color: #8A6B2A;
+    color: var(--muted);
 }
 
 .vicon-wrapper .vicon {
@@ -1677,14 +1601,14 @@ select:not(.t3-custom-input-text) {
     display: inline-flex;
     align-items: center;
     cursor: pointer;
-    color: #8A6B2A;
-    font-family: Poppins, sans-serif;
+    color: var(--muted);
+    font-family: var(--base-font-family);
     font-size: 14px;
     font-weight: 500;
 }
 
 .remenber-me-check input[type="checkbox"] {
-    accent-color: #B91C1C;
+    accent-color: var(--primary);
 }
 
 .ml-2 {
@@ -1715,8 +1639,8 @@ select:not(.t3-custom-input-text) {
 .t3-lr-button-box .header-login-btn {
     border: 0;
     background: transparent;
-    color: #D4AF37;
-    font-family: Poppins, sans-serif;
+    color: var(--base-link);
+    font-family: var(--base-font-family);
     font-size: 14px;
     font-weight: 800;
     line-height: 1.25;
@@ -1731,7 +1655,7 @@ select:not(.t3-custom-input-text) {
     margin-top: 16px;
     margin-inline: -10px;
     padding: 12px 10px;
-    border-top: 1px solid rgba(0, 0, 0, 0.06);
+    border-top: 1px solid var(--modal-footer-border);
     border-radius: 12px;
 }
 
@@ -1771,11 +1695,11 @@ select:not(.t3-custom-input-text) {
 }
 
 .yellow-note-title {
-    color: #D4AF37 !important;
+    color: var(--gold) !important;
 }
 
 .t3-deposit-amount-list-box>.item.disabled:hover {
-    background: #FFFFFF !important;
+    background: var(--surface-2) !important;
 }
 
 .t3-custom-light-btn {
@@ -1783,15 +1707,12 @@ select:not(.t3-custom-input-text) {
     min-height: 44px;
     border-radius: 10px;
     border: 0;
-    background: linear-gradient(180deg,
-            #991B1B 0%,
-            #B91C1C 38%,
-            #D81E2F 100%) !important;
-    color: #FFFFFF !important;
-    font-family: Poppins, sans-serif;
+    background: var(--cta-gradient) !important;
+    color: var(--on-primary) !important;
+    font-family: var(--base-font-family);
     font-size: 16px;
     font-weight: 700;
-    box-shadow: 0 4px 12px 0 color-mix(in srgb, #3A1515 12%, transparent);
+    box-shadow: var(--shadow-elevated);
     transition: filter 160ms ease;
 }
 
@@ -1806,117 +1727,99 @@ select:not(.t3-custom-input-text) {
     font-size: 0.875rem;
     font-weight: 700;
     line-height: 1.25;
-    background: linear-gradient(180deg,
-            #991B1B 0%,
-            #B91C1C 38%,
-            #D81E2F 100%) !important;
-    color: #FFFFFF !important;
+    background: var(--cta-gradient) !important;
+    color: var(--on-primary) !important;
 }
 
 .provider-category-container>div.active {
-    background: #991B1B !important;
-    border: 1px solid #D4AF37 !important;
-    color: #FFFFFF !important;
+    background: var(--primary-dark) !important;
+    border: 1px solid var(--gold) !important;
+    color: var(--on-primary) !important;
 }
 
 .t3-cms-header {
-    background: #FFFFFF !important;
+    background: var(--surface-2) !important;
     border-top-left-radius: 0.75rem;
     border-top-right-radius: 0.75rem;
 }
 
 .t3-vip-user-image-box>.t3-vip-user-image:before {
-    border: 1px solid #B91C1C !important;
+    border: 1px solid var(--theme-color-text-secondary) !important;
 }
 
 .t3-vip-user-image-box>.t3-vip-user-image:after {
-    border: 3px solid #B91C1C !important;
+    border: 3px solid var(--theme-color-text-secondary) !important;
 }
 
 .t3-vip-bar-item {
-    background: linear-gradient(180deg,
-            #991B1B 0%,
-            #B91C1C 38%,
-            #D81E2F 100%) !important;
+    background: var(--cta-gradient) !important;
 }
 
 .mobile-home-balance-box>.body .second button {
-    background: linear-gradient(180deg,
-            #991B1B 0%,
-            #B91C1C 38%,
-            #D81E2F 100%) !important;
-    color: #FFFFFF !important;
+    background: var(--cta-gradient) !important;
+    color: var(--on-primary) !important;
 }
 
 .t3-header-balance-deposit-box .t3-header-deposit {
-    color: #FFFFFF !important;
+    color: var(--on-primary) !important;
 }
 
 .home-login-register-box>div:first-child {
-    border: 1px solid #B91C1C !important;
+    border: 1px solid var(--theme-color-text-secondary) !important;
     background: none !important;
     box-shadow: unset !important;
-    color: #B91C1C !important;
+    color: var(--theme-color-text-secondary) !important;
 }
 
 .home-login-register-box>div:last-child {
-    background: linear-gradient(180deg,
-            #991B1B 0%,
-            #B91C1C 38%,
-            #D81E2F 100%) !important;
-    color: #FFFFFF !important;
+    background: var(--cta-gradient) !important;
+    color: var(--on-primary) !important;
 }
 
 .tac-countdown {
-    color: #D4AF37 !important;
+    color: var(--gold) !important;
 }
 
 .earn-stat-title .first-title {
-    color: #8A6B2A !important;
+    color: var(--muted) !important;
 }
 
 .t3-downline-table-tab>button.active,
 .t3-downline-status-table-tab>button.active {
-    background: linear-gradient(180deg,
-            #991B1B 0%,
-            #B91C1C 38%,
-            #D81E2F 100%) !important;
-    color: #FFFFFF !important;
+    background: var(--cta-gradient) !important;
+    color: var(--on-primary) !important;
 }
 
 .t3-downline-table-tab>button,
 .t3-downline-status-table-tab>button {
-    background: #FFFFFF !important;
-    color: #8A6B2A !important;
-    border-top: 2px solid rgba(0, 0, 0, 0.06) !important;
-    border-bottom: 2px solid rgba(0, 0, 0, 0.06) !important;
+    background: var(--theme-color-bg-modal-body) !important;
+    color: var(--muted) !important;
+    border-top: 2px solid var(--border) !important;
+    border-bottom: 2px solid var(--border) !important;
 }
 
 .t3-custom-table tbody>tr>td.downline-table-username {
-    color: #D4AF37 !important;
+    color: var(--gold) !important;
 }
 
 .t3-custom-table thead>tr>th {
-    background-color: #991B1B !important;
-    color: #FFFFFF !important;
+    background-color: var(--dashboard-table-th) !important;
+    color: var(--dashboard-table-th-color) !important;
     border-bottom: unset !important;
 }
 
 .t3-custom-table tbody>tr>td {
-    background-color: #FFFFFF !important;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.06) !important;
+    background-color: var(--surface) !important;
+    border-bottom: 1px solid var(--border) !important;
 }
 
 .pagination-bar .pagination-number-bar {
-    background: #3E2621 !important;
+    background: var(--non-active-bg) !important;
 }
 
 .pagination-bar .page-btn.active {
-    background: linear-gradient(180deg,
-            #991B1B 0%,
-            #B91C1C 38%,
-            #D81E2F 100%) !important;
-    color: #FFFFFF !important;
+    background: var(--cta-gradient) !important;
+    color: var(--on-primary) !important;
 }
 
 .pagination-bar .page-btn {
@@ -1924,29 +1827,29 @@ select:not(.t3-custom-input-text) {
 }
 
 .pagination-bar .arrow-btn {
-    background-color: #3E2621 !important;
-    color: #FFFFFF !important;
+    background-color: var(--non-active-bg) !important;
+    color: var(--on-primary) !important;
 }
 
 .t3-sidemenu-box .t3-sidemenu-item h6 {
-    color: #8A6B2A !important;
+    color: var(--muted) !important;
 }
 
 /* Preserve live-site sidebar state colors when using t3-sidemenu-item + h6 */
 .t3-sidemenu-box .t3-sidemenu-item.side-nav-item--active h6 {
-    color: #FFFFFF !important;
+    color: var(--nav-side-text-active) !important;
 }
 
 .t3-sidemenu-box .t3-sidemenu-item:hover h6 {
-    color: #FFFFFF !important;
+    color: var(--nav-side-text-hover) !important;
 }
 
 .t3-header>.second .t3-header-register {
-    color: #2A1A00 !important;
+    color: var(--nav-header-register-color) !important;
 }
 
 .t3-side-menu {
-    background-color: #EBEBEB !important;
+    background-color: var(--sidebar-bg) !important;
     z-index: 40;
     -ms-overflow-style: none;
     /* IE / legacy Edge */
@@ -1962,17 +1865,13 @@ select:not(.t3-custom-input-text) {
 }
 
 .mobile-latest-deposit-withdraw-box>div:first-child>.mobile-home-latest-transactions-box {
-    border-right: 1px solid rgba(0, 0, 0, 0.06) !important;
+    border-right: 1px solid var(--border) !important;
 }
 
-.t3-game-category-list .t3-game-category-item:hover {
-    background: var(--primary-dark);
-    color: var(--on-primary) !important;
-}
+/*.t3-game-category-list .t3-game-category-item:hover {
+    background: var(--primary-dark) !important;
+}*/
 
-.t3-game-category-list .t3-game-category-item:hover img {
-    filter: var(--sidebar-icon-filter-active) !important;
-}
 
 /* Footer — edge-to-edge red bar; logos + caption constrained (App renders Footer below sidebar row) */
 .layout__footer.layout__footer-fullbleed {
@@ -1982,10 +1881,10 @@ select:not(.t3-custom-input-text) {
     flex-shrink: 0;
     position: relative;
     z-index: 5;
-    background: #991B1B;
+    background: var(--primary-dark);
     border-top: 1px solid color-mix(in srgb, #ffffff 12%, transparent);
     border-bottom: 3px solid color-mix(in srgb, #000000 18%, transparent);
-    padding-left: 220px;
+    padding-left: var(--sidebar-fixed-width);
 }
 
 .footer-inner-shell {
@@ -2078,7 +1977,7 @@ select:not(.t3-custom-input-text) {
     margin-top: 2px;
     justify-self: center;
     text-align: center;
-    color: color-mix(in srgb, #E9C96A 58%, #FFFDF5);
+    color: var(--nav-footer-copyright-color);
     font-size: 10px;
     font-weight: 400;
 }
@@ -2120,9 +2019,9 @@ select:not(.t3-custom-input-text) {
 }
 
 .footer-language-container.footer-language-container--bottom .btn.btn-secondary {
-    border: 1px solid color-mix(in srgb, #D4AF37 55%, transparent);
+    border: 1px solid var(--nav-footer-control-border);
     background: transparent;
-    color: color-mix(in srgb, #E9C96A 72%, #FFFFFF);
+    color: var(--nav-footer-color);
     height: 34px;
     padding: 0 10px;
     border-radius: 8px;
@@ -2145,9 +2044,9 @@ select:not(.t3-custom-input-text) {
 
 /* Generic footer-lang style only if not using bottom screenshot variant */
 .footer-language-container:not(.footer-language-container--bottom) .btn.btn-secondary {
-    border: 1px solid color-mix(in srgb, #D4AF37 55%, transparent);
+    border: 1px solid var(--nav-footer-control-border);
     background: transparent;
-    color: color-mix(in srgb, #E9C96A 72%, #FFFFFF);
+    color: var(--nav-footer-color);
     height: 34px;
     padding: 0 10px;
     border-radius: 8px;
@@ -2159,7 +2058,7 @@ select:not(.t3-custom-input-text) {
 .t3-copyright {
     margin-top: 0;
     text-align: center;
-    color: color-mix(in srgb, #E9C96A 58%, #FFFDF5);
+    color: var(--nav-footer-copyright-color);
     font-size: 10px;
     font-weight: 400;
 }
@@ -2210,56 +2109,53 @@ select:not(.t3-custom-input-text) {
 .t3-team-second-section>div,
 .t3-team-third-section,
 .t3-team-third-section>div {
-    background: #FFFFFF !important;
+    background: var(--theme-color-bg-search) !important;
 }
 
 .t3-accordion-item.active>.details {
-    background: #FFFFFF !important;
+    background: var(--surface-2) !important;
 }
 
 .t3-accordion-item.active>.details>div:not(:last-child),
 .vip-details-list-table>tr:not(:last-child) {
-    border-bottom: 1px solid rgba(0, 0, 0, 0.06) !important;
+    border-bottom: 1px solid var(--border) !important;
 }
 
 .t3-accordion-item>.head {
-    background: #991B1B !important;
-    color: #FFFFFF !important;
+    background: var(--primary-dark) !important;
+    color: var(--on-primary) !important;
 }
 
 .custom-gray-box {
-    background: #FFFFFF !important;
+    background: var(--theme-color-bg-search) !important;
 }
 
 .vip-tab-buttons>div {
-    background: #FFFFFF !important;
+    background: var(--surface-2) !important;
 }
 
 .vip-details-list-table>tr>td.details.active {
-    background: #991B1B !important;
-    border-left: 1px solid #991B1B !important;
-    border-right: 1px solid #991B1B !important;
+    background: var(--primary-dark) !important;
+    border-left: 1px solid var(--primary-dark) !important;
+    border-right: 1px solid var(--primary-dark) !important;
 }
 
 .btn.btn-lg.btn-primary {
-    background: linear-gradient(180deg,
-            #991B1B 0%,
-            #B91C1C 38%,
-            #D81E2F 100%) !important;
-    color: #FFFFFF !important;
+    background: var(--cta-gradient) !important;
+    color: var(--on-primary) !important;
 }
 
 .t3-header-balance-deposit-box .t3-header-deposit .vicon {
-    color: #3A1515 !important;
+    color: var(--theme-color-text-base) !important;
 }
 
 .t3-header-logged-second .t3-header-balance-deposit-box .t3-header-deposit,
 .t3-header-logged-second .t3-header-balance-deposit-box .t3-header-deposit .text {
-    color: #2A1A00 !important;
+    color: var(--header-auth-deposit-text) !important;
 }
 
 .t3-header-logged-second .t3-header-balance-deposit-box .t3-header-deposit .vicon {
-    color: #2A1A00 !important;
+    color: var(--header-auth-deposit-text) !important;
 }
 
 /* Header right cluster — unified control height (--header-auth-control-height), compact typography */
@@ -2267,12 +2163,12 @@ select:not(.t3-custom-input-text) {
     display: flex;
     align-items: stretch;
     gap: 8px;
-    height: 40px;
-    min-height: 40px;
-    max-height: 40px;
+    height: var(--header-auth-control-height);
+    min-height: var(--header-auth-control-height);
+    max-height: var(--header-auth-control-height);
     padding: 0;
     box-sizing: border-box;
-    border: 1px solid color-mix(in srgb, #AAB4BF 36%, transparent);
+    border: 1px solid var(--header-auth-panel-border);
     border-radius: 8px;
     flex-wrap: nowrap;
     position: relative;
@@ -2305,7 +2201,7 @@ select:not(.t3-custom-input-text) {
 }
 
 .second.t3-header-logged-second .header-balance-column>span.font-size-header-balance {
-    color: #ffffff;
+    color: var(--header-auth-balance-label);
     font-size: 11px;
     font-weight: 700;
 }
@@ -2313,7 +2209,7 @@ select:not(.t3-custom-input-text) {
 .second.t3-header-logged-second .balance-amount {
     font-size: 12px;
     font-weight: 800;
-    color: #ffe176;
+    color: var(--header-auth-balance-amount);
     letter-spacing: 0.01em;
 }
 
@@ -2327,10 +2223,10 @@ select:not(.t3-custom-input-text) {
     height: 26px;
     padding: 0;
     border-radius: 6px;
-    border: 1px solid color-mix(in srgb, #8f98a6 42%, transparent);
-    background: linear-gradient(180deg, #484f59 0%, #3a424c 35%, #2d343e 72%, #20262e 100%);
-    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1);
-    color: rgba(255, 255, 255, 0.94);
+    border: 1px solid var(--header-auth-wallet-ddl-border);
+    background: var(--header-auth-wallet-ddl-bg);
+    box-shadow: var(--header-auth-wallet-ddl-inset);
+    color: var(--header-auth-wallet-ddl-chevron);
 }
 
 .second.t3-header-logged-second .t3-chevon-ddl svg {
@@ -2378,10 +2274,10 @@ select:not(.t3-custom-input-text) {
     place-items: center;
     border: 0;
     border-radius: 8px;
-    width: 40px;
-    height: 40px;
-    min-width: 40px;
-    min-height: 40px;
+    width: var(--header-auth-control-height);
+    height: var(--header-auth-control-height);
+    min-width: var(--header-auth-control-height);
+    min-height: var(--header-auth-control-height);
     flex-shrink: 0;
     cursor: pointer;
     box-sizing: border-box;
@@ -2391,22 +2287,22 @@ select:not(.t3-custom-input-text) {
     display: flex;
     align-items: center;
     gap: 6px;
-    height: 40px;
-    min-height: 40px;
-    max-height: 40px;
+    height: var(--header-auth-control-height);
+    min-height: var(--header-auth-control-height);
+    max-height: var(--header-auth-control-height);
     border-radius: 8px;
     padding: 0 8px;
     min-width: 0;
     box-sizing: border-box;
-    border: 1px solid color-mix(in srgb, #AAB4BF 35%, transparent);
-    background: linear-gradient(180deg, #2B3139 0%, #1A2027 100%);
+    border: 1px solid var(--header-auth-chip-border);
+    background: var(--header-auth-chip-bg);
 }
 
 .second.t3-header-logged-second .drop-down-language.header-language-container .header-lang-toggle {
     border-radius: 8px !important;
-    min-height: 40px !important;
-    max-height: 40px !important;
-    height: 40px !important;
+    min-height: var(--header-auth-control-height) !important;
+    max-height: var(--header-auth-control-height) !important;
+    height: var(--header-auth-control-height) !important;
     padding-left: 8px !important;
     padding-right: 8px !important;
     gap: 4px !important;
@@ -2431,7 +2327,7 @@ select:not(.t3-custom-input-text) {
 .second.t3-header-logged-second .t3-header-profile-box .second div:first-child {
     font-weight: 800;
     font-size: 12px;
-    color: #ffffff;
+    color: var(--header-auth-profile-name);
     line-height: 1;
     max-width: 140px;
     overflow: hidden;
@@ -2447,7 +2343,7 @@ select:not(.t3-custom-input-text) {
     font-size: 11px;
     font-weight: 500;
     line-height: 1.15;
-    color: #c5ccd6;
+    color: var(--header-auth-profile-status);
 }
 
 .second.t3-header-logged-second .t3-header-profile-box .third {
@@ -2455,7 +2351,7 @@ select:not(.t3-custom-input-text) {
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
-    color: #ffffff;
+    color: var(--header-auth-chip-color);
 }
 
 .second.t3-header-logged-second .t3-header-profile-box .third .profile-expand-svg {
@@ -2471,7 +2367,7 @@ select:not(.t3-custom-input-text) {
 }
 
 .second.t3-header-logged-second .header-rollover-dropdown-target-wrap {
-    color: #991B1B;
+    color: var(--primary-dark);
 }
 
 .second.t3-header-logged-second .header-rollover-dropdown-target-icon {
@@ -2481,8 +2377,8 @@ select:not(.t3-custom-input-text) {
 }
 
 .second.t3-header-logged-second .header-auth-mobile-logout {
-    width: 40px !important;
-    height: 40px !important;
+    width: var(--header-auth-control-height) !important;
+    height: var(--header-auth-control-height) !important;
 }
 
 /* Mobile header — logo | dark balance + gold $ pill | target | hamburger (profile & wallet chevron hidden) */
@@ -2526,12 +2422,12 @@ select:not(.t3-custom-input-text) {
 
     .second.t3-header-logged-second .t3-header-deposit {
         padding: 0 !important;
-        width: 40px;
-        min-width: 40px;
-        max-width: 40px;
-        flex: 0 0 40px;
+        width: var(--header-auth-control-height);
+        min-width: var(--header-auth-control-height);
+        max-width: var(--header-auth-control-height);
+        flex: 0 0 var(--header-auth-control-height);
         border-radius: 5px;
-        border-left: 1px solid color-mix(in srgb, #D4AF37 50%, rgba(0, 0, 0, 0.25) 50%);
+        border-left: 1px solid color-mix(in srgb, var(--gold) 50%, rgba(0, 0, 0, 0.25) 50%);
     }
 
     .second.t3-header-logged-second .t3-header-deposit .text {
@@ -2595,10 +2491,10 @@ select:not(.t3-custom-input-text) {
     padding: 12px;
     box-sizing: border-box;
     border-radius: 10px;
-    border: 1px solid rgba(0, 0, 0, 0.06);
-    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.06);
-    background: #EBEBEB;
-    font-family: Poppins, sans-serif, sans-serif;
+    border: 1px solid var(--border);
+    box-shadow: 0 4px 14px var(--shadow-soft);
+    background: var(--balance-modal-popup);
+    font-family: var(--base-font-family), sans-serif;
 }
 
 .header-balance-dropdown-panel {
@@ -2607,7 +2503,7 @@ select:not(.t3-custom-input-text) {
     align-items: center;
     gap: 8px;
     border-radius: 8px;
-    background: #FFFFFF;
+    background: var(--balance-inner-modal);
     padding: 10px 12px;
 }
 
@@ -2638,7 +2534,7 @@ select:not(.t3-custom-input-text) {
 .header-balance-dropdown-wallet-label {
     font-weight: 600;
     font-size: 13px;
-    color: #3A1515;
+    color: var(--text);
     white-space: nowrap;
 }
 
@@ -2646,14 +2542,14 @@ select:not(.t3-custom-input-text) {
     font-weight: 600;
     font-size: 13px;
     font-variant-numeric: tabular-nums;
-    color: #D4AF37;
+    color: var(--gold);
 }
 
 .header-balance-dropdown .vicon--info {
     width: 15px;
     height: 15px;
     flex-shrink: 0;
-    color: #8A6B2A;
+    color: var(--muted);
 }
 
 .header-balance-dropdown-refresh {
@@ -2666,20 +2562,20 @@ select:not(.t3-custom-input-text) {
     height: 24px;
     padding: 0;
     border: none;
-    background: #FFFFFF;
+    background: var(--balance-inner-modal);
     cursor: pointer;
     border-radius: 8px;
 }
 
 .header-balance-dropdown-refresh:focus-visible {
-    outline: 2px solid #B91C1C;
+    outline: 2px solid var(--primary);
     outline-offset: 2px;
 }
 
 .header-balance-dropdown-refresh .vicon--refresh {
     width: 18px;
     height: 18px;
-    color: #B91C1C;
+    color: var(--primary);
 }
 
 @media (max-width: 480px) {
@@ -2715,16 +2611,16 @@ select:not(.t3-custom-input-text) {
     column-gap: 10px;
     font-size: 16px;
     line-height: 1;
-    font-family: Poppins, sans-serif, sans-serif;
+    font-family: var(--base-font-family), sans-serif;
     box-sizing: border-box;
     transition: filter 150ms ease, box-shadow 150ms ease;
 }
 
 .t3-two-custom-tabs>div:not(.active) {
-    background: #3E2621 !important;
-    color: #FFFFFF !important;
-    border: 1px solid rgba(0, 0, 0, 0.06) !important;
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06);
+    background: var(--non-active-bg) !important;
+    color: var(--on-primary) !important;
+    border: 1px solid var(--border) !important;
+    box-shadow: 0 1px 2px var(--shadow-soft);
 }
 
 .t3-two-custom-tabs>div:not(.active):hover {
@@ -2732,13 +2628,10 @@ select:not(.t3-custom-input-text) {
 }
 
 .t3-two-custom-tabs>div.active {
-    background: linear-gradient(180deg,
-            #991B1B 0%,
-            #B91C1C 38%,
-            #D81E2F 100%) !important;
-    color: #FFFFFF !important;
+    background: var(--cta-gradient) !important;
+    color: var(--on-primary) !important;
     border: none !important;
-    box-shadow: none;
+    box-shadow: var(--card-shadow);
 }
 
 .t3-two-custom-tabs>div.active:hover {
@@ -2746,7 +2639,7 @@ select:not(.t3-custom-input-text) {
 }
 
 .t3-two-custom-tabs>div:focus-visible {
-    outline: 2px solid #E9C96A;
+    outline: 2px solid var(--gold-bright);
     outline-offset: 2px;
 }
 
@@ -2763,20 +2656,20 @@ select:not(.t3-custom-input-text) {
 }
 
 .deposit-page .t3-settings-menu-list .t3-settings-menu-list-item.bank {
-    background: #FFFFFF !important;
-    color: #3A1515 !important;
-    border-color: color-mix(in srgb, #D4AF37 48%, transparent) !important;
+    background: var(--deposit-accordion-bg) !important;
+    color: var(--text) !important;
+    border-color: var(--panel-item-border) !important;
 }
 
 /* Override global settings list hover (red gradient) on deposit accordions */
 .deposit-page .t3-settings-menu-list .t3-settings-menu-list-item.bank:hover {
-    background: #FFFFFF !important;
-    color: #3A1515 !important;
+    background: var(--deposit-accordion-bg) !important;
+    color: var(--text) !important;
 }
 
 .deposit-page .t3-settings-menu-list .t3-settings-menu-list-item.bank:hover>.menu-list-item-row svg,
 .deposit-page .t3-settings-menu-list .t3-settings-menu-list-item.bank:hover .vicon {
-    color: #B91C1C !important;
+    color: var(--primary) !important;
 }
 
 .deposit-page .t3-settings-menu-list .menu-list-item-row {
@@ -2800,7 +2693,7 @@ select:not(.t3-custom-input-text) {
 
 
 .deposit-page .t3-settings-menu-list .menu-list-item-row:focus-visible {
-    outline: 2px solid #E9C96A;
+    outline: 2px solid var(--gold-bright);
     outline-offset: 1px;
 }
 
@@ -2817,14 +2710,14 @@ select:not(.t3-custom-input-text) {
     display: flex;
     align-items: center;
     flex-shrink: 0;
-    color: #8A6B2A;
+    color: var(--muted);
 }
 
 .deposit-page .t3-settings-menu-list .title {
     font-size: 15px;
     font-weight: 700;
     line-height: 1.2;
-    color: #1F2937;
+    color: var(--game-card-title);
 }
 
 .deposit-page .t3-settings-menu-list .remark {
@@ -2833,7 +2726,7 @@ select:not(.t3-custom-input-text) {
     font-size: 12px;
     font-weight: 400;
     line-height: 1.3;
-    color: #8A6B2A;
+    color: var(--muted);
 }
 
 .deposit-page .t3-settings-menu-list .bank-option-list {
@@ -2853,34 +2746,31 @@ select:not(.t3-custom-input-text) {
     max-width: 100%;
     margin: 0;
     padding: 8px 10px;
-    background: #FFFFFF !important;
-    color: #3A1515;
-    border: 1px solid color-mix(in srgb, #D4AF37 48%, transparent);
+    background: var(--deposit-bank-option-bg) !important;
+    color: var(--text);
+    border: 1px solid var(--deposit-bank-option-border);
     border-radius: 8px;
-    box-shadow: none;
+    box-shadow: var(--card-shadow);
     cursor: pointer;
     transition: box-shadow 170ms ease, transform 170ms ease, border-color 0.15s ease;
 }
 
 .deposit-page .t3-settings-menu-list .bank-option-box:hover {
-    background: linear-gradient(180deg,
-            #991B1B 0%,
-            #B91C1C 38%,
-            #D81E2F 100%) !important;
+    background: var(--cta-gradient) !important;
 }
 
 .deposit-page .t3-settings-menu-list .bank-option-box:hover .bank-option-name,
 .deposit-page .t3-settings-menu-list .bank-option-box:hover .bank-option-minmax {
-    color: #FFFFFF !important;
+    color: var(--on-primary) !important;
 }
 
 .deposit-page .t3-settings-menu-list .bank-option-box:active {
     transform: translateY(0);
-    box-shadow: none;
+    box-shadow: var(--card-shadow);
 }
 
 .deposit-page .t3-settings-menu-list .bank-option-box:focus-visible {
-    outline: 2px solid #E9C96A;
+    outline: 2px solid var(--gold-bright);
     outline-offset: 2px;
 }
 
@@ -2904,41 +2794,41 @@ select:not(.t3-custom-input-text) {
     font-size: 13px;
     font-weight: 700;
     line-height: 1.25;
-    color: #1F2937;
+    color: var(--deposit-bank-option-text);
 }
 
 .deposit-page .t3-settings-menu-list .bank-option-minmax {
     font-size: 12px;
     font-weight: 600;
-    color: #8A6B2A;
+    color: var(--deposit-bank-option-muted);
 }
 
 .deposit-page .deposit-accordion-item {
-    background: #F5F5F5;
+    background: var(--surface-3);
     border-radius: 12px;
     overflow: hidden;
 }
 
 .deposit-page .deposit-accordion-item>.details,
 .deposit-page .deposit-accordion-item.active>.details {
-    background: #F5F5F5 !important;
+    background: var(--surface-3) !important;
 }
 
 .deposit-page .deposit-accordion-item>.head,
 .deposit-page .deposit-accordion-item.active>.head {
-    background: #F5F5F5 !important;
-    color: #3A1515 !important;
+    background: var(--surface-3) !important;
+    color: var(--text) !important;
     border-radius: 0;
 }
 
 .deposit-page .deposit-accordion-item>.head .vicon {
-    color: #B91C1C !important;
+    color: var(--primary) !important;
 }
 
 .deposit-page .deposit-bank-card {
-    background: #FFFFFF !important;
-    border: 1px solid color-mix(in srgb, #D4AF37 48%, transparent) !important;
-    box-shadow: none;
+    background: var(--game-card-bg) !important;
+    border: 1px solid var(--panel-item-border) !important;
+    box-shadow: var(--card-shadow);
 }
 
 .deposit-page .deposit-bank-card img {
@@ -2947,16 +2837,16 @@ select:not(.t3-custom-input-text) {
 
 /* Deposit — bank transfer details (Normal Bank Transfer) — brand / theme tokens only */
 .deposit-page .deposit-bank-transfer-details {
-    --deposit-bt-accent-deep: #991B1B;
-    --deposit-bt-heading: #991B1B;
-    --deposit-bt-soft-panel: color-mix(in srgb, #F5F5F5 88%, rgba(199, 154, 44, 0.14) 12%);
-    --deposit-bt-panel-edge: color-mix(in srgb, #D4AF37 48%, transparent);
-    --deposit-bt-bank-idle-top: color-mix(in srgb, #991B1B 52%, #F5F5F5 48%);
-    --deposit-bt-bank-idle-bot: color-mix(in srgb, #991B1B 62%, #F5F5F5 38%);
-    --deposit-bt-chip: color-mix(in srgb, #F5F5F5 72%, #FFFFFF 28%);
-    --deposit-bt-chip-active: color-mix(in srgb, rgba(199, 154, 44, 0.14) 75%, #FFFFFF 25%);
-    --deposit-bt-selected-ring: #D4AF37;
-    --deposit-bt-card-border: color-mix(in srgb, #D4AF37 52%, color-mix(in srgb, #D4AF37 48%, transparent) 48%);
+    --deposit-bt-accent-deep: var(--primary-dark);
+    --deposit-bt-heading: var(--primary-dark);
+    --deposit-bt-soft-panel: color-mix(in srgb, var(--surface-3) 88%, var(--gold-tint) 12%);
+    --deposit-bt-panel-edge: var(--panel-item-border);
+    --deposit-bt-bank-idle-top: color-mix(in srgb, var(--primary-dark) 52%, var(--surface-3) 48%);
+    --deposit-bt-bank-idle-bot: color-mix(in srgb, var(--primary-dark) 62%, var(--surface-3) 38%);
+    --deposit-bt-chip: color-mix(in srgb, var(--surface-3) 72%, var(--bg) 28%);
+    --deposit-bt-chip-active: color-mix(in srgb, var(--gold-tint) 75%, var(--bg) 25%);
+    --deposit-bt-selected-ring: var(--gold);
+    --deposit-bt-card-border: color-mix(in srgb, var(--gold) 52%, var(--panel-item-border) 48%);
     --deposit-bt-card-shadow: none;
     margin-top: 12px;
     display: flex;
@@ -2977,17 +2867,14 @@ select:not(.t3-custom-input-text) {
     min-height: 40px;
     padding: 0 14px;
     border-radius: 10px;
-    border: 1px solid color-mix(in srgb, #D4AF37 35%, #991B1B 65%);
+    border: 1px solid color-mix(in srgb, var(--gold) 35%, var(--primary-dark) 65%);
     font: inherit;
     font-weight: 700;
     font-size: 14px;
     cursor: pointer;
-    color: #FFFFFF;
-    background: linear-gradient(180deg,
-            #991B1B 0%,
-            #B91C1C 38%,
-            #D81E2F 100%);
-    box-shadow: none;
+    color: var(--on-primary);
+    background: var(--cta-gradient);
+    box-shadow: var(--card-shadow);
 }
 
 .deposit-page .deposit-bank-transfer__back:hover {
@@ -2998,25 +2885,25 @@ select:not(.t3-custom-input-text) {
     margin: 0;
     font-size: 17px;
     font-weight: 800;
-    color: #991B1B;
+    color: var(--primary-dark);
 }
 
 .deposit-page .deposit-bank-transfer__panel {
     border-radius: 12px;
     padding: 16px 18px;
-    border: 1px solid color-mix(in srgb, #D4AF37 52%, color-mix(in srgb, #D4AF37 48%, transparent) 48%);
-    background: #FFFFFF;
-    box-shadow: none;
+    border: 1px solid var(--deposit-bt-card-border);
+    background: var(--bg);
+    box-shadow: var(--deposit-bt-card-shadow);
 }
 
 .deposit-page .deposit-bank-transfer__panel--brand-surface {
-    background: color-mix(in srgb, #F5F5F5 88%, rgba(199, 154, 44, 0.14) 12%);
-    border-color: color-mix(in srgb, #D4AF37 48%, transparent);
-    box-shadow: none;
+    background: var(--deposit-bt-soft-panel);
+    border-color: var(--deposit-bt-panel-edge);
+    box-shadow: var(--card-shadow);
 }
 
 .deposit-page .deposit-bank-transfer__section-title--brand {
-    color: #991B1B;
+    color: var(--deposit-bt-heading);
 }
 
 .deposit-page .deposit-bank-transfer__upload-section {
@@ -3030,7 +2917,7 @@ select:not(.t3-custom-input-text) {
     gap: 12px;
     font-size: 14px;
     font-weight: 600;
-    color: #991B1B;
+    color: var(--primary-dark);
 }
 
 .deposit-page .deposit-bank-transfer__info-row+.deposit-bank-transfer__info-row {
@@ -3039,21 +2926,21 @@ select:not(.t3-custom-input-text) {
 
 .deposit-page .deposit-bank-transfer__info-val {
     font-weight: 800;
-    color: #D4AF37;
+    color: var(--gold);
     font-variant-numeric: tabular-nums;
 }
 
 .deposit-page .deposit-bank-transfer__notes-rule {
     margin: 12px 0 0;
     padding-top: 12px;
-    border-top: 1px solid color-mix(in srgb, #D4AF37 52%, color-mix(in srgb, #D4AF37 48%, transparent) 48%);
+    border-top: 1px solid var(--deposit-bt-card-border);
 }
 
 .deposit-page .deposit-bank-transfer__notes-label {
     margin: 0 0 6px;
     font-size: 13px;
     font-weight: 800;
-    color: #B91C1C;
+    color: var(--primary);
 }
 
 .deposit-page .deposit-bank-transfer__notes-body {
@@ -3061,7 +2948,7 @@ select:not(.t3-custom-input-text) {
     font-size: 12px;
     line-height: 1.45;
     font-weight: 600;
-    color: #3A1515;
+    color: var(--text);
 }
 
 .deposit-page .deposit-bank-transfer__section-title {
@@ -3069,7 +2956,7 @@ select:not(.t3-custom-input-text) {
     font-size: 15px;
     font-weight: 800;
     letter-spacing: 0.01em;
-    color: #991B1B;
+    color: var(--primary-dark);
 }
 
 .deposit-page .deposit-bank-transfer__section-title--tight {
@@ -3092,7 +2979,7 @@ select:not(.t3-custom-input-text) {
 }
 
 .deposit-page .deposit-bank-transfer__bank-scroll::-webkit-scrollbar-thumb {
-    background: color-mix(in srgb, #991B1B 28%, rgba(0, 0, 0, 0.06));
+    background: color-mix(in srgb, var(--deposit-bt-accent-deep) 28%, var(--border));
     border-radius: 3px;
 }
 
@@ -3122,7 +3009,7 @@ select:not(.t3-custom-input-text) {
 }
 
 .deposit-page .deposit-bank-transfer__bank-card.selected {
-    background: #991B1B;
+    background: var(--deposit-bt-accent-deep);
 }
 
 .deposit-page .deposit-bank-transfer__bank-card-media {
@@ -3163,7 +3050,7 @@ select:not(.t3-custom-input-text) {
     font-size: 12px;
     font-weight: 800;
     line-height: 1.2;
-    color: #991B1B;
+    color: var(--primary-dark);
     letter-spacing: 0.02em;
 }
 
@@ -3193,11 +3080,11 @@ select:not(.t3-custom-input-text) {
 .deposit-page .deposit-bank-transfer__amount-chip {
     min-height: 46px;
     border-radius: 10px;
-    background: #FFFFFF;
+    background: var(--bg);
     font: inherit;
     font-size: 15px;
     font-weight: 800;
-    color: #991B1B;
+    color: var(--primary-dark);
     cursor: pointer;
     transition:
         background 0.15s ease,
@@ -3206,13 +3093,13 @@ select:not(.t3-custom-input-text) {
 }
 
 .deposit-page .deposit-bank-transfer__amount-chip:hover {
-    border-color: color-mix(in srgb, #D4AF37 65%, rgba(0, 0, 0, 0.06));
+    border-color: color-mix(in srgb, var(--gold) 65%, var(--border));
 }
 
 .deposit-page .deposit-bank-transfer__amount-chip.active {
-    background: color-mix(in srgb, rgba(199, 154, 44, 0.14) 85%, #FFFFFF 15%);
-    border-color: #D4AF37;
-    color: #991B1B;
+    background: color-mix(in srgb, var(--gold-tint) 85%, var(--bg) 15%);
+    border-color: var(--gold);
+    color: var(--primary-dark);
     box-shadow: none;
 }
 
@@ -3221,7 +3108,7 @@ select:not(.t3-custom-input-text) {
     border-radius: 10px;
     overflow: hidden;
     border: none;
-    background: #FFFFFF;
+    background: var(--bg);
     box-shadow: none;
 }
 
@@ -3234,8 +3121,8 @@ select:not(.t3-custom-input-text) {
     font-weight: 800;
     font-style: italic;
     letter-spacing: 0.06em;
-    color: #FFFFFF;
-    background: #991B1B;
+    color: var(--on-primary);
+    background: var(--primary-dark);
 }
 
 .deposit-page .deposit-bank-transfer__input-field {
@@ -3246,12 +3133,12 @@ select:not(.t3-custom-input-text) {
     font: inherit;
     font-size: 14px;
     font-weight: 600;
-    color: #3A1515;
-    background: #FFFFFF;
+    color: var(--text);
+    background: var(--bg);
 }
 
 .deposit-page .deposit-bank-transfer__input-field::placeholder {
-    color: color-mix(in srgb, #8A6B2A 72%, #D4AF37 28%);
+    color: color-mix(in srgb, var(--muted) 72%, var(--gold) 28%);
     font-weight: 500;
 }
 
@@ -3260,49 +3147,49 @@ select:not(.t3-custom-input-text) {
     font-size: 12px;
     font-weight: 600;
     text-align: right;
-    color: color-mix(in srgb, #D4AF37 42%, #8A6B2A 58%);
+    color: color-mix(in srgb, var(--gold) 42%, var(--muted) 58%);
 }
 
 /* Amount / input inside brand-tinted panel */
 .deposit-page .deposit-bank-transfer__panel--brand-surface .deposit-bank-transfer__amount-chip {
     background: #dbdad8;
-    color: #991B1B;
+    color: var(--deposit-bt-heading);
     font-size: 20px;
     font-weight: 700;
     height: 66px;
 }
 
 .deposit-page .deposit-bank-transfer__panel--brand-surface .deposit-bank-transfer__amount-chip:hover {
-    border-color: color-mix(in srgb, #D4AF37 45%, #991B1B 25%);
+    border-color: color-mix(in srgb, var(--gold) 45%, var(--primary-dark) 25%);
 }
 
 .deposit-page .deposit-bank-transfer__panel--brand-surface .deposit-bank-transfer__amount-chip.active {
-    background: #991B1B;
+    background: var(--deposit-bt-accent-deep);
     color: #ffffff;
 }
 
 .deposit-page .deposit-bank-transfer__panel--brand-surface .deposit-bank-transfer__input-row {
     border: none;
-    background: #FFFFFF;
+    background: var(--bg);
 }
 
 .deposit-page .deposit-bank-transfer__panel--brand-surface .deposit-bank-transfer__input-prefix {
-    background: #991B1B;
-    color: #FFFFFF;
+    background: var(--primary-dark);
+    color: var(--on-primary);
 }
 
 .deposit-page .deposit-bank-transfer__panel--brand-surface .deposit-bank-transfer__input-field {
     text-align: right;
-    color: #3A1515;
+    color: var(--text);
 }
 
 .deposit-page .deposit-bank-transfer__panel--brand-surface .deposit-bank-transfer__input-field::placeholder {
-    color: #8A6B2A;
+    color: var(--muted);
     text-align: right;
 }
 
 .deposit-page .deposit-bank-transfer__panel--brand-surface .deposit-bank-transfer__input-hint {
-    color: #991B1B;
+    color: var(--primary-dark);
 }
 
 /* —— Stat cards: label (muted, small) → value (bold primary-dark); used for deposit amount + bank details —— */
@@ -3315,7 +3202,7 @@ select:not(.t3-custom-input-text) {
     margin: 0 0 8px;
     font-size: 13px;
     font-weight: 600;
-    color: #8A6B2A;
+    color: var(--muted);
     line-height: 1.3;
 }
 
@@ -3331,7 +3218,7 @@ select:not(.t3-custom-input-text) {
 .deposit-page .deposit-bank-transfer__pay-usd {
     font-size: 16px;
     font-weight: 800;
-    color: #991B1B;
+    color: var(--primary-dark);
     letter-spacing: 0.03em;
 }
 
@@ -3339,7 +3226,7 @@ select:not(.t3-custom-input-text) {
     font-size: 32px;
     font-weight: 900;
     font-variant-numeric: tabular-nums;
-    color: #991B1B;
+    color: var(--primary-dark);
     line-height: 1.05;
     letter-spacing: -0.03em;
 }
@@ -3349,7 +3236,7 @@ select:not(.t3-custom-input-text) {
     padding: 0;
     height: 0;
     border: none;
-    border-top: 1px solid color-mix(in srgb, #991B1B 20%, color-mix(in srgb, #D4AF37 52%, color-mix(in srgb, #D4AF37 48%, transparent) 48%));
+    border-top: 1px solid color-mix(in srgb, var(--primary-dark) 20%, var(--deposit-bt-card-border));
 }
 
 .deposit-page .deposit-bank-transfer__bank-detail-card {
@@ -3388,7 +3275,7 @@ select:not(.t3-custom-input-text) {
 .deposit-page .deposit-bank-transfer__stat-value {
     font-size: 16px;
     font-weight: 800;
-    color: #991B1B;
+    color: var(--primary-dark);
     line-height: 1.3;
     word-break: break-word;
 }
@@ -3397,7 +3284,7 @@ select:not(.t3-custom-input-text) {
     height: 0;
     margin: 0;
     border: none;
-    border-top: 1px solid color-mix(in srgb, #991B1B 16%, color-mix(in srgb, #D4AF37 52%, color-mix(in srgb, #D4AF37 48%, transparent) 48%));
+    border-top: 1px solid color-mix(in srgb, var(--primary-dark) 16%, var(--deposit-bt-card-border));
 }
 
 .deposit-page .deposit-bank-transfer__ref-card {
@@ -3440,8 +3327,8 @@ select:not(.t3-custom-input-text) {
     height: 160px;
     border-radius: 10px;
     overflow: hidden;
-    background: #FFFFFF;
-    border: 1px solid color-mix(in srgb, #D4AF37 52%, color-mix(in srgb, #D4AF37 48%, transparent) 48%);
+    background: var(--bg);
+    border: 1px solid var(--deposit-bt-card-border);
     box-shadow: none;
 }
 
@@ -3453,14 +3340,14 @@ select:not(.t3-custom-input-text) {
     font: inherit;
     font-size: 14px;
     font-weight: 700;
-    color: #991B1B;
+    color: var(--primary-dark);
     text-decoration: underline;
     text-underline-offset: 3px;
     cursor: pointer;
 }
 
 .deposit-page .deposit-bank-transfer__qr-link:hover {
-    color: #B91C1C;
+    color: var(--primary);
 }
 
 /* Copy control — match ReferralPage referral link (round hit area, transparent, Figma copy asset) */
@@ -3475,7 +3362,7 @@ select:not(.t3-custom-input-text) {
     border-radius: 9999px;
     cursor: pointer;
     background: transparent;
-    color: #D4AF37;
+    color: var(--gold);
     font: inherit;
     line-height: 0;
 }
@@ -3507,8 +3394,8 @@ select:not(.t3-custom-input-text) {
     font: inherit;
     font-size: 14px;
     font-weight: 600;
-    background: #FFFFFF;
-    color: #3A1515;
+    background: var(--bg);
+    color: var(--text);
     box-shadow: none;
 }
 
@@ -3517,7 +3404,7 @@ select:not(.t3-custom-input-text) {
     font-size: 13px;
     line-height: 1.45;
     font-weight: 600;
-    color: #3A1515;
+    color: var(--text);
 }
 
 .deposit-page .deposit-bank-transfer__upload {
@@ -3529,8 +3416,8 @@ select:not(.t3-custom-input-text) {
     min-height: 120px;
     padding: 20px 16px;
     border-radius: 10px;
-    border: 1px dashed color-mix(in srgb, rgba(0, 0, 0, 0.06) 75%, #8A6B2A 25%);
-    background: #FFFFFF;
+    border: 1px dashed color-mix(in srgb, var(--border) 75%, var(--muted) 25%);
+    background: var(--bg);
     cursor: pointer;
     transition:
         border-color 0.15s ease,
@@ -3538,12 +3425,12 @@ select:not(.t3-custom-input-text) {
 }
 
 .deposit-page .deposit-bank-transfer__upload:hover {
-    border-color: color-mix(in srgb, rgba(0, 0, 0, 0.06) 55%, #991B1B 45%);
-    background: color-mix(in srgb, #FFFFFF 88%, #F5F5F5 12%);
+    border-color: color-mix(in srgb, var(--border) 55%, var(--primary-dark) 45%);
+    background: color-mix(in srgb, var(--bg) 88%, var(--surface-3) 12%);
 }
 
 .deposit-page .deposit-bank-transfer__upload-icon {
-    color: #991B1B;
+    color: var(--primary-dark);
     margin-bottom: 0;
     flex-shrink: 0;
 }
@@ -3552,7 +3439,7 @@ select:not(.t3-custom-input-text) {
     margin: 0;
     font-size: 16px;
     font-weight: 400;
-    color: #991B1B;
+    color: var(--primary-dark);
 }
 
 .deposit-page .deposit-bank-transfer__submit {
@@ -3562,17 +3449,14 @@ select:not(.t3-custom-input-text) {
     margin: 8px auto 0;
     min-height: 48px;
     border-radius: 10px;
-    border: 1px solid color-mix(in srgb, #D4AF37 30%, #991B1B 70%);
+    border: 1px solid color-mix(in srgb, var(--gold) 30%, var(--primary-dark) 70%);
     font: inherit;
     font-size: 16px;
     font-weight: 800;
     cursor: pointer;
-    color: #FFFFFF;
-    background: linear-gradient(180deg,
-            #991B1B 0%,
-            #B91C1C 38%,
-            #D81E2F 100%);
-    box-shadow: none;
+    color: var(--on-primary);
+    background: var(--cta-gradient);
+    box-shadow: var(--card-shadow);
 }
 
 .deposit-page .deposit-bank-transfer__submit:hover {
@@ -3580,60 +3464,57 @@ select:not(.t3-custom-input-text) {
 }
 
 .t3-reload-bank-list-box .border-top {
-    border-top: 1px solid rgba(0, 0, 0, 0.06) !important;
+    border-top: 1px solid var(--border) !important;
 }
 
 .t3-reload-bank-list-box {
-    background: #FFFFFF !important;
+    background: var(--surface) !important;
 }
 
 .t3-sweet-alert-container .sweet-alert .btn {
-    background: #FFFFFF !important;
+    background: var(--surface-2) !important;
 }
 
 .t3-settings-vip-box,
 .t3-settings-withdrawal-box {
-    background: #FFFFFF !important;
+    background: var(--theme-color-bg-search) !important;
 }
 
 .t3-settings-withdrawal-box>div {
-    background: #FFFFFF !important;
+    background: var(--surface-2) !important;
 }
 
 .t3-settings-logout .t3-custom-light-btn .theme-icon-size-20 {
-    color: #3A1515 !important;
+    color: var(--theme-color-text-base) !important;
 }
 
 .t3-settings-menu-list .t3-settings-menu-list-item:hover {
-    background: linear-gradient(180deg,
-            #991B1B 0%,
-            #B91C1C 38%,
-            #D81E2F 100%) !important;
-    color: #FFFFFF !important;
+    background: var(--cta-gradient) !important;
+    color: var(--on-primary) !important;
 }
 
 .t3-statistics-dropdown-box>.first {
-    color: #3A1515 !important;
+    color: var(--theme-color-text-base) !important;
 }
 
 .t3-statistics-body-box {
-    background: #FFFFFF !important;
+    background: var(--theme-color-bg-modal-body) !important;
 }
 
 .t3-custom-input-text.date {
-    color: #8A6B2A !important;
+    color: var(--muted) !important;
 }
 
 .t3-statistics-dropdown-box>.second select {
-    color: #FFFFFF !important;
+    color: var(--bg) !important;
 }
 
 .t3-custom-table thead>tr>th:after {
-    background: rgba(0, 0, 0, 0.12) !important;
+    background: var(--border-strong) !important;
 }
 
 .t3-settings-menu-list-item:hover svg {
-    color: #FFFFFF !important;
+    color: var(--on-primary) !important;
 }
 
 .t3-downline-modal-body {
@@ -3641,31 +3522,31 @@ select:not(.t3-custom-input-text) {
 }
 
 .reports-stats-box .ro-box-1-1 {
-    background: #FFFFFF !important;
+    background: var(--theme-color-bg-deposit) !important;
 }
 
 .t3-deposit-amount-list-box>.item.disabled>.first,
 .t3-deposit-amount-list-box>.active>.first,
 .t3-deposit-amount-list-box>.item:hover>.first {
-    color: #3A1515 !important;
+    color: var(--theme-color-text-base) !important;
 }
 
 .t3-team-first-section>div>.first,
 .t3-team-first-section>.second {
-    background: #FFFFFF !important;
+    background: var(--theme-color-bg-search) !important;
 }
 
 .vip-bottom-content-box {
-    background: #FFFFFF !important;
+    background: var(--theme-color-bg-search) !important;
 }
 
 .t3-vip-user-light {
-    box-shadow: 0 0 50px 20px #B91C1C !important;
+    box-shadow: 0 0 50px 20px var(--theme-color-text-secondary) !important;
 }
 
 .vip-tab-buttons button {
-    background: #D4AF37 !important;
-    box-shadow: 0 0 10px 0 rgba(199, 154, 44, 0.14);
+    background: var(--gold) !important;
+    box-shadow: 0 0 10px 0 var(--gold-tint);
 }
 
 .t3-game-list-box .t3-game-list-image-box:hover .image .first {
@@ -3673,28 +3554,28 @@ select:not(.t3-custom-input-text) {
 }
 
 .play-icon {
-    color: #D4AF37 !important;
+    color: var(--gold) !important;
 }
 
 .t3-mobile-side-menu-container {
-    background: #FFFFFF !important;
+    background: var(--theme-color-bg-base) !important;
 }
 
 .mobile-home-balance-box>.body .second .theme-icon-size-20 {
-    color: #3A1515 !important;
+    color: var(--theme-color-text-base) !important;
 }
 
 .t3-settings-ep-username-box .item,
 .sweet-alert .t3-rollover-box {
-    background: #FFFFFF !important;
+    background: var(--theme-color-bg-deposit) !important;
 }
 
 .t3-progress:after {
-    border: 5px solid rgba(0, 0, 0, 0.12) !important;
+    border: 5px solid var(--border-strong) !important;
 }
 
 .t3-deposit-amount-list-box>.item {
-    background: #FFFFFF;
+    background: var(--theme-color-bg-btn-number);
 }
 
 #spin-wheel {
@@ -3718,7 +3599,7 @@ select:not(.t3-custom-input-text) {
 margin: 0;
 }
 .modal-backdrop {
-background-color: color-mix(in srgb, #991B1B 72%, #8A0F1E);
+background-color: color-mix(in srgb, var(--primary-dark) 72%, var(--crimson-deep));
 }
 @media (max-width: 500px) {
 #t3-login-register-modal.home-announcement-modal.modal-dialog-centered {
@@ -3739,15 +3620,15 @@ padding: 0;
 }*/
 
 .t3-promotion-content.banner-layout .promo-info .promo-info-description {
-    color: #3A1515;
+    color: var(--text);
 }
 
 .referral-login {
-    box-shadow: 0 4px 30px 0 rgba(179, 13, 30, 0.10) inset;
+    box-shadow: 0 4px 30px 0 var(--active-tint) inset;
 }
 
 .deposit-comm-table table thead>tr>th {
-    color: #B91C1C;
+    color: var(--primary);
 }
 
 .deposit-comm-table table tbody>tr:last-child>td {
@@ -3755,41 +3636,35 @@ padding: 0;
 }
 
 .bank-option-minmax {
-    color: #8A6B2A;
+    color: var(--muted);
 }
 
 .t3-settings-menu-list .t3-settings-menu-list-item {
-    background: #FFFFFF;
+    background: var(--surface-2);
 }
 
 .referral-comm-info-container {
-    background: #FFFFFF;
+    background: var(--surface-2);
 }
 
 .t3-custom-modal-with-back-btn .modal-header .modal-title>.first .vicon {
-    color: #3A1515;
+    color: var(--text);
 }
 
 .mobile-apk-banner .close-button svg {
-    fill: #3A1515 !important;
+    fill: var(--text) !important;
 }
 
 .vip-tab-buttons button:disabled {
-    background: #3E2621 !important;
+    background: var(--membership-tab-button) !important;
 }
 
 .deposit-now-btn {
-    background: linear-gradient(180deg,
-            #991B1B 0%,
-            #B91C1C 38%,
-            #D81E2F 100%);
+    background: var(--cta-gradient);
 }
 
 .home-progress-identifier {
-    background: linear-gradient(180deg,
-            #991B1B 0%,
-            #B91C1C 38%,
-            #D81E2F 100%);
+    background: var(--cta-gradient);
 }
 
 .home-announcement-modal-content-box img {
@@ -3798,18 +3673,18 @@ padding: 0;
 
 /* Referral page layout */
 .t3-referral-content {
-    color: #3A1515;
+    color: var(--text);
 }
 
 .t3-referral-content .referral-login {
-    background: linear-gradient(180deg, #991B1B 0%, #FFFFFF 100%);
-    border: 1px solid #B91C1C;
+    background: var(--referral-login-box);
+    border: 1px solid var(--referral-login-border);
     border-radius: 12px;
 }
 
 .t3-referral-content .referral-comm-info-container {
-    background: #FFFFFF;
-    border: 1px solid rgba(0, 0, 0, 0.06);
+    background: var(--referral-container-bg);
+    border: 1px solid var(--border);
 }
 
 .t3-referral-content .t3-downline-table-tab>button {
@@ -3828,7 +3703,7 @@ padding: 0;
     margin-right: 18px;
     border: 0;
     background: transparent;
-    color: #8A6B2A;
+    color: var(--muted);
     font-size: 15px;
     font-weight: 700;
     cursor: pointer;
@@ -3839,16 +3714,16 @@ padding: 0;
 }
 
 .t3-referral-content .t3-referral-page-tabs>button:hover {
-    color: #991B1B;
+    color: var(--primary-dark);
 }
 
 .t3-referral-content .t3-referral-page-tabs>button.active {
-    color: #991B1B;
-    border-bottom-color: #D4AF37;
+    color: var(--primary-dark);
+    border-bottom-color: var(--gold);
 }
 
 .t3-referral-content .referral-invite-card h1 {
-    color: #991B1B;
+    color: var(--primary-dark);
 }
 
 /* Referral — sub-tab strip (flat track + active pill; e.g. single Referral Info) */
@@ -3861,8 +3736,8 @@ padding: 0;
     box-sizing: border-box;
     padding: 4px 6px;
     border-radius: 10px;
-    border: 1px solid color-mix(in srgb, #D4AF37 48%, transparent);
-    background: color-mix(in srgb, #F5F5F5 86%, rgba(199, 154, 44, 0.14) 14%);
+    border: 1px solid var(--panel-item-border);
+    background: color-mix(in srgb, var(--surface-3) 86%, var(--gold-tint) 14%);
     box-shadow: none;
 }
 
@@ -3884,9 +3759,9 @@ padding: 0;
 }
 
 .t3-referral-subtabs__tab--active {
-    background: #991B1B;
-    color: #FFFFFF;
-    border-color: color-mix(in srgb, #991B1B 88%, rgba(0, 0, 0, 0.06) 12%);
+    background: var(--primary-dark);
+    color: var(--on-primary);
+    border-color: color-mix(in srgb, var(--primary-dark) 88%, var(--border) 12%);
 }
 
 /* Logged-out referral hero: light panel + gold frame + centered copy (matches design reference) */
@@ -3958,8 +3833,8 @@ padding: 0;
     min-height: 140px;
     border-radius: 14px;
     overflow: hidden;
-    border: 1px solid color-mix(in srgb, color-mix(in srgb, #D4AF37 48%, transparent) 55%, transparent);
-    box-shadow: none;
+    border: 1px solid color-mix(in srgb, var(--panel-item-border) 55%, transparent);
+    box-shadow: var(--card-shadow);
 }
 
 .t3-referral-promo-card--commission {
@@ -4096,7 +3971,7 @@ padding: 0;
 /* Mobile home — logged-in profile card (gold rim, light gray fill) */
 .home-mobile-profile-card {
     background: #f5f5f5;
-    border-color: color-mix(in srgb, #D4AF37 52%, color-mix(in srgb, #D4AF37 48%, transparent) 48%);
+    border-color: color-mix(in srgb, var(--gold) 52%, var(--panel-item-border) 48%);
     box-shadow: none;
 }
 
@@ -4105,14 +3980,14 @@ padding: 0;
     margin-top: 14px;
     padding: 10px 12px;
     border-radius: 8px;
-    border: 1px solid color-mix(in srgb, #3A1515 26%, rgba(0, 0, 0, 0.06) 74%);
-    background: color-mix(in srgb, #FFFFFF 82%, #F5F5F5 18%);
+    border: 1px solid color-mix(in srgb, var(--text) 26%, var(--border) 74%);
+    background: color-mix(in srgb, var(--bg) 82%, var(--surface-3) 18%);
 }
 
 .home-mobile-profile-card__rollover-track {
     height: 8px;
     border-radius: 9999px;
-    background: color-mix(in srgb, rgba(0, 0, 0, 0.12) 45%, #F5F5F5 55%);
+    background: color-mix(in srgb, var(--border-strong) 45%, var(--surface-3) 55%);
     overflow: hidden;
 }
 
@@ -4120,16 +3995,13 @@ padding: 0;
     height: 100%;
     min-width: 0;
     border-radius: 9999px;
-    background: linear-gradient(90deg,
-            #991B1B 0%,
-            #B91C1C 42%,
-            #D81E2F 100%);
+    background: var(--mobile-profile-rollover-fill);
     transition: width 240ms ease;
 }
 
 /* Desktop home — referral hub white panel on banner */
 .home-desktop-referral-hub__card {
-    border-color: color-mix(in srgb, #D4AF37 55%, color-mix(in srgb, #D4AF37 48%, transparent) 45%);
+    border-color: color-mix(in srgb, var(--gold) 55%, var(--panel-item-border) 45%);
     box-shadow: none;
 }
 
@@ -4144,8 +4016,8 @@ padding: 0;
     justify-content: space-around;
     gap: 0;
     padding: 0px;
-    background: #252525;
-    border-top: 1px solid color-mix(in srgb, #3A1515 22%, transparent);
+    background: var(--mobile-nav-bg);
+    border-top: 1px solid color-mix(in srgb, var(--text) 22%, transparent);
 }
 
 .mobile-bottom-nav__icon {
@@ -4166,12 +4038,12 @@ padding: 0;
 
 .mobile-bottom-nav__btn[data-active="true"] .mobile-bottom-nav__icon--svg {
     opacity: 1;
-    color: #D4AF37;
+    color: var(--gold);
 }
 
 .mobile-bottom-nav__btn[data-active="true"] {
-    color: #D4AF37;
-    background: #B91C1C;
+    color: var(--gold);
+    background: var(--primary);
 }
 
 .mobile-bottom-nav__btn--badge {
@@ -4187,8 +4059,8 @@ padding: 0;
     height: 18px;
     padding: 0 5px;
     border-radius: 9999px;
-    background: #D81E2F;
-    color: #FFFFFF;
+    background: var(--primary-bright);
+    color: var(--on-primary);
     font-size: 10px;
     font-weight: 800;
     display: flex;
@@ -4199,7 +4071,7 @@ padding: 0;
 
 /* Compact RTP info badge (thumb + crown + game + RTP) — under provider title */
 .t3-game-rtp-info-badge {
-    font-family: Poppins, sans-serif;
+    font-family: var(--base-font-family);
     display: flex;
     align-items: center;
     gap: 6px;
@@ -4209,7 +4081,7 @@ padding: 0;
     padding: 0 6px 0 0;
     margin-inline: auto;
     border-radius: 8px;
-    background: #1a1d23;
+    background: var(--game-rtp-badge-bg);
     box-sizing: border-box;
     overflow: visible;
     transition: transform 160ms ease, filter 160ms ease;
@@ -4265,7 +4137,7 @@ padding: 0;
 }
 
 .t3-game-rtp-info-badge__game {
-    color: #ffffff;
+    color: var(--game-rtp-badge-game);
     font-size: 11px;
     font-weight: 700;
     line-height: 1.15;
@@ -4284,14 +4156,14 @@ padding: 0;
 }
 
 .t3-game-rtp-info-badge__rtp-label {
-    color: #ffe176;
+    color: var(--game-rtp-badge-neon);
     font-size: 10px;
     font-weight: 700;
     flex-shrink: 0;
 }
 
 .t3-game-rtp-info-badge__rtp-value {
-    color: #ffe176;
+    color: var(--game-rtp-badge-neon);
     font-size: 12px;
     font-weight: 700;
     font-variant-numeric: tabular-nums;
@@ -4302,8 +4174,8 @@ padding: 0;
     margin-top: 6px;
     padding: 4px 6px;
     border-radius: 4px;
-    background: #1a1d23;
-    color: #ffe176;
+    background: var(--game-rtp-badge-bg);
+    color: var(--game-rtp-badge-neon);
     font-size: 10px;
     font-weight: 800;
     text-align: center;
@@ -4313,6 +4185,6 @@ padding: 0;
 
 @media (max-width: 700px) {
     .t3-game-list-image-box {
-        border: 1px solid color-mix(in srgb, #D4AF37 50%, rgba(0, 0, 0, 0.06) 50%);
+        border: 1px solid color-mix(in srgb, var(--gold) 50%, var(--border) 50%);
     }
 }

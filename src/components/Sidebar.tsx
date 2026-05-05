@@ -228,6 +228,7 @@ function PromoStrip({
 type SidebarProps = {
   view: AppView;
   onNavigate: (next: AppView) => void;
+  isOpen?: boolean;
 };
 
 function navTargetForLabel(label: string): AppView | null {
@@ -264,10 +265,13 @@ function isItemActive(view: AppView, label: string): boolean {
   return false;
 }
 
-export function Sidebar({ view, onNavigate }: SidebarProps) {
+export function Sidebar({ view, onNavigate, isOpen = true }: SidebarProps) {
   return (
     <aside
-      className="t3-side-menu t3-sidemenu-box fixed left-0 top-[60px] z-40 hidden h-[calc(100vh-60px)] w-[220px] shrink-0 overflow-y-auto border-r bg-bg-sidebar pb-4 lg:block"
+      className={[
+        "t3-side-menu t3-sidemenu-box fixed left-0 top-[60px] z-40 hidden h-[calc(100vh-60px)] w-[220px] shrink-0 overflow-y-auto border-r bg-bg-sidebar pb-4 transition-all duration-300",
+        isOpen ? "lg:block" : "lg:hidden",
+      ].join(" ")}
       style={{
         borderRightColor: "var(--sidebar-container-border)",
       }}
