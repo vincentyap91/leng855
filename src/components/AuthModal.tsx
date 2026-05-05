@@ -168,8 +168,9 @@ export function AuthModal({
                   <img src={assets.leng855Logo} className="img-responsive" alt="logo" />
                 </div>
                 <button type="button" className="t3-close-modal" onClick={onClose} aria-label="Close">
-                  <svg className="vicon" viewBox="0 0 1024 1024" aria-hidden="true">
-                    <path d="M512 439.603l-362.035-362.035-72.397 72.397 362.035 362.035-362.035 362.035 72.397 72.397 362.035-362.035 362.035 362.035 72.397-72.397-362.035-362.035 362.035-362.035-72.397-72.397-362.035 362.035z" />
+                  <svg className="vicon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                    <line x1="18" y1="6" x2="6" y2="18" />
+                    <line x1="6" y1="6" x2="18" y2="18" />
                   </svg>
                 </button>
               </div>
@@ -312,12 +313,24 @@ export function AuthModal({
                         </p>
                       ) : null}
                       <div className="t3-lr-button-box mt-4">
-                        <div style={!isLogin ? { flex: "0 0 auto" } : undefined}>
+                        <div style={!isLogin ? { flex: "0 0 auto" } : { flex: "1" }}>
                           <button
-                            className={isLogin ? "t3-custom-light-btn" : "t3-profile-action-btn"}
+                            className={isLogin ? "" : "t3-profile-action-btn"}
                             type="submit"
                             disabled={!isLogin && isRegistering}
-                            style={!isLogin ? { background: "var(--cta-gradient)" } : undefined}
+                            style={isLogin ? {
+                              background: "#A91E22",
+                              color: "white",
+                              border: "none",
+                              borderRadius: "10px",
+                              minHeight: "44px",
+                              width: "100%",
+                              fontSize: "16px",
+                              fontWeight: 700,
+                              cursor: "pointer",
+                              boxShadow: "0 2px 4px rgba(0,0,0,0.1)",
+                              transition: "opacity 0.2s"
+                            } : { background: "var(--cta-gradient)" }}
                           >
                             {!isLogin && isRegistering ? (
                               <span className="inline-flex items-center gap-2">
@@ -333,14 +346,25 @@ export function AuthModal({
                           </button>
                         </div>
                         {isLogin && (
-                          <div>
+                          <div style={{ flex: "1.2" }}>
                             <button
-                              className="t3-custom-gray-btn"
                               type="button"
                               onClick={() => {
                                 if (!isLogin) {
                                   onModeChange("login");
                                 }
+                              }}
+                              style={{
+                                background: "#f5f5f5",
+                                border: "1px solid #e0e0e0",
+                                color: "#111",
+                                borderRadius: "10px",
+                                minHeight: "44px",
+                                width: "100%",
+                                fontSize: "15px",
+                                fontWeight: 700,
+                                cursor: "pointer",
+                                transition: "background 0.2s"
                               }}
                             >
                               {secondaryLabel}
@@ -350,11 +374,12 @@ export function AuthModal({
                       </div>
                       <div className="t3-lr-modal-footer mt-3">
                         <div className="t3-lr-button-box">
-                          <span className={!isLogin ? "text-[14px]" : undefined}>{promptPrefix}</span>{" "}
+                          <span className={!isLogin ? "text-[14px]" : undefined} style={isLogin ? { color: "#A91E22", fontWeight: 500 } : undefined}>{promptPrefix}</span>{" "}
                           <button
                             className="header-login-btn"
                             type="button"
                             onClick={() => onModeChange(isLogin ? "register" : "login")}
+                            style={isLogin ? { color: "#D4AF37", fontWeight: 700, textDecoration: "underline" } : undefined}
                           >
                             {promptAction}
                           </button>

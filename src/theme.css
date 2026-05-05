@@ -1244,31 +1244,31 @@ button.side-nav-item:not(.side-nav-item--active):hover .side-nav-icon {
 }
 
 .modal-content.t3-login-register-modal {
-    border: var(--modal-border);
-    border-radius: 18px;
-    background: var(--modal-body);
-    box-shadow: var(--modal-box-shadow);
+    border: none;
+    border-radius: 12px;
+    background: #fdfbf7;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
     overflow: hidden;
 }
 
 .modal-content.t3-login-register-modal>.modal-body {
     padding: 0;
-    background: var(--modal-body);
+    background: #fdfbf7;
 }
 
 .t3-lr-modal-container {
-    background: var(--modal-body);
+    background: #fdfbf7;
 }
 
 .t3-lr-modal-header {
-    min-height: 72px;
-    padding: 10px 18px;
+    min-height: 60px;
+    padding: 10px 20px;
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 12px;
-    background-color: var(--sidebar-bg);
-    border-bottom: 1px solid var(--border);
+    background: linear-gradient(90deg, #8A0F1E 0%, #7A1120 24%, #991B1B 48%, #B91C1C 78%, #D81E2F 100%);
+    border-bottom: none;
 }
 
 .t3-lr-modal-header .t3-logo {
@@ -1287,26 +1287,28 @@ button.side-nav-item:not(.side-nav-item--active):hover .side-nav-icon {
 .t3-close-modal {
     width: 34px;
     height: 34px;
-    color: var(--modal-header-close);
+    color: #ffffff;
     display: grid;
     place-items: center;
-    transition: filter 160ms ease;
+    transition: opacity 160ms ease;
+    background: transparent;
+    border: none;
 }
 
 .t3-close-modal:hover {
-    filter: brightness(1.06);
+    opacity: 0.8;
 }
 
 .t3-close-modal .vicon {
-    width: 16px;
-    height: 16px;
+    width: 24px;
+    height: 24px;
 }
 
 .t3-lr-modal-body {
     display: grid;
-    grid-template-columns: 42% 58%;
+    grid-template-columns: 45% 55%;
     align-items: center;
-    background: #f7f7f7;
+    background: #fdfbf7;
     position: relative;
 }
 
@@ -1547,7 +1549,7 @@ select:not(.t3-custom-input-text) {
     align-items: center;
     justify-content: center;
     gap: 10px;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
 }
 
 .t3-auth-register-mode .t3-lr-button-box {
