@@ -2651,10 +2651,10 @@ select:not(.t3-custom-input-text) {
 }
 
 .t3-two-custom-tabs>div:not(.active) {
-    background: var(--surface-inverse) !important;
+    background: var(--text-inverse) !important;
     color: var(--surface-base) !important;
-    border: 1px solid color-mix(in srgb, var(--surface-inverse) 6%, transparent) !important;
-    box-shadow: 0 1px 2px color-mix(in srgb, var(--surface-inverse) 6%, transparent);
+    border: 1px solid color-mix(in srgb, var(--text-inverse) 6%, transparent) !important;
+    box-shadow: 0 1px 2px color-mix(in srgb, var(--text-inverse) 6%, transparent);
 }
 
 .t3-two-custom-tabs>div:not(.active):hover {
