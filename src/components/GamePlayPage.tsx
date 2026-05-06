@@ -35,7 +35,7 @@ const LATEST_BETS = [
 // ---------------------------------------------------------------------------
 function ChevronRight() {
   return (
-    <span aria-hidden className="inline-block text-[var(--muted)]" style={{ transform: "translateY(1px)" }}>
+    <span aria-hidden className="inline-block text-[var(--text-secondary)]" style={{ transform: "translateY(1px)" }}>
       &gt;
     </span>
   );
@@ -52,13 +52,13 @@ function IconHamburger() {
 function IconNoData() {
   return (
     <svg viewBox="0 0 64 64" className="h-16 w-16 opacity-40" aria-hidden>
-      <rect x="8" y="10" width="40" height="44" rx="3" fill="#c0c4cc" />
-      <rect x="14" y="20" width="28" height="3" rx="1.5" fill="#fff" />
-      <rect x="14" y="28" width="20" height="3" rx="1.5" fill="#fff" />
-      <rect x="14" y="36" width="24" height="3" rx="1.5" fill="#fff" />
-      <circle cx="46" cy="46" r="12" fill="#e0e0e0" stroke="#b0b0b0" strokeWidth="2" />
-      <circle cx="46" cy="46" r="7" fill="none" stroke="#b0b0b0" strokeWidth="2" />
-      <line x1="51" y1="51" x2="57" y2="57" stroke="#b0b0b0" strokeWidth="2.5" strokeLinecap="round" />
+      <rect x="8" y="10" width="40" height="44" rx="3" fill="var(--border-strong)" />
+      <rect x="14" y="20" width="28" height="3" rx="1.5" fill="var(--text-on-emphasis)" />
+      <rect x="14" y="28" width="20" height="3" rx="1.5" fill="var(--text-on-emphasis)" />
+      <rect x="14" y="36" width="24" height="3" rx="1.5" fill="var(--text-on-emphasis)" />
+      <circle cx="46" cy="46" r="12" fill="var(--border-default)" stroke="var(--border-strong)" strokeWidth="2" />
+      <circle cx="46" cy="46" r="7" fill="none" stroke="var(--border-strong)" strokeWidth="2" />
+      <line x1="51" y1="51" x2="57" y2="57" stroke="var(--border-strong)" strokeWidth="2.5" strokeLinecap="round" />
     </svg>
   );
 }
@@ -68,7 +68,7 @@ function IconNoData() {
 // ---------------------------------------------------------------------------
 function GameViewport({ src, label, iframeUrl }: { src: string; label: string; iframeUrl?: string }) {
   return (
-    <div className="relative w-full overflow-hidden rounded-xl" style={{ background: "#1a1a2e" }}>
+    <div className="relative w-full overflow-hidden rounded-xl" style={{ background: "var(--surface-inverse)" }}>
       {/* 16:9 aspect ratio container */}
       <div className="relative w-full" style={{ paddingBottom: "56.25%" }}>
         {iframeUrl ? (
@@ -88,14 +88,14 @@ function GameViewport({ src, label, iframeUrl }: { src: string; label: string; i
             {/* Session / game-id watermark (top-left) */}
             <div
               className="absolute left-3 top-2 text-[9px] font-mono opacity-60 select-none"
-              style={{ color: "#fff" }}
+              style={{ color: "var(--text-on-emphasis)" }}
             >
               8026011309168
             </div>
             {/* Game title watermark (top-right) */}
             <div
               className="absolute right-3 top-2 text-[11px] font-semibold opacity-80 select-none"
-              style={{ color: "#fff" }}
+              style={{ color: "var(--text-on-emphasis)" }}
             >
               {label}
             </div>
@@ -104,43 +104,43 @@ function GameViewport({ src, label, iframeUrl }: { src: string; label: string; i
         {/* Bottom overlay bar */}
         <div
           className="absolute bottom-0 left-0 right-0 z-10 flex items-center justify-between gap-2 px-4 py-2"
-          style={{ background: "rgba(0,0,0,0.78)" }}
+          style={{ background: "color-mix(in srgb, var(--surface-inverse) 78%, transparent)" }}
         >
           {/* Balance */}
           <div className="flex flex-col items-center min-w-0">
-            <span className="text-[10px] font-semibold tracking-wide" style={{ color: "rgba(255,255,255,0.65)" }}>
+            <span className="text-[10px] font-semibold tracking-wide" style={{ color: "color-mix(in srgb, var(--text-on-emphasis) 65%, transparent)" }}>
               Balance(USD)
             </span>
-            <span className="text-[20px] font-black tabular-nums leading-tight" style={{ color: "var(--gold)" }}>
+            <span className="text-[20px] font-black tabular-nums leading-tight" style={{ color: "var(--accent-soft)" }}>
               0.00
             </span>
-            <span className="text-[9px]" style={{ color: "rgba(255,255,255,0.45)" }}>
+            <span className="text-[9px]" style={{ color: "color-mix(in srgb, var(--text-on-emphasis) 45%, transparent)" }}>
               2026-04-30, 15:08:53 GMT+8 | NS99FA7791
             </span>
           </div>
 
           {/* Total Win */}
           <div className="flex flex-col items-center min-w-0">
-            <span className="text-[10px] font-semibold tracking-wide" style={{ color: "rgba(255,255,255,0.65)" }}>
+            <span className="text-[10px] font-semibold tracking-wide" style={{ color: "color-mix(in srgb, var(--text-on-emphasis) 65%, transparent)" }}>
               Total Win(USD)
             </span>
-            <span className="text-[20px] font-black tabular-nums leading-tight" style={{ color: "var(--gold)" }}>
+            <span className="text-[20px] font-black tabular-nums leading-tight" style={{ color: "var(--accent-soft)" }}>
               0.00
             </span>
-            <span className="text-[9px]" style={{ color: "rgba(255,255,255,0.45)" }}>
+            <span className="text-[9px]" style={{ color: "color-mix(in srgb, var(--text-on-emphasis) 45%, transparent)" }}>
               243 Ways
             </span>
           </div>
 
           {/* Bet */}
           <div className="flex flex-col items-center min-w-0">
-            <span className="text-[10px] font-semibold tracking-wide" style={{ color: "rgba(255,255,255,0.65)" }}>
+            <span className="text-[10px] font-semibold tracking-wide" style={{ color: "color-mix(in srgb, var(--text-on-emphasis) 65%, transparent)" }}>
               Bet(USD)
             </span>
-            <span className="text-[20px] font-black tabular-nums leading-tight" style={{ color: "var(--gold)" }}>
+            <span className="text-[20px] font-black tabular-nums leading-tight" style={{ color: "var(--accent-soft)" }}>
               0.80
             </span>
-            <span className="text-[9px]" style={{ color: "rgba(255,255,255,0.45)" }}>
+            <span className="text-[9px]" style={{ color: "color-mix(in srgb, var(--text-on-emphasis) 45%, transparent)" }}>
               Bet Multiplier ×2
             </span>
           </div>
@@ -149,7 +149,7 @@ function GameViewport({ src, label, iframeUrl }: { src: string; label: string; i
           <button
             type="button"
             aria-label="Game menu"
-            className="grid h-9 w-9 shrink-0 place-items-center rounded-full border border-white/30 text-white transition hover:bg-white/10"
+            className="grid h-9 w-9 shrink-0 place-items-center rounded-full border border-[var(--text-on-emphasis)]/30 text-[var(--text-on-emphasis)] transition hover:bg-[var(--surface-base)]/10"
           >
             <IconHamburger />
           </button>
@@ -167,15 +167,15 @@ function RankingSection({ gameLabel, provider }: { gameLabel: string; provider: 
     <div
       className="rounded-xl p-4"
       style={{
-        background: "#f4f4f5",
+        background: "var(--surface-muted)",
       }}
     >
       {/* Title */}
       <p className="mb-3 text-[14px]">
-        <span className="font-extrabold" style={{ color: "var(--primary-dark, #7f1d1d)" }}>
+        <span className="font-extrabold" style={{ color: "var(--action-primary-hover)" }}>
           {gameLabel}
         </span>{" "}
-        <span className="font-medium" style={{ color: "var(--primary-dark, #7f1d1d)" }}>
+        <span className="font-medium" style={{ color: "var(--action-primary-hover)" }}>
           by <span className="underline">{provider}</span>
         </span>
       </p>
@@ -183,18 +183,18 @@ function RankingSection({ gameLabel, provider }: { gameLabel: string; provider: 
       {/* Button */}
       <button
         type="button"
-        className="mb-4 rounded-md px-8 py-1.5 text-[13px] font-bold text-white transition hover:brightness-110"
-        style={{ background: "var(--primary-dark, #7f1d1d)" }}
+        className="mb-4 rounded-md px-8 py-1.5 text-[13px] font-bold text-[var(--text-on-emphasis)] transition hover:brightness-110"
+        style={{ background: "var(--action-primary-hover)" }}
       >
         Ranking
       </button>
 
       {/* Table header */}
       <div
-        className="grid text-[13px] font-bold text-white"
+        className="grid text-[13px] font-bold text-[var(--text-on-emphasis)]"
         style={{
           gridTemplateColumns: "1fr 2fr 2fr 2fr 2fr 2fr",
-          background: "var(--primary-dark, #7f1d1d)",
+          background: "var(--action-primary-hover)",
           borderRadius: "6px 6px 0 0",
           padding: "10px 12px",
         }}
@@ -209,11 +209,11 @@ function RankingSection({ gameLabel, provider }: { gameLabel: string; provider: 
         className="flex flex-col items-center justify-center gap-2 py-12"
         style={{
           borderRadius: "0 0 6px 6px",
-          background: "#ffffff",
+          background: "var(--surface-base)",
         }}
       >
         <IconNoData />
-        <p className="text-[13px] font-bold" style={{ color: "#b3b9c4" }}>
+        <p className="text-[13px] font-bold" style={{ color: "var(--text-muted)" }}>
           No Data Found
         </p>
       </div>
@@ -229,25 +229,25 @@ function LatestBetsSection() {
     <div
       className="rounded-xl p-4"
       style={{
-        background: "#f4f4f5",
+        background: "var(--surface-muted)",
       }}
     >
       {/* Section title */}
       <div className="mb-4">
-        <h2 className="text-[14px] font-extrabold" style={{ color: "var(--primary-dark, #7f1d1d)" }}>
+        <h2 className="text-[14px] font-extrabold" style={{ color: "var(--action-primary-hover)" }}>
           Latest Bets
         </h2>
       </div>
 
       {/* Table */}
-      <div className="overflow-hidden rounded-md" style={{ background: "#ffffff" }}>
+      <div className="overflow-hidden rounded-md" style={{ background: "var(--surface-base)" }}>
         <table className="w-full text-[13px]" style={{ borderCollapse: "collapse" }}>
           <thead>
-            <tr style={{ background: "var(--primary-dark, #7f1d1d)" }}>
+            <tr style={{ background: "var(--action-primary-hover)" }}>
               {["Bet ID", "Username", "Date/Time", "Bet Amount"].map((h) => (
                 <th
                   key={h}
-                  className="px-4 py-3 text-left font-bold text-white"
+                  className="px-4 py-3 text-left font-bold text-[var(--text-on-emphasis)]"
                 >
                   {h}
                 </th>
@@ -259,19 +259,19 @@ function LatestBetsSection() {
               <tr
                 key={row.betId}
                 style={{
-                  borderBottom: i === LATEST_BETS.length - 1 ? "none" : "1px solid #f0f0f0",
+                  borderBottom: i === LATEST_BETS.length - 1 ? "none" : "1px solid var(--accent-strong)",
                 }}
               >
-                <td className="px-4 py-3 font-medium" style={{ color: "var(--text)" }}>
+                <td className="px-4 py-3 font-medium" style={{ color: "var(--text-primary)" }}>
                   {row.betId}
                 </td>
-                <td className="px-4 py-3 font-medium" style={{ color: "var(--primary)" }}>
+                <td className="px-4 py-3 font-medium" style={{ color: "var(--accent-strong)" }}>
                   {row.username}
                 </td>
-                <td className="px-4 py-3 font-medium" style={{ color: "var(--primary-dark, #7f1d1d)" }}>
+                <td className="px-4 py-3 font-medium" style={{ color: "var(--action-primary-hover)" }}>
                   {row.dateTime}
                 </td>
-                <td className="px-4 py-3 font-extrabold text-right sm:text-left" style={{ color: "var(--gold)" }}>
+                <td className="px-4 py-3 font-extrabold text-right sm:text-left" style={{ color: "var(--accent-soft)" }}>
                   {row.betAmount}
                 </td>
               </tr>
@@ -302,17 +302,17 @@ export function GamePlayPage({
       {/* Breadcrumbs */}
       <div
         className="inline-flex w-fit max-w-full items-center gap-2 rounded-full px-5 text-sm"
-        style={{ background: "#fce8e8", lineHeight: "36px" }}
+        style={{ background: "var(--accent-strong)", lineHeight: "36px" }}
       >
-        <a href="#/games" className="no-underline font-medium" style={{ color: "var(--muted)" }}>
+        <a href="#/games" className="no-underline font-medium" style={{ color: "var(--text-secondary)" }}>
           All
         </a>
         <ChevronRight />
-        <a href={`#/provider/${providerSlug}`} className="no-underline font-medium" style={{ color: "var(--muted)" }}>
+        <a href={`#/provider/${providerSlug}`} className="no-underline font-medium" style={{ color: "var(--text-secondary)" }}>
           {provider}
         </a>
         <ChevronRight />
-        <span className="font-bold" style={{ color: "var(--primary-dark, #7f1d1d)" }}>
+        <span className="font-bold" style={{ color: "var(--action-primary-hover)" }}>
           {gameLabel}
         </span>
       </div>
@@ -320,7 +320,7 @@ export function GamePlayPage({
       {/* Game title */}
       <h1
         className="m-0 text-[20px] font-extrabold leading-tight md:text-[22px]"
-        style={{ color: "var(--primary)" }}
+        style={{ color: "var(--accent-strong)" }}
       >
         {gameLabel}
       </h1>

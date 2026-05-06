@@ -40,10 +40,10 @@ const sliderSettings: Settings = {
 
 export function HotProviders() {
   return (
-    <section className="rounded-xl bg-white p-4">
+    <section className="rounded-xl bg-[var(--surface-base)] p-4">
       <h2
         className="mb-3 text-[15px] font-extrabold italic uppercase tracking-wide sm:mb-4"
-        style={{ color: "var(--primary-dark)" }}
+        style={{ color: "var(--action-primary-hover)" }}
       >
         HOT PROVIDERS
       </h2>

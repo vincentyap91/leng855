@@ -24,9 +24,9 @@ export default {
           tableHeader: "var(--dashboard-table-th)",
           menu: "var(--nav-controls-bg)",
         },
-        // Brand / accent tokens
+        // Action / accent tokens
         brand: {
-          red: "var(--base-highlight)",
+          emphasis: "var(--base-highlight)",
           link: "var(--base-link)",
           payout: "var(--payout-item-highlight)",
         },
@@ -36,8 +36,8 @@ export default {
       backgroundImage: {
         // Themeable gradients — values come from theme.css
         register: "var(--register-btn-bg)",
-        "gold-cta": "var(--gold-cta-gradient)",
-        "gold-header": "var(--gold-gradient)",
+        "accent-cta": "var(--secondary-cta-gradient)",
+        "accent-header": "var(--secondary-gradient)",
         "card-grad": "var(--payout-item-bg)",
         "mobile-profile": "var(--mobile-profile-bg)",
         "sidebar-daily": "var(--daily-checkin-button)",
@@ -45,8 +45,8 @@ export default {
         "sidebar-download": "var(--apk-banner-button)",
       },
       boxShadow: {
-        register: "0 4px 8px 0 rgba(29,34,37,0.1)",
-        payout: "inset 0 0 20px 0 rgba(255,128,128,0.2)",
+        register: "0 4px 8px 0 color-mix(in srgb, var(--surface-inverse) 10%, transparent)",
+        payout: "inset 0 0 20px 0 color-mix(in srgb, var(--feedback-danger) 20%, transparent)",
       },
     },
   },

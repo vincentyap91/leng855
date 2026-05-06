@@ -18,7 +18,7 @@ function ChevronDown({ open }: { open: boolean }) {
     <svg
       aria-hidden
       className="h-5 w-5 shrink-0 transition-transform duration-200"
-      style={{ transform: open ? "rotate(180deg)" : undefined, color: "var(--gold)" }}
+      style={{ transform: open ? "rotate(180deg)" : undefined, color: "var(--accent-soft)" }}
       viewBox="0 0 24 24"
       fill="none"
       stroke="currentColor"
@@ -48,7 +48,7 @@ function InfoTooltip({
       <span
         role="tooltip"
         className="pointer-events-none absolute bottom-[calc(100%+10px)] left-1/2 z-20 w-[230px] -translate-x-1/2 rounded-lg px-4 py-2.5 text-center text-[13px] font-semibold leading-6 opacity-0 shadow-lg transition-opacity duration-150 group-hover:opacity-100 group-focus-within:opacity-100"
-        style={{ background: "#1f2228", color: "#ffffff", fontFamily: "Poppins, sans-serif" }}
+        style={{ background: "var(--surface-inverse)", color: "var(--surface-base)", fontFamily: "Poppins, sans-serif" }}
       >
         {text}
       </span>
@@ -81,8 +81,8 @@ const imgCommissionCasino = "https://pksoftcdn.azureedge.net/media/icon-casino-2
 const imgCommissionFish = "https://pksoftcdn.azureedge.net/media/icon-fish-202510290908089225.svg";
 const imgCommissionEsport = "https://pksoftcdn.azureedge.net/media/icon-esport-202510290908358335.svg";
 
-/** Monochrome / dark CDN icons → tint to match `var(--gold)` */
-const commissionIconGoldFilter =
+/** Monochrome / dark CDN icons → tint to match `var(--accent-soft)` */
+const commissionIconSecondaryFilter =
   "brightness(0) saturate(100%) invert(72%) sepia(55%) saturate(520%) hue-rotate(2deg) brightness(98%) contrast(90%)";
 
 function CommissionCategoryIcon({ src }: { src: string }) {
@@ -91,7 +91,7 @@ function CommissionCategoryIcon({ src }: { src: string }) {
       src={src}
       alt=""
       className="h-6 w-6 object-contain"
-      style={{ filter: commissionIconGoldFilter }}
+      style={{ filter: commissionIconSecondaryFilter }}
       aria-hidden
     />
   );
@@ -100,12 +100,12 @@ function CommissionCategoryIcon({ src }: { src: string }) {
 /** Slots — inline SVG painted with theme gold */
 function IconSlots({ className = "h-6 w-6" }: { className?: string }) {
   return (
-    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="var(--gold)" strokeWidth="1.85" aria-hidden>
+    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="var(--accent-soft)" strokeWidth="1.85" aria-hidden>
       <rect x="3.5" y="5.5" width="17" height="13" rx="2.5" />
-      <rect x="6" y="8" width="4.5" height="5" rx="1" fill="var(--gold)" opacity={0.15} stroke="none" />
-      <rect x="13.5" y="8" width="4.5" height="5" rx="1" fill="var(--gold)" opacity={0.15} stroke="none" />
-      <circle cx="8.25" cy="10.3" r="0.95" fill="var(--gold)" stroke="none" />
-      <circle cx="15.75" cy="10.3" r="0.95" fill="var(--gold)" stroke="none" />
+      <rect x="6" y="8" width="4.5" height="5" rx="1" fill="var(--accent-soft)" opacity={0.15} stroke="none" />
+      <rect x="13.5" y="8" width="4.5" height="5" rx="1" fill="var(--accent-soft)" opacity={0.15} stroke="none" />
+      <circle cx="8.25" cy="10.3" r="0.95" fill="var(--accent-soft)" stroke="none" />
+      <circle cx="15.75" cy="10.3" r="0.95" fill="var(--accent-soft)" stroke="none" />
     </svg>
   );
 }
@@ -176,17 +176,17 @@ function GameCommissionAccordionTable({
   const thTdBase = "px-[20px] py-[14px] align-middle";
 
   return (
-    <div className="overflow-x-auto" style={{ background: "#f2f2f2" }}>
+    <div className="overflow-x-auto" style={{ background: "var(--surface-muted)" }}>
       <table className="w-full min-w-[440px] border-collapse text-[13px]">
         <thead>
-          <tr style={{ borderBottom: "1px solid var(--border)" }}>
+          <tr style={{ borderBottom: "1px solid var(--border-subtle)" }}>
             {columns.map((label, idx) => (
               <th
                 key={label}
                 className={`${thTdBase} font-extrabold ${idx === 0 ? "text-left" : "text-center"}`}
                 style={{
-                  color: "var(--commission-title, var(--primary-dark))",
-                  borderLeft: idx === 0 ? "none" : "1px solid var(--border)",
+                  color: "var(--commission-title, var(--action-primary-hover))",
+                  borderLeft: idx === 0 ? "none" : "1px solid var(--border-subtle)",
                 }}
               >
                 {label}
@@ -199,19 +199,19 @@ function GameCommissionAccordionTable({
             <tr
               key={`${row.provider}-${i}`}
               style={{
-                borderBottom: i === rows.length - 1 ? "none" : "1px solid var(--border)",
+                borderBottom: i === rows.length - 1 ? "none" : "1px solid var(--border-subtle)",
               }}
             >
-              <td className={`${thTdBase} text-left font-medium`} style={{ color: "var(--text)" }}>
+              <td className={`${thTdBase} text-left font-medium`} style={{ color: "var(--text-primary)" }}>
                 {row.provider}
               </td>
               <td
                 className={`${thTdBase} text-center tabular-nums`}
-                style={{ color: "var(--text)" }}
+                style={{ color: "var(--text-primary)" }}
               >
                 {row.l1}
               </td>
-              <td className={`${thTdBase} text-center tabular-nums`} style={{ color: "var(--text)" }}>
+              <td className={`${thTdBase} text-center tabular-nums`} style={{ color: "var(--text-primary)" }}>
                 {row.l2}
               </td>
             </tr>
@@ -237,9 +237,9 @@ export function ReferralPage({ isLoggedIn = false, onLoginClick }: ReferralPageP
 
   const shareIcons = useMemo(
     () => [
-      { label: "Facebook", href: "#share-fb", color: "#1877F2", src: imgShareOnFacebook },
-      { label: "Telegram", href: "#share-telegram", color: "#229ED9", src: imgShareOnTelegram },
-      { label: "WhatsApp", href: "#share-whatsapp", color: "#25D366", src: imgShareOnWhatsApp },
+      { label: "Facebook", href: "#share-fb", color: "var(--feedback-info)", src: imgShareOnFacebook },
+      { label: "Telegram", href: "#share-telegram", color: "var(--feedback-info)", src: imgShareOnTelegram },
+      { label: "WhatsApp", href: "#share-whatsapp", color: "var(--feedback-success)", src: imgShareOnWhatsApp },
     ],
     [],
   );
@@ -260,11 +260,11 @@ export function ReferralPage({ isLoggedIn = false, onLoginClick }: ReferralPageP
       className="mt-6 rounded-xl border p-[20px]"
       style={{
         borderColor: "var(--panel-item-border)",
-        background: "var(--surface)",
+        background: "var(--surface-base)",
         boxShadow: "var(--card-shadow)",
       }}
     >
-      <div className="text-center text-[18px] font-extrabold" style={{ color: "var(--primary-dark)" }}>
+      <div className="text-center text-[18px] font-extrabold" style={{ color: "var(--action-primary-hover)" }}>
         Invite Your Friends to Earn Passive Income
       </div>
 
@@ -277,14 +277,14 @@ export function ReferralPage({ isLoggedIn = false, onLoginClick }: ReferralPageP
           <div
             key={label}
             className="relative rounded-xl border p-[20px] text-center"
-            style={{ borderColor: "var(--panel-item-border)", background: "#f2f2f2" }}
+            style={{ borderColor: "var(--panel-item-border)", background: "var(--surface-muted)" }}
           >
             <div
               className="absolute left-0 top-0 w-fit px-5 py-1 text-[14px] font-extrabold"
               style={{
                 background: "var(--cta-gradient)",
-                color: "var(--on-primary)",
-                boxShadow: "0 3px 8px color-mix(in srgb, var(--primary-dark) 36%, transparent)",
+                color: "var(--text-on-emphasis)",
+                boxShadow: "0 3px 8px color-mix(in srgb, var(--action-primary-hover) 36%, transparent)",
                 borderRadius: "10px 0px 10px 0px",
               }}
             >
@@ -295,7 +295,7 @@ export function ReferralPage({ isLoggedIn = false, onLoginClick }: ReferralPageP
               <img src={src} alt="" className="h-16 w-16 object-contain" aria-hidden />
             </div>
 
-            <div className="mt-4 text-[15px] font-bold" style={{ color: "var(--text)", lineHeight: 1.35 }}>
+            <div className="mt-4 text-[15px] font-bold" style={{ color: "var(--text-primary)", lineHeight: 1.35 }}>
               {text}
             </div>
           </div>
@@ -309,19 +309,19 @@ export function ReferralPage({ isLoggedIn = false, onLoginClick }: ReferralPageP
       className="mt-5 rounded-xl border p-[20px]"
       style={{
         borderColor: "var(--panel-item-border)",
-        background: "var(--surface)",
+        background: "var(--surface-base)",
         boxShadow: "var(--card-shadow)",
-        ["--commission-title" as string]: "color-mix(in srgb, #1e3a5f 72%, var(--text) 28%)",
+        ["--commission-title" as string]: "color-mix(in srgb, var(--text-primary) 72%, var(--text-primary) 28%)",
       }}
     >
       <div>
         <h2
           className="m-0 text-[17px] font-extrabold leading-tight tracking-tight"
-          style={{ color: "var(--commission-title, var(--text))" }}
+          style={{ color: "var(--commission-title, var(--text-primary))" }}
         >
           Game Commission Rate
         </h2>
-        <p className="m-0 mt-1.5 text-[13px] font-semibold leading-snug" style={{ color: "var(--primary)" }}>
+        <p className="m-0 mt-1.5 text-[13px] font-semibold leading-snug" style={{ color: "var(--accent-strong)" }}>
           Listing of commission rates you earn from your downlines&apos; bets by game type and provider.
         </p>
       </div>
@@ -334,7 +334,7 @@ export function ReferralPage({ isLoggedIn = false, onLoginClick }: ReferralPageP
               key={cat.id}
               className="overflow-hidden rounded-[10px] border"
               style={{
-                borderColor: "var(--border)",
+                borderColor: "var(--border-subtle)",
               }}
             >
               <button
@@ -345,9 +345,9 @@ export function ReferralPage({ isLoggedIn = false, onLoginClick }: ReferralPageP
                 onClick={() => toggleCommissionCategory(cat.id)}
                 className="flex w-full items-center px-[20px] py-[8px] text-left"
                 style={{
-                  background: "#262c34",
+                  background: "var(--surface-inverse)",
                   border: "var(--header-lang-border)",
-                  color: "var(--gold)",
+                  color: "var(--accent-soft)",
                   minHeight: 56,
                 }}
               >
@@ -359,7 +359,7 @@ export function ReferralPage({ isLoggedIn = false, onLoginClick }: ReferralPageP
               </button>
               <div id={`commission-panel-${cat.id}`} role="region" aria-labelledby={`commission-trigger-${cat.id}`}>
                 {open && (
-                  <div className="border-t" style={{ borderColor: "var(--border)" }}>
+                  <div className="border-t" style={{ borderColor: "var(--border-subtle)" }}>
                     <GameCommissionAccordionTable rows={cat.rows} />
                   </div>
                 )}
@@ -372,23 +372,23 @@ export function ReferralPage({ isLoggedIn = false, onLoginClick }: ReferralPageP
   );
 
   return (
-    <section className="t3-referral-content" style={{ background: "var(--bg)" }}>
+    <section className="t3-referral-content" style={{ background: "var(--surface-base)" }}>
       <div className="mx-auto w-full max-w-[1430px] px-4 py-5">
         {/* Breadcrumbs — pill */}
         <div
           className="inline-flex w-fit max-w-full items-center gap-2 rounded-full text-sm font-semibold"
           style={{
-            background: "var(--surface-3)",
-            color: "var(--muted)",
+            background: "var(--surface-muted)",
+            color: "var(--text-secondary)",
             padding: "3px 20px",
             lineHeight: "36px",
           }}
         >
-          <a href="#/" style={{ color: "var(--muted)", textDecoration: "none" }} aria-label="Home">
+          <a href="#/" style={{ color: "var(--text-secondary)", textDecoration: "none" }} aria-label="Home">
             Home
           </a>
           <ChevronRight />
-          <span style={{ color: "var(--primary-dark)" }}>Referral</span>
+          <span style={{ color: "var(--action-primary-hover)" }}>Referral</span>
         </div>
 
         <div className="t3-referral-subtabs mt-4" role="tablist" aria-label="Referral sections">
@@ -450,28 +450,28 @@ export function ReferralPage({ isLoggedIn = false, onLoginClick }: ReferralPageP
                   <div
                     className="referral-invite-card flex min-w-0 flex-col gap-4 rounded-xl border p-[20px]"
                     style={{
-                      background: "color-mix(in srgb, var(--surface-3) 55%, var(--surface))",
+                      background: "color-mix(in srgb, var(--surface-muted) 55%, var(--surface-base))",
                       borderColor: "var(--panel-item-border)",
                       boxShadow: "var(--card-shadow)",
                     }}
                   >
-                    <h1 className="m-0 text-lg font-extrabold leading-snug md:text-[18px]" style={{ color: "var(--primary-dark)" }}>
+                    <h1 className="m-0 text-lg font-extrabold leading-snug md:text-[18px]" style={{ color: "var(--action-primary-hover)" }}>
                       Invite friends now to get more reward
                     </h1>
-                    <p className="m-0 text-[13px] leading-relaxed md:text-[14px]" style={{ color: "var(--muted)" }}>
+                    <p className="m-0 text-[13px] leading-relaxed md:text-[14px]" style={{ color: "var(--text-secondary)" }}>
                       Invite your friends to join through our referral program! Share your unique code or link and earn rewards as they sign up and engage with our platform.
                     </p>
                     <div
                       className="h-px w-full shrink-0"
                       style={{
-                        background: "color-mix(in srgb, var(--primary-dark) 18%, var(--border))",
+                        background: "color-mix(in srgb, var(--action-primary-hover) 18%, var(--border-subtle))",
                         margin: "20px 0px",
                       }}
                       aria-hidden
                     />
 
                     <div className="flex flex-col gap-2">
-                      <div className="text-sm font-extrabold md:text-[15px]" style={{ color: "var(--primary-dark)" }}>
+                      <div className="text-sm font-extrabold md:text-[15px]" style={{ color: "var(--action-primary-hover)" }}>
                         My Referral Link
                       </div>
                       <div className="relative w-full min-w-0">
@@ -479,12 +479,12 @@ export function ReferralPage({ isLoggedIn = false, onLoginClick }: ReferralPageP
                           className="relative flex min-h-[46px] w-full items-center rounded-lg border pl-4 pr-14 text-left"
                           style={{
                             borderColor: "var(--panel-item-border)",
-                            background: "var(--surface)",
-                            boxShadow: "inset 0 1px 0 color-mix(in srgb, var(--text) 4%, transparent)",
+                            background: "var(--surface-base)",
+                            boxShadow: "inset 0 1px 0 color-mix(in srgb, var(--text-primary) 4%, transparent)",
                           }}
                         >
                           <div className="min-w-0 flex-1 overflow-hidden py-3">
-                            <div className="truncate text-[13px] font-semibold md:text-sm" style={{ color: "var(--text)" }}>
+                            <div className="truncate text-[13px] font-semibold md:text-sm" style={{ color: "var(--text-primary)" }}>
                               {link}
                             </div>
                           </div>
@@ -494,7 +494,7 @@ export function ReferralPage({ isLoggedIn = false, onLoginClick }: ReferralPageP
                             aria-label="Copy referral link"
                             className="absolute right-1.5 top-1/2 grid h-10 w-10 -translate-y-1/2 place-items-center rounded-full"
                             style={{
-                              color: "var(--gold)",
+                              color: "var(--accent-soft)",
                               background: "transparent",
                             }}
                           >
@@ -505,7 +505,7 @@ export function ReferralPage({ isLoggedIn = false, onLoginClick }: ReferralPageP
                     </div>
 
                     <div className="flex flex-col gap-3 pt-1 sm:flex-row sm:items-center sm:gap-4">
-                      <span className="shrink-0 text-sm font-extrabold md:text-[15px]" style={{ color: "var(--primary-dark)" }}>
+                      <span className="shrink-0 text-sm font-extrabold md:text-[15px]" style={{ color: "var(--action-primary-hover)" }}>
                         Share via social media
                       </span>
                       <div className="flex flex-wrap items-center gap-2.5 sm:justify-end">
@@ -517,9 +517,9 @@ export function ReferralPage({ isLoggedIn = false, onLoginClick }: ReferralPageP
                             className="grid h-11 w-11 place-items-center rounded-full border shadow-sm"
                             style={{
                               borderColor: "var(--panel-item-border)",
-                              background: "var(--surface)",
+                              background: "var(--surface-base)",
                               color,
-                              boxShadow: "0 2px 10px color-mix(in srgb, var(--text) 10%, transparent)",
+                              boxShadow: "0 2px 10px color-mix(in srgb, var(--text-primary) 10%, transparent)",
                             }}
                           >
                             <img src={src} alt="" className="h-5 w-5 object-contain" aria-hidden />
@@ -533,7 +533,7 @@ export function ReferralPage({ isLoggedIn = false, onLoginClick }: ReferralPageP
                   <div
                     className="flex min-h-[100%] min-w-0 flex-col gap-4 rounded-xl border p-[20px]"
                     style={{
-                      background: "color-mix(in srgb, var(--surface-3) 55%, var(--surface))",
+                      background: "color-mix(in srgb, var(--surface-muted) 55%, var(--surface-base))",
                       borderColor: "var(--panel-item-border)",
                       boxShadow: "var(--card-shadow)",
                     }}
@@ -541,9 +541,9 @@ export function ReferralPage({ isLoggedIn = false, onLoginClick }: ReferralPageP
                     <div className="flex flex-1 flex-col gap-4">
                       <div
                         className="rounded-lg border p-[20px]"
-                        style={{ background: "var(--surface-3)", borderColor: "var(--panel-item-border)" }}
+                        style={{ background: "var(--surface-muted)", borderColor: "var(--panel-item-border)" }}
                       >
-                        <div className="flex items-center text-[13px] font-semibold" style={{ color: "var(--muted)" }}>
+                        <div className="flex items-center text-[13px] font-semibold" style={{ color: "var(--text-secondary)" }}>
                           Total Referral Commission Bonus
                           <InfoTooltip
                             label="Total referral commission bonus info"
@@ -552,16 +552,16 @@ export function ReferralPage({ isLoggedIn = false, onLoginClick }: ReferralPageP
                         </div>
                         <div
                           className="mt-2 text-[20px] font-extrabold tabular-nums tracking-tight"
-                          style={{ color: "var(--gold)" }}
+                          style={{ color: "var(--accent-soft)" }}
                         >
                           0.000
                         </div>
                       </div>
                       <div
                         className="rounded-lg border p-[20px]"
-                        style={{ background: "var(--surface-3)", borderColor: "var(--panel-item-border)" }}
+                        style={{ background: "var(--surface-muted)", borderColor: "var(--panel-item-border)" }}
                       >
-                        <div className="flex items-center text-[13px] font-semibold" style={{ color: "var(--muted)" }}>
+                        <div className="flex items-center text-[13px] font-semibold" style={{ color: "var(--text-secondary)" }}>
                           Total Referral Deposit Bonus
                           <InfoTooltip
                             label="Total referral deposit bonus info"
@@ -570,7 +570,7 @@ export function ReferralPage({ isLoggedIn = false, onLoginClick }: ReferralPageP
                         </div>
                         <div
                           className="mt-2 text-[20px] font-extrabold tabular-nums tracking-tight"
-                          style={{ color: "var(--gold)" }}
+                          style={{ color: "var(--accent-soft)" }}
                         >
                           0.000
                         </div>
@@ -583,8 +583,8 @@ export function ReferralPage({ isLoggedIn = false, onLoginClick }: ReferralPageP
                       className="mt-auto w-full rounded-lg py-3 text-[14px] font-extrabold"
                       style={{
                         background: "var(--cta-gradient)",
-                        color: "var(--on-primary)",
-                        border: "1px solid color-mix(in srgb, var(--primary-dark) 22%, transparent)",
+                        color: "var(--text-on-emphasis)",
+                        border: "1px solid color-mix(in srgb, var(--action-primary-hover) 22%, transparent)",
                         boxShadow: "var(--card-shadow)",
                       }}
                     >
@@ -603,4 +603,3 @@ export function ReferralPage({ isLoggedIn = false, onLoginClick }: ReferralPageP
     </section>
   );
 }
-

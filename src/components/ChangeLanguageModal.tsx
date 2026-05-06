@@ -68,24 +68,24 @@ export function ChangeLanguageModal({ isOpen, onClose }: ChangeLanguageModalProp
               display: "flex",
               alignItems: "center",
               justifyContent: "space-between",
-              background: "#a3addf",
-              borderBottom: "1px solid var(--border)",
+              background: "var(--surface-raised)",
+              borderBottom: "1px solid var(--border-subtle)",
             }}
           >
-            <div className="modal-title font-extrabold" style={{ color: "var(--primary)", lineHeight: 1.2 }}>
+            <div className="modal-title font-extrabold" style={{ color: "var(--accent-strong)", lineHeight: 1.2 }}>
               Change Language
             </div>
-            <button type="button" className="t3-close-modal" onClick={onClose} aria-label="Close" style={{ color: "#0038A8" }}>
+            <button type="button" className="t3-close-modal" onClick={onClose} aria-label="Close" style={{ color: "var(--feedback-info)" }}>
               <XCloseIcon />
             </button>
           </div>
 
-          <div className="modal-body" style={{ background: "var(--bg)", padding: 0, flex: "1 1 auto", overflowY: "auto" }}>
+          <div className="modal-body" style={{ background: "var(--surface-base)", padding: 0, flex: "1 1 auto", overflowY: "auto" }}>
             <div className="px-5 py-6">
               <button
                 type="button"
                 className="flex w-full items-center justify-between rounded-lg px-4 py-3 text-left"
-                style={{ background: "var(--surface-3)", color: "var(--primary-dark)" }}
+                style={{ background: "var(--surface-muted)", color: "var(--action-primary-hover)" }}
                 onClick={() => handleLanguageSwitch("khmer")}
               >
                 <div className="flex items-center gap-3">
@@ -95,11 +95,11 @@ export function ChangeLanguageModal({ isOpen, onClose }: ChangeLanguageModalProp
                     aria-hidden
                     style={{ width: 24, height: 24, borderRadius: "9999px", flexShrink: 0 }}
                   />
-                  <span className="text-[14px] font-bold leading-none" style={{ color: "var(--primary-dark)" }}>
+                  <span className="text-[14px] font-bold leading-none" style={{ color: "var(--action-primary-hover)" }}>
                     Khmer
                   </span>
                 </div>
-                <span className="text-[14px] font-medium leading-none" style={{ color: "var(--primary-dark)" }}>
+                <span className="text-[14px] font-medium leading-none" style={{ color: "var(--action-primary-hover)" }}>
                   {selected === "khmer" ? "Selected" : "Select"}
                 </span>
               </button>
@@ -107,7 +107,7 @@ export function ChangeLanguageModal({ isOpen, onClose }: ChangeLanguageModalProp
               <button
                 type="button"
                 className="mt-3 flex w-full items-center justify-between rounded-lg px-4 py-3 text-left"
-                style={{ background: "var(--surface-3)", color: "var(--primary-dark)" }}
+                style={{ background: "var(--surface-muted)", color: "var(--action-primary-hover)" }}
                 onClick={() => handleLanguageSwitch("english")}
               >
                 <div className="flex items-center gap-3">
@@ -117,11 +117,11 @@ export function ChangeLanguageModal({ isOpen, onClose }: ChangeLanguageModalProp
                     aria-hidden
                     style={{ width: 24, height: 24, borderRadius: "9999px", flexShrink: 0 }}
                   />
-                  <span className="text-[14px] font-bold leading-none" style={{ color: "var(--primary-dark)" }}>
+                  <span className="text-[14px] font-bold leading-none" style={{ color: "var(--action-primary-hover)" }}>
                     English
                   </span>
                 </div>
-                <span className="text-[14px] font-medium leading-none" style={{ color: "var(--primary-dark)" }}>
+                <span className="text-[14px] font-medium leading-none" style={{ color: "var(--action-primary-hover)" }}>
                   {selected === "english" ? "Selected" : "Select"}
                 </span>
               </button>
@@ -132,4 +132,3 @@ export function ChangeLanguageModal({ isOpen, onClose }: ChangeLanguageModalProp
     </div>
   );
 }
-

@@ -52,11 +52,11 @@ type ProfilePageProps = {
 function UserAvatar() {
   return (
     <div
-      className="flex h-[84px] w-[84px] shrink-0 items-center justify-center bg-[#fdfdfd]"
-      style={{ border: "2px solid #dfc790", padding: "4px" }}
+      className="flex h-[84px] w-[84px] shrink-0 items-center justify-center bg-[var(--surface-base)]"
+      style={{ border: "2px solid var(--accent-muted)", padding: "4px" }}
       aria-hidden
     >
-      <div className="flex h-full w-full items-center justify-center border border-[#dfc790] bg-white">
+      <div className="flex h-full w-full items-center justify-center border border-[var(--accent-muted)] bg-[var(--surface-base)]">
         <img
           src="https://www.figma.com/api/mcp/asset/78f25659-de5b-4941-baee-aec4c4051819"
           alt=""
@@ -80,65 +80,65 @@ export function ProfilePage({ onLogout }: ProfilePageProps) {
   return (
     <section className="mx-auto w-full max-w-[760px] px-4 py-6">
       {/* Top Card: User Info */}
-      <article className="rounded-md p-4" style={{ background: "#f8f8f8" }}>
+      <article className="rounded-md p-4" style={{ background: "var(--surface-muted)" }}>
         <div className="flex items-center gap-4">
           <UserAvatar />
           <div className="min-w-0 flex-1">
             {/* Username row */}
             <div className="flex items-center gap-3">
-              <h2 className="text-[17px] font-extrabold" style={{ color: "#992925" }}>Demo</h2>
-              <div className="h-4 w-[1px] bg-gray-300" />
-              <span className="text-[14px] font-medium" style={{ color: "#a56658" }}>6012300001234</span>
+              <h2 className="text-[17px] font-extrabold" style={{ color: "var(--action-primary-hover)" }}>Demo</h2>
+              <div className="h-4 w-[1px] bg-[var(--border-strong)]" />
+              <span className="text-[14px] font-medium" style={{ color: "var(--text-secondary)" }}>6012300001234</span>
             </div>
 
             {/* Rank info row */}
-            <div className="mt-2 flex items-center justify-between text-[13px] font-medium" style={{ color: "#a56658" }}>
+            <div className="mt-2 flex items-center justify-between text-[13px] font-medium" style={{ color: "var(--text-secondary)" }}>
               <span>Orichalcum</span>
               <span>
-                Deposit <span style={{ color: "#d2ac6f" }}>900,723.48</span> to become <span style={{ color: "#d2ac6f" }}>Orichalcum II</span>!
+                Deposit <span style={{ color: "var(--accent-muted)" }}>900,723.48</span> to become <span style={{ color: "var(--accent-muted)" }}>Orichalcum II</span>!
               </span>
             </div>
 
             {/* Progress bar row */}
             <div className="mt-2 flex items-center gap-3">
-              <div className="h-2.5 flex-1 overflow-hidden rounded-full bg-white border border-gray-200">
-                <div className="h-full rounded-full" style={{ width: "10%", background: "#a6332a" }} />
+              <div className="h-2.5 flex-1 overflow-hidden rounded-full bg-[var(--surface-base)] border border-[var(--border-default)]">
+                <div className="h-full rounded-full" style={{ width: "10%", background: "var(--accent-strong)" }} />
               </div>
-              <span className="text-[12px] font-medium text-gray-500">10%</span>
+              <span className="text-[12px] font-medium text-[var(--text-muted)]">10%</span>
             </div>
           </div>
         </div>
       </article>
 
       {/* Bottom Card: Wallet Info */}
-      <article className="mt-3 rounded-md p-3" style={{ background: "#f8f8f8" }}>
-        <div className="rounded-md bg-white p-4 shadow-sm border border-gray-100">
+      <article className="mt-3 rounded-md p-3" style={{ background: "var(--surface-muted)" }}>
+        <div className="rounded-md bg-[var(--surface-base)] p-4 shadow-sm border border-[var(--border-subtle)]">
           <div className="flex items-center justify-between">
             <div className="flex flex-col">
-              <span className="text-[13px] font-bold" style={{ color: "#d96f5b" }}>Main Wallet</span>
-              <span className="mt-0.5 text-[18px] font-extrabold" style={{ color: "#7a1a1a" }}>100.00</span>
+              <span className="text-[13px] font-bold" style={{ color: "var(--feedback-danger)" }}>Main Wallet</span>
+              <span className="mt-0.5 text-[18px] font-extrabold" style={{ color: "var(--action-primary-hover)" }}>100.00</span>
             </div>
             <button
               type="button"
               onClick={() => {
                 window.location.hash = "#/deposit";
               }}
-              className="rounded-lg px-6 py-2.5 text-[15px] font-bold text-white shadow-md transition-opacity hover:opacity-90"
-              style={{ background: "linear-gradient(180deg, #b23333 0%, #871919 100%)" }}
+              className="rounded-lg px-6 py-2.5 text-[15px] font-bold text-[var(--text-on-emphasis)] shadow-md transition-opacity hover:opacity-90"
+              style={{ background: "linear-gradient(180deg, var(--accent-strong) 0%, var(--action-primary-hover) 100%)" }}
             >
               Deposit
             </button>
           </div>
 
           <div className="mt-5">
-            <div className="text-[13px] font-semibold" style={{ color: "#a56658" }}>
-              Deposit Rollover <span className="ml-1 font-bold" style={{ color: "#d2ac6f" }}>0 / 100</span>
+            <div className="text-[13px] font-semibold" style={{ color: "var(--text-secondary)" }}>
+              Deposit Rollover <span className="ml-1 font-bold" style={{ color: "var(--accent-muted)" }}>0 / 100</span>
             </div>
             <div className="mt-2 flex items-center gap-3">
-              <div className="h-1.5 flex-1 overflow-hidden rounded-full bg-[#f4f4f5]">
-                <div className="h-full rounded-full" style={{ width: "0%", background: "#a6332a" }} />
+              <div className="h-1.5 flex-1 overflow-hidden rounded-full bg-[var(--surface-muted)]">
+                <div className="h-full rounded-full" style={{ width: "0%", background: "var(--accent-strong)" }} />
               </div>
-              <span className="text-[12px] font-medium" style={{ color: "#8a584e" }}>0%</span>
+              <span className="text-[12px] font-medium" style={{ color: "var(--text-secondary)" }}>0%</span>
             </div>
           </div>
         </div>
@@ -150,7 +150,7 @@ export function ProfilePage({ onLogout }: ProfilePageProps) {
             key={label}
             type="button"
             className="flex h-[46px] w-full items-center justify-between rounded-md px-3 text-left"
-            style={{ background: "var(--surface-3)" }}
+            style={{ background: "var(--surface-muted)" }}
             onClick={() => {
               if (label === "My Profile") {
                 setIsMyProfileOpen(true);
@@ -196,7 +196,7 @@ export function ProfilePage({ onLogout }: ProfilePageProps) {
                 aria-hidden
                 className="h-[20px] w-[20px] shrink-0 object-contain"
               />
-              <span className="truncate text-sm font-normal text-[var(--primary-dark)]">{label}</span>
+              <span className="truncate text-sm font-normal text-[var(--action-primary-hover)]">{label}</span>
             </div>
             <span className="shrink-0">
               <RowChevron />

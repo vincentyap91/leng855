@@ -42,7 +42,7 @@ export function PromoBanners() {
       <Slider className="promo-banners-slider" {...promoBannerSliderSettings}>
         {banners.map((b) => (
           <div key={b.alt}>
-            <div className="overflow-hidden rounded-[20px] shadow-[0_2px_12px_rgba(0,0,0,0.08)] lg:rounded-lg lg:shadow-sm">
+            <div className="overflow-hidden rounded-[20px] shadow-[0_2px_12px_color-mix(in srgb, var(--surface-inverse) 8%, transparent)] lg:rounded-lg lg:shadow-sm">
               <div className="overflow-hidden max-lg:aspect-[2/1] lg:aspect-[580/320]">
                 <img
                   src={b.src}

@@ -64,7 +64,7 @@ function MenuChevronRight({ className }: { className?: string }) {
 function BankCategoryIcon() {
   return (
     <svg
-      className="theme-icon-size-20 vicon shrink-0 text-[var(--primary)]"
+      className="theme-icon-size-20 vicon shrink-0 text-[var(--accent-strong)]"
       viewBox="0 0 1088 1024"
       aria-hidden
       width={18}
@@ -85,7 +85,7 @@ function CryptoCategoryIcon() {
       viewBox="0 0 25 25"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      className="vicon shrink-0 text-[var(--primary)]"
+      className="vicon shrink-0 text-[var(--accent-strong)]"
       aria-hidden
     >
       <path
@@ -228,15 +228,15 @@ function BankTransferQrSvg({ seed, fileBase }: { seed: string; fileBase: string 
         if (!cells[y][x]) continue;
         const px = gap + x * (cell + gap);
         const py = gap + y * (cell + gap);
-        body += `<rect x="${px.toFixed(3)}" y="${py.toFixed(3)}" width="${cell.toFixed(3)}" height="${cell.toFixed(3)}" fill="#0f172a"/>`;
+        body += `<rect x="${px.toFixed(3)}" y="${py.toFixed(3)}" width="${cell.toFixed(3)}" height="${cell.toFixed(3)}" fill="var(--surface-inverse)"/>`;
       }
     }
     const svg = `<?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" width="${sz}" height="${sz}" viewBox="0 0 ${sz} ${sz}">
-<rect width="${sz}" height="${sz}" fill="#ffffff"/>
+<rect width="${sz}" height="${sz}" fill="var(--surface-base)"/>
 ${body}
-<circle cx="${sz / 2}" cy="${sz / 2}" r="14" fill="#991B1B"/>
-<text x="${sz / 2}" y="${sz / 2 + 5}" text-anchor="middle" fill="#ffffff" font-size="16" font-family="system-ui,sans-serif" font-weight="700">$</text>
+<circle cx="${sz / 2}" cy="${sz / 2}" r="14" fill="var(--action-primary-hover)"/>
+<text x="${sz / 2}" y="${sz / 2 + 5}" text-anchor="middle" fill="var(--surface-base)" font-size="16" font-family="system-ui,sans-serif" font-weight="700">$</text>
 </svg>`;
     const blob = new Blob([svg], { type: "image/svg+xml;charset=utf-8" });
     const url = URL.createObjectURL(blob);
@@ -253,7 +253,7 @@ ${body}
       if (!cells[y][x]) continue;
       const px = gap + x * (cell + gap);
       const py = gap + y * (cell + gap);
-      rects.push(<rect key={`${x}-${y}`} x={px} y={py} width={cell} height={cell} fill="#0f172a" />);
+      rects.push(<rect key={`${x}-${y}`} x={px} y={py} width={cell} height={cell} fill="var(--surface-inverse)" />);
     }
   }
 
@@ -261,14 +261,14 @@ ${body}
     <div className="deposit-bank-transfer__qr">
       <div className="deposit-bank-transfer__qr-box">
         <svg width={sz} height={sz} viewBox={`0 0 ${sz} ${sz}`} role="img" aria-label="Deposit QR code placeholder">
-          <rect width={sz} height={sz} fill="#ffffff" />
+          <rect width={sz} height={sz} fill="var(--surface-base)" />
           {rects}
-          <circle cx={sz / 2} cy={sz / 2} r={14} fill="var(--primary-dark)" />
+          <circle cx={sz / 2} cy={sz / 2} r={14} fill="var(--action-primary-hover)" />
           <text
             x={sz / 2}
             y={sz / 2 + 5}
             textAnchor="middle"
-            fill="#ffffff"
+            fill="var(--surface-base)"
             fontSize={16}
             fontFamily="system-ui, sans-serif"
             fontWeight={700}
@@ -544,7 +544,7 @@ export function DepositPage() {
   );
 
   return (
-    <section className="deposit-page mx-auto w-full max-w-4xl px-4 py-4" style={{ background: "var(--bg)" }}>
+    <section className="deposit-page mx-auto w-full max-w-4xl px-4 py-4" style={{ background: "var(--surface-base)" }}>
       <div className="t3-two-custom-tabs deposit-page-tabs" role="tablist" aria-label="Deposit or withdrawal">
         <div
           role="tab"
@@ -586,7 +586,7 @@ export function DepositPage() {
       </div>
 
       {cashTab === "deposit" && !activeBank ? (
-        <p className="mb-3 text-sm sm:text-[14px]" style={{ color: "var(--muted)" }}>
+        <p className="mb-3 text-sm sm:text-[14px]" style={{ color: "var(--text-secondary)" }}>
           Select a reload option from the available options.
         </p>
       ) : null}
@@ -600,7 +600,7 @@ export function DepositPage() {
         />
       ) : cashTab === "deposit" ? (
         <div className="t3-settings-menu-list mt-2 flex flex-col gap-2">
-          <div className="t3-settings-menu-list-item bank overflow-hidden rounded-xl border" style={{ borderColor: "var(--border)" }}>
+          <div className="t3-settings-menu-list-item bank overflow-hidden rounded-xl border" style={{ borderColor: "var(--border-subtle)" }}>
             <button type="button" className="menu-list-item-row" onClick={() => setBankOpen((o) => !o)} aria-expanded={bankOpen}>
               <div className="first">
                 <div className="flex shrink-0 items-center">
@@ -611,7 +611,7 @@ export function DepositPage() {
                   <span className="remark">Normal Bank Transfer</span>
                 </div>
               </div>
-              <div className="second text-[var(--muted)]">{bankOpen ? <MenuChevronDown /> : <MenuChevronRight />}</div>
+              <div className="second text-[var(--text-secondary)]">{bankOpen ? <MenuChevronDown /> : <MenuChevronRight />}</div>
             </button>
             {bankOpen ? (
               <div className="bank-option-list">
@@ -635,7 +635,7 @@ export function DepositPage() {
             ) : null}
           </div>
 
-          <div className="t3-settings-menu-list-item bank overflow-hidden rounded-xl border" style={{ borderColor: "var(--border)" }}>
+          <div className="t3-settings-menu-list-item bank overflow-hidden rounded-xl border" style={{ borderColor: "var(--border-subtle)" }}>
             <button type="button" className="menu-list-item-row" onClick={() => setCryptoOpen((o) => !o)} aria-expanded={cryptoOpen}>
               <div className="first">
                 <div className="flex shrink-0 items-center">
@@ -646,7 +646,7 @@ export function DepositPage() {
                   <span className="remark">Cryptocurrency (Manual)</span>
                 </div>
               </div>
-              <div className="second text-[var(--muted)]">{cryptoOpen ? <MenuChevronDown /> : <MenuChevronRight />}</div>
+              <div className="second text-[var(--text-secondary)]">{cryptoOpen ? <MenuChevronDown /> : <MenuChevronRight />}</div>
             </button>
             {cryptoOpen ? (
               <div className="bank-option-list">
@@ -668,12 +668,12 @@ export function DepositPage() {
       ) : (
         <div
           className="rounded-xl border px-6 py-12 text-center"
-          style={{ borderColor: "var(--border)", background: "var(--surface-2)" }}
+          style={{ borderColor: "var(--border-subtle)", background: "var(--surface-base)" }}
         >
-          <p className="text-sm font-semibold" style={{ color: "var(--primary-dark)" }}>
+          <p className="text-sm font-semibold" style={{ color: "var(--action-primary-hover)" }}>
             Withdrawal
           </p>
-          <p className="mt-2 text-sm" style={{ color: "var(--muted)" }}>
+          <p className="mt-2 text-sm" style={{ color: "var(--text-secondary)" }}>
             Withdrawal options will appear here.
           </p>
         </div>

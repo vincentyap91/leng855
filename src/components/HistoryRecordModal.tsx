@@ -64,7 +64,7 @@ export function HistoryRecordModal({ isOpen, onClose }: HistoryRecordModalProps)
     // `.t3-custom-table` uses these tokens (with `!important`) for header visuals.
     // Override them locally so the modal table follows the modal-specific variables.
     ["--dashboard-table-th" as any]: "var(--sidebar-bg)",
-    ["--dashboard-table-th-color" as any]: "var(--text)",
+    ["--dashboard-table-th-color" as any]: "var(--text-primary)",
     ["--border-strong" as any]: "var(--modal-table-header-boder)",
   };
 
@@ -102,14 +102,14 @@ export function HistoryRecordModal({ isOpen, onClose }: HistoryRecordModalProps)
               alignItems: "center",
               justifyContent: "space-between",
               gap: 12,
-              borderBottom: "1px solid var(--border)",
+              borderBottom: "1px solid var(--border-subtle)",
             }}
           >
             <div
               className="modal-title"
               style={{
                 fontWeight: 800,
-                color: "var(--primary)",
+                color: "var(--accent-strong)",
                 fontFamily: "var(--base-font-family)",
                 fontSize: 14,
                 lineHeight: 1.25,
@@ -125,12 +125,12 @@ export function HistoryRecordModal({ isOpen, onClose }: HistoryRecordModalProps)
 
           <div
             className="modal-body"
-            style={{ background: "var(--bg)", padding: 0, flex: "1 1 auto", overflowY: "auto" }}
+            style={{ background: "var(--surface-base)", padding: 0, flex: "1 1 auto", overflowY: "auto" }}
           >
             <div className="px-4 py-4">
               {/* Record Type */}
               <div className="flex items-center gap-2">
-                <div style={{ color: "var(--muted)", fontSize: 12, fontWeight: 600 }}>Record Type</div>
+                <div style={{ color: "var(--text-secondary)", fontSize: 12, fontWeight: 600 }}>Record Type</div>
                 <select
                   className="t3-custom-input-text"
                   style={{ flex: 1, minHeight: 40, height: 40, fontSize: 13 }}
@@ -146,7 +146,7 @@ export function HistoryRecordModal({ isOpen, onClose }: HistoryRecordModalProps)
               <div className="mt-4">
                 <div
                   style={{
-                    color: "var(--primary-dark)",
+                    color: "var(--action-primary-hover)",
                     fontFamily: "var(--base-font-family)",
                     fontWeight: 800,
                     fontSize: 15,
@@ -159,7 +159,7 @@ export function HistoryRecordModal({ isOpen, onClose }: HistoryRecordModalProps)
                 {/* Date filters */}
                 <div className="mt-3 grid grid-cols-2 gap-4">
                   <div>
-                    <div style={{ color: "var(--muted)", fontSize: 12, fontWeight: 600 }}>Start Date</div>
+                    <div style={{ color: "var(--text-secondary)", fontSize: 12, fontWeight: 600 }}>Start Date</div>
                     <input
                       type="text"
                       className="t3-custom-input-text date"
@@ -170,7 +170,7 @@ export function HistoryRecordModal({ isOpen, onClose }: HistoryRecordModalProps)
                   </div>
 
                   <div>
-                    <div style={{ color: "var(--muted)", fontSize: 12, fontWeight: 600 }}>End Date</div>
+                    <div style={{ color: "var(--text-secondary)", fontSize: 12, fontWeight: 600 }}>End Date</div>
                     <input
                       type="text"
                       className="t3-custom-input-text date"
@@ -192,9 +192,9 @@ export function HistoryRecordModal({ isOpen, onClose }: HistoryRecordModalProps)
                         onClick={() => setActiveQuickFilter(f)}
                         className="rounded-md"
                         style={{
-                          background: active ? "var(--theme-color-nav-menu-active)" : "var(--surface-3)",
-                          color: active ? "var(--on-primary)" : "var(--primary-dark)",
-                          border: `1px solid ${active ? "var(--theme-color-nav-menu-active)" : "var(--border)"}`,
+                          background: active ? "var(--theme-color-nav-menu-active)" : "var(--surface-muted)",
+                          color: active ? "var(--text-on-emphasis)" : "var(--action-primary-hover)",
+                          border: `1px solid ${active ? "var(--theme-color-nav-menu-active)" : "var(--border-subtle)"}`,
                           fontFamily: "var(--base-font-family)",
                           fontSize: 12,
                           fontWeight: 700,
@@ -208,15 +208,15 @@ export function HistoryRecordModal({ isOpen, onClose }: HistoryRecordModalProps)
                 </div>
 
                 {/* Toggle tabs */}
-                <div className="mt-4 grid grid-cols-2 overflow-hidden rounded-md border" style={{ borderColor: "var(--border)" }}>
+                <div className="mt-4 grid grid-cols-2 overflow-hidden rounded-md border" style={{ borderColor: "var(--border-subtle)" }}>
                   <button
                     type="button"
                     className="text-sm font-bold"
                     onClick={() => setTab("deposits")}
                     style={{
-                      background: tab === "deposits" ? "var(--theme-color-nav-menu-active)" : "var(--surface-3)",
-                      color: tab === "deposits" ? "var(--on-primary)" : "var(--primary-dark)",
-                      borderRight: "1px solid var(--border)",
+                      background: tab === "deposits" ? "var(--theme-color-nav-menu-active)" : "var(--surface-muted)",
+                      color: tab === "deposits" ? "var(--text-on-emphasis)" : "var(--action-primary-hover)",
+                      borderRight: "1px solid var(--border-subtle)",
                       padding: "10px 12px",
                     }}
                   >
@@ -227,8 +227,8 @@ export function HistoryRecordModal({ isOpen, onClose }: HistoryRecordModalProps)
                     className="text-sm font-bold"
                     onClick={() => setTab("withdrawals")}
                     style={{
-                      background: tab === "withdrawals" ? "var(--theme-color-nav-menu-active)" : "var(--surface-3)",
-                      color: tab === "withdrawals" ? "var(--on-primary)" : "var(--primary-dark)",
+                      background: tab === "withdrawals" ? "var(--theme-color-nav-menu-active)" : "var(--surface-muted)",
+                      color: tab === "withdrawals" ? "var(--text-on-emphasis)" : "var(--action-primary-hover)",
                       padding: "10px 12px",
                     }}
                   >
@@ -239,7 +239,7 @@ export function HistoryRecordModal({ isOpen, onClose }: HistoryRecordModalProps)
                 {/* Data table */}
                 <div
                   className="mt-4 overflow-hidden rounded-md border"
-                  style={{ borderColor: "var(--border)", ...tableThemeVars }}
+                  style={{ borderColor: "var(--border-subtle)", ...tableThemeVars }}
                 >
                   <div className="overflow-x-auto">
                     <table className="t3-custom-table w-full border-collapse text-[13px]">
@@ -251,9 +251,9 @@ export function HistoryRecordModal({ isOpen, onClose }: HistoryRecordModalProps)
                               className="h-[36px] px-3 text-center font-bold"
                               style={{
                                 background: "var(--sidebar-bg)",
-                                color: "var(--text)",
-                                borderBottom: "1px solid #9bbb9c",
-                                borderLeft: colIdx === 0 ? "none" : "1px solid #9bbb9c",
+                                color: "var(--text-primary)",
+                                borderBottom: "1px solid var(--border-strong)",
+                                borderLeft: colIdx === 0 ? "none" : "1px solid var(--border-strong)",
                               }}
                             >
                               {h}
@@ -269,7 +269,7 @@ export function HistoryRecordModal({ isOpen, onClose }: HistoryRecordModalProps)
                               style={{
                                 textAlign: "center",
                                 padding: "18px 0",
-                                color: "var(--primary)",
+                                color: "var(--accent-strong)",
                                 background: "var(--modal-table-body)",
                               }}
                             >
@@ -283,7 +283,7 @@ export function HistoryRecordModal({ isOpen, onClose }: HistoryRecordModalProps)
                                 className="px-3 py-2.5"
                                 style={{
                                   background: "var(--modal-table-body)",
-                                  color: "var(--text)",
+                                  color: "var(--text-primary)",
                                   fontWeight: 700,
                                 }}
                               >
@@ -293,7 +293,7 @@ export function HistoryRecordModal({ isOpen, onClose }: HistoryRecordModalProps)
                                 className="px-3 py-2.5 tabular-nums"
                                 style={{
                                   background: "var(--modal-table-body)",
-                                  color: "var(--gold)",
+                                  color: "var(--accent-soft)",
                                   fontWeight: 900,
                                 }}
                               >
@@ -303,7 +303,7 @@ export function HistoryRecordModal({ isOpen, onClose }: HistoryRecordModalProps)
                                 className="px-3 py-2.5"
                                 style={{
                                   background: "var(--modal-table-body)",
-                                  color: "var(--muted)",
+                                  color: "var(--text-secondary)",
                                   fontWeight: 700,
                                 }}
                               >
@@ -313,7 +313,7 @@ export function HistoryRecordModal({ isOpen, onClose }: HistoryRecordModalProps)
                                 className="px-3 py-2.5"
                                 style={{
                                   background: "var(--modal-table-body)",
-                                  color: "var(--muted)",
+                                  color: "var(--text-secondary)",
                                   fontWeight: 600,
                                 }}
                               >
@@ -334,4 +334,3 @@ export function HistoryRecordModal({ isOpen, onClose }: HistoryRecordModalProps)
     </div>
   );
 }
-

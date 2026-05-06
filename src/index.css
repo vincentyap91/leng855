@@ -43,13 +43,13 @@ body {
 }
 .hot-providers-slider .slick-prev:before,
 .hot-providers-slider .slick-next:before {
-  color: #64748b;
+  color: var(--text-muted);
   font-size: 22px;
   opacity: 1;
 }
 .hot-providers-slider .slick-prev:hover:before,
 .hot-providers-slider .slick-next:hover:before {
-  color: var(--primary, #b91c1c);
+  color: var(--accent-strong);
 }
 .hot-providers-slider .slick-slide > div {
   height: 100%;
@@ -88,11 +88,13 @@ body {
   }
   .promo-banners-slider .slick-dots li button:before {
     font-size: 8px;
-    color: var(--muted, #94a3b8);
+    color: var(--text-secondary);
     opacity: 0.85;
   }
   .promo-banners-slider .slick-dots li.slick-active button:before {
-    color: var(--gold, #c9a227);
+    color: var(--accent-soft);
     opacity: 1;
   }
 }
+
+

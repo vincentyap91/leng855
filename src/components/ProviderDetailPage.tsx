@@ -117,24 +117,24 @@ function NextspinProviderLayout() {
   return (
     <section
       className="t3-provider-game-page space-y-5"
-      style={{ background: "var(--bg)", fontFamily: "var(--base-font-family)" }}
+      style={{ background: "var(--surface-base)", fontFamily: "var(--base-font-family)" }}
     >
       <div
         className="inline-flex w-fit max-w-full items-center gap-2 rounded-full px-5 text-sm font-semibold"
         style={{
-          background: "var(--surface-3)",
-          color: "var(--muted)",
+          background: "var(--surface-muted)",
+          color: "var(--text-secondary)",
           lineHeight: "36px",
         }}
       >
-        <a href="#/games" className="no-underline" style={{ color: "var(--muted)" }}>
+        <a href="#/games" className="no-underline" style={{ color: "var(--text-secondary)" }}>
           All
         </a>
         <ChevronRight />
-        <span style={{ color: "var(--primary)" }}>Nextspin</span>
+        <span style={{ color: "var(--accent-strong)" }}>Nextspin</span>
       </div>
 
-      <h1 className="m-0 text-[22px] font-bold leading-tight md:text-[26px]" style={{ color: "var(--primary)" }}>
+      <h1 className="m-0 text-[22px] font-bold leading-tight md:text-[26px]" style={{ color: "var(--accent-strong)" }}>
         Nextspin
       </h1>
 
@@ -145,25 +145,25 @@ function NextspinProviderLayout() {
       <div
         className="rounded-lg p-2"
         style={{
-          background: "#f4f4f5",
+          background: "var(--surface-muted)",
         }}
       >
         <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
-          <div className="flex items-center justify-between rounded-md bg-white px-4 py-2.5 shadow-sm">
+          <div className="flex items-center justify-between rounded-md bg-[var(--surface-base)] px-4 py-2.5 shadow-sm">
             <div className="flex flex-col leading-tight">
-              <span className="text-[12px] font-medium" style={{ color: "var(--gold)" }}>Wallet</span>
-              <span className="mt-0.5 text-[15px] font-bold" style={{ color: "var(--primary-dark)" }}>0.00</span>
+              <span className="text-[12px] font-medium" style={{ color: "var(--accent-soft)" }}>Wallet</span>
+              <span className="mt-0.5 text-[15px] font-bold" style={{ color: "var(--action-primary-hover)" }}>0.00</span>
             </div>
-            <button type="button" className="flex h-[22px] w-[22px] items-center justify-center transition-opacity hover:opacity-80" aria-label="Refresh wallet" style={{ color: "var(--primary-dark)" }}>
+            <button type="button" className="flex h-[22px] w-[22px] items-center justify-center transition-opacity hover:opacity-80" aria-label="Refresh wallet" style={{ color: "var(--action-primary-hover)" }}>
               <IconRefresh />
             </button>
           </div>
-          <div className="flex items-center justify-between rounded-md bg-white px-4 py-2.5 shadow-sm">
+          <div className="flex items-center justify-between rounded-md bg-[var(--surface-base)] px-4 py-2.5 shadow-sm">
             <div className="flex flex-col leading-tight">
-              <span className="text-[12px] font-medium" style={{ color: "var(--gold)" }}>Membership Rebate</span>
-              <span className="mt-0.5 text-[15px] font-bold" style={{ color: "var(--primary-dark)" }}>0.00%</span>
+              <span className="text-[12px] font-medium" style={{ color: "var(--accent-soft)" }}>Membership Rebate</span>
+              <span className="mt-0.5 text-[15px] font-bold" style={{ color: "var(--action-primary-hover)" }}>0.00%</span>
             </div>
-            <span className="flex h-[20px] w-[20px] items-center justify-center" aria-hidden style={{ color: "var(--primary-dark)" }}>
+            <span className="flex h-[20px] w-[20px] items-center justify-center" aria-hidden style={{ color: "var(--action-primary-hover)" }}>
               <IconLock />
             </span>
           </div>
@@ -172,16 +172,16 @@ function NextspinProviderLayout() {
 
 
       <div
-        className="flex items-center gap-3 rounded-lg border bg-white px-[20px] py-[12px]"
+        className="flex items-center gap-3 rounded-lg border bg-[var(--surface-base)] px-[20px] py-[12px]"
         style={{ borderColor: "var(--panel-item-border)" }}
       >
-        <span className="flex h-5 w-5 items-center justify-center" style={{ color: "var(--primary-dark)" }}>
+        <span className="flex h-5 w-5 items-center justify-center" style={{ color: "var(--action-primary-hover)" }}>
           <IconSearch />
         </span>
         <input
           type="search"
-          className="w-full bg-transparent text-[14px] font-medium outline-none placeholder:text-[#b89b7b]"
-          style={{ color: "var(--text)" }}
+          className="w-full bg-transparent text-[14px] font-medium outline-none placeholder:text-[var(--text-secondary)]"
+          style={{ color: "var(--text-primary)" }}
           placeholder="Search games..."
           value={query}
           onChange={(e) => setQuery(e.target.value)}
@@ -228,7 +228,7 @@ export function ProviderDetailPage({ provider }: ProviderDetailPageProps) {
       </div>
 
       <section className="t3-game-list-box">
-        <div className="mb-3 px-1 text-sm font-bold uppercase tracking-wide" style={{ color: "var(--primary-dark)" }}>
+        <div className="mb-3 px-1 text-sm font-bold uppercase tracking-wide" style={{ color: "var(--action-primary-hover)" }}>
           {meta.title} Games
         </div>
         <div className="t3-game-list-grid">

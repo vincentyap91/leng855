@@ -298,10 +298,10 @@ export function Header({
                       style={{ background: "var(--rollover-modal-popup-panel)" }}
                     >
                       <div className="min-w-0 flex-1 self-center">
-                        <div className="text-sm font-bold" style={{ color: "var(--primary-dark)", lineHeight: 1.2 }}>
+                        <div className="text-sm font-bold" style={{ color: "var(--action-primary-hover)", lineHeight: 1.2 }}>
                           Deposit Now
                         </div>
-                        <div className="mt-0.5 text-[12px] font-medium" style={{ color: "var(--muted)" }}>
+                        <div className="mt-0.5 text-[12px] font-medium" style={{ color: "var(--text-secondary)" }}>
                           Deposit to View Your Rollover
                         </div>
                       </div>
@@ -312,7 +312,7 @@ export function Header({
                     <a
                       href="#/deposit"
                       className="mt-3 block rounded-lg px-4 py-2 text-center text-sm font-bold no-underline"
-                      style={{ background: "var(--cta-gradient)", color: "var(--on-primary)" }}
+                      style={{ background: "var(--cta-gradient)", color: "var(--text-on-emphasis)" }}
                       onClick={() => setRolloverOpen(false)}
                     >
                       Deposit Now
@@ -362,7 +362,7 @@ export function Header({
               aria-expanded={langOpen}
               onClick={() => setLangOpen((o) => !o)}
               style={{
-                background: "var(--header-lang-bg, #2b1b09)",
+                background: "var(--header-lang-bg, var(--text-inverse))",
                 paddingLeft: "8px",
                 paddingRight: "6px",
                 minWidth: "40px",
@@ -390,17 +390,17 @@ export function Header({
                 tabIndex={-1}
                 role="menu"
                 className="language-dropdown-menu dropdown-menu absolute top-full right-0 z-[100] mt-2 max-h-[min(260px,calc(100vh-140px))] min-w-[200px] overflow-auto rounded-xl border shadow-lg"
-                style={{ borderColor: "var(--border)", background: "var(--surface)" }}
+                style={{ borderColor: "var(--border-subtle)", background: "var(--surface-base)" }}
               >
                 <button type="button" tabIndex={0} role="menuitem" className="dropdown-item flex w-full items-center gap-2 px-4 py-2 text-left hover:brightness-[0.98]" onClick={() => setLangOpen(false)}>
-                  <img src={assets.cambodiaFlag} alt="" height={20} className="h-5 w-5 rounded-full object-cover" /> <span className="ml-1 text-[13px] text-[var(--text)]">Khmer</span>
+                  <img src={assets.cambodiaFlag} alt="" height={20} className="h-5 w-5 rounded-full object-cover" /> <span className="ml-1 text-[13px] text-[var(--text-primary)]">Khmer</span>
                 </button>
                 <button type="button" tabIndex={0} role="menuitem" className="dropdown-item flex w-full items-center gap-2 px-4 py-2 text-left hover:brightness-[0.98]" onClick={() => setLangOpen(false)}>
-                  <img src={assets.ukFlag} alt="" height={20} className="h-5 w-5 rounded-full object-cover" /> <span className="ml-1 text-[13px] text-[var(--text)]">English</span>
+                  <img src={assets.ukFlag} alt="" height={20} className="h-5 w-5 rounded-full object-cover" /> <span className="ml-1 text-[13px] text-[var(--text-primary)]">English</span>
                 </button>
                 <button type="button" tabIndex={0} role="menuitem" className="dropdown-item flex w-full items-center gap-2 px-4 py-2 text-left hover:brightness-[0.98]" onClick={() => setLangOpen(false)}>
                   <img src={assets.chinaFlag} alt="" height={20} className="h-5 w-5 rounded-full object-cover" />{" "}
-                  <span className="ml-1 text-[13px] text-[var(--text)]">简体中文</span>
+                  <span className="ml-1 text-[13px] text-[var(--text-primary)]">简体中文</span>
                 </button>
               </div>
             ) : null}

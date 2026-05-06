@@ -21,8 +21,8 @@ export function MobileAuthBar({ onLoginClick, onRegisterClick }: MobileAuthBarPr
         className="min-h-[48px] flex-1 rounded-lg border-2 text-sm font-extrabold transition hover:brightness-[0.98]"
         style={{
           borderColor: "var(--border-strong)",
-          background: "var(--bg)",
-          color: "var(--gold)",
+          background: "var(--surface-base)",
+          color: "var(--accent-soft)",
         }}
         onClick={onLoginClick}
       >
@@ -30,7 +30,7 @@ export function MobileAuthBar({ onLoginClick, onRegisterClick }: MobileAuthBarPr
       </button>
       <button
         type="button"
-        className="min-h-[48px] flex-1 rounded-lg border-0 text-sm font-extrabold text-[var(--on-primary)] transition hover:brightness-110"
+        className="min-h-[48px] flex-1 rounded-lg border-0 text-sm font-extrabold text-[var(--text-on-emphasis)] transition hover:brightness-110"
         style={{ background: "var(--cta-gradient)" }}
         onClick={onRegisterClick}
       >
@@ -42,7 +42,7 @@ export function MobileAuthBar({ onLoginClick, onRegisterClick }: MobileAuthBarPr
 
 function IconDepositPill() {
   return (
-    <span className="grid h-7 w-7 shrink-0 place-items-center rounded-full bg-white/25 text-[11px] font-black text-white" aria-hidden>
+    <span className="grid h-7 w-7 shrink-0 place-items-center rounded-full bg-[var(--surface-base)]/25 text-[11px] font-black text-[var(--text-on-emphasis)]" aria-hidden>
       $
     </span>
   );
@@ -50,7 +50,7 @@ function IconDepositPill() {
 
 function IconWithdrawWallet() {
   return (
-    <svg className="h-6 w-6 shrink-0 text-white/95" viewBox="0 0 24 24" fill="currentColor" aria-hidden>
+    <svg className="h-6 w-6 shrink-0 text-[var(--text-on-emphasis)]/95" viewBox="0 0 24 24" fill="currentColor" aria-hidden>
       <path d="M21 18v1c0 1.1-.9 2-2 2H5c-1.11 0-2-.9-2-2V5c0-1.1.89-2 2-2h14c1.1 0 2 .9 2 2v1h-9a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h9zm-9-2h10V8H12v8zm4-2.5c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5z" />
     </svg>
   );
@@ -58,7 +58,7 @@ function IconWithdrawWallet() {
 
 function IconRefresh() {
   return (
-    <svg className="h-5 w-5 shrink-0 text-white/95" viewBox="0 0 24 24" fill="currentColor" aria-hidden>
+    <svg className="h-5 w-5 shrink-0 text-[var(--text-on-emphasis)]/95" viewBox="0 0 24 24" fill="currentColor" aria-hidden>
       <path d="M17.65 6.35A7.958 7.958 0 0 0 12 4c-4.42 0-7.99 3.58-7.99 8s3.57 8 7.99 8c3.73 0 6.84-2.55 7.73-6h-2.08A5.99 5.99 0 0 1 12 18c-3.31 0-6-2.69-6-6s2.69-6 6-6c1.66 0 3.14.69 4.22 1.78L13 11h7V4l-2.35 2.35z" />
     </svg>
   );
@@ -66,7 +66,7 @@ function IconRefresh() {
 
 function IconMembershipBadge() {
   return (
-    <svg className="h-5 w-5 shrink-0 opacity-75" viewBox="0 0 24 24" fill="currentColor" aria-hidden style={{ color: "var(--gold)" }}>
+    <svg className="h-5 w-5 shrink-0 opacity-75" viewBox="0 0 24 24" fill="currentColor" aria-hidden style={{ color: "var(--accent-soft)" }}>
       <path d="M5 16L3 5l5.5 5L12 4l3.5 6L21 5l-2 11H5zm2.7 2h8.6l1.55 2H6.14L7.7 18z" />
     </svg>
   );
@@ -90,7 +90,7 @@ export function MobileProfileCard({
   rolloverCurrent = 50,
   rolloverTarget = 100,
 }: MobileProfileCardProps) {
-  const labelColor = "var(--primary-dark)";
+  const labelColor = "var(--action-primary-hover)";
   const rolloverPct =
     rolloverTarget > 0 ? Math.min(100, Math.max(0, Math.round((rolloverCurrent / rolloverTarget) * 100))) : 0;
 
@@ -110,7 +110,7 @@ export function MobileProfileCard({
 
       <div
         className="my-3 h-px w-full"
-        style={{ background: "color-mix(in srgb, var(--primary-dark) 22%, var(--border) 78%)" }}
+        style={{ background: "color-mix(in srgb, var(--action-primary-hover) 22%, var(--border-subtle) 78%)" }}
         aria-hidden
       />
 
@@ -131,7 +131,7 @@ export function MobileProfileCard({
         <div className="flex w-[128px] shrink-0 flex-col justify-center gap-2">
           <a
             href="#/deposit"
-            className="flex min-h-[40px] items-center gap-2 rounded-lg px-2.5 text-xs font-extrabold text-white no-underline"
+            className="flex min-h-[40px] items-center gap-2 rounded-lg px-2.5 text-xs font-extrabold text-[var(--text-on-emphasis)] no-underline"
             style={{ background: "var(--cta-gradient)" }}
           >
             <IconDepositPill />
@@ -139,16 +139,16 @@ export function MobileProfileCard({
           </a>
           <a
             href="#/deposit?tab=withdrawal"
-            className="flex min-h-[40px] items-center gap-1.5 rounded-lg px-2.5 text-xs font-extrabold text-white no-underline"
-            style={{ background: "var(--gold-gradient)" }}
+            className="flex min-h-[40px] items-center gap-1.5 rounded-lg px-2.5 text-xs font-extrabold text-[var(--text-on-emphasis)] no-underline"
+            style={{ background: "var(--secondary-gradient)" }}
           >
             <IconWithdrawWallet />
             Withdraw
           </a>
           <button
             type="button"
-            className="flex min-h-[40px] items-center gap-2 rounded-lg px-2.5 text-left text-xs font-extrabold text-white"
-            style={{ background: "var(--gold-gradient)" }}
+            className="flex min-h-[40px] items-center gap-2 rounded-lg px-2.5 text-left text-xs font-extrabold text-[var(--text-on-emphasis)]"
+            style={{ background: "var(--secondary-gradient)" }}
             onClick={() => onBalanceRefresh?.()}
           >
             <IconRefresh />
@@ -160,7 +160,7 @@ export function MobileProfileCard({
       <div className="home-mobile-profile-card__rollover">
         <p className="m-0 text-[11px] font-bold leading-snug" style={{ color: labelColor }}>
           Your Rollover Progress is{" "}
-          <span className="font-extrabold" style={{ color: "var(--gold)" }}>
+          <span className="font-extrabold" style={{ color: "var(--accent-soft)" }}>
             {rolloverCurrent} / {rolloverTarget}
           </span>
           .
@@ -171,7 +171,7 @@ export function MobileProfileCard({
           </div>
           <span
             className="shrink-0 text-xs font-extrabold tabular-nums leading-none"
-            style={{ color: "var(--primary-dark)" }}
+            style={{ color: "var(--action-primary-hover)" }}
           >
             {rolloverPct}%
           </span>
@@ -181,9 +181,9 @@ export function MobileProfileCard({
   );
 }
 
-const referralHubGoldBtn =
+const referralHubSecondaryBtn =
   "rounded-lg border-0 py-3 text-sm font-extrabold transition hover:brightness-105 min-h-[44px]";
-const referralHubGoldBtnStyle = {
+const referralHubSecondaryBtnStyle = {
   background: "var(--nav-header-register-bg)",
   color: "var(--nav-header-register-color)",
 } as const;
@@ -209,28 +209,28 @@ export function MobilePassiveIncomeBanner() {
         decoding="async"
         referrerPolicy="no-referrer"
       />
-      <div className="px-3 pb-4 pt-3" style={{ background: "var(--bg)" }}>
+      <div className="px-3 pb-4 pt-3" style={{ background: "var(--surface-base)" }}>
         <div className="grid grid-cols-2 gap-2">
           <button
             type="button"
-            className={referralHubGoldBtn}
-            style={referralHubGoldBtnStyle}
+            className={referralHubSecondaryBtn}
+            style={referralHubSecondaryBtnStyle}
             onClick={goReferralPage}
           >
             Share
           </button>
           <button
             type="button"
-            className={referralHubGoldBtn}
-            style={referralHubGoldBtnStyle}
+            className={referralHubSecondaryBtn}
+            style={referralHubSecondaryBtnStyle}
             onClick={goReferralPage}
           >
             Downlines
           </button>
           <button
             type="button"
-            className={`${referralHubGoldBtn} col-span-2`}
-            style={referralHubGoldBtnStyle}
+            className={`${referralHubSecondaryBtn} col-span-2`}
+            style={referralHubSecondaryBtnStyle}
             onClick={goReferralPage}
           >
             More Info
@@ -268,25 +268,25 @@ export function DesktopReferralHubBanner() {
           referrerPolicy="no-referrer"
         />
         <div className="relative z-[1] flex min-h-[240px] items-center p-5 md:min-h-[300px] md:p-10">
-          <div className="home-desktop-referral-hub__card w-full max-w-[380px] rounded-[14px] bg-white p-6 md:p-8 md:ml-[5%] shadow-lg border-0">
-            <h3 className="m-0 text-center text-[22px] font-extrabold tracking-tight" style={{ color: "var(--primary)" }}>
+          <div className="home-desktop-referral-hub__card w-full max-w-[380px] rounded-[14px] bg-[var(--surface-base)] p-6 md:p-8 md:ml-[5%] shadow-lg border-0">
+            <h3 className="m-0 text-center text-[22px] font-extrabold tracking-tight" style={{ color: "var(--accent-strong)" }}>
               Your Unique Referral Hub
             </h3>
-            <p className="m-0 mt-1.5 text-center text-[15px] font-bold tracking-tight" style={{ color: "#000" }}>
+            <p className="m-0 mt-1.5 text-center text-[15px] font-bold tracking-tight" style={{ color: "var(--surface-inverse)" }}>
               Share & Grow Your Network
             </p>
-            <p className="m-0 mt-5 text-[13px] font-medium" style={{ color: "#000" }}>
+            <p className="m-0 mt-5 text-[13px] font-medium" style={{ color: "var(--surface-inverse)" }}>
               My Referral Link
             </p>
             <div
               className="relative mt-2 flex min-h-[48px] items-center rounded-xl border-0 px-4 pr-12"
               style={{
-                background: "#f4f4f4",
+                background: "var(--surface-muted)",
               }}
             >
               <span
                 className="min-w-0 flex-1 truncate text-left text-[12px] font-semibold md:text-[13px]"
-                style={{ color: "var(--text)" }}
+                style={{ color: "var(--text-primary)" }}
               >
                 {DEFAULT_REFERRAL_LINK}
               </span>
@@ -294,7 +294,7 @@ export function DesktopReferralHubBanner() {
                 type="button"
                 aria-label="Copy referral link"
                 className="absolute right-1.5 grid h-10 w-10 place-items-center rounded-full border-0 bg-transparent transition hover:opacity-90"
-                style={{ color: "var(--gold)" }}
+                style={{ color: "var(--accent-soft)" }}
                 onClick={copyLink}
               >
                 <img src={copyIconSrc} alt="" className="h-[18px] w-[18px] object-contain opacity-95" aria-hidden />
@@ -304,7 +304,7 @@ export function DesktopReferralHubBanner() {
               <button
                 type="button"
                 className="rounded-xl border-0 py-3 text-[14px] font-bold transition hover:opacity-90 min-h-[48px]"
-                style={{ background: "#DCB54A", color: "#2A1A00" }}
+                style={{ background: "var(--accent-muted)", color: "var(--text-inverse)" }}
                 onClick={goReferralPage}
               >
                 Share
@@ -312,7 +312,7 @@ export function DesktopReferralHubBanner() {
               <button
                 type="button"
                 className="rounded-xl border-0 py-3 text-[14px] font-bold transition hover:opacity-90 min-h-[48px]"
-                style={{ background: "#DCB54A", color: "#2A1A00" }}
+                style={{ background: "var(--accent-muted)", color: "var(--text-inverse)" }}
                 onClick={goReferralPage}
               >
                 Downlines
@@ -320,7 +320,7 @@ export function DesktopReferralHubBanner() {
               <button
                 type="button"
                 className="rounded-xl border-0 py-3 text-[14px] font-bold transition hover:opacity-90 min-h-[48px] col-span-2"
-                style={{ background: "#DCB54A", color: "#2A1A00" }}
+                style={{ background: "var(--accent-muted)", color: "var(--text-inverse)" }}
                 onClick={goReferralPage}
               >
                 More Info

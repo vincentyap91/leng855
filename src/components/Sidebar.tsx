@@ -90,8 +90,8 @@ function SideLink({ label, icon, badge, active, onSelect }: SideLinkProps) {
           className={[
             "min-w-[18px] h-[18px] px-[5px] rounded-full text-[11px] font-bold flex items-center justify-center",
             active
-              ? "bg-white text-[var(--primary)]"
-              : "bg-[var(--primary)] text-white",
+              ? "bg-[var(--surface-base)] text-[var(--accent-strong)]"
+              : "bg-[var(--accent-strong)] text-[var(--text-on-emphasis)]",
           ].join(" ")}
         >
           {badge}
@@ -144,7 +144,7 @@ function LiveChatLink() {
       <h6 className="m-0 text-[13px] font-semibold leading-none flex-1 text-left text-[var(--nav-side-color)] group-hover:text-[var(--nav-side-text-hover)]">
         Live Chat
       </h6>
-      <span className="min-w-[18px] h-[18px] px-[5px] rounded-full bg-[var(--primary)] text-white text-[11px] font-bold flex items-center justify-center">
+      <span className="min-w-[18px] h-[18px] px-[5px] rounded-full bg-[var(--accent-strong)] text-[var(--text-on-emphasis)] text-[11px] font-bold flex items-center justify-center">
         1
       </span>
     </button>
@@ -153,11 +153,11 @@ function LiveChatLink() {
 
 function SocialSidebarRow() {
   const linkClass =
-    "block w-[34px] h-[34px] rounded-[6px] overflow-hidden ring-1 ring-white/10 shadow-sm hover:brightness-110 transition-[filter] duration-150";
+    "block w-[34px] h-[34px] rounded-[6px] overflow-hidden ring-1 ring-[color:color-mix(in_srgb,var(--text-on-emphasis)_10%,transparent)] shadow-sm hover:brightness-110 transition-[filter] duration-150";
 
   return (
     <div className="flex items-center justify-center gap-2.5 pt-3 pb-1">
-      <a href="#facebook" className={linkClass} aria-label="Facebook">
+      <a href="var(--accent-strong)ook" className={linkClass} aria-label="Facebook">
         <img
           src={assets.socialFb}
           alt=""
@@ -208,8 +208,8 @@ function PromoStrip({
       type="button"
       className={[
         "w-full h-[48px] rounded-[6px] flex items-center px-[12px] gap-[11px]",
-        "text-white font-bold text-[13px] leading-[1.15] text-left",
-        "ring-1 ring-white/10 shadow-[0_3px_6px_rgba(0,0,0,0.35)]",
+        "text-[var(--accent-soft)] font-bold text-[13px] leading-[1.15] text-left",
+        "ring-1 ring-[color:color-mix(in_srgb,var(--text-on-emphasis)_10%,transparent)] shadow-[0_3px_6px_color-mix(in srgb, var(--surface-inverse) 35%, transparent)]",
         "transition hover:brightness-110 active:brightness-95",
         bgClass,
       ].join(" ")}
@@ -218,7 +218,7 @@ function PromoStrip({
       <img
         src={icon}
         alt=""
-        className="w-[32px] h-[32px] object-contain shrink-0 drop-shadow-[0_2px_3px_rgba(0,0,0,0.45)]"
+        className="w-[32px] h-[32px] object-contain shrink-0 drop-shadow-[0_2px_3px_color-mix(in srgb, var(--surface-inverse) 45%, transparent)]"
       />
       <span>{children}</span>
     </button>

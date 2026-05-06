@@ -20,4 +20,3 @@ export function getCenteredModalDialogStyle(opts: {
     justifyContent: "center",
   } satisfies CSSProperties;
 }
-

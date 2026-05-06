@@ -38,13 +38,13 @@ function CountdownPanel({ endDate }: { endDate: string }) {
     <div
       className="flex shrink-0 flex-col gap-3 rounded-xl px-4 py-4 md:min-w-[200px]"
       style={{
-        background: "var(--surface-3)",
+        background: "var(--surface-muted)",
         boxShadow: "var(--card-shadow)",
       }}
     >
       <p
         className="m-0 text-center text-[11px] font-bold uppercase tracking-wider"
-        style={{ color: "var(--primary-dark)" }}
+        style={{ color: "var(--action-primary-hover)" }}
       >
         Remaining Time
       </p>
@@ -54,14 +54,14 @@ function CountdownPanel({ endDate }: { endDate: string }) {
             <div
               className="flex h-10 w-full max-w-[52px] items-center justify-center rounded-lg text-[15px] font-extrabold tabular-nums sm:h-11 sm:text-[16px]"
               style={{
-                background: "var(--surface)",
-                color: "var(--primary)",
+                background: "var(--surface-base)",
+                color: "var(--accent-strong)",
                 boxShadow: "0 1px 3px var(--shadow-soft)",
               }}
             >
               {value}
             </div>
-            <span className="text-[10px] font-semibold" style={{ color: "var(--muted)" }}>
+            <span className="text-[10px] font-semibold" style={{ color: "var(--text-secondary)" }}>
               {label}
             </span>
           </div>
@@ -82,11 +82,11 @@ function SectionBlock({
     <section className="space-y-2">
       <h3
         className="m-0 text-[15px] font-extrabold leading-snug"
-        style={{ color: "var(--primary-dark)" }}
+        style={{ color: "var(--action-primary-hover)" }}
       >
         {title}
       </h3>
-      <div className="text-[13px] leading-relaxed" style={{ color: "var(--text)" }}>
+      <div className="text-[13px] leading-relaxed" style={{ color: "var(--text-primary)" }}>
         {children}
       </div>
     </section>
@@ -115,13 +115,13 @@ export function PromotionDetailPage({ slug }: PromotionDetailPageProps) {
   if (!detail) {
     return (
       <div className="t3-promotion-detail rounded-2xl px-4 py-10 text-center md:px-8">
-        <p className="m-0 text-[15px] font-semibold" style={{ color: "var(--primary-dark)" }}>
+        <p className="m-0 text-[15px] font-semibold" style={{ color: "var(--action-primary-hover)" }}>
           Promotion not found.
         </p>
         <a
           href="#/promotion"
           className="mt-4 inline-block text-[14px] font-semibold underline underline-offset-4"
-          style={{ color: "var(--primary)" }}
+          style={{ color: "var(--accent-strong)" }}
         >
           Back to promotions
         </a>
@@ -134,13 +134,13 @@ export function PromotionDetailPage({ slug }: PromotionDetailPageProps) {
   return (
     <div className="t3-promotion-detail space-y-6">
       <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-        <h1 className="m-0 text-[18px] font-extrabold tracking-tight" style={{ color: "var(--primary-dark)" }}>
+        <h1 className="m-0 text-[18px] font-extrabold tracking-tight" style={{ color: "var(--action-primary-hover)" }}>
           Promotion Details
         </h1>
         <a
           href="#/promotion"
           className="text-[13px] font-semibold no-underline transition-opacity hover:opacity-80"
-          style={{ color: "var(--gold)" }}
+          style={{ color: "var(--accent-soft)" }}
         >
           ← All promotions
         </a>
@@ -149,7 +149,7 @@ export function PromotionDetailPage({ slug }: PromotionDetailPageProps) {
       <div
         className="overflow-hidden rounded-2xl"
         style={{
-          background: "var(--surface)",
+          background: "var(--surface-base)",
           boxShadow: "var(--card-shadow)",
         }}
       >
@@ -166,15 +166,15 @@ export function PromotionDetailPage({ slug }: PromotionDetailPageProps) {
           </div>
         </div>
 
-        <div className="space-y-6 border-t px-4 pb-8 pt-6 md:px-8" style={{ borderColor: "var(--border)" }}>
+        <div className="space-y-6 border-t px-4 pb-8 pt-6 md:px-8" style={{ borderColor: "var(--border-subtle)" }}>
           <div>
             <h2
               className="m-0 text-[22px] font-extrabold leading-tight tracking-tight"
-              style={{ color: "var(--primary-dark)" }}
+              style={{ color: "var(--action-primary-hover)" }}
             >
               {detail.title}
             </h2>
-            <p className="mt-2 m-0 text-[14px] font-semibold leading-snug" style={{ color: "var(--primary)" }}>
+            <p className="mt-2 m-0 text-[14px] font-semibold leading-snug" style={{ color: "var(--accent-strong)" }}>
               {detail.tagline}
             </p>
           </div>
@@ -201,7 +201,7 @@ export function PromotionDetailPage({ slug }: PromotionDetailPageProps) {
 
           <button
             type="button"
-            className="w-full rounded-xl py-3.5 text-[15px] font-extrabold tracking-wide text-[var(--on-primary)] transition-[filter] hover:brightness-105 active:brightness-95"
+            className="w-full rounded-xl py-3.5 text-[15px] font-extrabold tracking-wide text-[var(--text-on-emphasis)] transition-[filter] hover:brightness-105 active:brightness-95"
             style={{
               background: "var(--cta-gradient)",
               boxShadow: "var(--card-shadow)",

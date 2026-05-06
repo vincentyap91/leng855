@@ -2,15 +2,15 @@ import { useEffect, useState } from "react";
 import { assets } from "../data/assets";
 import type { AppView } from "./Sidebar";
 
-/** Full-screen mobile menu — screenshot: white rows, icon + label both #a01a1a (no gradient icon tiles). */
+/** Full-screen mobile menu — screenshot: white rows, icon + label both var(--accent-strong) (no gradient icon tiles). */
 const MENU = {
-  panelBg: "#e0e4e8",
-  langBg: "#2b1b09",
-  langAccent: "#c5a059",
-  label: "#a01a1a",
-  cardBorder: "#e2e6ea",
-  footerMuted: "#8b6914",
-  /** Renders colored PNG/SVG nav glyphs as ~#a01a1a */
+  panelBg: "var(--surface-raised)",
+  langBg: "var(--text-inverse)",
+  langAccent: "var(--accent-strong)",
+  label: "var(--accent-strong)",
+  cardBorder: "var(--border-default)",
+  footerMuted: "var(--accent-strong)",
+  /** Renders colored PNG/SVG nav glyphs as ~var(--accent-strong) */
   iconFilter:
     "brightness(0) saturate(100%) invert(14%) sepia(72%) saturate(4156%) hue-rotate(335deg) brightness(96%) contrast(101%)",
 } as const;
@@ -87,11 +87,11 @@ export function MobileNavDrawer({ isOpen, onClose, view, onNavigate }: MobileNav
   };
 
   const cardBase =
-    "mobile-nav-drawer__card relative flex w-full items-center gap-2.5 rounded-lg bg-white px-1 py-1 text-left outline-none transition  active:brightness-[0.98]";
+    "mobile-nav-drawer__card relative flex w-full items-center gap-2.5 rounded-lg bg-[var(--surface-base)] px-1 py-1 text-left outline-none transition  active:brightness-[0.98]";
 
-  const cardStyle = { borderColor: MENU.cardBorder, boxShadow: "0 1px 2px rgba(0,0,0,0.07)" } as const;
+  const cardStyle = { borderColor: MENU.cardBorder, boxShadow: "0 1px 2px color-mix(in srgb, var(--surface-inverse) 7%, transparent)" } as const;
 
-  const activeRing = "ring-2 ring-[#a01a1a]/28 ring-offset-2 ring-offset-[#e0e4e8]";
+  const activeRing = "ring-2 ring-[color:color-mix(in_srgb,var(--accent-strong)_28%,transparent)] ring-offset-2 ring-offset-[var(--surface-raised)]";
 
   return (
     <div
@@ -100,14 +100,14 @@ export function MobileNavDrawer({ isOpen, onClose, view, onNavigate }: MobileNav
       aria-modal="true"
       aria-label="Main menu"
     >
-      <button type="button" className="absolute inset-0 bg-black/40" aria-label="Close menu" onClick={onClose} />
+      <button type="button" className="absolute inset-0 bg-[color:color-mix(in_srgb,var(--surface-inverse)_40%,transparent)]" aria-label="Close menu" onClick={onClose} />
 
       <div
         className="relative z-[1] flex min-h-0 flex-1 flex-col"
         style={{
           background: MENU.panelBg,
           paddingBottom: "env(safe-area-inset-bottom, 0px)",
-          boxShadow: "inset 0 1px 0 rgba(255,255,255,0.35)",
+          boxShadow: "inset 0 1px 0 color-mix(in srgb, var(--text-on-emphasis) 35%, transparent)",
         }}
       >
         <div className="flex shrink-0 items-start justify-between gap-3 px-4 pb-3 pt-4">
@@ -118,28 +118,28 @@ export function MobileNavDrawer({ isOpen, onClose, view, onNavigate }: MobileNav
               style={{
                 background: MENU.langBg,
                 color: MENU.langAccent,
-                boxShadow: "0 2px 10px rgba(0,0,0,0.22)",
+                boxShadow: "0 2px 10px color-mix(in srgb, var(--surface-inverse) 22%, transparent)",
               }}
               aria-expanded={langOpen}
               aria-haspopup="listbox"
               onClick={() => setLangOpen((v) => !v)}
             >
-              <img src={assets.ukFlag} alt="" className="h-6 w-6 shrink-0 rounded-lg object-cover ring-1 ring-white/20" />
+              <img src={assets.ukFlag} alt="" className="h-6 w-6 shrink-0 rounded-lg object-cover ring-1 ring-[color:color-mix(in_srgb,var(--text-on-emphasis)_20%,transparent)]" />
               <span className="min-w-0 flex-1 truncate font-medium text-sm">English</span>
-              <span className="-rotate-90"><svg focusable="false" color="#ffffff" aria-hidden="true" viewBox="0 0 24 24" data-testid="ExpandMoreIcon" fill="white" height="20px" className="language-arrow-down"><path d="M16.59 8.59 12 13.17 7.41 8.59 6 10l6 6 6-6z"></path></svg>
+              <span className="-rotate-90"><svg focusable="false" color="var(--surface-base)" aria-hidden="true" viewBox="0 0 24 24" data-testid="ExpandMoreIcon" fill="var(--text-on-emphasis)" height="20px" className="language-arrow-down"><path d="M16.59 8.59 12 13.17 7.41 8.59 6 10l6 6 6-6z"></path></svg>
               </span>
             </button>
             {langOpen ? (
               <div
                 className="absolute left-0 top-[calc(100%+8px)] z-10 min-w-[220px] overflow-hidden rounded-[10px] border py-1 shadow-lg"
-                style={{ borderColor: MENU.cardBorder, background: "#ffffff" }}
+                style={{ borderColor: MENU.cardBorder, background: "var(--surface-base)" }}
                 role="listbox"
               >
                 <button
                   type="button"
                   role="option"
-                  className="flex w-full items-center gap-2 px-4 py-2.5 text-left text-[13px] font-bold hover:bg-black/[0.04]"
-                  style={{ color: "#1a1a1a" }}
+                  className="flex w-full items-center gap-2 px-4 py-2.5 text-left text-[13px] font-bold hover:bg-[color:color-mix(in_srgb,var(--surface-inverse)_4%,transparent)]"
+                  style={{ color: "var(--text-primary)" }}
                   onClick={() => setLangOpen(false)}
                 >
                   <img src={assets.cambodiaFlag} alt="" className="h-5 w-5 rounded-full object-cover" /> Khmer
@@ -147,8 +147,8 @@ export function MobileNavDrawer({ isOpen, onClose, view, onNavigate }: MobileNav
                 <button
                   type="button"
                   role="option"
-                  className="flex w-full items-center gap-2 px-4 py-2.5 text-left text-[13px] font-bold hover:bg-black/[0.04]"
-                  style={{ color: "#1a1a1a" }}
+                  className="flex w-full items-center gap-2 px-4 py-2.5 text-left text-[13px] font-bold hover:bg-[color:color-mix(in_srgb,var(--surface-inverse)_4%,transparent)]"
+                  style={{ color: "var(--text-primary)" }}
                   onClick={() => setLangOpen(false)}
                 >
                   <img src={assets.ukFlag} alt="" className="h-5 w-5 rounded-full object-cover" /> English
@@ -156,8 +156,8 @@ export function MobileNavDrawer({ isOpen, onClose, view, onNavigate }: MobileNav
                 <button
                   type="button"
                   role="option"
-                  className="flex w-full items-center gap-2 px-4 py-2.5 text-left text-[13px] font-bold hover:bg-black/[0.04]"
-                  style={{ color: "#1a1a1a" }}
+                  className="flex w-full items-center gap-2 px-4 py-2.5 text-left text-[13px] font-bold hover:bg-[color:color-mix(in_srgb,var(--surface-inverse)_4%,transparent)]"
+                  style={{ color: "var(--text-primary)" }}
                   onClick={() => setLangOpen(false)}
                 >
                   <img src={assets.chinaFlag} alt="" className="h-5 w-5 rounded-full object-cover" /> 简体中文
@@ -195,7 +195,7 @@ export function MobileNavDrawer({ isOpen, onClose, view, onNavigate }: MobileNav
                   </span>
                   {item.badge !== undefined ? (
                     <span
-                      className="min-w-[22px] rounded-full px-1.5 py-0.5 text-center text-[11px] font-bold text-white"
+                      className="min-w-[22px] rounded-full px-1.5 py-0.5 text-center text-[11px] font-bold text-[var(--text-on-emphasis)]"
                       style={{ background: MENU.label }}
                     >
                       {item.badge}
@@ -228,7 +228,7 @@ export function MobileNavDrawer({ isOpen, onClose, view, onNavigate }: MobileNav
                 Live Chat
               </span>
               <span
-                className="min-w-[22px] rounded-full px-1.5 py-0.5 text-center text-[11px] font-bold text-white"
+                className="min-w-[22px] rounded-full px-1.5 py-0.5 text-center text-[11px] font-bold text-[var(--text-on-emphasis)]"
                 style={{ background: MENU.label }}
               >
                 1

@@ -17,14 +17,14 @@ const withdrawals: Row[] = [
 export function LiveTransactions() {
   return (
     <section className="mobile-home-latest-transactions-box">
-      <h2 className="italic font-bold text-[17.5px] text-brand-red tracking-wide">
+      <h2 className="italic font-bold text-[17.5px] text-brand-emphasis tracking-wide">
         LIVE TRANSACTIONS
       </h2>
       <div
         className="body mt-2 rounded-lg overflow-hidden"
         style={{
-          backgroundColor: "var(--surface)",
-          border: "1px solid var(--gold)",
+          backgroundColor: "var(--surface-base)",
+          border: "1px solid var(--accent-soft)",
           boxShadow: "var(--card-shadow)",
         }}
       >
@@ -45,8 +45,8 @@ export function LiveTransactions() {
                     <span
                       className="mr-2 inline-block h-5 w-5 rounded-full"
                       style={{
-                        backgroundColor: "var(--surface-3)",
-                        border: "1px solid var(--border)",
+                        backgroundColor: "var(--surface-muted)",
+                        border: "1px solid var(--border-subtle)",
                       }}
                     />
                     <span>{d.account}</span>
@@ -58,8 +58,8 @@ export function LiveTransactions() {
                     <span
                       className="mr-2 inline-block h-5 w-5 rounded-full"
                       style={{
-                        backgroundColor: "var(--surface-3)",
-                        border: "1px solid var(--border)",
+                        backgroundColor: "var(--surface-muted)",
+                        border: "1px solid var(--border-subtle)",
                       }}
                     />
                     <span>{withdrawals[i]?.account}</span>

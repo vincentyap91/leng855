@@ -48,8 +48,8 @@ export function RecentBigWins() {
     <section
       className="rounded-[18px] border p-3.5 sm:p-4"
       style={{
-        backgroundColor: "var(--bg)",
-        borderColor: "var(--primary)",
+        backgroundColor: "var(--surface-muted)",
+        borderColor: "var(--accent-strong)",
         boxShadow: "var(--card-shadow)",
       }}
     >
@@ -60,8 +60,8 @@ export function RecentBigWins() {
           className="h-7 w-7 shrink-0 object-contain [filter:sepia(0.45)_saturate(1.5)_brightness(0.92)_hue-rotate(-5deg)]"
         />
         <span className="text-[15px] font-bold uppercase leading-none tracking-wide">
-          <span className="text-[var(--text)]">RECENT</span>{" "}
-          <span className="italic text-[var(--primary)]">BIG WINS</span>
+          <span className="text-[var(--text-primary)]">RECENT</span>{" "}
+          <span className="italic text-[var(--accent-strong)]">BIG WINS</span>
         </span>
       </h2>
 
@@ -71,9 +71,9 @@ export function RecentBigWins() {
             key={i}
             className="flex min-h-0 items-center gap-3 overflow-hidden rounded-[10px] p-2.5 sm:p-3"
             style={{
-              backgroundColor: "var(--surface)",
-              border: "1px solid color-mix(in srgb, var(--primary) 20%, transparent)",
-              boxShadow: "0 1px 3px rgba(0,0,0,0.2)",
+              backgroundColor: "var(--surface-base)",
+              border: "1px solid color-mix(in srgb, var(--accent-strong) 20%, transparent)",
+              boxShadow: "0 1px 3px color-mix(in srgb, var(--surface-inverse) 20%, transparent)",
             }}
           >
             <img
@@ -82,13 +82,13 @@ export function RecentBigWins() {
               className="h-[64px] w-[64px] shrink-0 rounded-lg object-cover sm:h-[68px] sm:w-[68px]"
             />
             <div className="min-w-0 flex-1 text-[13px] leading-snug">
-              <p className="text-[var(--text)]">
+              <p className="text-[var(--text-primary)]">
                 Provider: <span className="font-bold">{w.provider}</span>
               </p>
-              <p className="mt-0.5 text-[var(--muted)]">
-                {w.user} in <span className="font-bold text-[var(--gold)]">{w.game}</span> won
+              <p className="mt-0.5 text-[var(--text-secondary)]">
+                {w.user} in <span className="font-bold text-[var(--accent-soft)]">{w.game}</span> won
               </p>
-              <p className="mt-1 text-base font-extrabold tabular-nums text-[var(--primary)] sm:text-[17px]">
+              <p className="mt-1 text-base font-extrabold tabular-nums text-[var(--accent-strong)] sm:text-[17px]">
                 {formatWinAmount(w.amount)}
               </p>
             </div>

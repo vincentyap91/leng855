@@ -196,7 +196,7 @@ export function AuthModal({
                               <circle cx="12" cy="12" r="10" fill="currentColor" />
                               <path
                                 d="M12 7v5M12 16h.01"
-                                stroke="#ffffff"
+                                stroke="var(--surface-base)"
                                 strokeWidth="2"
                                 strokeLinecap="round"
                                 strokeLinejoin="round"
@@ -222,7 +222,7 @@ export function AuthModal({
                               placeholder={usernamePlaceholder}
                               autoComplete="off"
                               id="loginUsername"
-                              style={!isLogin && registerFieldErrors.username ? { borderColor: "var(--primary)" } : undefined}
+                              style={!isLogin && registerFieldErrors.username ? { borderColor: "var(--accent-strong)" } : undefined}
                             />
                           </div>
                           <small className="text-muted">
@@ -262,7 +262,7 @@ export function AuthModal({
                               placeholder={passwordPlaceholder}
                               id="loginPassword"
                               autoComplete={isLogin ? "current-password" : "new-password"}
-                              style={!isLogin && registerFieldErrors.password ? { borderColor: "var(--primary)" } : undefined}
+                              style={!isLogin && registerFieldErrors.password ? { borderColor: "var(--accent-strong)" } : undefined}
                             />
                           </div>
                           <div className="vicon-wrapper">
@@ -308,7 +308,7 @@ export function AuthModal({
                         </div>
                       )}
                       {!isLogin && (registerFieldErrors.username || registerFieldErrors.password || registerError) ? (
-                        <p className="m-0 mt-2 text-[13px] font-semibold" style={{ color: "var(--primary)" }}>
+                        <p className="m-0 mt-2 text-[13px] font-semibold" style={{ color: "var(--accent-strong)" }}>
                           {registerFieldErrors.username ?? registerFieldErrors.password ?? registerError}
                         </p>
                       ) : null}
@@ -319,8 +319,8 @@ export function AuthModal({
                             type="submit"
                             disabled={!isLogin && isRegistering}
                             style={isLogin ? {
-                              background: "#A91E22",
-                              color: "white",
+                              background: "var(--accent-strong)",
+                              color: "var(--text-on-emphasis)",
                               border: "none",
                               borderRadius: "10px",
                               minHeight: "44px",
@@ -328,7 +328,7 @@ export function AuthModal({
                               fontSize: "16px",
                               fontWeight: 700,
                               cursor: "pointer",
-                              boxShadow: "0 2px 4px rgba(0,0,0,0.1)",
+                              boxShadow: "0 2px 4px color-mix(in srgb, var(--surface-inverse) 10%, transparent)",
                               transition: "opacity 0.2s"
                             } : { background: "var(--cta-gradient)" }}
                           >
@@ -336,7 +336,7 @@ export function AuthModal({
                               <span className="inline-flex items-center gap-2">
                                 <span
                                   aria-hidden
-                                  className="inline-block h-3.5 w-3.5 animate-spin rounded-full border-2 border-white border-t-transparent"
+                                  className="inline-block h-3.5 w-3.5 animate-spin rounded-full border-2 border-[var(--text-on-emphasis)] border-t-transparent"
                                 />
                                 Registering...
                               </span>
@@ -355,9 +355,9 @@ export function AuthModal({
                                 }
                               }}
                               style={{
-                                background: "#f5f5f5",
-                                border: "1px solid #e0e0e0",
-                                color: "#111",
+                                background: "var(--surface-muted)",
+                                border: "1px solid var(--border-default)",
+                                color: "var(--text-primary)",
                                 borderRadius: "10px",
                                 minHeight: "44px",
                                 width: "100%",
@@ -374,12 +374,12 @@ export function AuthModal({
                       </div>
                       <div className="t3-lr-modal-footer mt-3">
                         <div className="t3-lr-button-box">
-                          <span className={!isLogin ? "text-[14px]" : undefined} style={isLogin ? { color: "#A91E22", fontWeight: 500 } : undefined}>{promptPrefix}</span>{" "}
+                          <span className={!isLogin ? "text-[14px]" : undefined} style={isLogin ? { color: "var(--accent-strong)", fontWeight: 500 } : undefined}>{promptPrefix}</span>{" "}
                           <button
                             className="header-login-btn"
                             type="button"
                             onClick={() => onModeChange(isLogin ? "register" : "login")}
-                            style={isLogin ? { color: "#D4AF37", fontWeight: 700, textDecoration: "underline" } : undefined}
+                            style={isLogin ? { color: "var(--accent-soft)", fontWeight: 700, textDecoration: "underline" } : undefined}
                           >
                             {promptAction}
                           </button>

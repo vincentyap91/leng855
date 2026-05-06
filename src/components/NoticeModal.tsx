@@ -47,12 +47,12 @@ export function NoticeModal({ isOpen, onClose, onSubmit }: NoticeModalProps) {
               display: "flex",
               alignItems: "center",
               justifyContent: "space-between",
-              borderBottom: "1px solid var(--border)",
+              borderBottom: "1px solid var(--border-subtle)",
             }}
           >
             <div
               className="modal-title"
-              style={{ fontWeight: 800, color: "var(--primary)", fontSize: 14 }}
+              style={{ fontWeight: 800, color: "var(--accent-strong)", fontSize: 14 }}
             >
               Notice
             </div>
@@ -62,7 +62,7 @@ export function NoticeModal({ isOpen, onClose, onSubmit }: NoticeModalProps) {
           </div>
 
           {/* Body */}
-          <div className="modal-body" style={{ background: "var(--bg)", padding: "20px 24px" }}>
+          <div className="modal-body" style={{ background: "var(--surface-base)", padding: "20px 24px" }}>
             {/* Warning icon */}
             <div style={{ textAlign: "center", marginBottom: 16 }}>
               <div
@@ -73,16 +73,16 @@ export function NoticeModal({ isOpen, onClose, onSubmit }: NoticeModalProps) {
                   width: 56,
                   height: 56,
                   borderRadius: "50%",
-                  background: "#f59e0b",
+                  background: "var(--feedback-warning)",
                   marginBottom: 12,
                 }}
               >
-                <span style={{ color: "#fff", fontSize: 28, fontWeight: 900, lineHeight: 1 }}>!</span>
+                <span style={{ color: "var(--text-on-emphasis)", fontSize: 28, fontWeight: 900, lineHeight: 1 }}>!</span>
               </div>
-              <div style={{ color: "var(--primary-dark)", fontWeight: 800, fontSize: 15, marginBottom: 4 }}>
+              <div style={{ color: "var(--action-primary-hover)", fontWeight: 800, fontSize: 15, marginBottom: 4 }}>
                 You're almost there!
               </div>
-              <div style={{ color: "var(--muted)", fontSize: 13, fontWeight: 500 }}>
+              <div style={{ color: "var(--text-secondary)", fontSize: 13, fontWeight: 500 }}>
                 Please complete the information below before moving to the next step!
               </div>
             </div>
@@ -91,13 +91,13 @@ export function NoticeModal({ isOpen, onClose, onSubmit }: NoticeModalProps) {
             <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
               {/* Full Name */}
               <div>
-                <div style={{ color: "var(--primary)", fontSize: 12, fontWeight: 700, marginBottom: 6 }}>
+                <div style={{ color: "var(--accent-strong)", fontSize: 12, fontWeight: 700, marginBottom: 6 }}>
                   Full Name
                 </div>
                 <input
                   type="text"
                   className="t3-custom-input-text"
-                  style={{ height: 40, fontSize: 13, border: "1.5px solid var(--border)" }}
+                  style={{ height: 40, fontSize: 13, border: "1.5px solid var(--border-subtle)" }}
                   value={fullName}
                   onChange={(e) => setFullName(e.target.value)}
                   placeholder="Enter your full name"
@@ -112,25 +112,25 @@ export function NoticeModal({ isOpen, onClose, onSubmit }: NoticeModalProps) {
                   alignItems: "flex-start",
                   padding: "10px 12px",
                   borderRadius: 6,
-                  border: "1.5px solid var(--primary)",
-                  background: "var(--surface)",
+                  border: "1.5px solid var(--accent-strong)",
+                  background: "var(--surface-base)",
                 }}
               >
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" style={{ width: 16, height: 16, color: "var(--primary)", flexShrink: 0, marginTop: 2 }}>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" style={{ width: 16, height: 16, color: "var(--accent-strong)", flexShrink: 0, marginTop: 2 }}>
                   <circle cx="12" cy="12" r="10" strokeWidth="2" />
                   <path d="M12 8v4m0 4h.01" strokeWidth="2" strokeLinecap="round" />
                 </svg>
-                <p style={{ margin: 0, fontSize: 12, fontWeight: 600, color: "var(--primary)", lineHeight: 1.5 }}>
+                <p style={{ margin: 0, fontSize: 12, fontWeight: 600, color: "var(--accent-strong)", lineHeight: 1.5 }}>
                   Ensure your full name matches the name on your bank account, or the company may decline your application.
                 </p>
               </div>
 
               {/* Bank Name */}
               <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
-                <div style={{ minWidth: 110, color: "var(--muted)", fontSize: 12, fontWeight: 700 }}>Bank Name</div>
+                <div style={{ minWidth: 110, color: "var(--text-secondary)", fontSize: 12, fontWeight: 700 }}>Bank Name</div>
                 <select
                   className="t3-custom-input-text"
-                  style={{ flex: 1, height: 40, fontSize: 13, border: "1.5px solid var(--border)" }}
+                  style={{ flex: 1, height: 40, fontSize: 13, border: "1.5px solid var(--border-subtle)" }}
                   value={bankName}
                   onChange={(e) => setBankName(e.target.value)}
                 >
@@ -144,11 +144,11 @@ export function NoticeModal({ isOpen, onClose, onSubmit }: NoticeModalProps) {
 
               {/* Account Number */}
               <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
-                <div style={{ minWidth: 110, color: "var(--muted)", fontSize: 12, fontWeight: 700 }}>Account Number</div>
+                <div style={{ minWidth: 110, color: "var(--text-secondary)", fontSize: 12, fontWeight: 700 }}>Account Number</div>
                 <input
                   type="text"
                   className="t3-custom-input-text"
-                  style={{ flex: 1, height: 40, fontSize: 13, border: "1.5px solid var(--border)" }}
+                  style={{ flex: 1, height: 40, fontSize: 13, border: "1.5px solid var(--border-subtle)" }}
                   placeholder="Enter Your Account Number"
                   value={accountNumber}
                   onChange={(e) => setAccountNumber(e.target.value.replace(/\D/g, ""))}
@@ -164,7 +164,7 @@ export function NoticeModal({ isOpen, onClose, onSubmit }: NoticeModalProps) {
                   className="t3-profile-action-btn"
                   style={{
                     background: !fullName || !bankName || !accountNumber
-                      ? "var(--surface-3)"
+                      ? "var(--surface-muted)"
                       : "var(--cta-gradient)",
                     minWidth: 140,
                     padding: "10px 24px",

@@ -48,7 +48,7 @@ function PhoneIcon() {
 
 function XCloseIcon() {
   return (
-    <svg className="vicon" viewBox="0 0 1024 1024" aria-hidden="true" style={{ color: "var(--text)" }}>
+    <svg className="vicon" viewBox="0 0 1024 1024" aria-hidden="true" style={{ color: "var(--text-primary)" }}>
       <path d="M512 439.603l-362.035-362.035-72.397 72.397 362.035 362.035-362.035 362.035 72.397 72.397 362.035-362.035 362.035 362.035 72.397-72.397-362.035-362.035 362.035-362.035-72.397-72.397z" fill="currentColor" />
     </svg>
   );
@@ -103,7 +103,7 @@ export function MyProfileModal({
             display: "flex",
             flexDirection: "column",
             overflow: "hidden",
-            background: "var(--bg)",
+            background: "var(--surface-base)",
             boxShadow: "var(--card-shadow)",
             width: "100%",
           }}
@@ -116,14 +116,14 @@ export function MyProfileModal({
               alignItems: "center",
               justifyContent: "space-between",
               gap: 12,
-              borderBottom: "1px solid var(--border)",
+              borderBottom: "1px solid var(--border-subtle)",
             }}
           >
             <div
               className="modal-title"
               style={{
                 fontWeight: 800,
-                color: "var(--primary)",
+                color: "var(--accent-strong)",
                 fontFamily: "var(--base-font-family)",
                 fontSize: 14,
                 lineHeight: 1.25,
@@ -137,21 +137,21 @@ export function MyProfileModal({
               className="t3-close-modal"
               onClick={onClose}
               aria-label="Close"
-              style={{ color: "var(--text)" }}
+              style={{ color: "var(--text-primary)" }}
             >
               <XCloseIcon />
             </button>
           </div>
 
           <div className="modal-body text-sm" style={{ flex: "1 1 auto", overflowY: "auto", background: "var(--modal-body)" }}>
-            <div className="p-6" style={{ background: "var(--bg)" }}>
+            <div className="p-6" style={{ background: "var(--surface-base)" }}>
               <div className="mt-1">
-                <div style={{ color: "var(--primary)", fontWeight: 700, lineHeight: 1.2 }}>General</div>
+                <div style={{ color: "var(--accent-strong)", fontWeight: 700, lineHeight: 1.2 }}>General</div>
 
                 <div className="mt-5 space-y-3">
                   <div
                     style={{
-                      background: "var(--surface-3)",
+                      background: "var(--surface-muted)",
                       borderRadius: 10,
                       minHeight: 44,
                       display: "flex",
@@ -160,13 +160,13 @@ export function MyProfileModal({
                       gap: 20,
                     }}
                   >
-                    <span style={{ color: "var(--primary)", fontWeight: 600, minWidth: 112 }}>Username</span>
-                    <span style={{ color: "var(--primary)", fontWeight: 600 }}>{username}</span>
+                    <span style={{ color: "var(--accent-strong)", fontWeight: 600, minWidth: 112 }}>Username</span>
+                    <span style={{ color: "var(--accent-strong)", fontWeight: 600 }}>{username}</span>
                   </div>
 
                   <div
                     style={{
-                      background: "var(--surface-3)",
+                      background: "var(--surface-muted)",
                       borderRadius: 10,
                       minHeight: 44,
                       display: "flex",
@@ -175,15 +175,15 @@ export function MyProfileModal({
                       gap: 14,
                     }}
                   >
-                    <span style={{ color: "var(--primary)", fontWeight: 600, minWidth: 112 }}>Full Name</span>
+                    <span style={{ color: "var(--accent-strong)", fontWeight: 600, minWidth: 112 }}>Full Name</span>
                     <input
                       value={fullName}
                       onChange={(e) => setFullName(e.target.value)}
                       placeholder="Please enter your full name"
                       className="w-full rounded-lg border-0 px-5 py-2.5 outline-none"
                       style={{
-                        background: "var(--surface)",
-                        color: "var(--text)",
+                        background: "var(--surface-base)",
+                        color: "var(--text-primary)",
                         fontWeight: 500,
                       }}
                     />
@@ -191,7 +191,7 @@ export function MyProfileModal({
 
                   <div
                     style={{
-                      background: "var(--surface-3)",
+                      background: "var(--surface-muted)",
                       borderRadius: 10,
                       minHeight: 44,
                       display: "flex",
@@ -200,14 +200,14 @@ export function MyProfileModal({
                       gap: 14,
                     }}
                   >
-                    <span style={{ color: "var(--primary)", fontWeight: 600, minWidth: 112 }}>Birth Date</span>
+                    <span style={{ color: "var(--accent-strong)", fontWeight: 600, minWidth: 112 }}>Birth Date</span>
                     <div
                       style={{
-                        background: "var(--surface)",
+                        background: "var(--surface-base)",
                         borderRadius: 8,
                         width: "100%",
                         padding: "8px 20px",
-                        color: "color-mix(in srgb, var(--text) 80%, transparent)",
+                        color: "color-mix(in srgb, var(--text-primary) 80%, transparent)",
                         fontWeight: 600,
                         lineHeight: 1.2,
                       }}
@@ -216,7 +216,7 @@ export function MyProfileModal({
                     </div>
                   </div>
 
-                  <div className="flex items-center gap-2.5" style={{ color: "#FF3B30" }}>
+                  <div className="flex items-center gap-2.5" style={{ color: "var(--feedback-danger)" }}>
                     <InfoIcon />
                     <p style={{ margin: 0, fontWeight: 600 }}>
                       Please enter your date of birth to receive additional bonus
@@ -226,19 +226,19 @@ export function MyProfileModal({
               </div>
 
               <div className="mt-7">
-                <div style={{ color: "var(--primary)", fontWeight: 700, lineHeight: 1.2 }}>Contact Details</div>
+                <div style={{ color: "var(--accent-strong)", fontWeight: 700, lineHeight: 1.2 }}>Contact Details</div>
 
                 <div className="mt-4">
                   <div
                     style={{
-                      background: "var(--surface-3)",
+                      background: "var(--surface-muted)",
                       borderRadius: 10,
                       minHeight: 44,
                       display: "flex",
                       alignItems: "center",
                       padding: "0 16px",
                       gap: 14,
-                      color: "var(--primary)",
+                      color: "var(--accent-strong)",
                     }}
                   >
                     <span aria-hidden style={{ display: "flex", alignItems: "center" }}>
@@ -269,4 +269,3 @@ export function MyProfileModal({
     </div>
   );
 }
-

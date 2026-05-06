@@ -17,11 +17,11 @@ export function RtpInfoBadge({ thumbUrl, gameName, rtpPercent, showGameName = tr
     return (
       <div
         className="mx-auto mt-1 flex w-fit items-center justify-center gap-1.5 rounded-[4px] px-2 py-[2px]"
-        style={{ background: "var(--primary)" }}
+        style={{ background: "var(--accent-strong)" }}
         title={gameName}
       >
-        <span className="text-[10px] font-extrabold text-white">RTP</span>
-        <span className="text-[11px] font-bold text-white">{rtpPercent}%</span>
+        <span className="text-[10px] font-extrabold text-[var(--text-on-emphasis)]">RTP</span>
+        <span className="text-[11px] font-bold text-[var(--text-on-emphasis)]">{rtpPercent}%</span>
         <img
           src={isUp ? "/assets/up.png" : "/assets/down.png"}
           alt=""

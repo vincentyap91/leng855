@@ -113,9 +113,9 @@ function TierCard({
       onClick={onSelect}
       className="flex flex-1 flex-col items-center justify-center gap-[6px] rounded-[8px] py-3 px-2 transition-all duration-200 cursor-pointer border"
       style={{
-        background: active ? "var(--primary)" : "var(--surface-3)",
-        borderColor: active ? "var(--primary-dark)" : "var(--border-strong, rgba(0,0,0,0.10))",
-        boxShadow: active ? "0 2px 8px rgba(185,28,28,0.25)" : "none",
+        background: active ? "var(--accent-strong)" : "var(--surface-muted)",
+        borderColor: active ? "var(--action-primary-hover)" : "var(--border-strong)",
+        boxShadow: active ? "0 2px 8px color-mix(in srgb, var(--accent-strong) 25%, transparent)" : "none",
       }}
     >
       <img
@@ -127,7 +127,7 @@ function TierCard({
       <span
         className="text-[12px] font-bold leading-none"
         style={{
-          color: active ? "#FFFFFF" : "var(--primary-dark)",
+          color: active ? "var(--surface-base)" : "var(--action-primary-hover)",
         }}
       >
         {tier.label}
@@ -143,13 +143,13 @@ function BenefitRow({ item, last }: { item: BenefitItem; last?: boolean }) {
       <div className="flex items-center justify-between py-[14px] px-[20px]">
         <span
           className="text-[13px] font-medium"
-          style={{ color: "var(--text)" }}
+          style={{ color: "var(--text-primary)" }}
         >
           {item.label}
         </span>
         <span
           className="text-[13px] font-semibold"
-          style={{ color: "var(--text)" }}
+          style={{ color: "var(--text-primary)" }}
         >
           {item.value}
         </span>
@@ -157,7 +157,7 @@ function BenefitRow({ item, last }: { item: BenefitItem; last?: boolean }) {
       {!last && (
         <div
           className="mx-[20px] h-px"
-          style={{ background: "var(--border)" }}
+          style={{ background: "var(--border-subtle)" }}
         />
       )}
     </>
@@ -177,12 +177,12 @@ function RequirementCell({
   return (
     <div
       className="flex items-center justify-between px-[20px] py-[14px] rounded-xl border"
-      style={{ background: "#f2f2f2", borderColor: "var(--panel-item-border)" }}
+      style={{ background: "var(--surface-muted)", borderColor: "var(--panel-item-border)" }}
     >
-      <span className="text-[13px] font-medium" style={{ color: "var(--text)" }}>
+      <span className="text-[13px] font-medium" style={{ color: "var(--text-primary)" }}>
         {label}
       </span>
-      <span className="text-[13px] font-semibold ml-2" style={{ color: "var(--text)" }}>
+      <span className="text-[13px] font-semibold ml-2" style={{ color: "var(--text-primary)" }}>
         {value}
       </span>
     </div>
@@ -197,7 +197,7 @@ export function MembershipPage() {
   const tier = TIERS.find((t) => t.id === selectedId) ?? TIERS[0];
 
   const titleStyle = {
-    color: "var(--primary-dark)",
+    color: "var(--action-primary-hover)",
     fontFamily: "var(--base-font-family, Poppins, system-ui, sans-serif)",
   } as const;
 
@@ -233,7 +233,7 @@ export function MembershipPage() {
         <div
           className="rounded-xl border p-[20px] space-y-[20px]"
           style={{
-            background: "var(--surface)",
+            background: "var(--surface-base)",
             borderColor: "var(--panel-item-border)",
             boxShadow: "var(--card-shadow)",
           }}
@@ -250,7 +250,7 @@ export function MembershipPage() {
               className="overflow-hidden rounded-xl border"
               style={{
                 borderColor: "var(--panel-item-border)",
-                background: "#f2f2f2",
+                background: "var(--surface-muted)",
               }}
             >
               {tier.benefits.map((item, i) => (
@@ -302,16 +302,16 @@ export function MembershipPage() {
             <div
               className="flex items-center justify-between px-[20px] py-[14px] rounded-xl border"
               style={{
-                background: "#f2f2f2",
+                background: "var(--surface-muted)",
                 borderColor: "var(--panel-item-border)",
               }}
             >
-              <span className="text-[13px] font-medium" style={{ color: "var(--text)" }}>
+              <span className="text-[13px] font-medium" style={{ color: "var(--text-primary)" }}>
                 Membership Renewal
               </span>
               <span
                 className="text-[13px] font-semibold"
-                style={{ color: "var(--text)" }}
+                style={{ color: "var(--text-primary)" }}
               >
                 {tier.renewal}
               </span>

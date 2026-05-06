@@ -57,9 +57,9 @@ export function FloatingOverlays() {
               aria-label="Dismiss download banner"
               className="absolute -top-2 -right-2 z-10 w-5 h-5 rounded-full border text-[11px] leading-none grid place-items-center transition-colors"
               style={{
-                backgroundColor: "#FFFFFF",
-                borderColor: "#D4AF37",
-                color: "#991B1B",
+                backgroundColor: "var(--surface-base)",
+                borderColor: "var(--accent-soft)",
+                color: "var(--action-primary-hover)",
               }}
             >
               <span aria-hidden="true">×</span>
@@ -72,8 +72,8 @@ export function FloatingOverlays() {
       <button
         type="button"
         aria-label="Live chat"
-        className="fixed right-4 bottom-4 z-40 w-14 h-14 rounded-full overflow-hidden border-2 shadow-lg bg-white"
-        style={{ borderColor: "#B91C1C" }}
+        className="fixed right-4 bottom-4 z-40 w-14 h-14 rounded-full overflow-hidden border-2 shadow-lg bg-[var(--surface-base)]"
+        style={{ borderColor: "var(--accent-strong)" }}
       >
         <img
           src={assets.chatAvatar}

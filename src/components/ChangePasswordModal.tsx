@@ -29,10 +29,10 @@ function EyeOffIcon() {
 function RuleItem({ text }: { text: string }) {
   return (
     <div className="flex items-start gap-2">
-      <span className="mt-0.5 inline-flex h-4 w-4 items-center justify-center rounded-full border text-[11px] font-bold" style={{ borderColor: "var(--primary)", color: "var(--primary)" }}>
+      <span className="mt-0.5 inline-flex h-4 w-4 items-center justify-center rounded-full border text-[11px] font-bold" style={{ borderColor: "var(--accent-strong)", color: "var(--accent-strong)" }}>
         ✓
       </span>
-      <span className="text-[13px] leading-5" style={{ color: "var(--text)" }}>
+      <span className="text-[13px] leading-5" style={{ color: "var(--text-primary)" }}>
         {text}
       </span>
     </div>
@@ -80,19 +80,19 @@ export function ChangePasswordModal({ isOpen, onClose }: ChangePasswordModalProp
               display: "flex",
               alignItems: "center",
               justifyContent: "space-between",
-              background: "#a3addf",
-              borderBottom: "1px solid var(--border)",
+              background: "var(--surface-raised)",
+              borderBottom: "1px solid var(--border-subtle)",
             }}
           >
-            <div className="modal-title font-extrabold" style={{ color: "var(--primary)", lineHeight: 1.2 }}>
+            <div className="modal-title font-extrabold" style={{ color: "var(--accent-strong)", lineHeight: 1.2 }}>
               Change Password
             </div>
-            <button type="button" className="t3-close-modal" onClick={onClose} aria-label="Close" style={{ color: "#0038A8" }}>
+            <button type="button" className="t3-close-modal" onClick={onClose} aria-label="Close" style={{ color: "var(--feedback-info)" }}>
               <XCloseIcon />
             </button>
           </div>
 
-          <div className="modal-body" style={{ background: "var(--bg)", padding: 0, flex: "1 1 auto", overflowY: "auto" }}>
+          <div className="modal-body" style={{ background: "var(--surface-base)", padding: 0, flex: "1 1 auto", overflowY: "auto" }}>
             <form className="px-5 py-6" onSubmit={(e) => e.preventDefault()}>
               {[
                 {
@@ -118,8 +118,8 @@ export function ChangePasswordModal({ isOpen, onClose }: ChangePasswordModalProp
                 },
               ].map((field) => (
                 <div key={field.id} className="mb-4">
-                  <label htmlFor={field.id} className="mb-2 block text-[15px] font-semibold" style={{ color: "#9d7a2b" }}>
-                    {field.label} <span style={{ color: "var(--primary)" }}>*</span>
+                  <label htmlFor={field.id} className="mb-2 block text-[15px] font-semibold" style={{ color: "var(--text-secondary)" }}>
+                    {field.label} <span style={{ color: "var(--accent-strong)" }}>*</span>
                   </label>
                   <div className="relative">
                     <input
@@ -129,9 +129,9 @@ export function ChangePasswordModal({ isOpen, onClose }: ChangePasswordModalProp
                       onChange={(e) => field.setValue(e.target.value)}
                       placeholder={field.placeholder}
                       className="w-full rounded-lg border py-2.5 pl-4 pr-10 text-[14px] font-medium outline-none"
-                      style={{ borderColor: "var(--border)", color: "var(--text)", background: "var(--surface)" }}
+                      style={{ borderColor: "var(--border-subtle)", color: "var(--text-primary)", background: "var(--surface-base)" }}
                     />
-                    <span className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2" style={{ color: "#9d7a2b" }}>
+                    <span className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2" style={{ color: "var(--text-secondary)" }}>
                       <EyeOffIcon />
                     </span>
                   </div>
@@ -160,4 +160,3 @@ export function ChangePasswordModal({ isOpen, onClose }: ChangePasswordModalProp
     </div>
   );
 }
-

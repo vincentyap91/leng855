@@ -5,7 +5,7 @@ export type RebatePageProps = {
 
 export function RebatePage({ isLoggedIn = false, onLoginClick }: RebatePageProps) {
   const titleStyle = {
-    color: "var(--primary-dark)",
+    color: "var(--action-primary-hover)",
     fontFamily: "var(--base-font-family, Poppins, system-ui, sans-serif)",
   } as const;
 
@@ -27,7 +27,7 @@ export function RebatePage({ isLoggedIn = false, onLoginClick }: RebatePageProps
           <div
             className="rounded-xl border p-[20px]"
             style={{
-              background: "var(--surface)",
+              background: "var(--surface-base)",
               borderColor: "var(--panel-item-border)",
               boxShadow: "var(--card-shadow)",
             }}
@@ -35,16 +35,16 @@ export function RebatePage({ isLoggedIn = false, onLoginClick }: RebatePageProps
             <div
               className="rounded-xl border px-[20px] py-[14px]"
               style={{
-                background: "#f2f2f2",
+                background: "var(--surface-muted)",
                 borderColor: "var(--panel-item-border)",
               }}
             >
               <p
                 className="m-0 text-[13px] font-semibold leading-snug"
-                style={{ color: "var(--primary-dark)", fontFamily: "var(--base-font-family, Poppins, system-ui, sans-serif)" }}
+                style={{ color: "var(--action-primary-hover)", fontFamily: "var(--base-font-family, Poppins, system-ui, sans-serif)" }}
               >
                 Claimable Rebate:{" "}
-                <span className="font-extrabold" style={{ color: "var(--gold)" }}>
+                <span className="font-extrabold" style={{ color: "var(--accent-soft)" }}>
                   0.000
                 </span>
               </p>

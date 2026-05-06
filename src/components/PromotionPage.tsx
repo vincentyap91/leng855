@@ -3,7 +3,7 @@ import { promotionSectionGroups } from "../data/promotions";
 
 function PromotionCard({ id, title, image }: { id: string; title: string; image: string }) {
   return (
-    <article className="promo-item overflow-hidden rounded-xl bg-[var(--surface)]">
+    <article className="promo-item overflow-hidden rounded-xl bg-[var(--surface-base)]">
       <a href={`#/promotion/${id}`} className="promo-image relative block" aria-label={title}>
         <img
           src={image}
@@ -13,9 +13,9 @@ function PromotionCard({ id, title, image }: { id: string; title: string; image:
         <span
           className="claimable-tag absolute right-0 top-0 z-10 rounded-full px-4 py-2 text-sm font-extrabold leading-tight tracking-wide whitespace-nowrap md:px-5 md:py-2.5 md:text-base"
           style={{
-            background: "linear-gradient(180deg, var(--primary-bright) 0%, var(--primary-dark) 100%)",
-            color: "#ffffff",
-            boxShadow: "0 2px 10px color-mix(in srgb, var(--primary-dark) 45%, transparent)",
+            background: "linear-gradient(180deg, var(--feedback-danger) 0%, var(--action-primary-hover) 100%)",
+            color: "var(--surface-base)",
+            boxShadow: "0 2px 10px color-mix(in srgb, var(--action-primary-hover) 45%, transparent)",
           }}
         >
           Claimable
@@ -41,9 +41,9 @@ export function PromotionPage() {
           <div className="mb-3 flex items-center gap-3">
             <span
               className="h-[2px] w-8 rounded-full"
-              style={{ backgroundColor: "var(--gold)" }}
+              style={{ backgroundColor: "var(--accent-soft)" }}
             />
-            <h2 className="t3-custom-promotion-title m-0 text-[14px] font-extrabold uppercase tracking-wide text-[var(--primary-dark)]">
+            <h2 className="t3-custom-promotion-title m-0 text-[14px] font-extrabold uppercase tracking-wide text-[var(--action-primary-hover)]">
               {section.title}
             </h2>
           </div>

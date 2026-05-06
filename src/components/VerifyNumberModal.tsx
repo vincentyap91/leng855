@@ -66,7 +66,7 @@ export function VerifyNumberModal({ isOpen, onClose, onSuccess, mobileNumber = "
               alignItems: "center",
               justifyContent: "space-between",
               borderBottom: "none",
-              background: "var(--surface-3)",
+              background: "var(--surface-muted)",
             }}
           >
             <img src={assets.leng855Logo} style={{ height: 40, objectFit: "contain" }} alt="logo" />
@@ -76,7 +76,7 @@ export function VerifyNumberModal({ isOpen, onClose, onSuccess, mobileNumber = "
           </div>
 
           {/* Body */}
-          <div className="modal-body" style={{ background: "var(--bg)", padding: 0 }}>
+          <div className="modal-body" style={{ background: "var(--surface-base)", padding: 0 }}>
             <div style={{ display: "flex" }}>
               {/* Left image */}
               <div
@@ -86,7 +86,7 @@ export function VerifyNumberModal({ isOpen, onClose, onSuccess, mobileNumber = "
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
-                  background: "var(--surface)",
+                  background: "var(--surface-base)",
                   padding: 16,
                 }}
               >
@@ -99,10 +99,10 @@ export function VerifyNumberModal({ isOpen, onClose, onSuccess, mobileNumber = "
 
               {/* Right content */}
               <div style={{ flex: 1, padding: "32px 24px", textAlign: "center" }}>
-                <div style={{ fontWeight: 900, fontSize: 18, color: "var(--primary-dark)", marginBottom: 8 }}>
+                <div style={{ fontWeight: 900, fontSize: 18, color: "var(--action-primary-hover)", marginBottom: 8 }}>
                   Verify Your Number
                 </div>
-                <div style={{ fontSize: 13, fontWeight: 500, color: "var(--muted)", marginBottom: 24 }}>
+                <div style={{ fontSize: 13, fontWeight: 500, color: "var(--text-secondary)", marginBottom: 24 }}>
                   Enter the code we sent to {maskedMobile}.
                 </div>
 
@@ -127,7 +127,7 @@ export function VerifyNumberModal({ isOpen, onClose, onSuccess, mobileNumber = "
                     fontSize: 20,
                     fontWeight: 900,
                     height: 48,
-                    border: "1.5px solid var(--border)",
+                    border: "1.5px solid var(--border-subtle)",
                     display: "block",
                   }}
                   placeholder="000000"
@@ -140,7 +140,7 @@ export function VerifyNumberModal({ isOpen, onClose, onSuccess, mobileNumber = "
                     marginTop: 16,
                     fontSize: 13,
                     fontWeight: 700,
-                    color: "var(--primary)",
+                    color: "var(--accent-strong)",
                   }}
                 >
                   {countdown > 0 ? `TAC Code Sent. ${countdown}s` : (
@@ -150,7 +150,7 @@ export function VerifyNumberModal({ isOpen, onClose, onSuccess, mobileNumber = "
                       style={{
                         background: "none",
                         border: "none",
-                        color: "var(--primary)",
+                        color: "var(--accent-strong)",
                         fontWeight: 700,
                         fontSize: 13,
                         cursor: "pointer",
@@ -166,7 +166,7 @@ export function VerifyNumberModal({ isOpen, onClose, onSuccess, mobileNumber = "
                 {countdown > 0 && (
                   <div style={{ marginTop: 12, display: "flex", justifyContent: "center" }}>
                     <svg
-                      style={{ width: 24, height: 24, color: "var(--primary)", animation: "spin 1s linear infinite" }}
+                      style={{ width: 24, height: 24, color: "var(--accent-strong)", animation: "spin 1s linear infinite" }}
                       xmlns="http://www.w3.org/2000/svg"
                       fill="none"
                       viewBox="0 0 24 24"

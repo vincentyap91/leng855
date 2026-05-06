@@ -43,13 +43,13 @@ export function DownlinesModal({ isOpen, onClose }: DownlinesModalProps) {
   if (!isOpen) return null;
 
   const activeTabBg = "var(--theme-color-nav-menu-active)";
-  const activeTabColor = "var(--on-primary)";
+  const activeTabColor = "var(--text-on-emphasis)";
 
-  const inactiveTabBg = "var(--surface-3)";
-  const inactiveTabColor = "var(--primary-dark)";
+  const inactiveTabBg = "var(--surface-muted)";
+  const inactiveTabColor = "var(--action-primary-hover)";
 
-  const cardLabelColor = "var(--text)";
-  const cardValueColor = "var(--gold)";
+  const cardLabelColor = "var(--text-primary)";
+  const cardValueColor = "var(--accent-soft)";
 
   const tabButtonBase: CSSProperties = {
     fontFamily: "var(--base-font-family)",
@@ -59,7 +59,7 @@ export function DownlinesModal({ isOpen, onClose }: DownlinesModalProps) {
   };
 
   const cardBase: CSSProperties = {
-    background: "var(--surface-2)",
+    background: "var(--surface-base)",
     border: "1px solid var(--panel-item-border)",
     borderRadius: 6,
     padding: "10px 12px",
@@ -91,14 +91,14 @@ export function DownlinesModal({ isOpen, onClose }: DownlinesModalProps) {
               alignItems: "center",
               justifyContent: "space-between",
               gap: 12,
-              borderBottom: "1px solid var(--border)",
+              borderBottom: "1px solid var(--border-subtle)",
             }}
           >
             <div
               className="modal-title"
               style={{
                 fontWeight: 800,
-                color: "var(--primary)",
+                color: "var(--accent-strong)",
                 fontFamily: "var(--base-font-family)",
                 fontSize: 14,
                 lineHeight: 1.25,
@@ -112,10 +112,10 @@ export function DownlinesModal({ isOpen, onClose }: DownlinesModalProps) {
             </button>
           </div>
 
-          <div className="modal-body" style={{ background: "var(--bg)", padding: 0 }}>
+          <div className="modal-body" style={{ background: "var(--surface-base)", padding: 0 }}>
             <div className="px-4 py-4">
               {/* Tabs */}
-              <div className="flex overflow-hidden rounded-md border" style={{ borderColor: "var(--border)" }}>
+              <div className="flex overflow-hidden rounded-md border" style={{ borderColor: "var(--border-subtle)" }}>
                 <button
                   type="button"
                   onClick={() => setTab("summary")}
@@ -124,7 +124,7 @@ export function DownlinesModal({ isOpen, onClose }: DownlinesModalProps) {
                     flex: 1,
                     background: tab === "summary" ? activeTabBg : inactiveTabBg,
                     color: tab === "summary" ? activeTabColor : inactiveTabColor,
-                    borderRight: "1px solid var(--border)",
+                    borderRight: "1px solid var(--border-subtle)",
                   }}
                 >
                   Downline Summary
@@ -146,20 +146,20 @@ export function DownlinesModal({ isOpen, onClose }: DownlinesModalProps) {
               {/* Date filter section */}
               <div className="mt-4 grid grid-cols-2 gap-3">
                 <div>
-                  <div style={{ color: "var(--muted)", fontSize: 12, fontWeight: 700 }}>Start Date</div>
+                  <div style={{ color: "var(--text-secondary)", fontSize: 12, fontWeight: 700 }}>Start Date</div>
                   <input
                     className="t3-custom-input-text"
-                    style={{ marginTop: 6, height: 40, fontSize: 13, borderColor: "var(--border)", background: "var(--surface-2)" }}
+                    style={{ marginTop: 6, height: 40, fontSize: 13, borderColor: "var(--border-subtle)", background: "var(--surface-base)" }}
                     value={startDate}
                     onChange={(e) => setStartDate(e.target.value)}
                     aria-label="Start Date"
                   />
                 </div>
                 <div>
-                  <div style={{ color: "var(--muted)", fontSize: 12, fontWeight: 700 }}>End Date</div>
+                  <div style={{ color: "var(--text-secondary)", fontSize: 12, fontWeight: 700 }}>End Date</div>
                   <input
                     className="t3-custom-input-text"
-                    style={{ marginTop: 6, height: 40, fontSize: 13, borderColor: "var(--border)", background: "var(--surface-2)" }}
+                    style={{ marginTop: 6, height: 40, fontSize: 13, borderColor: "var(--border-subtle)", background: "var(--surface-base)" }}
                     value={endDate}
                     onChange={(e) => setEndDate(e.target.value)}
                     aria-label="End Date"
@@ -177,9 +177,9 @@ export function DownlinesModal({ isOpen, onClose }: DownlinesModalProps) {
                       onClick={() => setActiveQuickFilter(f)}
                       className="rounded-md"
                       style={{
-                        border: `1px solid ${active ? "var(--theme-color-nav-menu-active)" : "var(--border)"}`,
-                        background: active ? "var(--theme-color-nav-menu-active)" : "var(--surface-3)",
-                        color: active ? "var(--on-primary)" : "var(--primary-dark)",
+                        border: `1px solid ${active ? "var(--theme-color-nav-menu-active)" : "var(--border-subtle)"}`,
+                        background: active ? "var(--theme-color-nav-menu-active)" : "var(--surface-muted)",
+                        color: active ? "var(--text-on-emphasis)" : "var(--action-primary-hover)",
                         fontFamily: "var(--base-font-family)",
                         fontSize: 12,
                         fontWeight: 700,
@@ -207,7 +207,7 @@ export function DownlinesModal({ isOpen, onClose }: DownlinesModalProps) {
                     </div>
                   </div>
 
-                  <div style={{ marginTop: 10, color: "var(--primary-dark)", fontSize: 13, fontWeight: 900 }}>
+                  <div style={{ marginTop: 10, color: "var(--action-primary-hover)", fontSize: 13, fontWeight: 900 }}>
                     Up To Now
                   </div>
 
@@ -228,8 +228,8 @@ export function DownlinesModal({ isOpen, onClose }: DownlinesModalProps) {
                   </div>
                 </div>
               ) : (
-                <div className="mt-4 rounded-md border p-4" style={{ borderColor: "var(--border)", background: "var(--surface-2)" }}>
-                  <div style={{ color: "var(--muted)", fontSize: 13, fontWeight: 700 }}>Downlines KPIs view (placeholder)</div>
+                <div className="mt-4 rounded-md border p-4" style={{ borderColor: "var(--border-subtle)", background: "var(--surface-base)" }}>
+                  <div style={{ color: "var(--text-secondary)", fontSize: 13, fontWeight: 700 }}>Downlines KPIs view (placeholder)</div>
                 </div>
               )}
             </div>
@@ -239,4 +239,3 @@ export function DownlinesModal({ isOpen, onClose }: DownlinesModalProps) {
     </div>
   );
 }
-

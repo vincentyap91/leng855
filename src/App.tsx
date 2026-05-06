@@ -229,7 +229,7 @@ export default function App() {
 
   return (
     <div
-      className="t3-default-lobby flex min-h-screen flex-col bg-bg-page text-[var(--text)]"
+      className="t3-default-lobby flex min-h-screen flex-col bg-bg-page text-[var(--text-primary)]"
       style={{ background: "var(--page-bg-gradient)" }}
     >
       <Header
