@@ -4,6 +4,7 @@ import { assets } from "../data/assets";
 import { DownlinesModal } from "./DownlinesModal";
 
 import { DEFAULT_REFERRAL_LINK } from "../data/referralDefaults";
+import { SegmentedTabs } from "./SegmentedTabs";
 
 function ChevronRight() {
   return (
@@ -185,8 +186,9 @@ function GameCommissionAccordionTable({
                 key={label}
                 className={`${thTdBase} font-extrabold ${idx === 0 ? "text-left" : "text-center"}`}
                 style={{
-                  color: "var(--commission-title, var(--action-primary-hover))",
+                  color: "var(--brand-3)",
                   borderLeft: idx === 0 ? "none" : "1px solid var(--border-subtle)",
+                  fontSize: "14px"
                 }}
               >
                 {label}
@@ -284,7 +286,7 @@ export function ReferralPage({ isLoggedIn = false, onLoginClick }: ReferralPageP
               style={{
                 background: "var(--cta-gradient)",
                 color: "var(--text-on-emphasis)",
-                boxShadow: "0 3px 8px color-mix(in srgb, var(--action-primary-hover) 36%, transparent)",
+                boxShadow: "0 3px 8px rgba(185, 28, 28, 0.36)",
                 borderRadius: "10px 0px 10px 0px",
               }}
             >
@@ -311,7 +313,7 @@ export function ReferralPage({ isLoggedIn = false, onLoginClick }: ReferralPageP
         borderColor: "var(--panel-item-border)",
         background: "var(--surface-base)",
         boxShadow: "var(--card-shadow)",
-        ["--commission-title" as string]: "color-mix(in srgb, var(--text-primary) 72%, var(--text-primary) 28%)",
+        ["--commission-title" as string]: "var(--text-primary)",
       }}
     >
       <div>
@@ -334,7 +336,8 @@ export function ReferralPage({ isLoggedIn = false, onLoginClick }: ReferralPageP
               key={cat.id}
               className="overflow-hidden rounded-[10px] border"
               style={{
-                borderColor: "var(--border-subtle)",
+                borderColor: "var(--brand-1)",
+                boxShadow: "0 4px 12px rgba(0,0,0,0.15)"
               }}
             >
               <button
@@ -343,17 +346,17 @@ export function ReferralPage({ isLoggedIn = false, onLoginClick }: ReferralPageP
                 aria-controls={`commission-panel-${cat.id}`}
                 id={`commission-trigger-${cat.id}`}
                 onClick={() => toggleCommissionCategory(cat.id)}
-                className="flex w-full items-center px-[20px] py-[8px] text-left"
+                className="flex w-full items-center px-[20px] py-[8px] text-left transition-all hover:brightness-110"
                 style={{
-                  background: "var(--surface-inverse)",
-                  border: "var(--header-lang-border)",
-                  color: "var(--accent-soft)",
-                  minHeight: 56,
+                  background: "var(--ref-110)",
+                  borderBottom: open ? "1px solid var(--brand-1)" : "none",
+                  color: "var(--brand-1)",
+                  minHeight: 60,
                 }}
               >
-                <span className="grid h-10 w-10 shrink-0 place-items-center text-[color:inherit]">{cat.icon}</span>
-                <span className="min-w-0 flex-1 text-[18px] font-extrabold leading-snug">{cat.title}</span>
-                <span className="shrink-0 text-[color:inherit]">
+                <span className="grid h-10 w-10 shrink-0 place-items-center">{cat.icon}</span>
+                <span className="min-w-0 flex-1 text-[17px] font-extrabold leading-snug tracking-wide">{cat.title}</span>
+                <span className="shrink-0 text-[var(--brand-1)]">
                   <ChevronDown open={open} />
                 </span>
               </button>
@@ -391,11 +394,12 @@ export function ReferralPage({ isLoggedIn = false, onLoginClick }: ReferralPageP
           <span style={{ color: "var(--action-primary-hover)" }}>Referral</span>
         </div>
 
-        <div className="t3-referral-subtabs mt-4" role="tablist" aria-label="Referral sections">
-          <span role="tab" aria-selected={true} className="t3-referral-subtabs__tab t3-referral-subtabs__tab--active">
-            Referral Info
-          </span>
-        </div>
+        <SegmentedTabs 
+          className="mt-4"
+          options={[{ id: "info", label: "Referral Info" }]} 
+          activeId="info" 
+          onChange={() => {}} 
+        />
 
         {!isLoggedIn ? (
           <>
@@ -447,28 +451,28 @@ export function ReferralPage({ isLoggedIn = false, onLoginClick }: ReferralPageP
             {/* Main content — 50% / 50%; stack on small screens */}
             <div className="mt-5 grid min-w-0 grid-cols-1 gap-6 lg:grid-cols-2">
                   {/* Left: invite */}
-                  <div
-                    className="referral-invite-card flex min-w-0 flex-col gap-4 rounded-xl border p-[20px]"
-                    style={{
-                      background: "color-mix(in srgb, var(--surface-muted) 55%, var(--surface-base))",
-                      borderColor: "var(--panel-item-border)",
-                      boxShadow: "var(--card-shadow)",
-                    }}
-                  >
+                    <div
+                      className="referral-invite-card flex min-w-0 flex-col gap-4 rounded-xl border p-[20px]"
+                      style={{
+                        background: "var(--surface-muted)",
+                        borderColor: "var(--panel-item-border)",
+                        boxShadow: "var(--card-shadow)",
+                      }}
+                    >
                     <h1 className="m-0 text-lg font-extrabold leading-snug md:text-[18px]" style={{ color: "var(--action-primary-hover)" }}>
                       Invite friends now to get more reward
                     </h1>
                     <p className="m-0 text-[13px] leading-relaxed md:text-[14px]" style={{ color: "var(--text-secondary)" }}>
                       Invite your friends to join through our referral program! Share your unique code or link and earn rewards as they sign up and engage with our platform.
                     </p>
-                    <div
-                      className="h-px w-full shrink-0"
-                      style={{
-                        background: "color-mix(in srgb, var(--action-primary-hover) 18%, var(--border-subtle))",
-                        margin: "20px 0px",
-                      }}
-                      aria-hidden
-                    />
+                      <div
+                        className="h-px w-full shrink-0"
+                        style={{
+                          background: "var(--border-subtle)",
+                          margin: "20px 0px",
+                        }}
+                        aria-hidden
+                      />
 
                     <div className="flex flex-col gap-2">
                       <div className="text-sm font-extrabold md:text-[15px]" style={{ color: "var(--action-primary-hover)" }}>
@@ -480,7 +484,7 @@ export function ReferralPage({ isLoggedIn = false, onLoginClick }: ReferralPageP
                           style={{
                             borderColor: "var(--panel-item-border)",
                             background: "var(--surface-base)",
-                            boxShadow: "inset 0 1px 0 color-mix(in srgb, var(--text-primary) 4%, transparent)",
+                            boxShadow: "inset 0 1px 0 rgba(0, 0, 0, 0.04)",
                           }}
                         >
                           <div className="min-w-0 flex-1 overflow-hidden py-3">
@@ -519,7 +523,7 @@ export function ReferralPage({ isLoggedIn = false, onLoginClick }: ReferralPageP
                               borderColor: "var(--panel-item-border)",
                               background: "var(--surface-base)",
                               color,
-                              boxShadow: "0 2px 10px color-mix(in srgb, var(--text-primary) 10%, transparent)",
+                              boxShadow: "0 2px 10px rgba(0, 0, 0, 0.1)",
                             }}
                           >
                             <img src={src} alt="" className="h-5 w-5 object-contain" aria-hidden />
@@ -533,7 +537,7 @@ export function ReferralPage({ isLoggedIn = false, onLoginClick }: ReferralPageP
                   <div
                     className="flex min-h-[100%] min-w-0 flex-col gap-4 rounded-xl border p-[20px]"
                     style={{
-                      background: "color-mix(in srgb, var(--surface-muted) 55%, var(--surface-base))",
+                      background: "var(--surface-muted)",
                       borderColor: "var(--panel-item-border)",
                       boxShadow: "var(--card-shadow)",
                     }}
@@ -581,12 +585,12 @@ export function ReferralPage({ isLoggedIn = false, onLoginClick }: ReferralPageP
                       type="button"
                       onClick={() => setIsDownlinesOpen(true)}
                       className="mt-auto w-full rounded-lg py-3 text-[14px] font-extrabold"
-                      style={{
-                        background: "var(--cta-gradient)",
-                        color: "var(--text-on-emphasis)",
-                        border: "1px solid color-mix(in srgb, var(--action-primary-hover) 22%, transparent)",
-                        boxShadow: "var(--card-shadow)",
-                      }}
+                        style={{
+                          background: "var(--cta-gradient)",
+                          color: "var(--text-on-emphasis)",
+                          border: "1px solid var(--ref-40)",
+                          boxShadow: "var(--card-shadow)",
+                        }}
                     >
                       Downlines
                     </button>
@@ -595,11 +599,120 @@ export function ReferralPage({ isLoggedIn = false, onLoginClick }: ReferralPageP
 
                 {passiveIncomeSection}
                 {gameCommissionSection}
+                <ReferralFAQSection />
           </>
         )}
       </div>
 
       <DownlinesModal isOpen={isDownlinesOpen} onClose={() => setIsDownlinesOpen(false)} />
     </section>
+  );
+}
+
+function ReferralFAQSection() {
+  const [activeTab, setActiveTab] = useState<"faq" | "terms">("faq");
+  const [openIndex, setOpenIndex] = useState<number | null>(0);
+
+  const faqs = [
+    {
+      q: "How does our Referral Program work?",
+      a: "You can earn cash rewards up to three referral tiers when you refer your friends. Invite your friends to join together and be entitled for lifetime cash rewards each time your friends Deposit.",
+    },
+    {
+      q: "What Should You Do?",
+      a: "Simply share your unique referral link with your friends. Once they register and start playing, you will begin earning rewards based on their activity levels and deposits across all game categories.",
+    },
+    {
+      q: "Test 123",
+      a: "This section demonstrates the accordion functionality. Each question can be expanded to reveal detailed information about the specific topic.",
+    },
+    {
+      q: "friend limitation",
+      a: "There are no limits to the number of friends you can refer. The more friends you invite to join our platform, the higher your potential passive income rewards will be.",
+    },
+  ];
+
+  const terms = [
+    {
+      q: "General Terms & Conditions",
+      a: "By participating in the Referral Program, you agree to abide by all platform rules. Rewards are calculated based on valid turnover and deposits from verified accounts only.",
+    },
+    {
+      q: "Abuse Policy",
+      a: "Any attempt to manipulate the referral system through multiple accounts or fraudulent activity will lead to immediate disqualification and forfeiture of all accumulated rewards.",
+    },
+  ];
+
+  const items = activeTab === "faq" ? faqs : terms;
+
+  return (
+    <div 
+      className="mt-8 rounded-xl border p-[20px]" 
+      style={{ 
+        borderColor: "var(--panel-item-border)", 
+        background: "var(--surface-base)", 
+        boxShadow: "var(--card-shadow)" 
+      }}
+    >
+      <h2 
+        className="m-0 text-[18px] font-extrabold tracking-tight" 
+        style={{ color: "var(--brand-3)", fontFamily: "var(--base-font-family)" }}
+      >
+        Frequently Asked Questions
+      </h2>
+
+      {/* Tab Switcher */}
+      <SegmentedTabs
+        className="mt-6"
+        options={[
+          { id: "faq", label: "FAQ" },
+          { id: "terms", label: "Terms & Conditions" }
+        ]}
+        activeId={activeTab}
+        onChange={(id) => { setActiveTab(id); setOpenIndex(0); }}
+      />
+
+      {/* Accordion List */}
+      <div className="mt-6 flex flex-col overflow-hidden rounded-xl border" style={{ borderColor: "var(--border-default)" }}>
+        {items.map((item, idx) => {
+          const isOpen = openIndex === idx;
+          return (
+            <div 
+              key={idx} 
+              className="border-b last:border-b-0" 
+              style={{ borderColor: "var(--border-default)" }}
+            >
+              <button
+                type="button"
+                onClick={() => setOpenIndex(isOpen ? null : idx)}
+                className="flex w-full items-center justify-between px-5 py-4 text-left transition-colors"
+                style={{ background: "var(--surface-muted)" }}
+              >
+                <span className="text-[14px] font-bold" style={{ color: "var(--text-primary)" }}>{item.q}</span>
+                <span style={{ color: "var(--brand-3)" }}>
+                  <svg 
+                    className={`h-5 w-5 transition-transform duration-200 ${isOpen ? "rotate-180" : ""}`} 
+                    viewBox="0 0 24 24" 
+                    fill="none" 
+                    stroke="currentColor" 
+                    strokeWidth="2.5"
+                  >
+                    <path d="M6 9l6 6 6-6" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
+                </span>
+              </button>
+              {isOpen && (
+                <div 
+                  className="px-5 py-5 text-[14px] leading-[1.6] animate-in fade-in slide-in-from-top-1 duration-200" 
+                  style={{ background: "var(--surface-base)", color: "var(--text-primary)" }}
+                >
+                  {item.a}
+                </div>
+              )}
+            </div>
+          );
+        })}
+      </div>
+    </div>
   );
 }

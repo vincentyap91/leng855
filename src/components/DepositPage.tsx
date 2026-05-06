@@ -1,5 +1,7 @@
 import { useCallback, useEffect, useId, useMemo, useState, type KeyboardEvent } from "react";
 import { copyIconSrc } from "../data/copyIcon";
+import { useDepositCountdown } from "../hooks/useDepositCountdown";
+import { DepositSuccessModal } from "./DepositSuccessModal";
 
 type CashTab = "deposit" | "withdrawal";
 
@@ -289,11 +291,15 @@ function BankTransferDetailsStep({
   allBanks,
   onBack,
   onSelectBank,
+  onSuccess,
+  countdownText,
 }: {
   bank: BankTransferRecord;
   allBanks: BankTransferRecord[];
   onBack: () => void;
   onSelectBank: (id: string) => void;
+  onSuccess: () => void;
+  countdownText: string | null;
 }) {
   const uploadId = useId();
   const [amountUsd, setAmountUsd] = useState(0);
@@ -329,6 +335,7 @@ function BankTransferDetailsStep({
 
   const onSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    onSuccess();
   };
 
   return (
@@ -340,6 +347,27 @@ function BankTransferDetailsStep({
         </button>
         <h2 className="deposit-bank-transfer__title">Normal Bank Transfer</h2>
       </div>
+
+      {countdownText && (
+        <div 
+          className="mb-4 flex items-center gap-3 rounded-xl border p-4 shadow-md animate-in fade-in slide-in-from-top-2 duration-300"
+          style={{ 
+            background: "var(--ref-100)", 
+            borderColor: "var(--brand-1)",
+            color: "var(--brand-3)",
+            fontFamily: "var(--base-font-family)"
+          }}
+        >
+          <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-[rgba(185,28,28,0.1)]">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+              <circle cx="12" cy="12" r="10" />
+              <line x1="12" y1="8" x2="12" y2="12" />
+              <line x1="12" y1="16" x2="12.01" y2="16" />
+            </svg>
+          </div>
+          <span className="text-[14px] font-bold tracking-tight">Please wait {countdownText} for deposit approval</span>
+        </div>
+      )}
 
       <div className="deposit-bank-transfer__panel">
         <div className="deposit-bank-transfer__info-row">
@@ -523,6 +551,9 @@ export function DepositPage({ onNavigate }: { onNavigate?: (view: "deposit" | "w
   const [bankOpen, setBankOpen] = useState(true);
   const [cryptoOpen, setCryptoOpen] = useState(false);
   const [bankTransferBankId, setBankTransferBankId] = useState<string | null>(null);
+  const [isSuccessModalOpen, setIsSuccessModalOpen] = useState(false);
+  const [isPendingView, setIsPendingView] = useState(false);
+  const { timeLeft, startTimer, formatTime } = useDepositCountdown();
 
   useEffect(() => {
     const applyTabFromHash = () => {
@@ -583,99 +614,146 @@ export function DepositPage({ onNavigate }: { onNavigate?: (view: "deposit" | "w
         </div>
       </div>
 
-      {cashTab === "deposit" && !activeBank ? (
-        <p className="mb-3 text-sm sm:text-[14px]" style={{ color: "var(--text-secondary)" }}>
-          Select a reload option from the available options.
-        </p>
+      {cashTab === "deposit" && isPendingView && timeLeft > 0 ? (
+        <div 
+          className="mt-3 flex items-center gap-4 rounded-xl border p-5 shadow-lg animate-in fade-in slide-in-from-top-4 duration-700"
+          style={{ 
+            background: "var(--ref-100)", 
+            borderColor: "var(--brand-1)",
+            color: "var(--brand-3)",
+            fontFamily: "var(--base-font-family)"
+          }}
+        >
+          <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[rgba(185,28,28,0.15)]">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+              <circle cx="12" cy="12" r="10" />
+              <line x1="12" y1="8" x2="12" y2="12" />
+              <line x1="12" y1="16" x2="12.01" r="16" />
+            </svg>
+          </div>
+          <div className="flex flex-col gap-0.5">
+            <span className="text-[15px] font-extrabold leading-tight tracking-wide">Please wait {formatTime()} for deposit approval</span>
+            <span className="text-[12px] font-medium opacity-90" style={{ color: "var(--brand-10)" }}>Your deposit is currently being processed by our team.</span>
+          </div>
+        </div>
+      ) : cashTab === "deposit" ? (
+        <>
+          {timeLeft > 0 && !activeBank && (
+            <div 
+              className="mb-4 mt-2 flex items-center gap-3 rounded-xl border p-4 shadow-md"
+              style={{ 
+                background: "var(--ref-100)", 
+                borderColor: "var(--brand-1)",
+                color: "var(--brand-3)",
+                fontFamily: "var(--base-font-family)"
+              }}
+            >
+              <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-[rgba(185,28,28,0.1)]">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                  <circle cx="12" cy="12" r="10" />
+                  <line x1="12" y1="8" x2="12" y2="12" />
+                  <line x1="12" y1="16" x2="12.01" y2="16" />
+                </svg>
+              </div>
+              <span className="text-[14px] font-bold tracking-tight">Pending Approval: {formatTime()} remaining</span>
+            </div>
+          )}
+
+          {!activeBank && timeLeft <= 0 ? (
+            <p className="mb-3 text-sm sm:text-[14px]" style={{ color: "var(--text-secondary)" }}>
+              Select a reload option from the available options.
+            </p>
+          ) : null}
+
+          {activeBank ? (
+            <BankTransferDetailsStep
+              bank={activeBank}
+              allBanks={BANK_TRANSFER_OPTIONS}
+              onBack={() => setBankTransferBankId(null)}
+              onSelectBank={(id) => setBankTransferBankId(id)}
+              onSuccess={() => {
+                startTimer(10);
+                setIsSuccessModalOpen(true);
+                setIsPendingView(true);
+                setBankTransferBankId(null);
+              }}
+              countdownText={timeLeft > 0 ? formatTime() : null}
+            />
+          ) : (
+            <div className="t3-settings-menu-list mt-2 flex flex-col gap-2">
+              <div className="t3-settings-menu-list-item bank overflow-hidden rounded-xl border" style={{ borderColor: "var(--border-subtle)" }}>
+                <button type="button" className="menu-list-item-row" onClick={() => setBankOpen((o) => !o)} aria-expanded={bankOpen}>
+                  <div className="first">
+                    <div className="flex shrink-0 items-center">
+                      <BankCategoryIcon />
+                    </div>
+                    <div className="min-w-0">
+                      <div className="title">Bank</div>
+                      <span className="remark">Normal Bank Transfer</span>
+                    </div>
+                  </div>
+                  <div className="second text-[var(--text-secondary)]">{bankOpen ? <MenuChevronDown /> : <MenuChevronRight />}</div>
+                </button>
+                {bankOpen ? (
+                  <div className="bank-option-list">
+                    {BANK_TRANSFER_OPTIONS.map((b) => (
+                      <button
+                        key={b.id}
+                        type="button"
+                        className="bank-option-box text-left"
+                        onClick={() => setBankTransferBankId(b.id)}
+                      >
+                        <div className="bank-option-img">
+                          <img src={b.logoUrl} alt={b.name} className="img-100" loading="lazy" referrerPolicy="no-referrer" />
+                        </div>
+                        <div className="bank-option-info min-w-0">
+                          <div className="bank-option-name">{b.name}</div>
+                          <div className="bank-option-minmax">{b.minmax}</div>
+                        </div>
+                      </button>
+                    ))}
+                  </div>
+                ) : null}
+              </div>
+
+              <div className="t3-settings-menu-list-item bank overflow-hidden rounded-xl border" style={{ borderColor: "var(--border-subtle)" }}>
+                <button type="button" className="menu-list-item-row" onClick={() => setCryptoOpen((o) => !o)} aria-expanded={cryptoOpen}>
+                  <div className="first">
+                    <div className="flex shrink-0 items-center">
+                      <CryptoCategoryIcon />
+                    </div>
+                    <div className="min-w-0">
+                      <div className="title">Cryptocurrency</div>
+                      <span className="remark">Cryptocurrency (Manual)</span>
+                    </div>
+                  </div>
+                  <div className="second text-[var(--text-secondary)]">{cryptoOpen ? <MenuChevronDown /> : <MenuChevronRight />}</div>
+                </button>
+                {cryptoOpen ? (
+                  <div className="bank-option-list">
+                    {CRYPTO_OPTIONS.map((c) => (
+                      <button key={c.name} type="button" className="bank-option-box text-left">
+                        <div className="bank-option-img">
+                          <img src={c.logoUrl} alt={c.name} className="img-100" loading="lazy" referrerPolicy="no-referrer" />
+                        </div>
+                        <div className="bank-option-info min-w-0">
+                          <div className="bank-option-name">{c.name}</div>
+                          <div className="bank-option-minmax">{c.minmax}</div>
+                        </div>
+                      </button>
+                    ))}
+                  </div>
+                ) : null}
+              </div>
+            </div>
+          )}
+        </>
       ) : null}
 
-      {cashTab === "deposit" && activeBank ? (
-        <BankTransferDetailsStep
-          bank={activeBank}
-          allBanks={BANK_TRANSFER_OPTIONS}
-          onBack={() => setBankTransferBankId(null)}
-          onSelectBank={(id) => setBankTransferBankId(id)}
-        />
-      ) : cashTab === "deposit" ? (
-        <div className="t3-settings-menu-list mt-2 flex flex-col gap-2">
-          <div className="t3-settings-menu-list-item bank overflow-hidden rounded-xl border" style={{ borderColor: "var(--border-subtle)" }}>
-            <button type="button" className="menu-list-item-row" onClick={() => setBankOpen((o) => !o)} aria-expanded={bankOpen}>
-              <div className="first">
-                <div className="flex shrink-0 items-center">
-                  <BankCategoryIcon />
-                </div>
-                <div className="min-w-0">
-                  <div className="title">Bank</div>
-                  <span className="remark">Normal Bank Transfer</span>
-                </div>
-              </div>
-              <div className="second text-[var(--text-secondary)]">{bankOpen ? <MenuChevronDown /> : <MenuChevronRight />}</div>
-            </button>
-            {bankOpen ? (
-              <div className="bank-option-list">
-                {BANK_TRANSFER_OPTIONS.map((b) => (
-                  <button
-                    key={b.id}
-                    type="button"
-                    className="bank-option-box text-left"
-                    onClick={() => setBankTransferBankId(b.id)}
-                  >
-                    <div className="bank-option-img">
-                      <img src={b.logoUrl} alt={b.name} className="img-100" loading="lazy" referrerPolicy="no-referrer" />
-                    </div>
-                    <div className="bank-option-info min-w-0">
-                      <div className="bank-option-name">{b.name}</div>
-                      <div className="bank-option-minmax">{b.minmax}</div>
-                    </div>
-                  </button>
-                ))}
-              </div>
-            ) : null}
-          </div>
-
-          <div className="t3-settings-menu-list-item bank overflow-hidden rounded-xl border" style={{ borderColor: "var(--border-subtle)" }}>
-            <button type="button" className="menu-list-item-row" onClick={() => setCryptoOpen((o) => !o)} aria-expanded={cryptoOpen}>
-              <div className="first">
-                <div className="flex shrink-0 items-center">
-                  <CryptoCategoryIcon />
-                </div>
-                <div className="min-w-0">
-                  <div className="title">Cryptocurrency</div>
-                  <span className="remark">Cryptocurrency (Manual)</span>
-                </div>
-              </div>
-              <div className="second text-[var(--text-secondary)]">{cryptoOpen ? <MenuChevronDown /> : <MenuChevronRight />}</div>
-            </button>
-            {cryptoOpen ? (
-              <div className="bank-option-list">
-                {CRYPTO_OPTIONS.map((c) => (
-                  <button key={c.name} type="button" className="bank-option-box text-left">
-                    <div className="bank-option-img">
-                      <img src={c.logoUrl} alt={c.name} className="img-100" loading="lazy" referrerPolicy="no-referrer" />
-                    </div>
-                    <div className="bank-option-info min-w-0">
-                      <div className="bank-option-name">{c.name}</div>
-                      <div className="bank-option-minmax">{c.minmax}</div>
-                    </div>
-                  </button>
-                ))}
-              </div>
-            ) : null}
-          </div>
-        </div>
-      ) : (
-        <div
-          className="rounded-xl border px-6 py-12 text-center"
-          style={{ borderColor: "var(--border-subtle)", background: "var(--surface-base)" }}
-        >
-          <p className="text-sm font-semibold" style={{ color: "var(--action-primary-hover)" }}>
-            Withdrawal
-          </p>
-          <p className="mt-2 text-sm" style={{ color: "var(--text-secondary)" }}>
-            Withdrawal options will appear here.
-          </p>
-        </div>
-      )}
+      <DepositSuccessModal 
+        isOpen={isSuccessModalOpen} 
+        onClose={() => setIsSuccessModalOpen(false)} 
+      />
     </section>
   );
 }

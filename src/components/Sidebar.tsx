@@ -110,7 +110,6 @@ function RecentGameLink({ active, onSelect }: { active: boolean; onSelect?: () =
         "t3-sidemenu-item group w-full h-[44px] rounded-lg flex items-center px-[12px] gap-[10px] text-left transition-colors",
         active ? "side-nav-item--active bg-[var(--nav-side-active)]" : "bg-bg-item hover:bg-[var(--nav-side-item-hover)]",
       ].join(" ")}
-      style={{ boxShadow: active ? "var(--nav-side-item-active-shadow)" : undefined }}
     >
       <img
         src={assets.iconRecent}

@@ -2715,7 +2715,6 @@ select:not(.t3-custom-input-text) {
 
 /* Override global settings list hover (red gradient) on deposit accordions */
 .deposit-page .t3-settings-menu-list .t3-settings-menu-list-item.bank:hover {
-    background: var(--surface-base) !important;
     color: var(--text-primary) !important;
 }
 
@@ -3134,7 +3133,7 @@ select:not(.t3-custom-input-text) {
 }
 
 .deposit-page .deposit-bank-transfer__bank-card.selected .mm {
-    color: var(--ref-90);
+    color: var(--brand-10);
 }
 
 .deposit-page .deposit-bank-transfer__amount-grid {
