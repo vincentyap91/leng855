@@ -161,8 +161,8 @@
     --header-lang-bg: var(--text-inverse);
     --header-lang-border: none;
     --header-lang-chevron-filter: brightness(0) invert(1);
-    --header-auth-panel-bg: linear-gradient(180deg, var(--surface-control-1) 0%, var(--surface-control-2) 100%);
-    --header-auth-chip-bg: linear-gradient(180deg, var(--surface-control-3) 0%, var(--surface-control-4) 100%);
+    --header-auth-panel-bg: var(--text-inverse);
+    --header-auth-chip-bg: var(--text-inverse);
     --header-auth-target-bg: linear-gradient(180deg, var(--accent-utility-1) 0%, var(--accent-utility-2) 100%);
     --header-auth-wallet-ddl-bg: linear-gradient(180deg, var(--surface-control-5) 0%, var(--surface-control-6) 35%, var(--surface-control-7) 72%, var(--surface-control-8) 100%);
     --header-auth-logout-color: var(--accent-muted-strong);
