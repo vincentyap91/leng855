@@ -389,18 +389,48 @@ export function Header({
               <div
                 tabIndex={-1}
                 role="menu"
-                className="language-dropdown-menu dropdown-menu absolute top-full right-0 z-[100] mt-2 max-h-[min(260px,calc(100vh-140px))] min-w-[200px] overflow-auto rounded-xl border shadow-lg"
-                style={{ borderColor: "var(--border-subtle)", background: "var(--surface-base)" }}
+                className="language-dropdown-menu absolute top-[calc(100%+8px)] right-0 z-[100] w-[200px] overflow-hidden rounded-xl border-[1.5px] shadow-2xl animate-in fade-in zoom-in-95 duration-200"
+                style={{ 
+                  borderColor: "var(--brand-1)", 
+                  background: "var(--ref-110)",
+                  fontFamily: "var(--base-font-family)"
+                }}
               >
-                <button type="button" tabIndex={0} role="menuitem" className="dropdown-item flex w-full items-center gap-2 px-4 py-2 text-left hover:brightness-[0.98]" onClick={() => setLangOpen(false)}>
-                  <img src={assets.cambodiaFlag} alt="" height={20} className="h-5 w-5 rounded-full object-cover" /> <span className="ml-1 text-[13px] text-[var(--text-primary)]">Khmer</span>
+                {/* Khmer - Active State */}
+                <button 
+                  type="button" 
+                  tabIndex={0} 
+                  role="menuitem" 
+                  className="flex w-full items-center gap-3 px-4 py-2.5 text-left transition-colors" 
+                  style={{ background: "var(--brand-3)" }}
+                  onClick={() => setLangOpen(false)}
+                >
+                  <img src={assets.cambodiaFlag} alt="" className="h-6 w-6 rounded-full object-cover shadow-md" /> 
+                  <span className="text-[14px] font-bold text-white tracking-wide">Khmer</span>
                 </button>
-                <button type="button" tabIndex={0} role="menuitem" className="dropdown-item flex w-full items-center gap-2 px-4 py-2 text-left hover:brightness-[0.98]" onClick={() => setLangOpen(false)}>
-                  <img src={assets.ukFlag} alt="" height={20} className="h-5 w-5 rounded-full object-cover" /> <span className="ml-1 text-[13px] text-[var(--text-primary)]">English</span>
+
+                {/* English - Inactive State */}
+                <button 
+                  type="button" 
+                  tabIndex={0} 
+                  role="menuitem" 
+                  className="flex w-full items-center gap-3 px-4 py-2.5 text-left transition-colors hover:bg-white/5" 
+                  onClick={() => setLangOpen(false)}
+                >
+                  <img src={assets.ukFlag} alt="" className="h-6 w-6 rounded-full object-cover shadow-md" /> 
+                  <span className="text-[14px] font-bold text-white tracking-wide">English</span>
                 </button>
-                <button type="button" tabIndex={0} role="menuitem" className="dropdown-item flex w-full items-center gap-2 px-4 py-2 text-left hover:brightness-[0.98]" onClick={() => setLangOpen(false)}>
-                  <img src={assets.chinaFlag} alt="" height={20} className="h-5 w-5 rounded-full object-cover" />{" "}
-                  <span className="ml-1 text-[13px] text-[var(--text-primary)]">简体中文</span>
+
+                {/* Simplified Chinese - Inactive State */}
+                <button 
+                  type="button" 
+                  tabIndex={0} 
+                  role="menuitem" 
+                  className="flex w-full items-center gap-3 px-4 py-2.5 text-left transition-colors hover:bg-white/5" 
+                  onClick={() => setLangOpen(false)}
+                >
+                  <img src={assets.chinaFlag} alt="" className="h-7 w-7 rounded-full object-cover shadow-md" /> 
+                  <span className="text-[14px] font-bold text-white tracking-wide">简体中文</span>
                 </button>
               </div>
             ) : null}
