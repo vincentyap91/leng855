@@ -65,12 +65,9 @@ function SideLink({ label, icon, badge, active, onSelect }: SideLinkProps) {
       type="button"
       onClick={onSelect}
       className={[
-        "t3-sidemenu-item side-nav-item group relative w-full h-[44px] rounded-lg transition-[color,background-color,box-shadow] duration-200 ease-out flex items-center px-[12px] gap-[10px]",
+        "t3-sidemenu-item side-nav-item group relative w-full h-[44px] rounded-lg transition-[color,background-color] duration-200 ease-out flex items-center px-[12px] gap-[10px]",
         active ? "side-nav-item--active bg-[var(--nav-side-active)]" : "bg-bg-item hover:bg-[var(--nav-side-item-hover)]",
       ].join(" ")}
-      style={{
-        boxShadow: active ? "var(--nav-side-item-active-shadow)" : undefined,
-      }}
     >
       <img
         src={icon}

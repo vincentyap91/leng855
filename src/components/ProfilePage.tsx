@@ -1,10 +1,11 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import { ChangeLanguageModal } from "./ChangeLanguageModal";
 import { ChangePasswordModal } from "./ChangePasswordModal";
 import { DownlinesModal } from "./DownlinesModal";
 import { HistoryRecordModal } from "./HistoryRecordModal";
 import { MyProfileModal } from "./MyProfileModal";
+import { ProfileUpdateReminderModal } from "./ProfileUpdateReminderModal";
 
 const PROFILE_ACTIONS = [
   "My Profile",
@@ -76,6 +77,17 @@ export function ProfilePage({ onLogout }: ProfilePageProps) {
   const [isDownlinesOpen, setIsDownlinesOpen] = useState(false);
   const [isChangeLanguageOpen, setIsChangeLanguageOpen] = useState(false);
   const [isChangePasswordOpen, setIsChangePasswordOpen] = useState(false);
+  const [isReminderOpen, setIsReminderOpen] = useState(false);
+
+  // Check for missing profile info on mount
+  useEffect(() => {
+    const storedFullName = localStorage.getItem("userFullName") || draftFullName;
+    const storedBirthDate = localStorage.getItem("userBirthDate"); // Assuming it's stored or default
+    
+    if (!storedFullName || !storedBirthDate) {
+      setIsReminderOpen(true);
+    }
+  }, []);
 
   return (
     <section className="mx-auto w-full max-w-[760px] px-4 py-6">
@@ -233,6 +245,15 @@ export function ProfilePage({ onLogout }: ProfilePageProps) {
       <DownlinesModal isOpen={isDownlinesOpen} onClose={() => setIsDownlinesOpen(false)} />
       <ChangeLanguageModal isOpen={isChangeLanguageOpen} onClose={() => setIsChangeLanguageOpen(false)} />
       <ChangePasswordModal isOpen={isChangePasswordOpen} onClose={() => setIsChangePasswordOpen(false)} />
+      
+      <ProfileUpdateReminderModal 
+        isOpen={isReminderOpen} 
+        onClose={() => setIsReminderOpen(false)} 
+        onContinue={() => {
+          setIsReminderOpen(false);
+          setIsMyProfileOpen(true);
+        }}
+      />
     </section>
   );
 }
