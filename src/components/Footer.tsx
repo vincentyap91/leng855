@@ -50,7 +50,7 @@ export function Footer() {
             </div>
             <div className="footer-actions">
               <div className="footer-social-links" aria-label="Social media">
-                <a href="var(--accent-strong)ook" className="footer-social-link" aria-label="Facebook">
+                <a href="#facebook" className="footer-social-link" aria-label="Facebook">
                   <img src={assets.socialFb} className="img-responsive" alt="" />
                 </a>
                 <a href="#telegram" className="footer-social-link" aria-label="Telegram">

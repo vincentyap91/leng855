@@ -19,7 +19,11 @@ function readDownloadBannerDismissed(): boolean {
  * (matches leng855.live): a download banner at bottom-left and a live-chat
  * agent bubble at bottom-right.
  */
-export function FloatingOverlays() {
+type FloatingOverlaysProps = {
+  onLiveChatClick?: () => void;
+};
+
+export function FloatingOverlays({ onLiveChatClick }: FloatingOverlaysProps) {
   const [downloadBannerDismissed, setDownloadBannerDismissed] = useState(
     readDownloadBannerDismissed,
   );
@@ -74,6 +78,7 @@ export function FloatingOverlays() {
         aria-label="Live chat"
         className="fixed right-4 bottom-4 z-40 w-14 h-14 rounded-full overflow-hidden border-2 shadow-lg bg-[var(--surface-base)]"
         style={{ borderColor: "var(--accent-strong)" }}
+        onClick={onLiveChatClick}
       >
         <img
           src={assets.chatAvatar}

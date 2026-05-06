@@ -13,10 +13,12 @@ export type AppView =
   | "promotion-detail"
   | "referral"
   | "deposit"
+  | "withdrawal"
   | "profile"
   | "rebate"
   | "membership"
-  | "recent-game";
+  | "recent-game"
+  | "live-chat";
 
 type Item = {
   label: string;
@@ -134,17 +136,32 @@ function RecentGameLink({ active, onSelect }: { active: boolean; onSelect?: () =
 }
 
 /** Live Chat — layout/spacing matches Recent Game; badge matches SideLink pill */
-function LiveChatLink() {
+function LiveChatLink({ active, onSelect }: { active: boolean; onSelect?: () => void }) {
   return (
     <button
       type="button"
-      className="t3-sidemenu-item group w-full h-[44px] rounded-lg flex items-center px-[12px] gap-[10px] text-left transition-colors bg-bg-item hover:bg-[var(--nav-side-item-hover)]"
+      onClick={onSelect}
+      className={[
+        "t3-sidemenu-item group w-full h-[44px] rounded-lg flex items-center px-[12px] gap-[10px] text-left transition-colors",
+        active ? "side-nav-item--active bg-[var(--nav-side-active)]" : "bg-bg-item hover:bg-[var(--nav-side-item-hover)]",
+      ].join(" ")}
+      style={{ boxShadow: active ? "var(--nav-side-item-active-shadow)" : undefined }}
     >
       <LiveChatIcon />
-      <h6 className="m-0 text-[13px] font-semibold leading-none flex-1 text-left text-[var(--nav-side-color)] group-hover:text-[var(--nav-side-text-hover)]">
+      <h6
+        className={[
+          "m-0 text-[13px] font-semibold leading-none flex-1 text-left",
+          active ? "text-[var(--nav-side-text-active)]" : "text-[var(--nav-side-color)] group-hover:text-[var(--nav-side-text-hover)]",
+        ].join(" ")}
+      >
         Live Chat
       </h6>
-      <span className="min-w-[18px] h-[18px] px-[5px] rounded-full bg-[var(--accent-strong)] text-[var(--text-on-emphasis)] text-[11px] font-bold flex items-center justify-center">
+      <span
+        className={[
+          "min-w-[18px] h-[18px] px-[5px] rounded-full text-[11px] font-bold flex items-center justify-center",
+          active ? "bg-[var(--surface-base)] text-[var(--accent-strong)]" : "bg-[var(--accent-strong)] text-[var(--text-on-emphasis)]",
+        ].join(" ")}
+      >
         1
       </span>
     </button>
@@ -153,11 +170,11 @@ function LiveChatLink() {
 
 function SocialSidebarRow() {
   const linkClass =
-    "block w-[34px] h-[34px] rounded-[6px] overflow-hidden ring-1 ring-[color:color-mix(in_srgb,var(--text-on-emphasis)_10%,transparent)] shadow-sm hover:brightness-110 transition-[filter] duration-150";
+    "block w-[34px] h-[34px] rounded-[6px] overflow-hidden ring-1 ring-[var(--nav-side-social-ring)] shadow-sm hover:brightness-110 transition-[filter] duration-150";
 
   return (
     <div className="flex items-center justify-center gap-2.5 pt-3 pb-1">
-      <a href="var(--accent-strong)ook" className={linkClass} aria-label="Facebook">
+      <a href="#facebook" className={linkClass} aria-label="Facebook">
         <img
           src={assets.socialFb}
           alt=""
@@ -208,8 +225,8 @@ function PromoStrip({
       type="button"
       className={[
         "w-full h-[48px] rounded-[6px] flex items-center px-[12px] gap-[11px]",
-        "text-[var(--accent-soft)] font-bold text-[13px] leading-[1.15] text-left",
-        "ring-1 ring-[color:color-mix(in_srgb,var(--text-on-emphasis)_10%,transparent)] shadow-[0_3px_6px_color-mix(in srgb, var(--surface-inverse) 35%, transparent)]",
+        "text-[var(--surface-utility-2)] font-bold text-[13px] leading-[1.15] text-left",
+        "ring-1 ring-[var(--nav-side-promo-ring)] shadow-[var(--nav-side-promo-shadow)]",
         "transition hover:brightness-110 active:brightness-95",
         bgClass,
       ].join(" ")}
@@ -218,7 +235,7 @@ function PromoStrip({
       <img
         src={icon}
         alt=""
-        className="w-[32px] h-[32px] object-contain shrink-0 drop-shadow-[0_2px_3px_color-mix(in srgb, var(--surface-inverse) 45%, transparent)]"
+        className="w-[32px] h-[32px] object-contain shrink-0 drop-shadow-[var(--nav-side-promo-icon-shadow)]"
       />
       <span>{children}</span>
     </button>
@@ -245,6 +262,7 @@ function navTargetForLabel(label: string): AppView | null {
   if (label === "Rebate") return "rebate";
   if (label === "Membership") return "membership";
   if (label === "Recent Game") return "recent-game";
+  if (label === "Live Chat") return "live-chat";
   return null;
 }
 
@@ -261,6 +279,7 @@ function isItemActive(view: AppView, label: string): boolean {
   if (view === "rebate" && label === "Rebate") return true;
   if (view === "membership" && label === "Membership") return true;
   if (view === "recent-game" && label === "Recent Game") return true;
+  if (view === "live-chat" && label === "Live Chat") return true;
   if (view === "home" && label === "Home") return true;
   return false;
 }
@@ -310,7 +329,7 @@ export function Sidebar({ view, onNavigate, isOpen = true }: SidebarProps) {
           className="mt-2 border-t border-b py-2.5 -mx-[8px] px-[8px]"
           style={{ borderColor: "var(--nav-side-chat-section-border)" }}
         >
-          <LiveChatLink />
+          <LiveChatLink active={view === "live-chat"} onSelect={() => onNavigate("live-chat")} />
         </div>
       </nav>
 

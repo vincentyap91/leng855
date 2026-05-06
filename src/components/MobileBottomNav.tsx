@@ -39,6 +39,7 @@ export function MobileBottomNav({ view, onNavigate }: MobileBottomNavProps) {
   const referralActive = view === "referral";
   const profileActive = view === "profile";
   const homeActive = view === "home";
+  const liveChatActive = view === "live-chat";
 
   return (
     <nav className="mobile-bottom-nav lg:hidden" role="navigation" aria-label="Mobile primary">
@@ -75,11 +76,18 @@ export function MobileBottomNav({ view, onNavigate }: MobileBottomNavProps) {
         <NavIcon src={assets.iconPromo} active={promoActive} />
         <span>Promotion</span>
       </button>
-      <button type="button" className={`${itemClass} mobile-bottom-nav__btn--badge`} aria-label="Live chat">
+      <button
+        type="button"
+        className={`${itemClass} mobile-bottom-nav__btn--badge`}
+        data-active={liveChatActive ? "true" : "false"}
+        aria-current={liveChatActive ? "page" : undefined}
+        aria-label="Live chat"
+        onClick={() => onNavigate("live-chat")}
+      >
         <span className="mobile-bottom-nav__badge" aria-hidden>
           1
         </span>
-        <NavIcon src={assets.iconLiveChat} active={false} />
+        <NavIcon src={assets.iconLiveChat} active={liveChatActive} />
         <span>Livechat</span>
       </button>
       <button

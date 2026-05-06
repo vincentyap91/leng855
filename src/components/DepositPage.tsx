@@ -518,7 +518,7 @@ function BankTransferDetailsStep({
   );
 }
 
-export function DepositPage() {
+export function DepositPage({ onNavigate }: { onNavigate?: (view: "deposit" | "withdrawal") => void }) {
   const [cashTab, setCashTab] = useState<CashTab>("deposit");
   const [bankOpen, setBankOpen] = useState(true);
   const [cryptoOpen, setCryptoOpen] = useState(false);
@@ -570,13 +570,11 @@ export function DepositPage() {
           aria-selected={cashTab === "withdrawal"}
           className={cashTab === "withdrawal" ? "active" : ""}
           onClick={() => {
-            setCashTab("withdrawal");
-            setBankTransferBankId(null);
+            onNavigate?.("withdrawal");
           }}
           onKeyDown={(e) =>
             tabActivatorKeyDown(e, () => {
-              setCashTab("withdrawal");
-              setBankTransferBankId(null);
+              onNavigate?.("withdrawal");
             })
           }
         >

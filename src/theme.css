@@ -21,6 +21,7 @@
     --ref-140: #1a1d23;
     --ref-150: #001f3f;
     --ref-160: #003366;
+    --ref-165: #4a90e2;
     --ref-170: #432800;
     --ref-180: #774505;
     --ref-190: #1d232a;
@@ -72,8 +73,8 @@
     --surface-control-6: var(--ref-240);
     --surface-control-7: var(--ref-250);
     --surface-control-8: var(--ref-260);
-    --surface-overlay: color-mix(in srgb, var(--surface-inverse) 50%, transparent);
-    --surface-scrim: color-mix(in srgb, var(--surface-inverse) 78%, transparent);
+    --surface-overlay: rgba(18, 23, 29, 0.5);
+    --surface-scrim: rgba(18, 23, 29, 0.78);
 
     /* Text */
     --text-primary: var(--ref-90);
@@ -103,7 +104,7 @@
     /* Border */
     --border-default: var(--ref-20);
     --border-strong: var(--ref-40);
-    --border-subtle: color-mix(in srgb, var(--surface-inverse) 6%, transparent);
+    --border-subtle: var(--ref-20);
 
     /* States */
     --feedback-success: var(--state-success);
@@ -112,10 +113,10 @@
     --feedback-info: var(--action-primary);
 
     /* Effects */
-    --effect-shadow-soft: color-mix(in srgb, var(--surface-inverse) 6%, transparent);
-    --effect-shadow-medium: color-mix(in srgb, var(--surface-inverse) 14%, transparent);
-    --effect-tint-action: color-mix(in srgb, var(--accent-strong) 10%, transparent);
-    --effect-tint-accent: color-mix(in srgb, var(--accent-soft) 14%, transparent);
+    --effect-shadow-soft: var(--ref-20);
+    --effect-shadow-medium: var(--ref-40);
+    --effect-tint-action: var(--brand-3);
+    --effect-tint-accent: var(--brand-1);
 
     /* Component tokens */
     --theme-font-family-base: Poppins, sans-serif;
@@ -140,7 +141,7 @@
     --btn-secondary-bg: var(--action-secondary);
     --btn-secondary-text: var(--text-primary);
     --card-bg: var(--surface-base);
-    --card-border: color-mix(in srgb, var(--accent-soft) 55%, transparent);
+    --card-border: var(--ref-40);
     --input-bg: var(--surface-muted);
     --input-border: var(--border-default);
     --input-text: var(--text-primary);
@@ -148,15 +149,15 @@
 
     --sidebar-fixed-width: 220px;
     --mobile-nav-bg: var(--surface-shell);
-    --mobile-nav-fg: color-mix(in srgb, var(--text-inverse) 90%, transparent);
+    --mobile-nav-fg: var(--ref-0);
     --mobile-profile-withdraw-bg: var(--feedback-info);
-    --mobile-home-profile-bg: color-mix(in srgb, var(--surface-muted) 58%, var(--surface-raised) 42%);
+    --mobile-home-profile-bg: var(--ref-10);
     --footer-strip-bg: var(--action-primary-hover);
 
     --header-gradient: linear-gradient(90deg, var(--surface-deep-1) 0%, var(--surface-deep-2) 24%, var(--surface-deep-3) 48%, var(--accent-deep) 78%, var(--accent-emphasis) 100%);
     --header-bar-gradient: var(--header-gradient);
-    --header-bar-top-line: color-mix(in srgb, var(--accent-soft) 38%, transparent);
-    --header-bar-bottom-line: color-mix(in srgb, var(--accent-muted) 28%, transparent);
+    --header-bar-top-line: var(--ref-50);
+    --header-bar-bottom-line: var(--ref-40);
     --header-logo-backdrop: transparent;
     --header-lang-bg: var(--text-inverse);
     --header-lang-border: none;
@@ -173,15 +174,15 @@
     --header-auth-profile-name: var(--text-on-emphasis);
     --header-auth-profile-status: var(--text-muted);
     --header-auth-profile-subtext: var(--text-muted);
-    --header-auth-panel-border: color-mix(in srgb, var(--border-strong) 36%, transparent);
-    --header-auth-chip-border: color-mix(in srgb, var(--border-strong) 35%, transparent);
+    --header-auth-panel-border: var(--ref-30);
+    --header-auth-chip-border: var(--ref-30);
     --header-auth-chevron-filter: brightness(0) invert(1);
     --header-auth-deposit-bg: linear-gradient(90deg, var(--accent-soft) 0%, var(--accent-muted) 50%, var(--accent-soft) 100%);
     --header-auth-deposit-text: var(--text-inverse);
     --header-auth-control-height: 40px;
-    --header-auth-wallet-ddl-border: color-mix(in srgb, var(--border-strong) 42%, transparent);
-    --header-auth-wallet-ddl-inset: inset 0 1px 0 color-mix(in srgb, var(--text-on-emphasis) 10%, transparent);
-    --header-auth-wallet-ddl-chevron: color-mix(in srgb, var(--text-on-emphasis) 94%, transparent);
+    --header-auth-wallet-ddl-border: var(--ref-40);
+    --header-auth-wallet-ddl-inset: inset 0 1px 0 var(--ref-20);
+    --header-auth-wallet-ddl-chevron: var(--ref-0);
 
     --surface-gradient: linear-gradient(90deg, var(--surface-base) 0%, var(--surface-base) 100%);
     --cta-gradient: var(--btn-primary-bg);
@@ -213,9 +214,9 @@
 
     --border: var(--border-subtle);
     --shadow-soft: var(--effect-shadow-soft);
-    --shadow-elevated-color: color-mix(in srgb, var(--text-primary) 12%, transparent);
+    --shadow-elevated-color: var(--ref-80);
     --shadow-elevated: 0 4px 12px 0 var(--shadow-elevated-color);
-    --shadow-promo-text: 0 1px 2px color-mix(in srgb, var(--action-primary-hover) 42%, transparent);
+    --shadow-promo-text: 0 1px 2px var(--ref-90);
     --active-tint: var(--effect-tint-action);
     --secondary-tint: var(--effect-tint-accent);
     --page-bg-glow: var(--surface-base);
@@ -227,7 +228,7 @@
     --container-secondary-border: 1px solid transparent;
     --container-secondary-glow: none;
     --panel-item-bg: var(--surface-base);
-    --panel-item-border: color-mix(in srgb, var(--accent-soft) 48%, transparent);
+    --panel-item-border: var(--ref-40);
     --panel-item-shadow: none;
 
     --sidebar-bg: var(--surface-raised);
@@ -258,11 +259,15 @@
     --nav-side-promo-download-bg: var(--sidebar-download-bg);
     --nav-side-promo-text-shadow: var(--shadow-promo-text);
     --nav-side-promo-icon-size: 34px;
+    --nav-side-promo-ring: rgba(255, 255, 255, 0.1);
+    --nav-side-promo-shadow: 0 3px 6px rgba(18, 23, 29, 0.35);
+    --nav-side-promo-icon-shadow: 0 2px 3px rgba(18, 23, 29, 0.45);
+    --nav-side-social-ring: rgba(255, 255, 255, 0.1);
     --nav-side-item-hover: var(--sidebar-item-hover);
     --nav-side-item-border: transparent;
     --nav-side-item-active-border: transparent;
     --nav-side-highlight-ring: var(--accent-strong);
-    --nav-side-item-glow: color-mix(in srgb, var(--accent-strong) 18%, transparent);
+    --nav-side-item-glow: var(--brand-3);
     --nav-side-item-active-shadow: 0 2px 6px var(--nav-side-item-glow);
     --nav-side-chat-bg: var(--surface-muted);
     --nav-side-chat-section-border: var(--border-default);
@@ -271,7 +276,7 @@
 
     --announcement-bg: var(--accent-wash);
     --announcement-color: var(--action-primary-hover);
-    --announcement-muted: color-mix(in srgb, var(--accent-soft) 74%, var(--action-primary-hover) 26%);
+    --announcement-muted: var(--ref-50);
     --announcement-icon-color: var(--action-primary-hover);
     --announcement-shadow: none;
     --non-active-bg: var(--surface-strong);
@@ -281,13 +286,13 @@
     --game-rtp-badge-game: var(--text-on-emphasis);
     --game-category-tab-color: var(--action-primary-hover);
     --game-category-tab-bg: var(--surface-base);
-    --game-category-tab-hover: color-mix(in srgb, var(--action-primary-hover) 8%, var(--surface-base) 92%);
+    --game-category-tab-hover: var(--ref-10);
     --game-category-tab-active: var(--action-primary-hover);
     --game-category-tab-active-color: var(--text-on-emphasis);
-    --game-category-pill-shadow: 0 2px 12px color-mix(in srgb, var(--text-primary) 9%, transparent);
+    --game-category-pill-shadow: 0 2px 12px var(--ref-20);
     --game-category-mobile-strip-bg: var(--surface-base);
     --game-category-mobile-strip-cap-bg: var(--action-primary-hover);
-    --game-category-mobile-strip-shadow: 0 2px 10px color-mix(in srgb, var(--text-primary) 10%, transparent);
+    --game-category-mobile-strip-shadow: 0 2px 10px var(--ref-20);
     --game-title-color: inherit;
     --game-title-highlight-color: var(--accent-strong);
     --game-item-border: 1px solid var(--border-subtle);
@@ -405,8 +410,8 @@
     --modal-footer-border: var(--border-subtle);
     --modal-body: var(--surface-base);
     --modal-backdrop: var(--surface-overlay);
-    --modal-border: 1px solid color-mix(in srgb, var(--accent-soft) 42%, transparent);
-    --modal-box-shadow: 0 24px 70px color-mix(in srgb, var(--text-primary) 22%, transparent);
+    --modal-border: 1px solid var(--ref-40);
+    --modal-box-shadow: 0 24px 70px var(--ref-80);
     --modal-field-bg: var(--surface-base);
     --modal-field-color: var(--text-primary);
     --modal-field-border: none;
@@ -435,7 +440,7 @@
     --deposit-accordion-bg: var(--surface-base);
     --deposit-accordion-row-hover: var(--surface-muted);
     --deposit-bank-option-bg: var(--surface-base);
-    --deposit-bank-option-border: color-mix(in srgb, var(--accent-soft) 48%, transparent);
+    --deposit-bank-option-border: var(--ref-40);
     --deposit-bank-option-text: var(--text-primary);
     --deposit-bank-option-muted: var(--text-secondary);
     --numberpad-bg: var(--surface-base);
@@ -458,9 +463,9 @@
     --nav-footer-bg: var(--accent-strong);
     --nav-footer-gradient: var(--header-gradient);
     --nav-footer-bottom-accent: var(--action-primary-hover);
-    --nav-footer-color: color-mix(in srgb, var(--accent-muted) 72%, var(--text-on-emphasis));
-    --nav-footer-copyright-color: color-mix(in srgb, var(--accent-muted) 58%, var(--surface-base));
-    --nav-footer-control-border: color-mix(in srgb, var(--accent-soft) 55%, transparent);
+    --nav-footer-color: var(--ref-40);
+    --nav-footer-copyright-color: var(--ref-30);
+    --nav-footer-control-border: var(--ref-40);
     --nav-footer-active: var(--action-primary-hover);
     --nav-footer-active-color: var(--text-primary);
     --nav-footer-border: 3px solid var(--action-primary-hover);
@@ -480,7 +485,7 @@
     --daily-checkin-active-day-label: var(--action-primary-hover);
     --daily-checkin-active-day-label-color: var(--text-primary);
     --daily-checkin-active-amount-color: var(--accent-soft);
-    --daily-checkin-avtive-box-shadow: 0 0 4px 0 var(--effect-tint-action);
+    --daily-checkin-avtive-box-shadow: 0 0 4px 0 var(--ref-30);
     --daily-checkin-claimed-bg: var(--surface-base);
     --daily-checkin-claimed-icon: var(--text-secondary);
     --daily-checkin-claimed-border: var(--border-subtle);
@@ -555,7 +560,7 @@
     --referral-inner-section-bg: var(--surface-base);
     --apk-banner-mobile-bg: var(--action-primary-hover);
     --apk-banner-mobile-bg-color: var(--text-primary);
-    --apk-banner-color: var(--text-primary);
+    --apk-banner-color: var(--ref-165);
     --apk-banner-button: var(--sidebar-download-bg);
 
     --balance-inner-modal: var(--surface-base);
@@ -581,8 +586,8 @@
     --surface-strong: var(--ref-70);
     --surface-shell: var(--ref-80);
     --surface-static-strong: var(--ref-140);
-    --surface-overlay: color-mix(in srgb, var(--ref-0) 50%, transparent);
-    --surface-scrim: color-mix(in srgb, var(--ref-0) 78%, transparent);
+    --surface-overlay: rgba(255, 255, 255, 0.5);
+    --surface-scrim: rgba(255, 255, 255, 0.78);
 
     /* Text */
     --text-primary: var(--ref-0);
@@ -603,7 +608,7 @@
     --accent-deep: var(--brand-6);
     --accent-soft: var(--brand-1);
     --accent-muted: var(--brand-2);
-    --accent-wash: color-mix(in srgb, var(--brand-7) 22%, var(--surface-base));
+    --accent-wash: var(--ref-20);
     --accent-bright: var(--brand-10);
     --accent-muted-strong: var(--brand-11);
     --accent-utility-1: var(--brand-8);
@@ -612,7 +617,7 @@
     /* Border */
     --border-default: var(--ref-70);
     --border-strong: var(--ref-50);
-    --border-subtle: color-mix(in srgb, var(--ref-0) 12%, transparent);
+    --border-subtle: var(--ref-20);
 
     /* States */
     --feedback-success: var(--state-success);
@@ -620,11 +625,16 @@
     --feedback-danger: var(--state-danger);
     --feedback-info: var(--action-primary);
 
+    --nav-side-promo-ring: rgba(255, 255, 255, 0.1);
+    --nav-side-promo-shadow: 0 3px 6px rgba(0, 0, 0, 0.5);
+    --nav-side-promo-icon-shadow: 0 2px 3px rgba(0, 0, 0, 0.6);
+    --nav-side-social-ring: rgba(255, 255, 255, 0.1);
+
     /* Effects */
-    --effect-shadow-soft: color-mix(in srgb, var(--ref-0) 10%, transparent);
-    --effect-shadow-medium: color-mix(in srgb, var(--ref-0) 18%, transparent);
-    --effect-tint-action: color-mix(in srgb, var(--accent-strong) 16%, transparent);
-    --effect-tint-accent: color-mix(in srgb, var(--accent-soft) 18%, transparent);
+    --effect-shadow-soft: var(--ref-20);
+    --effect-shadow-medium: var(--ref-40);
+    --effect-tint-action: var(--brand-3);
+    --effect-tint-accent: var(--brand-1);
 }
 
 
@@ -710,7 +720,7 @@
 
 .bg-sidebar-download {
     background: var(--sidebar-download-bg) !important;
-    color: var(--accent-bright) !important;
+    color: var(--apk-banner-color) !important;
 }
 
 .theme-menu-icon {
@@ -836,7 +846,7 @@ button.side-nav-item:not(.side-nav-item--active):hover .side-nav-icon {
     overflow: hidden;
     border-radius: 12px;
     background: var(--surface-base);
-    box-shadow: 0 2px 10px color-mix(in srgb, var(--text-primary) 10%, transparent);
+    box-shadow: 0 2px 10px var(--ref-20);
 }
 
 .t3-game-category-home-strip__cap {
@@ -888,7 +898,7 @@ button.side-nav-item:not(.side-nav-item--active):hover .side-nav-icon {
 }
 
 .t3-game-category-item--mobile-strip:not(.active):hover {
-    background: color-mix(in srgb, var(--action-primary-hover) 7%, transparent);
+    background: var(--ref-10);
 }
 
 .t3-game-category-item--mobile-strip:not(.active):hover h6 {
@@ -962,7 +972,7 @@ button.side-nav-item:not(.side-nav-item--active):hover .side-nav-icon {
     gap: 12px;
     padding: 14px 16px;
     background: var(--surface-base);
-    border: 1px solid color-mix(in srgb, var(--surface-inverse) 6%, transparent);
+    border: 1px solid var(--ref-20);
     border-radius: 12px;
     box-shadow: none;
     box-sizing: border-box;
@@ -979,7 +989,7 @@ button.side-nav-item:not(.side-nav-item--active):hover .side-nav-icon {
     font-family: Poppins, sans-serif;
     font-size: 12px;
     font-weight: 600;
-    color: color-mix(in srgb, var(--accent-soft) 82%, var(--text-secondary) 18%);
+    color: var(--accent-soft);
 }
 
 .t3-provider-info-bar__value {
@@ -1007,7 +1017,7 @@ button.side-nav-item:not(.side-nav-item--active):hover .side-nav-icon {
 }
 
 .t3-provider-info-bar__action:hover {
-    background: color-mix(in srgb, color-mix(in srgb, var(--surface-inverse) 6%, transparent) 45%, transparent);
+    background: var(--ref-20);
     color: var(--text-primary);
 }
 
@@ -1038,7 +1048,7 @@ button.side-nav-item:not(.side-nav-item--active):hover .side-nav-icon {
     min-height: 48px;
     box-sizing: border-box;
     background: var(--surface-base);
-    border: 1px solid color-mix(in srgb, var(--surface-inverse) 6%, transparent);
+    border: 1px solid var(--ref-20);
     border-radius: 12px;
     box-shadow: none;
 }
@@ -1169,7 +1179,7 @@ button.side-nav-item:not(.side-nav-item--active):hover .side-nav-icon {
     padding: 0 25px;
     min-height: 44px;
     border-radius: 10px;
-    border: 1px solid color-mix(in srgb, var(--surface-inverse) 6%, transparent);
+    border: 1px solid var(--ref-20);
     background: var(--surface-inverse) !important;
     color: var(--surface-base) !important;
     font-family: Poppins, sans-serif;
@@ -1192,7 +1202,7 @@ button.side-nav-item:not(.side-nav-item--active):hover .side-nav-icon {
 
 /* Live transactions: vertical rule between Deposit and Withdrawal columns */
 .live-transactions-dw-table .live-transactions-dw-table__deposit {
-    border-right: 1px solid color-mix(in srgb, var(--surface-inverse) 12%, transparent) !important;
+    border-right: 1px solid var(--border-default) !important;
 }
 
 .mobile-home-balance-box {
@@ -1251,7 +1261,7 @@ button.side-nav-item:not(.side-nav-item--active):hover .side-nav-icon {
 }
 
 .t3-upload-file-box {
-    border: 1px dashed color-mix(in srgb, var(--surface-inverse) 12%, transparent) !important;
+    border: 1px dashed var(--border-strong) !important;
 }
 
 .payout-container {
@@ -1282,7 +1292,7 @@ button.side-nav-item:not(.side-nav-item--active):hover .side-nav-icon {
 }
 
 .mobile-home-balance-box>.head {
-    border-bottom: 1px solid color-mix(in srgb, var(--surface-inverse) 6%, transparent) !important;
+    border-bottom: 1px solid var(--ref-20) !important;
 }
 
 .t3-default-lobby .progress-identifier {
@@ -1309,7 +1319,7 @@ button.side-nav-item:not(.side-nav-item--active):hover .side-nav-icon {
     inset: 0;
     z-index: 0;
     border: 0;
-    background: color-mix(in srgb, var(--surface-inverse) 50%, transparent);
+    background: var(--surface-overlay);
     backdrop-filter: none;
     cursor: pointer;
 }
@@ -1332,7 +1342,7 @@ button.side-nav-item:not(.side-nav-item--active):hover .side-nav-icon {
     border: none;
     border-radius: 12px;
     background: var(--accent-strong);
-    box-shadow: 0 10px 30px color-mix(in srgb, var(--surface-inverse) 30%, transparent);
+    box-shadow: 0 10px 30px var(--surface-overlay);
     overflow: hidden;
 }
 
@@ -1464,7 +1474,7 @@ button.side-nav-item:not(.side-nav-item--active):hover .side-nav-icon {
     font-size: 13px;
     font-weight: 600;
     line-height: 1.35;
-    border: 1px solid color-mix(in srgb, color-mix(in srgb, var(--surface-inverse) 6%, transparent) 55%, transparent);
+    border: 1px solid var(--ref-20);
 }
 
 .t3-auth-login-alert__text {
@@ -1511,7 +1521,7 @@ button.side-nav-item:not(.side-nav-item--active):hover .side-nav-icon {
     min-height: 44px;
     padding: 0 14px;
     border-radius: 10px;
-    border: 1px solid color-mix(in srgb, var(--surface-inverse) 6%, transparent);
+    border: 1px solid var(--ref-20);
     background: var(--surface-base);
     color: var(--text-primary);
     font-family: Poppins, sans-serif;
@@ -1529,7 +1539,7 @@ button.side-nav-item:not(.side-nav-item--active):hover .side-nav-icon {
 }
 
 .t3-custom-input-text:focus {
-    box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent-soft) 22%, transparent);
+    box-shadow: 0 0 0 3px var(--ref-20);
 }
 
 /* No border lines on text-like inputs / textareas / selects (Tailwind `border` included); keep borders on auth modal fields */
@@ -1661,7 +1671,7 @@ select:not(.t3-custom-input-text) {
     margin-top: 16px;
     margin-inline: -10px;
     padding: 12px 10px;
-    border-top: 1px solid color-mix(in srgb, var(--surface-inverse) 6%, transparent);
+    border-top: 1px solid var(--ref-20);
     border-radius: 12px;
 }
 
@@ -1721,7 +1731,7 @@ select:not(.t3-custom-input-text) {
     font-family: Poppins, sans-serif;
     font-size: 16px;
     font-weight: 700;
-    box-shadow: 0 4px 12px 0 color-mix(in srgb, var(--text-primary) 12%, transparent);
+    box-shadow: 0 4px 12px 0 var(--ref-20);
     transition: filter 160ms ease;
 }
 
@@ -1818,8 +1828,8 @@ select:not(.t3-custom-input-text) {
 .t3-downline-status-table-tab>button {
     background: var(--surface-base) !important;
     color: var(--text-secondary) !important;
-    border-top: 2px solid color-mix(in srgb, var(--surface-inverse) 6%, transparent) !important;
-    border-bottom: 2px solid color-mix(in srgb, var(--surface-inverse) 6%, transparent) !important;
+    border-top: 2px solid var(--ref-20) !important;
+    border-bottom: 2px solid var(--ref-20) !important;
 }
 
 .t3-custom-table tbody>tr>td.downline-table-username {
@@ -1834,7 +1844,7 @@ select:not(.t3-custom-input-text) {
 
 .t3-custom-table tbody>tr>td {
     background-color: var(--surface-base) !important;
-    border-bottom: 1px solid color-mix(in srgb, var(--surface-inverse) 6%, transparent) !important;
+    border-bottom: 1px solid var(--ref-20) !important;
 }
 
 .pagination-bar .pagination-number-bar {
@@ -1892,7 +1902,7 @@ select:not(.t3-custom-input-text) {
 }
 
 .mobile-latest-deposit-withdraw-box>div:first-child>.mobile-home-latest-transactions-box {
-    border-right: 1px solid color-mix(in srgb, var(--surface-inverse) 6%, transparent) !important;
+    border-right: 1px solid var(--ref-20) !important;
 }
 
 .t3-game-category-list .t3-game-category-item:hover {
@@ -1913,8 +1923,8 @@ select:not(.t3-custom-input-text) {
     position: relative;
     z-index: 5;
     background: var(--action-primary-hover);
-    border-top: 1px solid color-mix(in srgb, var(--surface-base) 12%, transparent);
-    border-bottom: 3px solid color-mix(in srgb, var(--surface-inverse) 18%, transparent);
+    border-top: 1px solid var(--ref-10);
+    border-bottom: 3px solid var(--ref-40);
     padding-left: 220px;
 }
 
@@ -2008,7 +2018,7 @@ select:not(.t3-custom-input-text) {
     margin-top: 2px;
     justify-self: center;
     text-align: center;
-    color: color-mix(in srgb, var(--accent-muted) 58%, var(--surface-base));
+    color: var(--ref-30);
     font-size: 10px;
     font-weight: 400;
 }
@@ -2050,9 +2060,9 @@ select:not(.t3-custom-input-text) {
 }
 
 .footer-language-container.footer-language-container--bottom .btn.btn-secondary {
-    border: 1px solid color-mix(in srgb, var(--accent-soft) 55%, transparent);
+    border: 1px solid var(--accent-muted);
     background: transparent;
-    color: color-mix(in srgb, var(--accent-muted) 72%, var(--surface-base));
+    color: var(--accent-muted);
     height: 34px;
     padding: 0 10px;
     border-radius: 8px;
@@ -2075,9 +2085,9 @@ select:not(.t3-custom-input-text) {
 
 /* Generic footer-lang style only if not using bottom screenshot variant */
 .footer-language-container:not(.footer-language-container--bottom) .btn.btn-secondary {
-    border: 1px solid color-mix(in srgb, var(--accent-soft) 55%, transparent);
+    border: 1px solid var(--ref-40);
     background: transparent;
-    color: color-mix(in srgb, var(--accent-muted) 72%, var(--surface-base));
+    color: var(--ref-40);
     height: 34px;
     padding: 0 10px;
     border-radius: 8px;
@@ -2089,7 +2099,7 @@ select:not(.t3-custom-input-text) {
 .t3-copyright {
     margin-top: 0;
     text-align: center;
-    color: color-mix(in srgb, var(--accent-muted) 58%, var(--surface-base));
+    color: var(--ref-30);
     font-size: 10px;
     font-weight: 400;
 }
@@ -2149,7 +2159,7 @@ select:not(.t3-custom-input-text) {
 
 .t3-accordion-item.active>.details>div:not(:last-child),
 .vip-details-list-table>tr:not(:last-child) {
-    border-bottom: 1px solid color-mix(in srgb, var(--surface-inverse) 6%, transparent) !important;
+    border-bottom: 1px solid var(--ref-20) !important;
 }
 
 .t3-accordion-item>.head {
@@ -2202,7 +2212,6 @@ select:not(.t3-custom-input-text) {
     max-height: 40px;
     padding: 0;
     box-sizing: border-box;
-    border: 1px solid color-mix(in srgb, var(--border-strong) 36%, transparent);
     border-radius: 8px;
     flex-wrap: nowrap;
     position: relative;
@@ -2257,10 +2266,8 @@ select:not(.t3-custom-input-text) {
     height: 26px;
     padding: 0;
     border-radius: 6px;
-    border: 1px solid color-mix(in srgb, var(--border-strong) 42%, transparent);
     background: var(--header-auth-wallet-ddl-bg);
-    box-shadow: inset 0 1px 0 color-mix(in srgb, var(--text-on-emphasis) 10%, transparent);
-    color: color-mix(in srgb, var(--text-on-emphasis) 94%, transparent);
+    color: var(--ref-0);
 }
 
 .second.t3-header-logged-second .t3-chevon-ddl svg {
@@ -2328,7 +2335,6 @@ select:not(.t3-custom-input-text) {
     padding: 0 8px;
     min-width: 0;
     box-sizing: border-box;
-    border: 1px solid color-mix(in srgb, var(--border-strong) 35%, transparent);
     background: var(--header-auth-chip-bg);
 }
 
@@ -2461,7 +2467,7 @@ select:not(.t3-custom-input-text) {
         max-width: 40px;
         flex: 0 0 40px;
         border-radius: 5px;
-        border-left: 1px solid color-mix(in srgb, var(--accent-soft) 50%, color-mix(in srgb, var(--surface-inverse) 25%, transparent) 50%);
+        border-left: 1px solid var(--ref-40);
     }
 
     .second.t3-header-logged-second .t3-header-deposit .text {
@@ -2525,10 +2531,10 @@ select:not(.t3-custom-input-text) {
     padding: 12px;
     box-sizing: border-box;
     border-radius: 10px;
-    border: 1px solid color-mix(in srgb, var(--surface-inverse) 6%, transparent);
-    box-shadow: 0 4px 14px color-mix(in srgb, var(--surface-inverse) 6%, transparent);
+    border: 1px solid var(--ref-20);
+    box-shadow: 0 4px 14px var(--ref-20);
     background: var(--surface-raised);
-    font-family: Poppins, sans-serif, sans-serif;
+    font-family: Poppins, sans-serif;
 }
 
 .header-balance-dropdown-panel {
@@ -2620,7 +2626,8 @@ select:not(.t3-custom-input-text) {
 }
 
 /* Deposit / reload — two tabs use .t3-two-custom-tabs (see DepositPage) */
-.deposit-page .t3-two-custom-tabs.deposit-page-tabs {
+.deposit-page .t3-two-custom-tabs.deposit-page-tabs,
+.withdrawal-page .t3-two-custom-tabs.deposit-page-tabs {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -2650,11 +2657,21 @@ select:not(.t3-custom-input-text) {
     transition: filter 150ms ease, box-shadow 150ms ease;
 }
 
+@media (max-width: 500px) {
+    .t3-two-custom-tabs>div {
+        flex: 1;
+        width: auto;
+        min-width: 0;
+        font-size: 14px;
+        height: 44px;
+    }
+}
+
 .t3-two-custom-tabs>div:not(.active) {
     background: var(--text-inverse) !important;
     color: var(--surface-base) !important;
-    border: 1px solid color-mix(in srgb, var(--text-inverse) 6%, transparent) !important;
-    box-shadow: 0 1px 2px color-mix(in srgb, var(--text-inverse) 6%, transparent);
+    border: 1px solid var(--ref-20) !important;
+    box-shadow: 0 1px 2px var(--ref-20);
 }
 
 .t3-two-custom-tabs>div:not(.active):hover {
@@ -2662,10 +2679,7 @@ select:not(.t3-custom-input-text) {
 }
 
 .t3-two-custom-tabs>div.active {
-    background: linear-gradient(180deg,
-            var(--action-primary-hover) 0%,
-            var(--accent-strong) 38%,
-            var(--feedback-danger) 100%) !important;
+    background: var(--action-primary-hover);
     color: var(--surface-base) !important;
     border: none !important;
     box-shadow: none;
@@ -2680,7 +2694,8 @@ select:not(.t3-custom-input-text) {
     outline-offset: 2px;
 }
 
-.deposit-page .deposit-tab-chevron {
+.deposit-page .deposit-tab-chevron,
+.withdrawal-page .deposit-tab-chevron {
     width: 16px;
     height: 16px;
     flex-shrink: 0;
@@ -2693,9 +2708,9 @@ select:not(.t3-custom-input-text) {
 }
 
 .deposit-page .t3-settings-menu-list .t3-settings-menu-list-item.bank {
-    background: var(--surface-base) !important;
+    background: var(--surface-muted) !important;
     color: var(--text-primary) !important;
-    border-color: color-mix(in srgb, var(--accent-soft) 48%, transparent) !important;
+    border: 1px solid var(--ref-30);
 }
 
 /* Override global settings list hover (red gradient) on deposit accordions */
@@ -2785,7 +2800,7 @@ select:not(.t3-custom-input-text) {
     padding: 8px 10px;
     background: var(--surface-base) !important;
     color: var(--text-primary);
-    border: 1px solid color-mix(in srgb, var(--accent-soft) 48%, transparent);
+    border: 1px solid var(--ref-40);
     border-radius: 8px;
     box-shadow: none;
     cursor: pointer;
@@ -2867,7 +2882,7 @@ select:not(.t3-custom-input-text) {
 
 .deposit-page .deposit-bank-card {
     background: var(--surface-base) !important;
-    border: 1px solid color-mix(in srgb, var(--accent-soft) 48%, transparent) !important;
+    border: 1px solid var(--ref-40) !important;
     box-shadow: none;
 }
 
@@ -2879,14 +2894,14 @@ select:not(.t3-custom-input-text) {
 .deposit-page .deposit-bank-transfer-details {
     --deposit-bt-accent-deep: var(--action-primary-hover);
     --deposit-bt-heading: var(--action-primary-hover);
-    --deposit-bt-soft-panel: color-mix(in srgb, var(--surface-muted) 88%, var(--effect-tint-accent) 12%);
-    --deposit-bt-panel-edge: color-mix(in srgb, var(--accent-soft) 48%, transparent);
-    --deposit-bt-bank-idle-top: color-mix(in srgb, var(--action-primary-hover) 52%, var(--surface-muted) 48%);
-    --deposit-bt-bank-idle-bot: color-mix(in srgb, var(--action-primary-hover) 62%, var(--surface-muted) 38%);
-    --deposit-bt-chip: color-mix(in srgb, var(--surface-muted) 72%, var(--surface-base) 28%);
-    --deposit-bt-chip-active: color-mix(in srgb, var(--effect-tint-accent) 75%, var(--surface-base) 25%);
+    --deposit-bt-soft-panel: var(--ref-10);
+    --deposit-bt-panel-edge: var(--ref-20);
+    --deposit-bt-bank-idle-top: var(--ref-30);
+    --deposit-bt-bank-idle-bot: var(--ref-40);
+    --deposit-bt-chip: var(--ref-20);
+    --deposit-bt-chip-active: var(--ref-30);
     --deposit-bt-selected-ring: var(--accent-soft);
-    --deposit-bt-card-border: color-mix(in srgb, var(--accent-soft) 52%, color-mix(in srgb, var(--accent-soft) 48%, transparent) 48%);
+    --deposit-bt-card-border: var(--ref-40);
     --deposit-bt-card-shadow: none;
     margin-top: 12px;
     display: flex;
@@ -2894,29 +2909,28 @@ select:not(.t3-custom-input-text) {
     gap: 18px;
 }
 
-.deposit-page .deposit-bank-transfer__subheader {
+.deposit-page .deposit-bank-transfer__subheader,
+.withdrawal-page .deposit-bank-transfer__subheader {
     display: flex;
     align-items: center;
     gap: 12px;
 }
 
-.deposit-page .deposit-bank-transfer__back {
+.deposit-page .deposit-bank-transfer__back,
+.withdrawal-page .deposit-bank-transfer__back {
     display: inline-flex;
     align-items: center;
     gap: 8px;
     min-height: 40px;
     padding: 0 14px;
     border-radius: 10px;
-    border: 1px solid color-mix(in srgb, var(--accent-soft) 35%, var(--action-primary-hover) 65%);
+    border: 1px solid var(--ref-40);
     font: inherit;
     font-weight: 700;
     font-size: 14px;
     cursor: pointer;
     color: var(--surface-base);
-    background: linear-gradient(180deg,
-            var(--action-primary-hover) 0%,
-            var(--accent-strong) 38%,
-            var(--feedback-danger) 100%);
+    background: var(--action-primary-hover);
     box-shadow: none;
 }
 
@@ -2924,28 +2938,32 @@ select:not(.t3-custom-input-text) {
     filter: brightness(1.04);
 }
 
-.deposit-page .deposit-bank-transfer__title {
+.deposit-page .deposit-bank-transfer__title,
+.withdrawal-page .deposit-bank-transfer__title {
     margin: 0;
     font-size: 17px;
     font-weight: 800;
     color: var(--action-primary-hover);
 }
 
-.deposit-page .deposit-bank-transfer__panel {
+.deposit-page .deposit-bank-transfer__panel,
+.withdrawal-page .deposit-bank-transfer__panel {
     border-radius: 12px;
     padding: 16px 18px;
-    border: 1px solid color-mix(in srgb, var(--accent-soft) 52%, color-mix(in srgb, var(--accent-soft) 48%, transparent) 48%);
-    background: var(--surface-base);
+    border: 1px solid var(--ref-40);
+    background: var(--surface-muted);
     box-shadow: none;
 }
 
-.deposit-page .deposit-bank-transfer__panel--brand-surface {
-    background: color-mix(in srgb, var(--surface-muted) 88%, var(--effect-tint-accent) 12%);
-    border-color: color-mix(in srgb, var(--accent-soft) 48%, transparent);
+.deposit-page .deposit-bank-transfer__panel--brand-surface,
+.withdrawal-page .deposit-bank-transfer__panel--brand-surface {
+    background: var(--ref-10);
+    border-color: var(--ref-20);
     box-shadow: none;
 }
 
-.deposit-page .deposit-bank-transfer__section-title--brand {
+.deposit-page .deposit-bank-transfer__section-title--brand,
+.withdrawal-page .deposit-bank-transfer__section-title--brand {
     color: var(--action-primary-hover);
 }
 
@@ -2953,7 +2971,8 @@ select:not(.t3-custom-input-text) {
     margin-top: 14px;
 }
 
-.deposit-page .deposit-bank-transfer__info-row {
+.deposit-page .deposit-bank-transfer__info-row,
+.withdrawal-page .deposit-bank-transfer__info-row {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -2967,26 +2986,30 @@ select:not(.t3-custom-input-text) {
     margin-top: 10px;
 }
 
-.deposit-page .deposit-bank-transfer__info-val {
+.deposit-page .deposit-bank-transfer__info-val,
+.withdrawal-page .deposit-bank-transfer__info-val {
     font-weight: 800;
     color: var(--accent-soft);
     font-variant-numeric: tabular-nums;
 }
 
-.deposit-page .deposit-bank-transfer__notes-rule {
+.deposit-page .deposit-bank-transfer__notes-rule,
+.withdrawal-page .deposit-bank-transfer__notes-rule {
     margin: 12px 0 0;
     padding-top: 12px;
-    border-top: 1px solid color-mix(in srgb, var(--accent-soft) 52%, color-mix(in srgb, var(--accent-soft) 48%, transparent) 48%);
+    border-top: 1px solid var(--ref-40);
 }
 
-.deposit-page .deposit-bank-transfer__notes-label {
+.deposit-page .deposit-bank-transfer__notes-label,
+.withdrawal-page .deposit-bank-transfer__notes-label {
     margin: 0 0 6px;
     font-size: 13px;
     font-weight: 800;
     color: var(--accent-strong);
 }
 
-.deposit-page .deposit-bank-transfer__notes-body {
+.deposit-page .deposit-bank-transfer__notes-body,
+.withdrawal-page .deposit-bank-transfer__notes-body {
     margin: 0;
     font-size: 12px;
     line-height: 1.45;
@@ -2994,7 +3017,8 @@ select:not(.t3-custom-input-text) {
     color: var(--text-primary);
 }
 
-.deposit-page .deposit-bank-transfer__section-title {
+.deposit-page .deposit-bank-transfer__section-title,
+.withdrawal-page .deposit-bank-transfer__section-title {
     margin: 0 0 12px;
     font-size: 15px;
     font-weight: 800;
@@ -3022,7 +3046,7 @@ select:not(.t3-custom-input-text) {
 }
 
 .deposit-page .deposit-bank-transfer__bank-scroll::-webkit-scrollbar-thumb {
-    background: color-mix(in srgb, var(--action-primary-hover) 28%, color-mix(in srgb, var(--surface-inverse) 6%, transparent));
+    background: var(--ref-20);
     border-radius: 3px;
 }
 
@@ -3064,11 +3088,11 @@ select:not(.t3-custom-input-text) {
     justify-content: center;
     border-radius: 6px;
     overflow: hidden;
-    background: color-mix(in srgb, var(--text-on-emphasis) 22%, transparent);
+    background: var(--ref-10);
 }
 
 .deposit-page .deposit-bank-transfer__bank-card.selected .deposit-bank-transfer__bank-card-media {
-    background: color-mix(in srgb, var(--text-on-emphasis) 14%, transparent);
+    background: var(--ref-40);
 }
 
 .deposit-page .deposit-bank-transfer__bank-card-media img {
@@ -3110,7 +3134,7 @@ select:not(.t3-custom-input-text) {
 }
 
 .deposit-page .deposit-bank-transfer__bank-card.selected .mm {
-    color: color-mix(in srgb, var(--text-on-emphasis) 68%, transparent);
+    color: var(--ref-90);
 }
 
 .deposit-page .deposit-bank-transfer__amount-grid {
@@ -3136,17 +3160,18 @@ select:not(.t3-custom-input-text) {
 }
 
 .deposit-page .deposit-bank-transfer__amount-chip:hover {
-    border-color: color-mix(in srgb, var(--accent-soft) 65%, color-mix(in srgb, var(--surface-inverse) 6%, transparent));
+    border-color: var(--accent-soft);
 }
 
 .deposit-page .deposit-bank-transfer__amount-chip.active {
-    background: color-mix(in srgb, var(--effect-tint-accent) 85%, var(--surface-base) 15%);
+    background: var(--accent-soft);
     border-color: var(--accent-soft);
     color: var(--action-primary-hover);
     box-shadow: none;
 }
 
-.deposit-page .deposit-bank-transfer__input-row {
+.deposit-page .deposit-bank-transfer__input-row,
+.withdrawal-page .deposit-bank-transfer__input-row {
     display: flex;
     border-radius: 10px;
     overflow: hidden;
@@ -3155,7 +3180,8 @@ select:not(.t3-custom-input-text) {
     box-shadow: none;
 }
 
-.deposit-page .deposit-bank-transfer__input-prefix {
+.deposit-page .deposit-bank-transfer__input-prefix,
+.withdrawal-page .deposit-bank-transfer__input-prefix {
     flex-shrink: 0;
     padding: 0 16px;
     display: flex;
@@ -3168,7 +3194,8 @@ select:not(.t3-custom-input-text) {
     background: var(--action-primary-hover);
 }
 
-.deposit-page .deposit-bank-transfer__input-field {
+.deposit-page .deposit-bank-transfer__input-field,
+.withdrawal-page .deposit-bank-transfer__input-field {
     flex: 1;
     min-width: 0;
     border: none;
@@ -3181,16 +3208,17 @@ select:not(.t3-custom-input-text) {
 }
 
 .deposit-page .deposit-bank-transfer__input-field::placeholder {
-    color: color-mix(in srgb, var(--text-secondary) 72%, var(--accent-soft) 28%);
+    color: var(--text-secondary);
     font-weight: 500;
 }
 
-.deposit-page .deposit-bank-transfer__input-hint {
+.deposit-page .deposit-bank-transfer__input-hint,
+.withdrawal-page .deposit-bank-transfer__input-hint {
     margin: 10px 0 0;
     font-size: 12px;
     font-weight: 600;
     text-align: right;
-    color: color-mix(in srgb, var(--accent-soft) 42%, var(--text-secondary) 58%);
+    color: var(--accent-soft);
 }
 
 /* Amount / input inside brand-tinted panel */
@@ -3203,7 +3231,7 @@ select:not(.t3-custom-input-text) {
 }
 
 .deposit-page .deposit-bank-transfer__panel--brand-surface .deposit-bank-transfer__amount-chip:hover {
-    border-color: color-mix(in srgb, var(--accent-soft) 45%, var(--action-primary-hover) 25%);
+    border-color: var(--accent-soft);
 }
 
 .deposit-page .deposit-bank-transfer__panel--brand-surface .deposit-bank-transfer__amount-chip.active {
@@ -3279,7 +3307,7 @@ select:not(.t3-custom-input-text) {
     padding: 0;
     height: 0;
     border: none;
-    border-top: 1px solid color-mix(in srgb, var(--action-primary-hover) 20%, color-mix(in srgb, var(--accent-soft) 52%, color-mix(in srgb, var(--accent-soft) 48%, transparent) 48%));
+    border-top: 1px solid var(--ref-40);
 }
 
 .deposit-page .deposit-bank-transfer__bank-detail-card {
@@ -3327,7 +3355,7 @@ select:not(.t3-custom-input-text) {
     height: 0;
     margin: 0;
     border: none;
-    border-top: 1px solid color-mix(in srgb, var(--action-primary-hover) 16%, color-mix(in srgb, var(--accent-soft) 52%, color-mix(in srgb, var(--accent-soft) 48%, transparent) 48%));
+    border-top: 1px solid var(--ref-40);
 }
 
 .deposit-page .deposit-bank-transfer__ref-card {
@@ -3371,7 +3399,7 @@ select:not(.t3-custom-input-text) {
     border-radius: 10px;
     overflow: hidden;
     background: var(--surface-base);
-    border: 1px solid color-mix(in srgb, var(--accent-soft) 52%, color-mix(in srgb, var(--accent-soft) 48%, transparent) 48%);
+    border: 1px solid var(--ref-40);
     box-shadow: none;
 }
 
@@ -3459,7 +3487,7 @@ select:not(.t3-custom-input-text) {
     min-height: 120px;
     padding: 20px 16px;
     border-radius: 10px;
-    border: 1px dashed color-mix(in srgb, color-mix(in srgb, var(--surface-inverse) 6%, transparent) 75%, var(--text-secondary) 25%);
+    border: 1px dashed var(--ref-30);
     background: var(--surface-base);
     cursor: pointer;
     transition:
@@ -3468,8 +3496,8 @@ select:not(.t3-custom-input-text) {
 }
 
 .deposit-page .deposit-bank-transfer__upload:hover {
-    border-color: color-mix(in srgb, color-mix(in srgb, var(--surface-inverse) 6%, transparent) 55%, var(--action-primary-hover) 45%);
-    background: color-mix(in srgb, var(--surface-base) 88%, var(--surface-muted) 12%);
+    border-color: var(--ref-40);
+    background: var(--ref-10);
 }
 
 .deposit-page .deposit-bank-transfer__upload-icon {
@@ -3492,7 +3520,7 @@ select:not(.t3-custom-input-text) {
     margin: 8px auto 0;
     min-height: 48px;
     border-radius: 10px;
-    border: 1px solid color-mix(in srgb, var(--accent-soft) 30%, var(--action-primary-hover) 70%);
+    border: 1px solid var(--ref-50);
     font: inherit;
     font-size: 16px;
     font-weight: 800;
@@ -3510,7 +3538,7 @@ select:not(.t3-custom-input-text) {
 }
 
 .t3-reload-bank-list-box .border-top {
-    border-top: 1px solid color-mix(in srgb, var(--surface-inverse) 6%, transparent) !important;
+    border-top: 1px solid var(--ref-20) !important;
 }
 
 .t3-reload-bank-list-box {
@@ -3559,7 +3587,7 @@ select:not(.t3-custom-input-text) {
 }
 
 .t3-custom-table thead>tr>th:after {
-    background: color-mix(in srgb, var(--surface-inverse) 12%, transparent) !important;
+    background: var(--ref-20) !important;
 }
 
 .t3-settings-menu-list-item:hover svg {
@@ -3620,7 +3648,7 @@ select:not(.t3-custom-input-text) {
 }
 
 .t3-progress:after {
-    border: 5px solid color-mix(in srgb, var(--surface-inverse) 12%, transparent) !important;
+    border: 5px solid var(--ref-20) !important;
 }
 
 .t3-deposit-amount-list-box>.item {
@@ -3648,7 +3676,7 @@ select:not(.t3-custom-input-text) {
 margin: 0;
 }
 .modal-backdrop {
-background-color: color-mix(in srgb, var(--action-primary-hover) 72%, var(--action-primary-hover));
+background-color: var(--action-primary-hover);
 }
 @media (max-width: 500px) {
 #t3-login-register-modal.home-announcement-modal.modal-dialog-centered {
@@ -3739,7 +3767,7 @@ padding: 0;
 
 .t3-referral-content .referral-comm-info-container {
     background: var(--surface-base);
-    border: 1px solid color-mix(in srgb, var(--surface-inverse) 6%, transparent);
+    border: 1px solid var(--ref-20);
 }
 
 .t3-referral-content .t3-downline-table-tab>button {
@@ -3791,8 +3819,8 @@ padding: 0;
     box-sizing: border-box;
     padding: 4px 6px;
     border-radius: 10px;
-    border: 1px solid color-mix(in srgb, var(--accent-soft) 48%, transparent);
-    background: color-mix(in srgb, var(--surface-muted) 86%, var(--effect-tint-accent) 14%);
+    border: 1px solid var(--ref-40);
+    background: var(--ref-10);
     box-shadow: none;
 }
 
@@ -3816,7 +3844,7 @@ padding: 0;
 .t3-referral-subtabs__tab--active {
     background: var(--action-primary-hover);
     color: var(--surface-base);
-    border-color: color-mix(in srgb, var(--action-primary-hover) 88%, color-mix(in srgb, var(--surface-inverse) 6%, transparent) 12%);
+    border-color: var(--ref-20);
 }
 
 /* Logged-out referral hero: light panel + gold frame + centered copy (matches design reference) */
@@ -3888,7 +3916,7 @@ padding: 0;
     min-height: 140px;
     border-radius: 14px;
     overflow: hidden;
-    border: 1px solid color-mix(in srgb, color-mix(in srgb, var(--accent-soft) 48%, transparent) 55%, transparent);
+    border: 1px solid var(--ref-30);
     box-shadow: none;
 }
 
@@ -3897,12 +3925,7 @@ padding: 0;
 }
 
 .t3-referral-promo-card--deposit {
-    background:
-        linear-gradient(118deg,
-            color-mix(in srgb, var(--surface-base) 42%, transparent) 0%,
-            transparent 42%,
-            transparent 100%),
-        linear-gradient(180deg, var(--accent-soft) 0%, var(--action-primary) 100%);
+    background: var(--accent-soft);
 }
 
 .t3-referral-promo-card__art {
@@ -3942,7 +3965,7 @@ padding: 0;
     font-size: 13px;
     font-weight: 400;
     line-height: 1.35;
-    color: color-mix(in srgb, var(--text-on-emphasis) 95%, transparent);
+    color: var(--text-on-emphasis);
     font-family: var(--base-font-family, system-ui, -apple-system, sans-serif);
 }
 
@@ -3955,12 +3978,6 @@ padding: 0;
     color: var(--surface-base);
     max-width: 24.5rem;
     font-family: var(--base-font-family, system-ui, -apple-system, sans-serif);
-    text-shadow: 0 1px 2px color-mix(in srgb, var(--surface-inverse) 28%, transparent);
-}
-
-.t3-referral-promo-card--deposit .t3-referral-promo-card__eyebrow,
-.t3-referral-promo-card--deposit .t3-referral-promo-card__headline {
-    text-shadow: 0 1px 3px color-mix(in srgb, var(--text-secondary) 45%, transparent);
 }
 
 /* Rebate page — logged-out login gate (white panel, gold-tint border, centered CTA) */
@@ -4026,7 +4043,7 @@ padding: 0;
 /* Mobile home — logged-in profile card (gold rim, light gray fill) */
 .home-mobile-profile-card {
     background: var(--surface-muted);
-    border-color: color-mix(in srgb, var(--accent-soft) 52%, color-mix(in srgb, var(--accent-soft) 48%, transparent) 48%);
+    border-color: var(--ref-40);
     box-shadow: none;
 }
 
@@ -4035,14 +4052,14 @@ padding: 0;
     margin-top: 14px;
     padding: 10px 12px;
     border-radius: 8px;
-    border: 1px solid color-mix(in srgb, var(--text-primary) 26%, color-mix(in srgb, var(--surface-inverse) 6%, transparent) 74%);
-    background: color-mix(in srgb, var(--surface-base) 82%, var(--surface-muted) 18%);
+    border: 1px solid var(--ref-40);
+    background: var(--surface-base);
 }
 
 .home-mobile-profile-card__rollover-track {
     height: 8px;
     border-radius: 9999px;
-    background: color-mix(in srgb, color-mix(in srgb, var(--surface-inverse) 12%, transparent) 45%, var(--surface-muted) 55%);
+    background: var(--ref-20);
     overflow: hidden;
 }
 
@@ -4059,7 +4076,7 @@ padding: 0;
 
 /* Desktop home — referral hub white panel on banner */
 .home-desktop-referral-hub__card {
-    border-color: color-mix(in srgb, var(--accent-soft) 55%, color-mix(in srgb, var(--accent-soft) 48%, transparent) 45%);
+    border-color: var(--ref-40);
     box-shadow: none;
 }
 
@@ -4075,7 +4092,7 @@ padding: 0;
     gap: 0;
     padding: 0px;
     background: var(--surface-inverse);
-    border-top: 1px solid color-mix(in srgb, var(--text-primary) 22%, transparent);
+    border-top: 1px solid var(--ref-20);
 }
 
 .mobile-bottom-nav__icon {
@@ -4086,7 +4103,7 @@ padding: 0;
 .mobile-bottom-nav__icon--svg {
     filter: none;
     opacity: 0.82;
-    color: color-mix(in srgb, var(--text-on-emphasis) 92%, transparent);
+    color: var(--text-on-emphasis);
 }
 
 .mobile-bottom-nav__btn[data-active="true"] .mobile-bottom-nav__icon {
@@ -4139,7 +4156,7 @@ padding: 0;
     padding: 0 6px 0 0;
     margin-inline: auto;
     border-radius: 8px;
-    background: var(--surface-inverse);
+    background: var(--action-primary-hover);
     box-sizing: border-box;
     overflow: visible;
     transition: transform 160ms ease, filter 160ms ease;
@@ -4180,7 +4197,7 @@ padding: 0;
     width: 15px;
     height: auto;
     pointer-events: none;
-    filter: drop-shadow(0 1px 2px color-mix(in srgb, var(--surface-inverse) 40%, transparent));
+    filter: drop-shadow(0 1px 2px var(--ref-30));
 }
 
 .t3-game-rtp-info-badge__text {
@@ -4243,6 +4260,441 @@ padding: 0;
 
 @media (max-width: 700px) {
     .t3-game-list-image-box {
-        border: 1px solid color-mix(in srgb, var(--accent-soft) 50%, color-mix(in srgb, var(--surface-inverse) 6%, transparent) 50%);
+        border: 1px solid var(--ref-30);
     }
+}
+
+/* Live Chat page */
+.live-chat-app-frame {
+    min-height: calc(100vh - 60px);
+    height: auto;
+    padding: 0;
+}
+
+.live-chat-page {
+    display: flex;
+    flex-direction: column;
+    min-height: calc(100vh - 60px);
+    width: 100%;
+}
+
+.live-chat-shell {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    min-height: calc(100vh - 60px);
+    margin-inline: auto;
+    overflow: visible;
+    background: var(--chat-bg);
+}
+
+.live-chat-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 14px;
+    min-height: 64px;
+    padding: 12px 18px;
+    border-bottom: 1px solid var(--border-subtle);
+    background: var(--ref-10);
+}
+
+.live-chat-header h1 {
+    margin: 0;
+    color: var(--action-primary-hover);
+    font-family: var(--base-font-family);
+    font-size: 20px;
+    font-weight: 800;
+    line-height: 1.15;
+}
+
+.live-chat-header p {
+    margin: 3px 0 0;
+    color: var(--text-secondary);
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 1.2;
+}
+
+.live-chat-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    min-height: 30px;
+    padding: 0 12px;
+    border: 1px solid var(--ref-20);
+    border-radius: 9999px;
+    color: var(--feedback-success);
+    background: var(--ref-10);
+    font-size: 12px;
+    font-weight: 800;
+    white-space: nowrap;
+}
+
+.live-chat-status span {
+    width: 8px;
+    height: 8px;
+    border-radius: 9999px;
+    background: var(--feedback-success);
+    box-shadow: 0 0 0 4px var(--ref-10);
+}
+
+.live-chat-body {
+    flex: 1;
+    overflow: visible;
+    background: var(--chat-bg);
+}
+
+.live-chat-body-inner {
+    width: 100%;
+    padding: 24px 24px 100px;
+    /* Extra bottom padding for sticky bar */
+}
+
+.live-chat-body::-webkit-scrollbar {
+    width: 8px;
+}
+
+.live-chat-body::-webkit-scrollbar-thumb {
+    border-radius: 9999px;
+    background: var(--ref-20);
+}
+
+.live-chat-day-divider {
+    width: fit-content;
+    margin: 0 auto 20px;
+    padding: 9px 14px;
+    border: 1px solid var(--border-subtle);
+    border-radius: 8px;
+    color: var(--action-primary-hover);
+    background: var(--chat-input-box);
+    font-size: 14px;
+    font-weight: 700;
+    box-shadow: var(--card-shadow);
+}
+
+.live-chat-message-list {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.live-chat-message {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    max-width: 90%;
+}
+
+.live-chat-message--user {
+    align-self: flex-end;
+    justify-content: flex-end;
+    text-align: right;
+}
+
+.live-chat-message--system {
+    max-width: 92%;
+}
+
+.live-chat-message__avatar {
+    display: grid;
+    place-items: center;
+    width: 42px;
+    height: 42px;
+    flex: 0 0 42px;
+    overflow: hidden;
+    border: 2px solid var(--ref-30);
+    border-radius: 9999px;
+    background: var(--surface-base);
+}
+
+.live-chat-message__avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.live-chat-message__content {
+    min-width: 0;
+}
+
+.live-chat-message__meta {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 16px;
+    margin-bottom: 6px;
+    color: #c32021;
+    /* Bright red for name */
+    font-size: 13px;
+    font-weight: 800;
+}
+
+.live-chat-message__meta time {
+    color: var(--text-secondary);
+    font-size: 11px;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.live-chat-message__bubble {
+    border: 1px solid var(--border-subtle);
+    border-radius: 8px;
+    padding: 10px 14px 12px;
+    color: #3a1515;
+    /* Dark brown-red from screenshot */
+    background: #f8f8f8;
+    /* Very light gray */
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 1.5;
+    box-shadow: none;
+    word-break: break-word;
+    white-space: pre-wrap;
+}
+
+.live-chat-message--support .live-chat-message__bubble,
+.live-chat-message--system .live-chat-message__bubble {
+    position: relative;
+    background: #f8f8f8;
+    border: 1px solid var(--border-subtle);
+    margin-left: 10px;
+}
+
+.live-chat-message--support .live-chat-message__bubble::before,
+.live-chat-message--system .live-chat-message__bubble::before {
+    content: "";
+    position: absolute;
+    left: -8px;
+    top: 12px;
+    width: 8px;
+    height: 12px;
+    background: var(--surface-muted);
+    clip-path: polygon(100% 0, 0 50%, 100% 100%);
+    border-left: 1px solid var(--border-subtle);
+    /* This is tricky with clip-path, usually easier with transform */
+}
+
+/* Precise triangle tail */
+.live-chat-message--support .live-chat-message__bubble::before,
+.live-chat-message--system .live-chat-message__bubble::before {
+    content: "";
+    position: absolute;
+    left: -8px;
+    top: 12px;
+    width: 0;
+    height: 0;
+    border-top: 6px solid transparent;
+    border-bottom: 6px solid transparent;
+    border-right: 8px solid #f8f8f8;
+    filter: drop-shadow(-1px 0.5px 0.5px rgba(0, 0, 0, 0.08));
+}
+
+.live-chat-message--user .live-chat-message__meta {
+    /* Standard alignment: name left, time right */
+}
+
+.live-chat-message--user .live-chat-message__meta span {
+    color: #cc9900;
+    /* Gold for user name */
+}
+
+.live-chat-message--user .live-chat-message__meta time,
+.live-chat-message--user .live-chat-message__bubble {
+    color: #8b0000;
+    /* Dark red for user message text */
+}
+
+.live-chat-message--user .live-chat-message__bubble {
+    position: relative;
+    margin-right: 10px;
+    margin-left: 0;
+    background: #f8f8f8;
+    border: 1px solid var(--border-subtle);
+    text-align: left;
+}
+
+/* User side right triangle tail */
+.live-chat-message--user .live-chat-message__bubble::after {
+    content: "";
+    position: absolute;
+    right: -8px;
+    top: 12px;
+    width: 0;
+    height: 0;
+    border-top: 6px solid transparent;
+    border-bottom: 6px solid transparent;
+    border-left: 8px solid #f8f8f8;
+    filter: drop-shadow(1px 0.5px 0.5px rgba(0, 0, 0, 0.08));
+}
+
+.live-chat-empty {
+    display: grid;
+    place-items: center;
+    min-height: 100%;
+    color: var(--text-secondary);
+    font-size: 14px;
+    font-weight: 700;
+    text-align: center;
+}
+
+.live-chat-input-bar {
+    position: sticky;
+    bottom: 0;
+    z-index: 10;
+    display: grid;
+    grid-template-columns: 48px minmax(0, 1fr) 48px;
+    gap: 10px;
+    align-items: center;
+    padding: 12px 14px;
+    border-top: 1px solid var(--chat-input-border);
+    background: var(--surface-muted);
+}
+
+.live-chat-input-bar input {
+    width: 100%;
+    height: 48px;
+    min-width: 0;
+    border: 1px solid var(--ref-20);
+    border-radius: 4px;
+    padding: 0 16px;
+    outline: none;
+    color: var(--text-primary);
+    background: #fdfdfd;
+    font: inherit;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.live-chat-input-bar input::placeholder {
+    color: var(--text-secondary);
+}
+
+.live-chat-input-bar input:focus {
+    border-color: var(--ref-40);
+    box-shadow: 0 0 0 3px var(--ref-20);
+}
+
+.live-chat-icon-button {
+    display: grid;
+    place-items: center;
+    width: 42px;
+    height: 42px;
+    border: none;
+    border-radius: 9999px;
+    color: #ffffff;
+    background: #8a0f1e;
+    /* Dark red from screenshot */
+    cursor: pointer;
+    transition: filter 150ms ease, transform 150ms ease;
+}
+
+.live-chat-icon-button:hover {
+    filter: brightness(1.2);
+}
+
+.live-chat-icon-button:active {
+    transform: scale(0.95);
+}
+
+.live-chat-icon-button svg {
+    width: 22px;
+    height: 22px;
+}
+
+.live-chat-icon-button--submit {
+    background: #8a0f1e;
+}
+
+@media (max-width: 1023px) {
+    .live-chat-app-frame {
+        height: calc(100dvh - 60px - 72px);
+        min-height: calc(100dvh - 60px - 72px);
+        padding: 10px 10px 12px;
+    }
+
+    .live-chat-shell {
+        width: 100%;
+        border-radius: 8px;
+    }
+
+    .live-chat-header {
+        min-height: 56px;
+        padding: 10px 12px;
+    }
+
+    .live-chat-header h1 {
+        font-size: 18px;
+    }
+
+    .live-chat-body {
+        padding: 0;
+    }
+
+    .live-chat-body-inner {
+        padding: 14px 12px 16px;
+    }
+
+    .live-chat-message {
+        max-width: 92%;
+        gap: 8px;
+    }
+
+    .live-chat-message--system {
+        max-width: 94%;
+    }
+
+    .live-chat-message__avatar {
+        width: 36px;
+        height: 36px;
+        flex-basis: 36px;
+    }
+
+    .live-chat-message__bubble {
+        padding: 10px 12px;
+        font-size: 13px;
+    }
+
+    .live-chat-input-bar {
+        grid-template-columns: 44px minmax(0, 1fr) 44px;
+        gap: 8px;
+        padding: 10px;
+    }
+
+    .live-chat-input-bar input,
+    .live-chat-icon-button {
+        height: 44px;
+    }
+
+    .live-chat-icon-button {
+        width: 44px;
+    }
+}
+
+.live-chat-scroll-bottom {
+    position: fixed;
+    right: 32px;
+    bottom: 96px;
+    z-index: 20;
+    display: grid;
+    place-items: center;
+    width: 44px;
+    height: 44px;
+    border: none;
+    border-radius: 9999px;
+    color: var(--action-primary-hover);
+    background: var(--surface-muted);
+    box-shadow: 0 4px 12px var(--ref-40);
+    cursor: pointer;
+    transition: transform 150ms ease, background 150ms ease;
+}
+
+.live-chat-scroll-bottom:hover {
+    background: var(--surface-raised);
+    transform: translateY(-2px);
+}
+
+.live-chat-scroll-bottom svg {
+    width: 24px;
+    height: 24px;
 }

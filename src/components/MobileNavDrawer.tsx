@@ -219,9 +219,9 @@ export function MobileNavDrawer({ isOpen, onClose, view, onNavigate }: MobileNav
 
             <button
               type="button"
-              className={cardBase}
+              className={[cardBase, isRouteActive(view, "live-chat") ? activeRing : ""].filter(Boolean).join(" ")}
               style={cardStyle}
-              onClick={onClose}
+              onClick={() => go("live-chat")}
             >
               <NavIcon src={assets.iconLiveChat} />
               <span className="min-w-0 flex-1 text-[15px] font-extrabold leading-snug tracking-tight" style={{ color: MENU.label }}>

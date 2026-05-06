@@ -8,6 +8,7 @@ import { DepositPage } from "./components/DepositPage";
 import { ProfilePage } from "./components/ProfilePage";
 import { RebatePage } from "./components/RebatePage";
 import { MembershipPage } from "./components/MembershipPage";
+import { WithdrawalPage } from "./components/WithdrawalPage";
 import { RecentGamePage } from "./components/RecentGamePage";
 import { AnnouncementBar } from "./components/AnnouncementBar";
 import { PromoBanners } from "./components/PromoBanners";
@@ -25,6 +26,7 @@ import { AuthModal, type AuthMode } from "./components/AuthModal";
 import { AllGamesPage } from "./components/AllGamesPage";
 import { ProviderDetailPage } from "./components/ProviderDetailPage";
 import { GamePlayPage } from "./components/GamePlayPage";
+import { LiveChatPage } from "./components/LiveChatPage";
 import { VerifyNumberModal } from "./components/VerifyNumberModal";
 import { NoticeModal } from "./components/NoticeModal";
 import { assets } from "./data/assets";
@@ -66,6 +68,9 @@ function parseRoute(): RouteState {
   if (h === "deposit" || h === "/deposit") {
     return { view: "deposit", promoSlug: null, providerSlug: null, gameSlug: null };
   }
+  if (h === "withdrawal" || h === "/withdrawal") {
+    return { view: "withdrawal", promoSlug: null, providerSlug: null, gameSlug: null };
+  }
   if (h === "profile" || h === "/profile") {
     return { view: "profile", promoSlug: null, providerSlug: null, gameSlug: null };
   }
@@ -77,6 +82,9 @@ function parseRoute(): RouteState {
   }
   if (h === "recent-game" || h === "/recent-game") {
     return { view: "recent-game", promoSlug: null, providerSlug: null, gameSlug: null };
+  }
+  if (h === "live-chat" || h === "/live-chat") {
+    return { view: "live-chat", promoSlug: null, providerSlug: null, gameSlug: null };
   }
   if (h.startsWith("provider/")) {
     const parts = h.slice("provider/".length).replace(/\/$/, "").split("/");
@@ -180,6 +188,8 @@ export default function App() {
       window.location.hash = "#/membership";
     } else if (next === "recent-game") {
       window.location.hash = "#/recent-game";
+    } else if (next === "live-chat") {
+      window.location.hash = "#/live-chat";
     } else {
       const { pathname, search } = window.location;
       window.history.replaceState(null, "", `${pathname}${search}`);
@@ -251,14 +261,16 @@ export default function App() {
         />
 
         <div className={`ml-0 flex min-w-0 flex-1 flex-col transition-[margin] duration-300 ${desktopSidebarOpen ? "lg:ml-[220px]" : "lg:ml-0"}`}>
-          <main className="min-w-0 flex-1 pb-20 lg:pb-5" style={{ background: "transparent" }}>
-            <div className="mx-auto w-full min-h-screen max-w-[1430px] space-y-6 px-4 py-5 sm:px-6">
+          <main className={view === "live-chat" ? "min-w-0 flex-1" : "min-w-0 flex-1 pb-20 lg:pb-5"} style={{ background: "transparent" }}>
+            <div className={`mx-auto w-full ${view === "live-chat" ? "live-chat-app-frame" : "min-h-screen max-w-[1430px] px-4 py-5 sm:px-6 space-y-6"}`}>
               {view === "promotion" ? (
                 <PromotionPage />
               ) : view === "referral" ? (
                 <ReferralPage isLoggedIn={isLoggedIn} onLoginClick={() => openAuthModal("login")} />
               ) : view === "deposit" ? (
-                <DepositPage />
+                <DepositPage onNavigate={(v) => goView(v)} />
+              ) : view === "withdrawal" ? (
+                <WithdrawalPage onNavigate={(v) => goView(v)} />
               ) : view === "profile" ? (
                 <ProfilePage
                   onLogout={() => {
@@ -272,6 +284,8 @@ export default function App() {
                 <MembershipPage />
               ) : view === "recent-game" ? (
                 <RecentGamePage />
+              ) : view === "live-chat" ? (
+                <LiveChatPage />
               ) : view === "promotion-detail" && promoSlug ? (
                 <PromotionDetailPage slug={promoSlug} />
               ) : providerSlug === "pgsoft" || providerSlug === "nextspin" ? (
@@ -360,9 +374,9 @@ export default function App() {
       </div>
 
       <MobileBottomNav view={view} onNavigate={goView} />
-      <Footer />
+      {view !== "live-chat" && <Footer />}
 
-      <FloatingOverlays />
+      {view !== "live-chat" ? <FloatingOverlays onLiveChatClick={() => goView("live-chat")} /> : null}
       <AuthModal
         isOpen={isAuthOpen}
         mode={authMode}

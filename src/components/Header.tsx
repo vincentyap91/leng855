@@ -136,7 +136,7 @@ export function Header({
 
   return (
     <>
-      <header className="t3-header sticky top-0 z-50 flex h-[60px] min-w-0 shrink-0 items-center gap-3 border-b border-t px-3 sm:px-5 md:gap-4">
+      <header className="t3-header sticky top-0 z-50 flex h-[60px] min-w-0 shrink-0 items-center gap-3 px-3 sm:px-5 md:gap-4">
         {/* Mobile Hamburger (Visible on Mobile) */}
         <button
           type="button"
