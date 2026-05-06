@@ -236,8 +236,8 @@
     --sidebar-spin-bg: linear-gradient(180deg, var(--surface-utility-3) 0%, var(--surface-utility-4) 100%);
     --sidebar-download-bg: linear-gradient(180deg, var(--surface-utility-1) 0%, var(--surface-utility-2) 100%);
     --sidebar-text: var(--action-primary-hover);
-    --sidebar-item-hover: var(--accent-strong);
-    --sidebar-item-active: var(--accent-strong);
+    --sidebar-item-hover: var(--action-primary-hover);
+    --sidebar-item-active: var(--action-primary-hover);
     --sidebar-item-active-ring: transparent;
     --sidebar-container-border: var(--border-default);
     --sidebar-item-radius: 8px;
