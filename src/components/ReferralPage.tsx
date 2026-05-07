@@ -61,9 +61,9 @@ function InfoTooltip({
 const imgShareOnFacebook = "https://www.figma.com/api/mcp/asset/63899948-cdda-4794-8c43-59cce5e6c107";
 const imgShareOnTelegram = "https://www.figma.com/api/mcp/asset/57050813-26fd-4038-a9c9-31d0fa29a860";
 const imgShareOnWhatsApp = "https://www.figma.com/api/mcp/asset/14e9dd20-5f8f-45d7-8994-01f5dfba20a3";
-const imgStep01 = "https://www.figma.com/api/mcp/asset/fd857e24-eeae-43ca-ab74-5d6296511368";
-const imgStep02 = "https://www.figma.com/api/mcp/asset/70faaa8f-2aa6-432c-83f9-6fecfd8c2265";
-const imgStep03 = "https://www.figma.com/api/mcp/asset/f93ecb38-bf5a-4bd8-8ecf-fe616c69180b";
+const imgStep01 = assets.referralStep1;
+const imgStep02 = assets.referralStep2;
+const imgStep03 = assets.referralStep3;
 const imgInfoIcon =
   "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUBAMAAAB/pwA+AAAAMFBMVEUAAAB9fX19fX19fX18fHx8fHx+fn59fX16enp8fHx9fX16enp4eHh3d3d9fX19fX1tXtBLAAAAD3RSTlMA36+fgF/vYGDPj1AQIL+0MRL2AAAAkUlEQVQI12NgYOBpkv+pzgAG2/4DgTiIxfUfDByATH8I8xcDAzuQkr0GJDYwMAJJBSYgkcNQDyS/gBR9ZdD/DwWfGOYDBRn4gMyPDCCigBkkzAAiDCBMeRjzJ4M+mAnW1g9mgg07BtQWwAFUJsDADeSDHRLAwLAeYsMXoMtYIMwFIAc3gljZEG80zf+oeoCBAQD6u4RdPf8nFgAAAABJRU5ErkJggg==";
 

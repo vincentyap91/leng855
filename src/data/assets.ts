@@ -134,6 +134,11 @@ export const assets = {
   profileAvatar: `${base}/profile-img.png`,
   profileChevron: `${base}/chevon-right.svg`,
 
+  // Referral Steps
+  referralStep1: `${base}/step1.svg`,
+  referralStep2: `${base}/step2.svg`,
+  referralStep3: `${base}/step3.svg`,
+
   // Trophy gif for "Recent Big Wins" header
   trophyGif: `${base}/trophy.gif`,
 } as const;
