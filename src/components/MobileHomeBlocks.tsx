@@ -184,8 +184,8 @@ export function MobileProfileCard({
 const referralHubSecondaryBtn =
   "rounded-lg border-0 py-3 text-sm font-extrabold transition hover:brightness-105 min-h-[44px]";
 const referralHubSecondaryBtnStyle = {
-  background: "var(--nav-header-register-bg)",
-  color: "var(--nav-header-register-color)",
+  background: "var(--accent-muted)",
+  color: "var(text-inverse)",
 } as const;
 
 function goReferralPage() {

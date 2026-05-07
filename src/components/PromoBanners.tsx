@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import type { Settings } from "react-slick";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
@@ -37,17 +38,30 @@ const promoBannerSliderSettings: Settings = {
 };
 
 export function PromoBanners() {
+  const [isMobile, setIsMobile] = useState(typeof window !== "undefined" ? window.innerWidth < 1024 : false);
+
+  useEffect(() => {
+    const handleResize = () => {
+      const mobile = window.innerWidth < 1024;
+      if (mobile !== isMobile) {
+        setIsMobile(mobile);
+      }
+    };
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, [isMobile]);
+
   return (
     <div className="promo-banners-wrap w-full max-lg:px-4 lg:max-w-none lg:px-0">
-      <Slider className="promo-banners-slider" {...promoBannerSliderSettings}>
+      <Slider key={isMobile ? "mobile" : "desktop"} className="promo-banners-slider" {...promoBannerSliderSettings}>
         {banners.map((b) => (
           <div key={b.alt}>
-            <div className="overflow-hidden rounded-[20px] shadow-[0_2px_12px_color-mix(in srgb, var(--surface-inverse) 8%, transparent)] lg:rounded-lg lg:shadow-sm">
-              <div className="overflow-hidden max-lg:aspect-[2/1] lg:aspect-[580/320]">
+            <div className="overflow-hidden rounded-[10px] shadow-sm lg:rounded-lg">
+              <div className="relative w-full overflow-hidden">
                 <img
                   src={b.src}
                   alt={b.alt}
-                  className="block h-full w-full object-cover object-center"
+                  className="block h-auto w-full object-contain"
                 />
               </div>
             </div>

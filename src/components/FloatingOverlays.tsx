@@ -76,7 +76,7 @@ export function FloatingOverlays({ onLiveChatClick }: FloatingOverlaysProps) {
       <button
         type="button"
         aria-label="Live chat"
-        className="fixed right-4 bottom-4 z-40 w-14 h-14 rounded-full overflow-hidden border-2 shadow-lg bg-[var(--surface-base)]"
+        className="fixed right-4 bottom-[74px] z-40 w-14 h-14 rounded-full overflow-hidden border-2 shadow-lg bg-[var(--surface-base)]"
         style={{ borderColor: "var(--accent-strong)" }}
         onClick={onLiveChatClick}
       >

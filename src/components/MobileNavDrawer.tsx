@@ -6,7 +6,7 @@ import type { AppView } from "./Sidebar";
 const MENU = {
   panelBg: "var(--surface-raised)",
   langBg: "var(--text-inverse)",
-  langAccent: "var(--accent-strong)",
+  langAccent: "var(--accent-bright)",
   label: "var(--accent-strong)",
   cardBorder: "var(--border-default)",
   footerMuted: "var(--accent-strong)",
@@ -103,7 +103,7 @@ export function MobileNavDrawer({ isOpen, onClose, view, onNavigate }: MobileNav
       <button type="button" className="absolute inset-0 bg-[color:color-mix(in_srgb,var(--surface-inverse)_40%,transparent)]" aria-label="Close menu" onClick={onClose} />
 
       <div
-        className="relative z-[1] flex min-h-0 flex-1 flex-col"
+        className="relative z-[1] flex flex-1 flex-col overflow-y-auto"
         style={{
           background: MENU.panelBg,
           paddingBottom: "env(safe-area-inset-bottom, 0px)",
@@ -177,7 +177,7 @@ export function MobileNavDrawer({ isOpen, onClose, view, onNavigate }: MobileNav
           </button>
         </div>
 
-        <nav className="mobile-nav-drawer__nav min-h-0 flex-1 overflow-y-auto px-4" aria-label="Site sections">
+        <nav className="mobile-nav-drawer__nav px-4" aria-label="Site sections">
           <div className="flex flex-col gap-3 pb-3">
             {routeItems.map((item) => {
               const active = isRouteActive(view, item.target);

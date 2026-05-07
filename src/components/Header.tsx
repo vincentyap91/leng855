@@ -138,22 +138,6 @@ export function Header({
     <>
       <header className="t3-header sticky top-0 z-50 flex h-[60px] min-w-0 shrink-0 items-center gap-3 px-3 sm:px-5 md:gap-4">
         {/* Mobile Hamburger (Visible on Mobile) */}
-        <button
-          type="button"
-          aria-label="Open mobile menu"
-          className="mobile-header-open-menu grid h-[30px] w-[30px] shrink-0 place-items-center opacity-90 hover:opacity-100 lg:hidden"
-          onClick={() => setMobileMenuOpen(true)}
-        >
-          <img
-            src={assets.menuIcon}
-            alt=""
-            className="h-[24px] w-[24px]"
-            style={{
-              filter:
-                "brightness(0) saturate(100%) invert(74%) sepia(63%) saturate(438%) hue-rotate(6deg) brightness(95%) contrast(90%)",
-            }}
-          />
-        </button>
 
         {/* Desktop Hamburger (Visible on Desktop only) */}
         <button
@@ -176,7 +160,7 @@ export function Header({
           <img
             src={assets.leng855Logo}
             alt="Leng855"
-            className="h-10 max-h-10 w-[min(200px,38vw)] max-w-[200px] object-contain object-left lg:h-[50px] lg:max-h-[50px] lg:w-[min(320px,42vw)] lg:max-w-[320px]"
+            className="h-8 max-h-8 w-auto object-contain object-left lg:h-[50px] lg:max-h-[50px] lg:w-[min(320px,42vw)] lg:max-w-[320px]"
           />
         </a>
 
@@ -184,7 +168,7 @@ export function Header({
           {loggedIn ? (
             <>
               <div
-                className="t3-header-balance-deposit-box"
+                className="t3-header-balance-deposit-box flex items-center rounded-lg px-2 py-1 lg:h-10 lg:gap-2 lg:px-0 lg:py-0"
                 style={{
                   background: "var(--header-auth-panel-bg)",
                   borderColor: "var(--header-auth-panel-border)",
@@ -197,9 +181,10 @@ export function Header({
                       style={{ cursor: "pointer", display: "flex", alignItems: "center", position: "relative" }}
                       aria-label="Balance wallet"
                     >
-                      <div className="header-balance-column">
-                        <span className="font-size-header-balance">Balance:</span>
-                        <b className="font-size-header-balance balance-amount" style={{ fontVariantNumeric: "tabular-nums" }}>
+                      <div className="header-balance-column flex flex-col justify-center lg:flex-row lg:items-center lg:gap-2">
+                        <span className="font-size-header-balance block text-[10px] leading-tight text-white/90 lg:hidden lg:text-inherit">Balance:</span>
+                        <span className="hidden font-size-header-balance lg:inline">Balance:</span>
+                        <b className="font-size-header-balance balance-amount text-[12px] font-extrabold leading-tight lg:text-sm lg:font-extrabold lg:leading-normal" style={{ fontVariantNumeric: "tabular-nums" }}>
                           {balanceDisplay}
                         </b>
                       </div>
@@ -257,20 +242,18 @@ export function Header({
 
                 <a
                   href="#/deposit"
-                  className="t3-header-deposit inline-flex cursor-pointer items-center text-inherit no-underline"
+                  className="t3-header-deposit flex items-center justify-center rounded-lg p-0 transition-opacity hover:opacity-90 lg:h-auto lg:w-auto lg:px-2"
                   style={{ background: "var(--header-auth-deposit-bg)" }}
                 >
-                  <div>
-                    <DepositViconSvg />
-                  </div>
-                  <div className="text">Deposit</div>
+                  <DepositViconSvg />
+                  <div className="text hidden lg:block">Deposit</div>
                 </a>
               </div>
 
               <div ref={rolloverRef} className="relative">
                 <button
                   type="button"
-                  className="t3-rollover-btn"
+                  className="t3-rollover-btn flex h-[44px] w-[44px] items-center justify-center rounded-lg transition-opacity hover:opacity-90 lg:h-10 lg:w-10"
                   aria-label="Activity"
                   aria-haspopup="dialog"
                   aria-expanded={rolloverOpen}
@@ -280,7 +263,7 @@ export function Header({
                     color: "var(--header-auth-target-color)",
                   }}
                 >
-                  <IconTargetDeposit className="img" />
+                  <IconTargetDeposit className="h-7 w-7 lg:h-6 lg:w-6" />
                 </button>
                 {rolloverOpen ? (
                   <div
@@ -321,7 +304,7 @@ export function Header({
                 ) : null}
               </div>
 
-              <a href="#/profile" className="t3-header-profile-box no-underline">
+              <a href="#/profile" className="t3-header-profile-box hidden no-underline lg:flex">
                 <div className="second">
                   <div>{session.username}</div>
                   <div>
@@ -354,7 +337,7 @@ export function Header({
             </>
           )}
 
-          <div ref={langRef} className="drop-down-language header-language-container dropdown relative">
+          <div ref={langRef} className="drop-down-language header-language-container dropdown relative hidden lg:block">
             <button
               type="button"
               className="header-lang-toggle flex h-10 shrink-0 items-center justify-center rounded-lg border-0 transition hover:brightness-110 gap-1"
@@ -390,52 +373,70 @@ export function Header({
                 tabIndex={-1}
                 role="menu"
                 className="language-dropdown-menu absolute top-[calc(100%+8px)] right-0 z-[100] w-[200px] overflow-hidden rounded-xl border-[1.5px] shadow-2xl animate-in fade-in zoom-in-95 duration-200"
-                style={{ 
-                  borderColor: "var(--brand-1)", 
+                style={{
+                  borderColor: "var(--brand-1)",
                   background: "var(--ref-110)",
                   fontFamily: "var(--base-font-family)"
                 }}
               >
                 {/* Khmer - Active State */}
-                <button 
-                  type="button" 
-                  tabIndex={0} 
-                  role="menuitem" 
-                  className="flex w-full items-center gap-3 px-4 py-2.5 text-left transition-colors" 
+                <button
+                  type="button"
+                  tabIndex={0}
+                  role="menuitem"
+                  className="flex w-full items-center gap-3 px-4 py-2.5 text-left transition-colors"
                   style={{ background: "var(--brand-3)" }}
                   onClick={() => setLangOpen(false)}
                 >
-                  <img src={assets.cambodiaFlag} alt="" className="h-6 w-6 rounded-full object-cover shadow-md" /> 
+                  <img src={assets.cambodiaFlag} alt="" className="h-6 w-6 rounded-full object-cover shadow-md" />
                   <span className="text-[14px] font-bold text-white tracking-wide">Khmer</span>
                 </button>
 
                 {/* English - Inactive State */}
-                <button 
-                  type="button" 
-                  tabIndex={0} 
-                  role="menuitem" 
-                  className="flex w-full items-center gap-3 px-4 py-2.5 text-left transition-colors hover:bg-white/5" 
+                <button
+                  type="button"
+                  tabIndex={0}
+                  role="menuitem"
+                  className="flex w-full items-center gap-3 px-4 py-2.5 text-left transition-colors hover:bg-white/5"
                   onClick={() => setLangOpen(false)}
                 >
-                  <img src={assets.ukFlag} alt="" className="h-6 w-6 rounded-full object-cover shadow-md" /> 
+                  <img src={assets.ukFlag} alt="" className="h-6 w-6 rounded-full object-cover shadow-md" />
                   <span className="text-[14px] font-bold text-white tracking-wide">English</span>
                 </button>
 
                 {/* Simplified Chinese - Inactive State */}
-                <button 
-                  type="button" 
-                  tabIndex={0} 
-                  role="menuitem" 
-                  className="flex w-full items-center gap-3 px-4 py-2.5 text-left transition-colors hover:bg-white/5" 
+                <button
+                  type="button"
+                  tabIndex={0}
+                  role="menuitem"
+                  className="flex w-full items-center gap-3 px-4 py-2.5 text-left transition-colors hover:bg-white/5"
                   onClick={() => setLangOpen(false)}
                 >
-                  <img src={assets.chinaFlag} alt="" className="h-7 w-7 rounded-full object-cover shadow-md" /> 
+                  <img src={assets.chinaFlag} alt="" className="h-7 w-7 rounded-full object-cover shadow-md" />
                   <span className="text-[14px] font-bold text-white tracking-wide">简体中文</span>
                 </button>
               </div>
             ) : null}
           </div>
         </div>
+
+        {/* Mobile Hamburger (Far Right) */}
+        <button
+          type="button"
+          aria-label="Open mobile menu"
+          className="mobile-header-open-menu ml-1 grid h-[30px] w-[30px] shrink-0 place-items-center opacity-90 hover:opacity-100 lg:hidden"
+          onClick={() => setMobileMenuOpen(true)}
+        >
+          <img
+            src={assets.menuIcon}
+            alt=""
+            className="h-[24px] w-[24px]"
+            style={{
+              filter:
+                "brightness(0) saturate(100%) invert(74%) sepia(63%) saturate(438%) hue-rotate(6deg) brightness(95%) contrast(90%)",
+            }}
+          />
+        </button>
       </header>
       <MobileNavDrawer
         isOpen={mobileMenuOpen}
