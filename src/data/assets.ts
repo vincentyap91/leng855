@@ -131,7 +131,7 @@ export const assets = {
   profileDownlines: `${base}/downlines.svg`,
   profileLanguage: `${base}/change-language.svg`,
   profilePassword: `${base}/change-password.svg`,
-  profileAvatar: `${base}/my-profile.svg`,
+  profileAvatar: `${base}/profile-img.png`,
   profileChevron: `${base}/chevon-right.svg`,
 
   // Trophy gif for "Recent Big Wins" header
