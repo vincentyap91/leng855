@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { assets } from "../data/assets";
 
 import { ChangeLanguageModal } from "./ChangeLanguageModal";
 import { ChangePasswordModal } from "./ChangePasswordModal";
@@ -18,31 +19,20 @@ const PROFILE_ACTIONS = [
   "Change Password",
 ];
 
-// From Figma node `8116:39919` asset exports (data extracted from MCP payload)
-const imgSvg = "https://www.figma.com/api/mcp/asset/b43e2a67-04d0-4bb7-a966-92b14eefc8a5";
-const imgSvg1 = "https://www.figma.com/api/mcp/asset/072de15d-c9bf-4621-9e5e-d667dae260e3";
-const imgSvg2 = "https://www.figma.com/api/mcp/asset/27b79e2c-d367-4a16-bde5-2ea05834e68c";
-const imgSvg3 = "https://www.figma.com/api/mcp/asset/6ab88921-eb5c-4ad7-a6ef-f142f5fcafb5";
-const imgSvg4 = "https://www.figma.com/api/mcp/asset/b541f599-6e08-4800-a027-dfb92caf8510";
-const imgSvg5 = "https://www.figma.com/api/mcp/asset/08316bf0-3d10-4156-96f5-fa47ec0a1959";
-const imgSvg6 = "https://www.figma.com/api/mcp/asset/acffdca1-813c-4987-9e3c-34b7ccd0379d";
-const imgSvg7 = "https://www.figma.com/api/mcp/asset/101d65b7-baba-45e4-b4b1-4565b9ec1df9";
-const imgSvg8 = "https://www.figma.com/api/mcp/asset/3b0248b5-4dd7-4593-8b81-498132a3192f";
-
 const ICON_LEFT_BY_LABEL: Record<string, string> = {
-  "My Profile": imgSvg,
-  Deposit: imgSvg2,
-  Withdrawal: imgSvg3,
-  "History Record": imgSvg4,
-  Referral: imgSvg5,
-  Downlines: imgSvg6,
-  "Change Language": imgSvg7,
-  "Change Password": imgSvg8,
+  "My Profile": assets.profileUser,
+  Deposit: assets.profileDeposit,
+  Withdrawal: assets.profileWithdrawal,
+  "History Record": assets.profileHistory,
+  Referral: assets.profileReferral,
+  Downlines: assets.profileDownlines,
+  "Change Language": assets.profileLanguage,
+  "Change Password": assets.profilePassword,
 };
 
 function RowChevron() {
   return (
-    <img src={imgSvg1} alt="" aria-hidden className="h-[18px] w-[18px] object-contain" />
+    <img src={assets.profileChevron} alt="" aria-hidden className="h-[18px] w-[18px] object-contain" />
   );
 }
 
@@ -59,7 +49,7 @@ function UserAvatar() {
     >
       <div className="flex h-full w-full items-center justify-center border border-[var(--accent-muted)] bg-[var(--surface-base)]">
         <img
-          src="https://www.figma.com/api/mcp/asset/78f25659-de5b-4941-baee-aec4c4051819"
+          src={assets.profileAvatar}
           alt=""
           className="h-full w-full object-contain"
         />

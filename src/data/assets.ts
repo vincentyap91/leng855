@@ -122,6 +122,18 @@ export const assets = {
   referralPromoCommission: `${base}/referral-promo-commission.png`,
   referralPromoDeposit: `${base}/referral-promo-deposit.png`,
 
+  // Profile Page Icons
+  profileUser: `${base}/my-profile.svg`,
+  profileDeposit: `${base}/deposit.svg`,
+  profileWithdrawal: `${base}/withdrawal.svg`,
+  profileHistory: `${base}/history-record.svg`,
+  profileReferral: `${base}/referral.svg`,
+  profileDownlines: `${base}/downlines.svg`,
+  profileLanguage: `${base}/change-language.svg`,
+  profilePassword: `${base}/change-password.svg`,
+  profileAvatar: `${base}/my-profile.svg`,
+  profileChevron: `${base}/chevon-right.svg`,
+
   // Trophy gif for "Recent Big Wins" header
   trophyGif: `${base}/trophy.gif`,
 } as const;
